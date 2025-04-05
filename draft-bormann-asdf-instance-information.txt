@@ -2,7 +2,7 @@
 
 
 
-ASDF WG                                                       C. Bormann
+A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
 Expires: 7 October 2025                            Hochschule Emden/Leer
@@ -39,7 +39,7 @@ About This Document
    https://www.ietf.org/mailman/listinfo/asdf/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/ietf-asdf-wg/instance-information.
+   https://github.com/ietf-wg-asdf/instance-information.
 
 Status of This Memo
 
@@ -141,21 +141,34 @@ Table of Contents
 
    Proofshot:  A message that attempts to describe the state of an
       Instance at a particular moment (which may be part of the
-      context).  Proofshots are snapshots, and they are "proofs" in the
+      context).
+
+      Proofshots are snapshots, and they are "proofs" in the
       photographic sense, i.e., they may not be of perfect quality.  Not
       all state that is characteristic of an Instance may be included in
       a Proofshot (e.g., information about an active action that is not
       embedded in an action resource).  Proofshots may depend on
       additional context (such as the identity of the Instance and a
-      Timestamp).  An interaction affordance to obtain a Proofshot may
-      not be provided by every Instance.
+      Timestamp).
 
-      Discuss Proofshots of a Thing (device) and of other component.
+      An interaction affordance to obtain a Proofshot may not be
+      provided by every Instance.  An Instance may provide separate
+      Construction affordances instead of simply setting a Proofshot.
 
-      Discuss concurrency problems.
+      Discuss Proofshots of a Thing (device) and of other components.
 
-      Discuss Timestamps appropriate for Things Section 4.4 of
-      [I-D.ietf-iotops-7228bis] [I-D.amsuess-t2trg-raytime].
+      Discuss concurrency problems with getting and setting Proofshots.
+
+      Discuss Timestamps appropriate for Things (Section 4.4 of
+      [I-D.ietf-iotops-7228bis], [I-D.amsuess-t2trg-raytime]).
+
+   Construction:  Construction messages enable the creation of a digital
+      Instance, e.g., initialization/commissioning of a device or
+      creation of its digital twins.  They are like proofshots, in that
+      they embody a state, however this state needs to be precise so the
+      construction can actually happen.
+
+      Discuss YANG config=true approach.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
