@@ -124,6 +124,7 @@ Instance:
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
+  
   Proofshots are snapshots, and they are "proofs" in the photographic
   sense, i.e., they may not be of perfect quality.
   Not all state that is characteristic of an Instance may be included
@@ -131,14 +132,26 @@ Proofshot:
   embedded in an action resource).
   Proofshots may depend on additional context (such as the identity of
   the Instance and a Timestamp).
+
   An interaction affordance to obtain a Proofshot may not be provided
   by every Instance.
+  An Instance may provide separate Construction affordances instead of
+  simply setting a Proofshot.
 
-  Discuss Proofshots of a Thing (device) and of other component.
+  Discuss Proofshots of a Thing (device) and of other components.
 
-  Discuss concurrency problems.
+  Discuss concurrency problems with getting and setting Proofshots.
 
-  Discuss Timestamps appropriate for Things {{Section 4.4 of -terms}} {{-raytime}}.
+  Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
+
+Construction:
+: Construction messages enable the creation of a digital Instance,
+  e.g., initialization/commissioning of a device or creation of its
+  digital twins.
+  They are like proofshots, in that they embody a state, however this
+  state needs to be precise so the construction can actually happen.
+
+  Discuss YANG config=true approach.
 
 {::boilerplate bcp14-tagged-bcp14}
 
