@@ -59,6 +59,12 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
+  LAYERS:
+    target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
+    title: Terminology for Layers
+    rc: WISHI Wiki
+    date: false
+
 --- abstract
 
 This document discusses types of Instance Information to be used in
@@ -102,6 +108,8 @@ Formats for them as well as ways to use SDF Models to describe them.
 ## Conventions and Definitions
 
 The definitions of {{-link-format}}, {{-link}}, and {{-sdf}} apply.
+
+Terminology may need to be imported from {{LAYERS}}.
 
 Representation:
 : As defined in {{Section 3.2 of RFC9110@-http}}, but understood to
