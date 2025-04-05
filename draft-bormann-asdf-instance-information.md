@@ -53,10 +53,10 @@ informative:
     seriesinfo:
       Ph.D.: Dissertation, University of California, Irvine
   RFC6690: link-format
-  I-D.laari-asdf-relations: sdfrel
-  I-D.bormann-asdf-sdftype-link: sdflink
+  # I-D.laari-asdf-relations: sdfrel
+  # I-D.bormann-asdf-sdftype-link: sdflink
   I-D.bormann-asdf-sdf-mapping: mapping
-  RFC9423: attr
+  # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
 --- abstract
