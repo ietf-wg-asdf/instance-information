@@ -10,8 +10,8 @@ consensus: true
 docname: draft-bormann-asdf-instance-information-latest
 number:
 date:
-area: "Applications and Real-Time"
-workgroup: ASDF WG
+area: ""
+workgroup: "A Semantic Definition Format for Data and Interactions of Things"
 keyword:
  - IoT
  - Link
@@ -21,7 +21,7 @@ keyword:
 venue:
   group: "A Semantic Definition Format for Data and Interactions of Things"
   mail: "asdf@ietf.org"
-  github: "ietf-asdf-wg/instance-information"
+  github: "ietf-wg-asdf/instance-information"
 
 author:
 - name: Carsten Bormann
