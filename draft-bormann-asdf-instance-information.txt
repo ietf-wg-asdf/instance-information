@@ -123,6 +123,8 @@ Table of Contents
    The definitions of [RFC6690], [RFC8288], and [I-D.ietf-asdf-sdf]
    apply.
 
+   Terminology may need to be imported from [LAYERS].
+
    Representation:  As defined in Section 3.2 of RFC 9110 [STD97], but
       understood to analogously apply to other interaction styles than
       Representational State Transfer [REST] as well.
@@ -323,12 +325,6 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-bormann-asdf-
               sdf-mapping-05>.
 
-   [I-D.bormann-asdf-sdftype-link]
-              Bormann, C., "An sdfType for Links", Work in Progress,
-              Internet-Draft, draft-bormann-asdf-sdftype-link-04, 6
-              December 2024, <https://datatracker.ietf.org/doc/html/
-              draft-bormann-asdf-sdftype-link-04>.
-
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
@@ -336,12 +332,9 @@ Table of Contents
               January 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-iotops-7228bis-01>.
 
-   [I-D.laari-asdf-relations]
-              Laari, P., "Extended relation information for Semantic
-              Definition Format (SDF)", Work in Progress, Internet-
-              Draft, draft-laari-asdf-relations-04, 28 January 2025,
-              <https://datatracker.ietf.org/doc/html/draft-laari-asdf-
-              relations-04>.
+   [LAYERS]   "Terminology for Layers", WISHI Wiki,
+              <https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-
+              for-Layers>.
 
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures", Ph.D. Dissertation,
@@ -352,11 +345,6 @@ Table of Contents
    [RFC6690]  Shelby, Z., "Constrained RESTful Environments (CoRE) Link
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
               <https://www.rfc-editor.org/rfc/rfc6690>.
-
-   [RFC9423]  Bormann, C., "Constrained RESTful Environments (CoRE)
-              Target Attributes Registry", RFC 9423,
-              DOI 10.17487/RFC9423, April 2024,
-              <https://www.rfc-editor.org/rfc/rfc9423>.
 
 Acknowledgments
 

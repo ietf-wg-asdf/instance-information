@@ -1262,68 +1262,69 @@ Formats for them as well as ways to use SDF Models to describe them.<a href="#se
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
         </h3>
 <p id="section-1.1-1">The definitions of <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span>, <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>, and <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> apply.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-1.1-2">
-          <dt id="section-1.1-2.1">Representation:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.2">
-            <p id="section-1.1-2.2.1">As defined in Section <a href="https://rfc-editor.org/rfc/rfc9110#section-3.2" class="relref">3.2</a> of RFC 9110 <span>[<a href="#STD97" class="cite xref">STD97</a>]</span>, but understood to
+<p id="section-1.1-2">Terminology may need to be imported from <span>[<a href="#LAYERS" class="cite xref">LAYERS</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-1.1-3">
+          <dt id="section-1.1-3.1">Representation:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.2">
+            <p id="section-1.1-3.2.1">As defined in Section <a href="https://rfc-editor.org/rfc/rfc9110#section-3.2" class="relref">3.2</a> of RFC 9110 <span>[<a href="#STD97" class="cite xref">STD97</a>]</span>, but understood to
 analogously apply to other interaction styles than Representational
-State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well.<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
+State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.3">Message:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.4">
-            <p id="section-1.1-2.4.1">A Representation that is exchanged in, or is the subject of, an
-Interaction.<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
+<dt id="section-1.1-3.3">Message:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.4">
+            <p id="section-1.1-3.4.1">A Representation that is exchanged in, or is the subject of, an
+Interaction.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.5">Instantiation:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.6">
-            <p id="section-1.1-2.6.1">Instantiation is a process that takes a Model, some Context Information, and possibly information from a Device and creates a Message.<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
+<dt id="section-1.1-3.5">Instantiation:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.6">
+            <p id="section-1.1-3.6.1">Instantiation is a process that takes a Model, some Context Information, and possibly information from a Device and creates a Message.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.7">Instance:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.8">
-            <p id="section-1.1-2.8.1">Anything that can be interacted with based on the SDF model.
+<dt id="section-1.1-3.7">Instance:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.8">
+            <p id="section-1.1-3.8.1">Anything that can be interacted with based on the SDF model.
 E.g., the Thing itself (device), a Digital Twin, an Asset Management
 system...
-Instances of a Thing are bound together by some form of identity.<a href="#section-1.1-2.8.1" class="pilcrow">¶</a></p>
+Instances of a Thing are bound together by some form of identity.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.9">Proofshot:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.10">
-            <p id="section-1.1-2.10.1">A message that attempts to describe the state of an Instance at a
-particular moment (which may be part of the context).<a href="#section-1.1-2.10.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.10.2">Proofshots are snapshots, and they are "proofs" in the photographic
+<dt id="section-1.1-3.9">Proofshot:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.10">
+            <p id="section-1.1-3.10.1">A message that attempts to describe the state of an Instance at a
+particular moment (which may be part of the context).<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.2">Proofshots are snapshots, and they are "proofs" in the photographic
 sense, i.e., they may not be of perfect quality.
 Not all state that is characteristic of an Instance may be included
 in a Proofshot (e.g., information about an active action that is not
 embedded in an action resource).
 Proofshots may depend on additional context (such as the identity of
-the Instance and a Timestamp).<a href="#section-1.1-2.10.2" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.10.3">An interaction affordance to obtain a Proofshot may not be provided
+the Instance and a Timestamp).<a href="#section-1.1-3.10.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.3">An interaction affordance to obtain a Proofshot may not be provided
 by every Instance.
 An Instance may provide separate Construction affordances instead of
-simply setting a Proofshot.<a href="#section-1.1-2.10.3" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.10.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-2.10.4" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.10.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-2.10.5" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.10.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-01#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-2.10.6" class="pilcrow">¶</a></p>
+simply setting a Proofshot.<a href="#section-1.1-3.10.3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.10.4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.10.5" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-01#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.10.6" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-2.11">Construction:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-2.12">
-            <p id="section-1.1-2.12.1">Construction messages enable the creation of a digital Instance,
+<dt id="section-1.1-3.11">Construction:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.12">
+            <p id="section-1.1-3.12.1">Construction messages enable the creation of a digital Instance,
 e.g., initialization/commissioning of a device or creation of its
 digital twins.
 They are like proofshots, in that they embody a state, however this
-state needs to be precise so the construction can actually happen.<a href="#section-1.1-2.12.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2.12.2">Discuss YANG config=true approach.<a href="#section-1.1-2.12.2" class="pilcrow">¶</a></p>
+state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.12.2">Discuss YANG config=true approach.<a href="#section-1.1-3.12.2" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-1.1-3">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-1.1-4">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in <span>[<a href="#BCP14" class="cite xref">BCP14</a>]</span> (<a href="#RFC2119" class="auto internal xref">RFC2119</a>) (<a href="#RFC8174" class="auto internal xref">RFC8174</a>) when, and only when, they
-appear in all capitals, as shown here.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terms-we-are-trying-not-to-use">
@@ -1508,29 +1509,21 @@ Multiple models may apply to the same device (including but not only revisions o
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-05</span>, <time datetime="2024-12-06" class="refDate">6 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-05">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.bormann-asdf-sdftype-link">[I-D.bormann-asdf-sdftype-link]</dt>
-        <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"An sdfType for Links"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdftype-link-04</span>, <time datetime="2024-12-06" class="refDate">6 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdftype-link-04">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdftype-link-04</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refAuthor">Ersue, M.</span>, <span class="refAuthor">Keränen, A.</span>, and <span class="refAuthor">C. Gomez</span>, <span class="refTitle">"Terminology for Constrained-Node Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-iotops-7228bis-01</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-01">https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.laari-asdf-relations">[I-D.laari-asdf-relations]</dt>
+<dt id="LAYERS">[LAYERS]</dt>
         <dd>
-<span class="refAuthor">Laari, P.</span>, <span class="refTitle">"Extended relation information for Semantic Definition Format (SDF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-laari-asdf-relations-04</span>, <time datetime="2025-01-28" class="refDate">28 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-laari-asdf-relations-04">https://datatracker.ietf.org/doc/html/draft-laari-asdf-relations-04</a>&gt;</span>. </dd>
+<span class="refTitle">"Terminology for Layers"</span>, <span class="refContent">WISHI Wiki</span>, <span>&lt;<a href="https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers">https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="REST">[REST]</dt>
         <dd>
 <span class="refAuthor">Fielding, R.</span>, <span class="refTitle">"Architectural Styles and the Design of Network-based Software Architectures"</span>, <span class="seriesInfo">Ph.D. Dissertation, University of California, Irvine</span>, <time datetime="2000" class="refDate">2000</time>, <span>&lt;<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf">http://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6690">[RFC6690]</dt>
-        <dd>
-<span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9423">[RFC9423]</dt>
       <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Target Attributes Registry"</span>, <span class="seriesInfo">RFC 9423</span>, <span class="seriesInfo">DOI 10.17487/RFC9423</span>, <time datetime="2024-04" class="refDate">April 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9423">https://www.rfc-editor.org/rfc/rfc9423</a>&gt;</span>. </dd>
+<span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
