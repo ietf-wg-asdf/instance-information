@@ -124,7 +124,7 @@ Instance:
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
-  
+
   Proofshots are snapshots, and they are "proofs" in the photographic
   sense, i.e., they may not be of perfect quality.
   Not all state that is characteristic of an Instance may be included
@@ -250,4 +250,3 @@ Multiple models may apply to the same device (including but not only revisions o
 {:unnumbered}
 
 (TODO)
-
