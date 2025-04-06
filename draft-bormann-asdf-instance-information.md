@@ -59,6 +59,7 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
+  I-D.lee-asdf-digital-twin-07: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
     title: Terminology for Layers
@@ -202,6 +203,155 @@ to/from concrete serializations...)
 ### Proofshots (read device, other component)
 
 (See defn above.)
+
+A proofshot that captures the state of an instance can be modelled as shown in
+{{code-non-affordance-instance}}.
+Here, every property of the corresponding SDF model (see {{code-non-affordance-model}})
+is mapped to a concrete value that corresponds with the associated schema information.
+Note that the proofshot also contains values for the implied (non-affordance) properties
+that are static (e.g., the physical location assigned to the instance) but still part of
+the instance's proofshot as the location is known. <!-- Not really sure about this yet. -->
+
+~~~ json
+{
+  "info": {
+    "title": "An example of the heater #1 in the boat #007",
+    "version": "2025-01-27",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "boat#007": {
+      "sdfInstanceOf": "models:#/sdfThing/boat",
+      // TODO: How to deal with wrapped instances..?
+      "sdfInstance": {
+        "heater#007#01": {
+            "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+            "identifier": { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
+            "isHeating": true,
+            "location": {
+              "wgs84": {
+                "latitude": 35.2988233791372,
+                    "longitude": 129.25478376484913,
+                    "altitude": 0.0
+                },
+                "postal": {
+                  "city": "Ulsan",
+                    "post-code": "44110",
+                    "country": "South Korea"
+                },
+                "w3w": {
+                  "what3words": "toggle.mopped.garages"
+                }
+            },
+            "report": {
+              "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #code-non-affordance-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+
+~~~ json
+{
+  "info": {
+    "title": "An example model of a heater on a boat",
+    "version": "2025-01-27",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models"
+  },
+  "defaultNamespace": "models",
+  "sdfThing": {
+    "boat": {
+      "sdfObject":
+        "heater": {
+          "sdfProperty": {
+            "isHeating": {
+               // FIXME: Find a better quality name
+              "nonAffordance": true,
+              "description": "The state of the heater on a boat; false for off and true for on.",
+              "type": "boolean"
+            },
+            // TODO: Could also be removed from the examples
+            "identifier": {
+              "type": "object",
+              "properties": {
+                "UUID": {
+                  "type": "string"
+                }
+              }
+            },
+            "location": {
+              "affordanceType": [
+                "offDeviceProperty"
+              ],
+              "type": "object",
+              "properties": {
+                "wgs84": {
+                  "type": "object",
+                  "properties": {
+                    "latitude": {
+                      "type": "number"
+                    },
+                    "longitude": {
+                      "type": "number"
+                    },
+                    "altitude": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "postal": {
+                  "type": "object",
+                  "properties": {
+                    "city": {
+                      "type": "string"
+                    },
+                    "post-code": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "w3w": {
+                  "type": "object",
+                  "properties": {
+                    "what3words": {
+                      "type": "string",
+                      "format": "..."
+                    }
+                  }
+                }
+              }
+            },
+            "report": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #code-non-affordance-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
 
 ### Construction
 
