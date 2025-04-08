@@ -241,7 +241,9 @@ Table of Contents
 
    (See defn above.)
 
-   The following examples are based on [I-D.lee-asdf-digital-twin-07].
+   The following examples are based on Figure 2 of
+   [I-D.lee-asdf-digital-twin-07], separated into an SDF instance and an
+   SDF model.
 
    A proofshot that captures the state of an instance can be modelled as
    shown in Figure 2.  Here, every property of the corresponding SDF
