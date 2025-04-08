@@ -242,7 +242,7 @@ Table of Contents
          "sdfInstance": {
            "heater#007#01": {
                "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-               identifier: { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
+               "identifier": { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
                "isHeating": true,
                "location": {
                  "wgs84": {
@@ -292,6 +292,15 @@ Table of Contents
                  "nonAffordance": true,
                  "description": "The state of the heater on a boat; false for off and true for on.",
                  "type": "boolean"
+               },
+               // TODO: Could also be removed from the examples
+               "identifier": {
+                 "type": "object",
+                 "properties": {
+                   "UUID": {
+                     "type": "string"
+                   }
+                 }
                },
                "location": {
                  "affordanceType": [
