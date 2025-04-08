@@ -249,7 +249,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
   "sdfInstance": {
     "boat#007": {
       "sdfInstanceOf": "models:#/sdfThing/boat",
-      // TODO: How to deal with wrapped instances..?
+      "$comment": "TODO: How to deal with wrapped instances..?",
       "sdfInstance": {
         "heater#007#01": {
             "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
@@ -299,12 +299,12 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
         "heater": {
           "sdfProperty": {
             "isHeating": {
-               // FIXME: Find a better quality name
+              "$comment": "FIXME: Find a better quality name",
               "nonAffordance": true,
               "description": "The state of the heater on a boat; false for off and true for on.",
               "type": "boolean"
             },
-            // TODO: Could also be removed from the examples
+            "$comment": "TODO: Could also be removed from the examples",
             "identifier": {
               "type": "object",
               "properties": {
@@ -314,9 +314,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
               }
             },
             "location": {
-              "affordanceType": [
-                "offDeviceProperty"
-              ],
+              "nonAffordance": true,
               "type": "object",
               "properties": {
                 "wgs84": {
@@ -407,10 +405,6 @@ which is pretty much a constructor.)
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
-  // Potential reference to a compatible mapping file
-  "compatibleMappingFiles": [
-    "https://example.org/wot-mapping-file"
-  ],
   "sdfObject": {
     "temperatureSensor": {
       "sdfProperty": {
@@ -418,25 +412,22 @@ which is pretty much a constructor.)
           "description": "Temperature value measure by this Thing's temperature sensor.",
           "type": "number",
           "sdfParameters": [
-            // Not sure whether it would be better to use JSON pointers here
             "minimum",
             {
               "targetQuality": "minimum",
               "parameterName": "minimum",
-              "constructorName": "construct" // Might be implicit if construct is defined as the default constructor. However, maybe this could also refer to a list of compatible constructors
+              "constructorName": "construct"
             }
-            // Could be a shorthand for when targetQuality and parameterName match:
             "maximum",
             {
               "targetQuality": "unit",
-              // Alternative: use a JSON pointer
               "parameterName": "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
             }
           ]
         }
       },
        "sdfConstructors": {
-        // TODO: Dicuss whether this should be assumed to be the default constructor
+        "$comment": "TODO: Dicuss whether this should be assumed to be the default constructor",
         "construct": {
           "parameters": {
             "minimum": {
@@ -444,7 +435,7 @@ which is pretty much a constructor.)
             },
             "maximum": {
               "required": false,
-              // Constructors could allow for further restricting values that can be assigned to affordances
+              "$comment": "Constructors could allow for further restricting values that can be assigned to affordances",
               "type": "integer"
             },
             "temperatureUnit": {
@@ -464,8 +455,8 @@ which is pretty much a constructor.)
 ~~~ json
 {
   "info": {
-    "title": "Example SDF construction message"
-    // TODO: What kind of meta data do we need here?
+    "title": "Example SDF construction message",
+    "$comment": "TODO: What kind of meta data do we need here?"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
@@ -499,8 +490,8 @@ a proofshot.
 ~~~ json
 {
   "info": {
-    "title": "Example SDF delta construction message"
-    // TODO: What kind of meta data do we need here?
+    "title": "Example SDF delta construction message",
+    "$comment": "TODO: What kind of meta data do we need here?"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
