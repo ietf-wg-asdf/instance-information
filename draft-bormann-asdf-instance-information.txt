@@ -5,8 +5,8 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 7 October 2025                            Hochschule Emden/Leer
-                                                            5 April 2025
+Expires: 10 October 2025                              Universität Bremen
+                                                            8 April 2025
 
 
                       Instance Information for SDF
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 October 2025.
+   This Internet-Draft will expire on 10 October 2025.
 
 Copyright Notice
 
@@ -362,6 +362,6 @@ Authors' Addresses
 
 
    Jan Romann
-   Hochschule Emden/Leer
+   Universität Bremen
    Germany
-   Email: jan.romann@hs-emden-leer.de
+   Email: jan.romann@uni-bremen.de
