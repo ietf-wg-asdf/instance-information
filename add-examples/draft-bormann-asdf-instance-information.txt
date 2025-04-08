@@ -523,6 +523,9 @@ Table of Contents
 
    Figure 5: Example for an SDF construction message for proofshot delta
 
+   Deltas and Default/Base messages could be used in the Series Transfer
+   Pattern [STP].
+
 2.2.  Metadata
 
    One interesting piece of non-affordance information is the model
@@ -625,6 +628,12 @@ Table of Contents
    [RFC6690]  Shelby, Z., "Constrained RESTful Environments (CoRE) Link
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
               <https://www.rfc-editor.org/rfc/rfc6690>.
+
+   [STP]      Bormann, C. and K. Hartke, "The Series Transfer Pattern
+              (STP)", Work in Progress, Internet-Draft, draft-bormann-
+              t2trg-stp-03, 7 April 2020,
+              <https://datatracker.ietf.org/doc/html/draft-bormann-
+              t2trg-stp-03>.
 
 Acknowledgments
 
