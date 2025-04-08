@@ -241,6 +241,8 @@ Table of Contents
 
    (See defn above.)
 
+   The following examples are based on [I-D.lee-asdf-digital-twin-07].
+
    A proofshot that captures the state of an instance can be modelled as
    shown in Figure 2.  Here, every property of the corresponding SDF
    model (see Figure 3) is mapped to a concrete value that corresponds
