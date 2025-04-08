@@ -5,8 +5,8 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 8 October 2025                            Hochschule Emden/Leer
-                                                            6 April 2025
+Expires: 10 October 2025                           Hochschule Emden/Leer
+                                                            8 April 2025
 
 
                       Instance Information for SDF
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 October 2025.
+   This Internet-Draft will expire on 10 October 2025.
 
 Copyright Notice
 
@@ -238,28 +238,32 @@ Table of Contents
      "defaultNamespace": "boats",
      "sdfInstance": {
        "boat#007": {
-         "sdfInstanceOf": "models:#/sdfObject/boat",
-         "sdfProperty": {
-           // DISCUSS: Do we require some kind of protocol binding for the
-           //          on-device properties?
-           "isHeating": true,
-           "location": {
-               "wgs84": {
+         "sdfInstanceOf": "models:#/sdfThing/boat",
+         // TODO: How to deal with wrapped instances..?
+         "sdfInstance": {
+           "heater#007#01": {
+               "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+               identifier: { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
+               "isHeating": true,
+               "location": {
+                 "wgs84": {
                    "latitude": 35.2988233791372,
-                   "longitude": 129.25478376484913,
-                   "altitude": 0.0
+                       "longitude": 129.25478376484913,
+                       "altitude": 0.0
+                   },
+                   "postal": {
+                     "city": "Ulsan",
+                       "post-code": "44110",
+                       "country": "South Korea"
+                   },
+                   "w3w": {
+                     "what3words": "toggle.mopped.garages"
+                   }
                },
-               "postal": {
-                   "city": "Ulsan",
-                   "post-code": "44110",
-                   "country": "South Korea"
-               },
-               "w3w": {
-                   "what3words": "toggle.mopped.garages"
+               "report": {
+                 "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
                }
-           },
-           "report": {
-               "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
+             }
            }
          }
        }
@@ -279,84 +283,69 @@ Table of Contents
        "models": "https://example.com/models"
      },
      "defaultNamespace": "models",
-     "sdfObject": {
+     "sdfThing": {
        "boat": {
-         // TODO: Rework "non-affordance" property modelling,
-         //       align with version -7 of the digital-twin I.-D.
-         "sdfProperty": {
-           "isHeating": {
-             // TODO: Find better name for quality and its enum values
-             //
-             // Potential quality name alternatives:
-             //     - propertyType?
-             //     - subProperty?
-             //
-             // Replace with a boolean instead?
-             "affordanceType": [
-               // Potential enum value alternatives (not fully convinced by any of these yet):
-               //     - "explicitProperty" vs "implicitProperty"
-               //     - "networkProperty" vs "attribute", "trait", or "characteristic"?
-               //     - "onlineProperty" vs "offlineProperty"
-               //
-               "onDeviceProperty"
-             ],
-             "description": "The state of the heater on a boat; false for off and true for on.",
-             "type": "boolean"
-           },
-           "location": {
-             "affordanceType": [
-               "offDeviceProperty"
-             ],
-             "type": "object",
-             "properties": {
-               "wgs84": {
+         "sdfObject":
+           "heater": {
+             "sdfProperty": {
+               "isHeating": {
+                  // FIXME: Find a better quality name
+                 "nonAffordance": true,
+                 "description": "The state of the heater on a boat; false for off and true for on.",
+                 "type": "boolean"
+               },
+               "location": {
+                 "affordanceType": [
+                   "offDeviceProperty"
+                 ],
                  "type": "object",
                  "properties": {
-                   "latitude": {
-                     "type": "number"
+                   "wgs84": {
+                     "type": "object",
+                     "properties": {
+                       "latitude": {
+                         "type": "number"
+                       },
+                       "longitude": {
+                         "type": "number"
+                       },
+                       "altitude": {
+                         "type": "number"
+                       }
+                     }
                    },
-                   "longitude": {
-                     "type": "number"
+                   "postal": {
+                     "type": "object",
+                     "properties": {
+                       "city": {
+                         "type": "string"
+                       },
+                       "post-code": {
+                         "type": "string"
+                       },
+                       "country": {
+                         "type": "string"
+                       }
+                     }
                    },
-                   "altitude": {
-                     "type": "number"
+                   "w3w": {
+                     "type": "object",
+                     "properties": {
+                       "what3words": {
+                         "type": "string",
+                         "format": "..."
+                       }
+                     }
                    }
                  }
                },
-               "postal": {
+               "report": {
                  "type": "object",
                  "properties": {
-                   "city": {
-                     "type": "string"
-                   },
-                   "post-code": {
-                     "type": "string"
-                   },
-                   "country": {
+                   "value": {
                      "type": "string"
                    }
                  }
-               },
-               "w3w": {
-                 "type": "object",
-                 "properties": {
-                   "what3words": {
-                     "type": "string",
-                     "format": "..."
-                   }
-                 }
-               }
-             }
-           },
-           "report": {
-             "affordanceType": [
-               "onDeviceProperty",
-               "offDeviceProperty"
-             ],
-             "type": "object",
-             "properties": {
-               "value": {
-                 "type": "string"
                }
              }
            }
@@ -387,6 +376,95 @@ Table of Contents
    RFC 8576 we would want to move a system to a re-usable initial state,
    which is pretty much a constructor.)
 
+2.1.3.1.  Examples
+
+2.1.3.1.1.  Example for an SDF model with constructors
+
+   {
+     "info": {
+       "title": "Example document for SDF (Semantic Definition Format) with constructors for instantiation",
+       "version": "2019-04-24",
+       "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+       "license": "https://example.com/license"
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap"
+     },
+     "defaultNamespace": "cap",
+     // Potential reference to a compatible mapping file
+     "compatibleMappingFiles": [
+       "https://example.org/wot-mapping-file"
+     ],
+     "sdfObject": {
+       "temperatureSensor": {
+         "sdfProperty": {
+           "temperature": {
+             "description": "Temperature value measure by this Thing's temperature sensor.",
+             "type": "number",
+             "sdfParameters": [
+               // Not sure whether it would be better to use JSON pointers here
+               "minimum",
+               {
+                 "targetQuality": "minimum",
+                 "parameterName": "minimum",
+                 "constructorName": "construct" // Might be implicit if construct is defined as the default constructor. However, maybe this could also refer to a list of compatible constructors
+               }
+               // Could be a shorthand for when targetQuality and parameterName match:
+               "maximum",
+               {
+                 "targetQuality": "unit",
+                 // Alternative: use a JSON pointer
+                 "parameterName": "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
+               }
+             ]
+           }
+         },
+          "sdfConstructors": {
+           // TODO: Dicuss whether this should be assumed to be the default constructor
+           "construct": {
+             "parameters": {
+               "minimum": {
+                 "required": true
+               },
+               "maximum": {
+                 "required": false,
+                 // Constructors could allow for further restricting values that can be assigned to affordances
+                 "type": "integer"
+               },
+               "temperatureUnit": {
+                 "required": false
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+
+             Figure 3: Example for SDF model with constructors
+
+2.1.3.1.2.  Example for an SDF construction message
+
+   {
+     "info": {
+       "title": "Example SDF construction message"
+       // TODO: What kind of meta data do we need here?
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap"
+     },
+     "defaultNamespace": "cap",
+     "sdfConstruction": {
+       "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+       "arguments": {
+         "minimum": 42,
+         "temperatureUnit": "°C"
+       }
+     }
+   }
+
+             Figure 4: Example for an SDF construction message
+
 2.1.4.  Deltas and Default/Base messages
 
    What changed since the last proofshot?
@@ -401,6 +479,26 @@ Table of Contents
    A construction message may be a delta, or it may have parameters that
    algorithmically influence the elements of state that one would find
    in a proofshot.
+
+   {
+     "info": {
+       "title": "Example SDF delta construction message"
+       // TODO: What kind of meta data do we need here?
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap"
+     },
+     "defaultNamespace": "cap",
+     "sdfConstruction": {
+       "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+       "previousProofshot": "???",
+       "arguments": {
+         "currentTemperature": 24
+       }
+     }
+   }
+
+   Figure 5: Example for an SDF construction message for proofshot delta
 
 2.2.  Metadata
 
