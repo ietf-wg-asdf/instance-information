@@ -216,6 +216,7 @@ to/from concrete serializations...)
     "boats": "https://example.com/boats"
   },
   "defaultNamespace": "boats",
+
   "sdfInstance": {
 
   }
