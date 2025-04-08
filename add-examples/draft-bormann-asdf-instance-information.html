@@ -1374,8 +1374,9 @@ interpretation, i.e., the context needed may need to be reified in the
 message (compare the use of SenML "n").<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-3">TODO: Use NIPC as an example how this could be used, including SCIM as
 a source of context information.<a href="#section-2.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-4">(Describe how protocol bindings can be used to convert these messages
-to/from concrete serializations...)<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.1-5">(Describe how protocol bindings can be used to convert these messages
+to/from concrete serializations...)<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
 <div id="examples-for-context-information">
 <section id="section-2.1.1.1">
             <h5 id="name-examples-for-context-inform">
@@ -1395,7 +1396,7 @@ to/from concrete serializations...)<a href="#section-2.1.1-4" class="pilcrow">¶
   "sdfInstance": {
     "$context": {
         "$comment": "Potential contents for the SDF context",
-        "deviceName": "urn:sdf:foo:bar",
+        "deviceName": "urn:dev:org:30810-boat007",
         "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
         "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
         "parentInstance": "TODO"
@@ -1430,49 +1431,50 @@ the instance's proofshot as the location is known.<a href="#section-2.1.2-2" cla
             <div class="lang-json sourcecode" id="section-2.1.2-3.1">
 <pre>
 {
-  "info": {
-    "title": "An example of the heater #1 in the boat #007",
-    "version": "2025-01-27",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
-  },
-  "defaultNamespace": "boats",
+    "info": {
+        "title": "An example of the heater #1 in the boat #007",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models",
+        "boats": "https://example.com/boats"
+    },
+    "defaultNamespace": "boats",
 
-  "sdfInstance": {
-    "boat007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "$comment": "TODO: How to deal with wrapped instances..?",
-      "sdfInstance": {
-        "heater01": {
-            "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-            "identifier": { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
-            "isHeating": true,
-            "location": {
-              "wgs84": {
-                "latitude": 35.2988233791372,
-                    "longitude": 129.25478376484913,
-                    "altitude": 0.0
-                },
-                "postal": {
-                  "city": "Ulsan",
-                    "post-code": "44110",
-                    "country": "South Korea"
-                },
-                "w3w": {
-                  "what3words": "toggle.mopped.garages"
+    "sdfInstance": {
+        "boat007": {
+            "sdfInstanceOf": "models:#/sdfThing/boat",
+            "$comment": "TODO: How to deal with wrapped instances..?",
+            "sdfInstance": {
+                "heater01": {
+                    "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+                    "$context": {
+                        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
+                    },
+                    "isHeating": true,
+                    "location": {
+                        "wgs84": {
+                            "latitude": 35.2988233791372,
+                            "longitude": 129.25478376484913,
+                            "altitude": 0.0
+                        },
+                        "postal": {
+                            "city": "Ulsan",
+                            "post-code": "44110",
+                            "country": "South Korea"
+                        },
+                        "w3w": {
+                            "what3words": "toggle.mopped.garages"
+                        }
+                    },
+                    "report": {
+                        "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
+                    }
                 }
-            },
-            "report": {
-              "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
             }
-          }
         }
-      }
     }
-  }
 }
 </pre>
 </div>
@@ -1485,92 +1487,87 @@ the instance's proofshot as the location is known.<a href="#section-2.1.2-2" cla
             <div class="breakable lang-json sourcecode" id="section-2.1.2-4.1">
 <pre>
 {
-  "info": {
-    "title": "An example model of a heater on a boat",
-    "version": "2025-01-27",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models"
-  },
-  "defaultNamespace": "models",
+    "info": {
+        "title": "An example model of a heater on a boat",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models"
+    },
+    "defaultNamespace": "models",
 
-  "sdfThing": {
-    "boat": {
-      "sdfObject":
-        "heater": {
-          "sdfProperty": {
-            "isHeating": {
-              "$comment": "FIXME: Find a better quality name",
-              "nonAffordance": true,
-              "description": "The state of the heater on a boat; false for off and true for on.",
-              "type": "boolean"
-            },
-            "$comment": "TODO: Could also be removed from the examples",
-            "identifier": {
-              "type": "object",
-              "properties": {
-                "UUID": {
-                  "type": "string"
-                }
-              }
-            },
-            "location": {
-              "nonAffordance": true,
-              "type": "object",
-              "properties": {
-                "wgs84": {
-                  "type": "object",
-                  "properties": {
-                    "latitude": {
-                      "type": "number"
+    "sdfThing": {
+        "boat": {
+            "sdfObject": {
+                "heater": {
+                    "sdfProperty": {
+                        "isHeating": {
+                            "offDevice": true,
+                            "description": "The state of the heater on a boat; false for off and true for on.",
+                            "type": "boolean"
+                        },
+                        "location": {
+                            "offDevice": true,
+                            "sdfRef": "#/sdfData/location"
+                        }
                     },
-                    "longitude": {
-                      "type": "number"
-                    },
-                    "altitude": {
-                      "type": "number"
+                    "report": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "string"
+                            }
+                        }
                     }
-                  }
+                }
+            }
+        }
+    },
+    "sdfData": {
+        "location": {
+            "type": "object",
+            "properties": {
+                "wgs84": {
+                    "type": "object",
+                    "properties": {
+                        "latitude": {
+                            "type": "number"
+                        },
+                        "longitude": {
+                            "type": "number"
+                        },
+                        "altitude": {
+                            "type": "number"
+                        }
+                    }
                 },
                 "postal": {
-                  "type": "object",
-                  "properties": {
-                    "city": {
-                      "type": "string"
-                    },
-                    "post-code": {
-                      "type": "string"
-                    },
-                    "country": {
-                      "type": "string"
+                    "type": "object",
+                    "properties": {
+                        "city": {
+                            "type": "string"
+                        },
+                        "post-code": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
                     }
-                  }
                 },
                 "w3w": {
-                  "type": "object",
-                  "properties": {
-                    "what3words": {
-                      "type": "string",
-                      "format": "..."
+                    "type": "object",
+                    "properties": {
+                        "what3words": {
+                            "type": "string",
+                            "format": "..."
+                        }
                     }
-                  }
                 }
-              }
-            },
-            "report": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 </pre>
 </div>
@@ -1634,7 +1631,7 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
               "targetQuality": "minimum",
               "parameterName": "minimum",
               "constructorName": "construct"
-            }
+            },
             "maximum",
             {
               "targetQuality": "unit",
@@ -1862,6 +1859,10 @@ Multiple models may apply to the same device (including but not only revisions o
 <dt id="RFC6690">[RFC6690]</dt>
         <dd>
 <span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9039">[RFC9039]</dt>
+        <dd>
+<span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">Z. Shelby</span>, <span class="refTitle">"Uniform Resource Names for Device Identifiers"</span>, <span class="seriesInfo">RFC 9039</span>, <span class="seriesInfo">DOI 10.17487/RFC9039</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9039">https://www.rfc-editor.org/rfc/rfc9039</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STP">[STP]</dt>
       <dd>
