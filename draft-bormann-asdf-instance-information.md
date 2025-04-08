@@ -33,8 +33,8 @@ author:
   phone: +49-421-218-63921
   email: cabo@tzi.org
 - name: Jan Romann
-  org: Hochschule Emden/Leer
-  email: jan.romann@hs-emden-leer.de
+  org: Universität Bremen
+  email: jan.romann@uni-bremen.de
   country: Germany
 
 normative:
