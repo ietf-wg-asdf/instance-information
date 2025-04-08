@@ -468,7 +468,7 @@ which is pretty much a constructor.)
     "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
     "arguments": {
       "minimum": 42,
-      "temperatureUnit": "°C"
+      "temperatureUnit": "Cel"
     }
   }
 }
