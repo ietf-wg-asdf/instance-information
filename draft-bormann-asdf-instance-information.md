@@ -249,11 +249,11 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
   "defaultNamespace": "boats",
 
   "sdfInstance": {
-    "boat#007": {
+    "boat007": {
       "sdfInstanceOf": "models:#/sdfThing/boat",
       "$comment": "TODO: How to deal with wrapped instances..?",
       "sdfInstance": {
-        "heater#007#01": {
+        "heater01": {
             "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
             "identifier": { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
             "isHeating": true,
