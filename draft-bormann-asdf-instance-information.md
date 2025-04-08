@@ -124,17 +124,26 @@ Message:
   Interaction.
 
 Instantiation:
-: Instantiation is a process that takes a Model, some Context Information, and possibly information from a Device and creates a Message.
+: Instantiation is a process that takes a Model, some Context
+  Information, and possibly information from a Device and creates a
+  Message.
 
 Instance:
 : Anything that can be interacted with based on the SDF model.
   E.g., the Thing itself (device), a Digital Twin, an Asset Management
   system...
   Instances of a Thing are bound together by some form of identity.
+  Instances become useful if they are "situated", i.e., with a
+  physical or digital "address" that they can be found at and made the
+  subject of an interaction.
 
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
+  We are not saying that the Proofshot *is* the instance because there
+  may be different ways to make one from an Instance (or to consume
+  one in updating the state of the Instance), and because the
+  proofshot, being a message, is not situated.
 
   Proofshots are snapshots, and they are "proofs" in the photographic
   sense, i.e., they may not be of perfect quality.
@@ -170,10 +179,9 @@ Construction:
 
 Non-affordance:
 : Originally a term for information that is the subject of
-  interactions with other Instances than the Thing, this term is now
-  considered confusing as it would often just be an affordance of
-  another Instance than the Thing.
-
+  interactions with other Instances than the Thing (called "offDevice"
+  now), this term is now considered confusing as it would often just
+  be an affordance of another Instance than the Thing.
 
 # Instance Information and SDF
 
@@ -220,7 +228,7 @@ to/from concrete serializations...)
         "deviceName": "urn:dev:org:30810-boat007",
         "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
         "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
-        "parentInstance": "TODO"
+        "parentInstance": "TODO -- addressing instance in data tree"
     }
   }
 }
@@ -235,10 +243,10 @@ The following examples are based on Figure 2 of {{-digital-twin}}, separated int
 an SDF instance and an SDF model.
 
 A proofshot that captures the state of an instance can be modelled as shown in
-{{code-non-affordance-instance}}.
-Here, every property of the corresponding SDF model (see {{code-non-affordance-model}})
+{{code-off-device-instance}}.
+Here, every property of the corresponding SDF model (see {{code-off-device-model}})
 is mapped to a concrete value that corresponds with the associated schema information.
-Note that the proofshot also contains values for the implied (non-affordance) properties
+Note that the proofshot also contains values for the implied (offDevice) properties
 that are static (e.g., the physical location assigned to the instance) but still part of
 the instance's proofshot as the location is known. <!-- Not really sure about this yet. -->
 
@@ -290,7 +298,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     }
 }
 ~~~
-{: #code-non-affordance-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+{: #code-off-device-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
 
 ~~~ json
 {
@@ -377,7 +385,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     }
 }
 ~~~
-{: #code-non-affordance-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+{: #code-off-device-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
 
 ### Construction
 
@@ -519,7 +527,7 @@ Deltas and Default/Base messages could be used in the Series Transfer Pattern {{
 
 ## Metadata
 
-One interesting piece of non-affordance information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
 Multiple models may apply to the same device (including but not only revisions of the models).
 
 # Discussion
