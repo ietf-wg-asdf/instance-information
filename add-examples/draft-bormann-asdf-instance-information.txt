@@ -5,7 +5,7 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 10 October 2025                           Hochschule Emden/Leer
+Expires: 10 October 2025                              Universität Bremen
                                                             8 April 2025
 
 
@@ -647,6 +647,6 @@ Authors' Addresses
 
 
    Jan Romann
-   Hochschule Emden/Leer
+   Universität Bremen
    Germany
-   Email: jan.romann@hs-emden-leer.de
+   Email: jan.romann@uni-bremen.de
