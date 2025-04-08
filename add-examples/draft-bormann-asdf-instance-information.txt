@@ -212,6 +212,24 @@ Table of Contents
    (Describe how protocol bindings can be used to convert these messages
    to/from concrete serializations...)
 
+2.1.1.1.  Examples for context information
+
+   {
+     "sdfContext": {
+       "deviceName": "urn:sdf:foo:bar",
+       "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
+       "parentInstance": "TODO"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "boats": "https://example.com/boats"
+     },
+     "defaultNamespace": "boats",
+     "sdfInstance": {
+
+     }
+   }
+
 2.1.2.  Proofshots (read device, other component)
 
    (See defn above.)
