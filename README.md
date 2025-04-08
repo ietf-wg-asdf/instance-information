@@ -9,6 +9,7 @@ This is the working area for the individual Internet-Draft, "Instance Informatio
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-bormann-asdf-instance-information)
 * [Compare Editor's Copy to Individual Draft](https://ietf-wg-asdf.github.io/instance-information/#go.draft-bormann-asdf-instance-information.diff)
 
+[Access to all branches](https://ietf-wg-asdf.github.io/instance-information/)
 
 ## Contributing
 
