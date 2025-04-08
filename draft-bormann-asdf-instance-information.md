@@ -205,13 +205,6 @@ to/from concrete serializations...)
 
 ~~~ json
 {
-  "sdfContext": {
-    "$comment": "Potential contents for the SDF context",
-    "deviceName": "urn:sdf:foo:bar",
-    "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
-    "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
-    "parentInstance": "TODO"
-  },
   "namespace": {
     "models": "https://example.com/models",
     "boats": "https://example.com/boats"
@@ -219,10 +212,17 @@ to/from concrete serializations...)
   "defaultNamespace": "boats",
 
   "sdfInstance": {
-
+    "$context": {
+        "$comment": "Potential contents for the SDF context",
+        "deviceName": "urn:sdf:foo:bar",
+        "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
+        "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
+        "parentInstance": "TODO"
+    }
   }
 }
 ~~~
+{: #example-context title="Example for an SDF instance with context information"}
 
 ### Proofshots (read device, other component)
 
