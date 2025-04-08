@@ -293,6 +293,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     "models": "https://example.com/models"
   },
   "defaultNamespace": "models",
+
   "sdfThing": {
     "boat": {
       "sdfObject":
@@ -405,6 +406,7 @@ which is pretty much a constructor.)
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
+
   "sdfObject": {
     "temperatureSensor": {
       "sdfProperty": {
