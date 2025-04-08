@@ -59,11 +59,14 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
+  I-D.lee-asdf-digital-twin-07: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
     title: Terminology for Layers
     rc: WISHI Wiki
     date: false
+  STP: I-D.bormann-t2trg-stp
+  RFC9039: device-id
 
 --- abstract
 
@@ -121,17 +124,26 @@ Message:
   Interaction.
 
 Instantiation:
-: Instantiation is a process that takes a Model, some Context Information, and possibly information from a Device and creates a Message.
+: Instantiation is a process that takes a Model, some Context
+  Information, and possibly information from a Device and creates a
+  Message.
 
 Instance:
 : Anything that can be interacted with based on the SDF model.
   E.g., the Thing itself (device), a Digital Twin, an Asset Management
   system...
   Instances of a Thing are bound together by some form of identity.
+  Instances become useful if they are "situated", i.e., with a
+  physical or digital "address" that they can be found at and made the
+  subject of an interaction.
 
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
+  We are not saying that the Proofshot *is* the instance because there
+  may be different ways to make one from an Instance (or to consume
+  one in updating the state of the Instance), and because the
+  proofshot, being a message, is not situated.
 
   Proofshots are snapshots, and they are "proofs" in the photographic
   sense, i.e., they may not be of perfect quality.
@@ -167,10 +179,9 @@ Construction:
 
 Non-affordance:
 : Originally a term for information that is the subject of
-  interactions with other Instances than the Thing, this term is now
-  considered confusing as it would often just be an affordance of
-  another Instance than the Thing.
-
+  interactions with other Instances than the Thing (called "offDevice"
+  now), this term is now considered confusing as it would often just
+  be an affordance of another Instance than the Thing.
 
 # Instance Information and SDF
 
@@ -196,12 +207,185 @@ message (compare the use of SenML "n").
 TODO: Use NIPC as an example how this could be used, including SCIM as
 a source of context information.
 
+TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
+
 (Describe how protocol bindings can be used to convert these messages
 to/from concrete serializations...)
+
+#### Examples for context information
+
+~~~ json
+{
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+
+  "sdfInstance": {
+    "$context": {
+        "$comment": "Potential contents for the SDF context",
+        "deviceName": "urn:dev:org:30810-boat007",
+        "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
+        "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
+        "parentInstance": "TODO -- addressing instance in data tree"
+    }
+  }
+}
+~~~
+{: #example-context title="Example for an SDF instance with context information"}
 
 ### Proofshots (read device, other component)
 
 (See defn above.)
+
+The following examples are based on Figure 2 of {{-digital-twin}}, separated into
+an SDF instance and an SDF model.
+
+A proofshot that captures the state of an instance can be modelled as shown in
+{{code-off-device-instance}}.
+Here, every property of the corresponding SDF model (see {{code-off-device-model}})
+is mapped to a concrete value that corresponds with the associated schema information.
+Note that the proofshot also contains values for the implied (offDevice) properties
+that are static (e.g., the physical location assigned to the instance) but still part of
+the instance's proofshot as the location is known. <!-- Not really sure about this yet. -->
+
+~~~ json
+{
+    "info": {
+        "title": "An example of the heater #1 in the boat #007",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models",
+        "boats": "https://example.com/boats"
+    },
+    "defaultNamespace": "boats",
+
+    "sdfInstance": {
+        "boat007": {
+            "sdfInstanceOf": "models:#/sdfThing/boat",
+            "$comment": "TODO: How to deal with wrapped instances..?",
+            "sdfInstance": {
+                "heater01": {
+                    "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+                    "$context": {
+                        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
+                    },
+                    "isHeating": true,
+                    "location": {
+                        "wgs84": {
+                            "latitude": 35.2988233791372,
+                            "longitude": 129.25478376484913,
+                            "altitude": 0.0
+                        },
+                        "postal": {
+                            "city": "Ulsan",
+                            "post-code": "44110",
+                            "country": "South Korea"
+                        },
+                        "w3w": {
+                            "what3words": "toggle.mopped.garages"
+                        }
+                    },
+                    "report": {
+                        "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
+                    }
+                }
+            }
+        }
+    }
+}
+~~~
+{: #code-off-device-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+
+~~~ json
+{
+    "info": {
+        "title": "An example model of a heater on a boat",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models"
+    },
+    "defaultNamespace": "models",
+
+    "sdfThing": {
+        "boat": {
+            "sdfObject": {
+                "heater": {
+                    "sdfProperty": {
+                        "isHeating": {
+                            "offDevice": true,
+                            "description": "The state of the heater on a boat; false for off and true for on.",
+                            "type": "boolean"
+                        },
+                        "location": {
+                            "offDevice": true,
+                            "sdfRef": "#/sdfData/location"
+                        }
+                    },
+                    "report": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sdfData": {
+        "location": {
+            "type": "object",
+            "properties": {
+                "wgs84": {
+                    "type": "object",
+                    "properties": {
+                        "latitude": {
+                            "type": "number"
+                        },
+                        "longitude": {
+                            "type": "number"
+                        },
+                        "altitude": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "postal": {
+                    "type": "object",
+                    "properties": {
+                        "city": {
+                            "type": "string"
+                        },
+                        "post-code": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "w3w": {
+                    "type": "object",
+                    "properties": {
+                        "what3words": {
+                            "type": "string",
+                            "format": "..."
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+~~~
+{: #code-off-device-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
 
 ### Construction
 
@@ -219,6 +403,91 @@ physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)
 
+#### Examples
+
+##### Example for an SDF model with constructors
+
+~~~ json
+{
+  "info": {
+    "title": "Example document for SDF (Semantic Definition Format) with constructors for instantiation",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+
+  "sdfObject": {
+    "temperatureSensor": {
+      "sdfProperty": {
+        "temperature": {
+          "description": "Temperature value measure by this Thing's temperature sensor.",
+          "type": "number",
+          "sdfParameters": [
+            "minimum",
+            {
+              "targetQuality": "minimum",
+              "parameterName": "minimum",
+              "constructorName": "construct"
+            },
+            "maximum",
+            {
+              "targetQuality": "unit",
+              "parameterName": "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
+            }
+          ]
+        }
+      },
+       "sdfConstructors": {
+        "$comment": "TODO: Dicuss whether this should be assumed to be the default constructor",
+        "construct": {
+          "parameters": {
+            "minimum": {
+              "required": true
+            },
+            "maximum": {
+              "required": false,
+              "$comment": "Constructors could allow for further restricting values that can be assigned to affordances",
+              "type": "integer"
+            },
+            "temperatureUnit": {
+              "required": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #code-sdf-constructors title="Example for SDF model with constructors"}
+
+##### Example for an SDF construction message
+
+~~~ json
+{
+  "info": {
+    "title": "Example SDF construction message",
+    "$comment": "TODO: What kind of meta data do we need here?"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfConstruction": {
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "arguments": {
+      "minimum": 42,
+      "temperatureUnit": "Cel"
+    }
+  }
+}
+~~~
+{: #code-sdf-construction-message title="Example for an SDF construction message"}
+
 ### Deltas and Default/Base messages
 
 What changed since the last proofshot?
@@ -233,9 +502,32 @@ A construction message may be a delta, or it may have parameters that
 algorithmically influence the elements of state that one would find in
 a proofshot.
 
+~~~ json
+{
+  "info": {
+    "title": "Example SDF delta construction message",
+    "$comment": "TODO: What kind of meta data do we need here?"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfConstruction": {
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "previousProofshot": "???",
+    "arguments": {
+      "currentTemperature": 24
+    }
+  }
+}
+~~~
+{: #code-sdf-construction-delta-message title="Example for an SDF construction message for proofshot delta"}
+
+Deltas and Default/Base messages could be used in the Series Transfer Pattern {{STP}}.
+
 ## Metadata
 
-One interesting piece of non-affordance information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
 Multiple models may apply to the same device (including but not only revisions of the models).
 
 # Discussion
