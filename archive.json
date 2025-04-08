@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-06T01:53:56.801129+00:00",
+  "timestamp": "2025-04-08T01:48:54.869231+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -50,5 +50,32 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOOUh3t86RjOw2",
+      "title": "Add proofshot and non-affordance examples",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/1",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR will eventually add examples and some additional text to the draft. Currently, the content of this PR is still WIP, therefore I marked it as a draft for now.",
+      "createdAt": "2025-04-06T23:16:15Z",
+      "updatedAt": "2025-04-06T23:16:15Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "ff51b25940fedbe281a16ae9d49dce2a820f778f",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "add-examples",
+      "headRefOid": "88211e7852e71ea78ace071aaa234754e35d5025",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
