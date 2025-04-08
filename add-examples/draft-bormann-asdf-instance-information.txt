@@ -227,6 +227,7 @@ Table of Contents
        "boats": "https://example.com/boats"
      },
      "defaultNamespace": "boats",
+
      "sdfInstance": {
 
      }
@@ -255,6 +256,7 @@ Table of Contents
        "boats": "https://example.com/boats"
      },
      "defaultNamespace": "boats",
+
      "sdfInstance": {
        "boat#007": {
          "sdfInstanceOf": "models:#/sdfThing/boat",
