@@ -219,11 +219,10 @@ Table of Contents
    A proofshot that captures the state of an instance can be modelled as
    shown in Figure 1.  Here, every property of the corresponding SDF
    model (see Figure 2) is mapped to a concrete value that corresponds
-   with the schema information associated with the property in question.
-   Note that the proofshot also contains values for the implied (non-
-   affordance) properties that are static (e.g., the physical location
-   assigned to the instance) but still part of the instance's proofshot
-   as the location is known.
+   with the associated schema information.  Note that the proofshot also
+   contains values for the implied (non-affordance) properties that are
+   static (e.g., the physical location assigned to the instance) but
+   still part of the instance's proofshot as the location is known.
 
    {
      "info": {
