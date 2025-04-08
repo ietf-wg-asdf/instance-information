@@ -247,6 +247,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     "boats": "https://example.com/boats"
   },
   "defaultNamespace": "boats",
+
   "sdfInstance": {
     "boat#007": {
       "sdfInstanceOf": "models:#/sdfThing/boat",
