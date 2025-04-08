@@ -302,6 +302,7 @@ Table of Contents
        "models": "https://example.com/models"
      },
      "defaultNamespace": "models",
+
      "sdfThing": {
        "boat": {
          "sdfObject":
@@ -417,6 +418,7 @@ Table of Contents
        "cap": "https://example.com/capability/cap"
      },
      "defaultNamespace": "cap",
+
      "sdfObject": {
        "temperatureSensor": {
          "sdfProperty": {
@@ -477,7 +479,7 @@ Table of Contents
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
        "arguments": {
          "minimum": 42,
-         "temperatureUnit": "°C"
+         "temperatureUnit": "Cel"
        }
      }
    }
