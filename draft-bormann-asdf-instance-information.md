@@ -231,6 +231,8 @@ to/from concrete serializations...)
 
 (See defn above.)
 
+The following examples are based on {{-digital-twin}}.
+
 A proofshot that captures the state of an instance can be modelled as shown in
 {{code-non-affordance-instance}}.
 Here, every property of the corresponding SDF model (see {{code-non-affordance-model}})
