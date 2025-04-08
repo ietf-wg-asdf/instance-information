@@ -241,141 +241,137 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
 
 ~~~ json
 {
-  "info": {
-    "title": "An example of the heater #1 in the boat #007",
-    "version": "2025-01-27",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
-  },
-  "defaultNamespace": "boats",
+    "info": {
+        "title": "An example of the heater #1 in the boat #007",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models",
+        "boats": "https://example.com/boats"
+    },
+    "defaultNamespace": "boats",
 
-  "sdfInstance": {
-    "boat007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "$comment": "TODO: How to deal with wrapped instances..?",
-      "sdfInstance": {
-        "heater01": {
-            "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-            "identifier": { "UUID": "a2e06d16-df2c-4618-aacd-490985a3f763" },
-            "isHeating": true,
-            "location": {
-              "wgs84": {
-                "latitude": 35.2988233791372,
-                    "longitude": 129.25478376484913,
-                    "altitude": 0.0
-                },
-                "postal": {
-                  "city": "Ulsan",
-                    "post-code": "44110",
-                    "country": "South Korea"
-                },
-                "w3w": {
-                  "what3words": "toggle.mopped.garages"
+    "sdfInstance": {
+        "boat007": {
+            "sdfInstanceOf": "models:#/sdfThing/boat",
+            "$comment": "TODO: How to deal with wrapped instances..?",
+            "sdfInstance": {
+                "heater01": {
+                    "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+                    "$context": {
+                        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
+                    },
+                    "isHeating": true,
+                    "location": {
+                        "wgs84": {
+                            "latitude": 35.2988233791372,
+                            "longitude": 129.25478376484913,
+                            "altitude": 0.0
+                        },
+                        "postal": {
+                            "city": "Ulsan",
+                            "post-code": "44110",
+                            "country": "South Korea"
+                        },
+                        "w3w": {
+                            "what3words": "toggle.mopped.garages"
+                        }
+                    },
+                    "report": {
+                        "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
+                    }
                 }
-            },
-            "report": {
-              "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
             }
-          }
         }
-      }
     }
-  }
 }
 ~~~
 {: #code-non-affordance-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
 
 ~~~ json
 {
-  "info": {
-    "title": "An example model of a heater on a boat",
-    "version": "2025-01-27",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models"
-  },
-  "defaultNamespace": "models",
+    "info": {
+        "title": "An example model of a heater on a boat",
+        "version": "2025-04-08",
+        "copyright": "Copyright 2025. All rights reserved."
+    },
+    "namespace": {
+        "models": "https://example.com/models"
+    },
+    "defaultNamespace": "models",
 
-  "sdfThing": {
-    "boat": {
-      "sdfObject":
-        "heater": {
-          "sdfProperty": {
-            "isHeating": {
-              "$comment": "FIXME: Find a better quality name",
-              "nonAffordance": true,
-              "description": "The state of the heater on a boat; false for off and true for on.",
-              "type": "boolean"
-            },
-            "$comment": "TODO: Could also be removed from the examples",
-            "identifier": {
-              "type": "object",
-              "properties": {
-                "UUID": {
-                  "type": "string"
-                }
-              }
-            },
-            "location": {
-              "nonAffordance": true,
-              "type": "object",
-              "properties": {
-                "wgs84": {
-                  "type": "object",
-                  "properties": {
-                    "latitude": {
-                      "type": "number"
+    "sdfThing": {
+        "boat": {
+            "sdfObject": {
+                "heater": {
+                    "sdfProperty": {
+                        "isHeating": {
+                            "offDevice": true,
+                            "description": "The state of the heater on a boat; false for off and true for on.",
+                            "type": "boolean"
+                        },
+                        "location": {
+                            "offDevice": true,
+                            "sdfRef": "#/sdfData/location"
+                        }
                     },
-                    "longitude": {
-                      "type": "number"
-                    },
-                    "altitude": {
-                      "type": "number"
+                    "report": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "string"
+                            }
+                        }
                     }
-                  }
+                }
+            }
+        }
+    },
+    "sdfData": {
+        "location": {
+            "type": "object",
+            "properties": {
+                "wgs84": {
+                    "type": "object",
+                    "properties": {
+                        "latitude": {
+                            "type": "number"
+                        },
+                        "longitude": {
+                            "type": "number"
+                        },
+                        "altitude": {
+                            "type": "number"
+                        }
+                    }
                 },
                 "postal": {
-                  "type": "object",
-                  "properties": {
-                    "city": {
-                      "type": "string"
-                    },
-                    "post-code": {
-                      "type": "string"
-                    },
-                    "country": {
-                      "type": "string"
+                    "type": "object",
+                    "properties": {
+                        "city": {
+                            "type": "string"
+                        },
+                        "post-code": {
+                            "type": "string"
+                        },
+                        "country": {
+                            "type": "string"
+                        }
                     }
-                  }
                 },
                 "w3w": {
-                  "type": "object",
-                  "properties": {
-                    "what3words": {
-                      "type": "string",
-                      "format": "..."
+                    "type": "object",
+                    "properties": {
+                        "what3words": {
+                            "type": "string",
+                            "format": "..."
+                        }
                     }
-                  }
                 }
-              }
-            },
-            "report": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 ~~~
 {: #code-non-affordance-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
@@ -425,7 +421,7 @@ which is pretty much a constructor.)
               "targetQuality": "minimum",
               "parameterName": "minimum",
               "constructorName": "construct"
-            }
+            },
             "maximum",
             {
               "targetQuality": "unit",
