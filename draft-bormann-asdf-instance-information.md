@@ -369,6 +369,97 @@ physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)
 
+#### Examples
+
+##### Example for an SDF model with constructors
+
+~~~ json
+{
+  "info": {
+    "title": "Example document for SDF (Semantic Definition Format) with constructors for instantiation",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  // Potential reference to a compatible mapping file
+  "compatibleMappingFiles": [
+    "https://example.org/wot-mapping-file"
+  ],
+  "sdfObject": {
+    "temperatureSensor": {
+      "sdfProperty": {
+        "temperature": {
+          "description": "Temperature value measure by this Thing's temperature sensor.",
+          "type": "number",
+          "sdfParameters": [
+            // Not sure whether it would be better to use JSON pointers here
+            "minimum",
+            {
+              "targetQuality": "minimum",
+              "parameterName": "minimum",
+              "constructorName": "construct" // Might be implicit if construct is defined as the default constructor. However, maybe this could also refer to a list of compatible constructors
+            }
+            // Could be a shorthand for when targetQuality and parameterName match:
+            "maximum",
+            {
+              "targetQuality": "unit",
+              // Alternative: use a JSON pointer
+              "parameterName": "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
+            }
+          ]
+        }
+      },
+       "sdfConstructors": {
+        // TODO: Dicuss whether this should be assumed to be the default constructor
+        "construct": {
+          "parameters": {
+            "minimum": {
+              "required": true
+            },
+            "maximum": {
+              "required": false,
+              // Constructors could allow for further restricting values that can be assigned to affordances
+              "type": "integer"
+            },
+            "temperatureUnit": {
+              "required": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
+~~~
+{: #code-sdf-constructors title="Example for SDF model with constructors"}
+
+##### Example for an SDF construction message
+
+~~~ json
+{
+  "info": {
+    "title": "Example SDF construction message"
+    // TODO: What kind of meta data do we need here?
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfConstruction": {
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "arguments": {
+      "minimum": 42,
+      "temperatureUnit": "°C"
+    }
+  }
+}
+~~~
+{: #code-sdf-construction-message title="Example for an SDF construction message"}
+
 ### Deltas and Default/Base messages
 
 What changed since the last proofshot?
@@ -382,6 +473,27 @@ Can I get the same (equivalent, not identical) coffee I just ordered but with 10
 A construction message may be a delta, or it may have parameters that
 algorithmically influence the elements of state that one would find in
 a proofshot.
+
+~~~ json
+{
+  "info": {
+    "title": "Example SDF delta construction message"
+    // TODO: What kind of meta data do we need here?
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfConstruction": {
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "previousProofshot": "???",
+    "arguments": {
+      "currentTemperature": 24
+    }
+  }
+}
+~~~
+{: #code-sdf-construction-delta-message title="Example for an SDF construction message for proofshot delta"}
 
 ## Metadata
 
