@@ -66,6 +66,7 @@ informative:
     rc: WISHI Wiki
     date: false
   STP: I-D.bormann-t2trg-stp
+  RFC9039: device-id
 
 --- abstract
 
@@ -198,6 +199,8 @@ message (compare the use of SenML "n").
 TODO: Use NIPC as an example how this could be used, including SCIM as
 a source of context information.
 
+TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
+
 (Describe how protocol bindings can be used to convert these messages
 to/from concrete serializations...)
 
@@ -214,7 +217,7 @@ to/from concrete serializations...)
   "sdfInstance": {
     "$context": {
         "$comment": "Potential contents for the SDF context",
-        "deviceName": "urn:sdf:foo:bar",
+        "deviceName": "urn:dev:org:30810-boat007",
         "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
         "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
         "parentInstance": "TODO"
