@@ -200,6 +200,28 @@ a source of context information.
 (Describe how protocol bindings can be used to convert these messages
 to/from concrete serializations...)
 
+#### Examples for context information
+
+~~~ json
+{
+  "sdfContext": {
+    // Potential contents for the SDF context
+    "deviceName": "urn:sdf:foo:bar",
+    "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
+    "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
+    "parentInstance": "TODO"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+
+  }
+}
+~~~
+
 ### Proofshots (read device, other component)
 
 (See defn above.)
