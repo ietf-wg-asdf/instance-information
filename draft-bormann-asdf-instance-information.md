@@ -65,6 +65,7 @@ informative:
     title: Terminology for Layers
     rc: WISHI Wiki
     date: false
+  STP: I-D.bormann-t2trg-stp
 
 --- abstract
 
@@ -511,6 +512,8 @@ a proofshot.
 }
 ~~~
 {: #code-sdf-construction-delta-message title="Example for an SDF construction message for proofshot delta"}
+
+Deltas and Default/Base messages could be used in the Series Transfer Pattern {{STP}}.
 
 ## Metadata
 
