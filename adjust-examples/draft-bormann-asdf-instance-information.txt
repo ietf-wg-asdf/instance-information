@@ -363,13 +363,13 @@ Table of Contents
                "location": {
                  "offDevice": true,
                  "sdfRef": "#/sdfData/location"
-               }
-             },
-             "report": {
-               "type": "object",
-               "properties": {
-                 "value": {
-                   "type": "string"
+               },
+               "report": {
+                 "type": "object",
+                 "properties": {
+                   "value": {
+                     "type": "string"
+                   }
                  }
                }
              }
