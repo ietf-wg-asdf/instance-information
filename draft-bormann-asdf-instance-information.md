@@ -19,7 +19,7 @@ keyword:
  - Interaction Model
  - Data Model
 venue:
-  group: "»A Semantic Definition Format for Data and Interactions of Things«"
+  group: "»A Semantic Definition Format for Data and Interactions of Things« (ASDF)"
   mail: asdf@ietf.org
   github: "ietf-wg-asdf/instance-information"
 
