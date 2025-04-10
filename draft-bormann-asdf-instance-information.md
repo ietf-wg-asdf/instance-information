@@ -244,8 +244,8 @@ is mapped to a concrete value that corresponds with the associated schema inform
 
 As in any instance message, information from the model is not repeated but
 referenced via a pointer into the model tree (`sdfInstanceOf`); the
-namespace for this is set up in the usual `namespace` section that we
-also have in models.
+namespace needed for this is set up in the usual `namespace` section that we
+also have in model files.
 
 Note that in this example, the proofshot also contains values for the implied (offDevice) properties
 that are static (e.g., the physical location assigned to the instance) but still part of
@@ -287,6 +287,16 @@ sdfInstance:
 ~~~
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+
+{{code-off-device-model}} shows a model like the one that could have
+been pointed to by the `sdfInstanceOf` pointers in the instance message.
+Note how the namespace is managed here to export the model components into
+`models:#/sdfThing/boat` and `models:#/sdfThing/boat/sdfObject/heater`.
+
+(This example model only specifies structure; it also could come with
+semantic information such as the units that are used for wgs84 etc.
+In practice, the definition of `wgs84` etc. probably would come from a common
+library and just be referenced via `sdfRef`.)
 
 ~~~ json-from-yaml
 info:
