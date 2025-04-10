@@ -1452,7 +1452,7 @@ that are static (e.g., the physical location assigned to the instance) but still
 the instance's proofshot as the location is known.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
+            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1474,7 +1474,26 @@ the instance's proofshot as the location is known.<a href="#section-2.1.2-5" cla
         "$context": {
           "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
         },
-        "isHeating": true,
+        "isHeating": {
+          "$comment": "Example for a proofshot that combines a \
+property state with an event history, where each output value is \
+                                        associated with a timestamp",
+          "propertyValue": true,
+          "eventHistory": [
+            {
+              "outputValue": true,
+              "timestamp": "2025-04-10T08:25:43.511Z"
+            },
+            {
+              "outputValue": false,
+              "timestamp": "2025-04-10T10:25:43.511Z"
+            },
+            {
+              "outputValue": false,
+              "timestamp": "2025-04-10T15:25:42.511Z"
+            }
+          ]
+        },
         "location": {
           "wgs84": {
             "latitude": 35.2988233791372,
@@ -1548,6 +1567,15 @@ library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2-
                   "type": "string"
                 }
               }
+            }
+          }
+        },
+        "sdfEvent": {
+          "isHeating": {
+            "$comment": "This is not a very good example for a '\
+                    namespace clash', but it might suffice for now.",
+            "sdfOutputData": {
+              "type": "boolean"
             }
           }
         }
