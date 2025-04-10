@@ -130,18 +130,26 @@ Table of Contents
       Representational State Transfer [REST] as well.
 
    Message:  A Representation that is exchanged in, or is the subject
-      of, an Interaction.
+      of, an Interaction.  Messages are "data in flight", not instance
+      "data at rest" (the latter are called "Instance" and are modeled
+      by the interaction model).  Depending on the specific message, an
+      abstract data model for the message may be provided by the sdfData
+      definitions (or of declarations that look like these, such as
+      sdfProperty) of an SDF model.
 
    Instantiation:  Instantiation is a process that takes a Model, some
       Context Information, and possibly information from a Device and
-      creates a Message.
+      creates an Instance.
 
    Instance:  Anything that can be interacted with based on the SDF
       model.  E.g., the Thing itself (device), a Digital Twin, an Asset
-      Management system... Instances of a Thing are bound together by
-      some form of identity.  Instances become useful if they are
-      "situated", i.e., with a physical or digital "address" that they
-      can be found at and made the subject of an interaction.
+      Management system... Instances are modeled as "data at rest", not
+      "data in flight" (the latter are called "Message" and actually
+      are/have a Representation).  Instances that relate to a single
+      Thing are bound together by some form of identity.  Instances
+      become useful if they are "situated", i.e., with a physical or
+      digital "address" that they can be found at and made the subject
+      of an interaction.
 
    Proofshot:  A message that attempts to describe the state of an
       Instance at a particular moment (which may be part of the

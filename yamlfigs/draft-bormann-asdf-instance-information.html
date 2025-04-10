@@ -1274,14 +1274,21 @@ State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well
 <dt id="section-1.1-3.3">Message:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.4">
             <p id="section-1.1-3.4.1">A Representation that is exchanged in, or is the subject of, an
-Interaction.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+Interaction.
+Messages are "data in flight", not instance "data at rest" (the
+latter are called "Instance" and are modeled by the interaction
+model).
+Depending on the specific message, an abstract data model for the
+message may be provided by the <code>sdfData</code> definitions (or of
+declarations that look like these, such as <code>sdfProperty</code>) of an SDF
+model.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.5">Instantiation:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.6">
             <p id="section-1.1-3.6.1">Instantiation is a process that takes a Model, some Context
-Information, and possibly information from a Device and creates a
-Message.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
+Information, and possibly information from a Device and creates an
+Instance.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.7">Instance:</dt>
@@ -1289,7 +1296,10 @@ Message.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
             <p id="section-1.1-3.8.1">Anything that can be interacted with based on the SDF model.
 E.g., the Thing itself (device), a Digital Twin, an Asset Management
 system...
-Instances of a Thing are bound together by some form of identity.
+Instances are modeled as "data at rest", not "data in flight" (the
+latter are called "Message" and actually are/have a Representation).
+Instances that relate to a single Thing are bound together by some
+form of identity.
 Instances become useful if they are "situated", i.e., with a
 physical or digital "address" that they can be found at and made the
 subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
