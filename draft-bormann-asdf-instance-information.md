@@ -11,7 +11,7 @@ docname: draft-bormann-asdf-instance-information-latest
 number:
 date:
 area: ""
-workgroup: "A Semantic Definition Format for Data and Interactions of Things"
+workgroup: ASDF
 keyword:
  - IoT
  - Link
@@ -19,8 +19,8 @@ keyword:
  - Interaction Model
  - Data Model
 venue:
-  group: "A Semantic Definition Format for Data and Interactions of Things"
-  mail: "asdf@ietf.org"
+  group: "»A Semantic Definition Format for Data and Interactions of Things«"
+  mail: asdf@ietf.org
   github: "ietf-wg-asdf/instance-information"
 
 author:
