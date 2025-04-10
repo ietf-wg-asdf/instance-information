@@ -241,7 +241,13 @@ A proofshot that captures the state of an instance can be modelled as shown in
 {{code-off-device-instance}}.
 Here, every property of the corresponding SDF model (see {{code-off-device-model}})
 is mapped to a concrete value that corresponds with the associated schema information.
-Note that the proofshot also contains values for the implied (offDevice) properties
+
+As in any instance message, information from the model is not repeated but
+referenced via a pointer into the model tree (`sdfInstanceOf`); the
+namespace for this is set up in the usual `namespace` section that we
+also have in models.
+
+Note that in this example, the proofshot also contains values for the implied (offDevice) properties
 that are static (e.g., the physical location assigned to the instance) but still part of
 the instance's proofshot as the location is known. <!-- Not really sure about this yet. -->
 
