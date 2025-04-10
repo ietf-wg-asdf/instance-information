@@ -338,7 +338,7 @@ sdfData:
             format: "..."
 ~~~
 {: #code-off-device-model post="fold"
-title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-07]}
+title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-07]"}
 
 ### Construction
 
