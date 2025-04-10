@@ -279,27 +279,25 @@ defaultNamespace: boats
 sdfInstance:
   boat007:
     sdfInstanceOf: models:#/sdfThing/boat
-    "$comment": 'TODO: How to deal with wrapped instances..?'
-    sdfInstance:
-      heater01:
-        sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
-        "$context":
-          scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-        isHeating: true
-        location:
-          wgs84:
-            latitude: 35.2988233791372
-            longitude: 129.25478376484912
-            altitude: 0.0
-          postal:
-            city: Ulsan
-            post-code: '44110'
-            country: South Korea
-          w3w:
-            what3words: toggle.mopped.garages
-        report:
-          value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
-            to 6 p.m.'
+    heater:
+      sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
+      "$context":
+        scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+      isHeating: true
+      location:
+        wgs84:
+          latitude: 35.2988233791372
+          longitude: 129.25478376484912
+          altitude: 0.0
+        postal:
+          city: Ulsan
+          post-code: '44110'
+          country: South Korea
+        w3w:
+          what3words: toggle.mopped.garages
+      report:
+        value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
+          to 6 p.m.'
 ~~~
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
@@ -334,11 +332,11 @@ sdfThing:
           location:
             offDevice: true
             sdfRef: "#/sdfData/location"
-        report:
-          type: object
-          properties:
-            value:
-              type: string
+          report:
+            type: object
+            properties:
+              value:
+                type: string
 sdfData:
   location:
     type: object
