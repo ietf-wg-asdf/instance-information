@@ -1277,11 +1277,14 @@ State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well
 Interaction.
 Messages are "data in flight", not instance "data at rest" (the
 latter are called "Instance" and are modeled by the interaction
-model).
-Depending on the specific message, an abstract data model for the
+model).<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.2">Depending on the specific message, an abstract data model for the
 message may be provided by the <code>sdfData</code> definitions (or of
 declarations that look like these, such as <code>sdfProperty</code>) of an SDF
-model.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+model.<a href="#section-1.1-3.4.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.3">Deriving an ecosystem specific representation of a message may be
+aided by <em>mapping files</em> <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span> that apply to the SDF model
+providing the abstract data model.<a href="#section-1.1-3.4.3" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.5">Instantiation:</dt>
@@ -1385,7 +1388,7 @@ self-describing.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
           <h4 id="name-input-and-output-data-of-sp">
 <a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-input-and-output-data-of-sp" class="section-name selfRef">Input and output data of specific interactions</a>
           </h4>
-<p id="section-2.1.1-1">Messages always have context, typically describing the "I" and the
+<p id="section-2.1.1-1">Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
 statements ("the temperature here", "my current draw")...<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-2">Messages may have to be complemented by this context for
@@ -1788,7 +1791,9 @@ a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <a href="#name-example-for-an-sdf-constructi" class="selfRef">Example for an SDF construction message for proofshot delta</a>
             </figcaption></figure>
 </div>
-<p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer
+Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may be one way to model a telemetry stream from a
+device.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
