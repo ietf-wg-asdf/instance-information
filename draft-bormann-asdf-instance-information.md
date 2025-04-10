@@ -298,7 +298,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     }
 }
 ~~~
-{: #code-off-device-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+{: #code-off-device-instance title="SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 2"}
 
 ~~~ json
 {
@@ -385,7 +385,7 @@ the instance's proofshot as the location is known. <!-- Not really sure about th
     }
 }
 ~~~
-{: #code-off-device-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 1"}
+{: #code-off-device-model title="Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 2"}
 
 ### Construction
 
