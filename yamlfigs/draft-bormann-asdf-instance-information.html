@@ -1431,13 +1431,17 @@ an SDF instance and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</
 <p id="section-2.1.2-3">A proofshot that captures the state of an instance can be modelled as shown in
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>.
 Here, every property of the corresponding SDF model (see <a href="#code-off-device-model" class="auto internal xref">Figure 3</a>)
-is mapped to a concrete value that corresponds with the associated schema information.
-Note that the proofshot also contains values for the implied (offDevice) properties
+is mapped to a concrete value that corresponds with the associated schema information.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-4">As in any instance message, information from the model is not repeated but
+referenced via a pointer into the model tree (<code>sdfInstanceOf</code>); the
+namespace needed for this is set up in the usual <code>namespace</code> section that we
+also have in model files.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-5">Note that in this example, the proofshot also contains values for the implied (offDevice) properties
 that are static (e.g., the physical location assigned to the instance) but still part of
-the instance's proofshot as the location is known.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+the instance's proofshot as the location is known.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="lang-json-from-yaml sourcecode" id="section-2.1.2-4.1">
+            <div class="lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1492,9 +1496,17 @@ the instance's proofshot as the location is known.<a href="#section-2.1.2-3" cla
 <a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
             </figcaption></figure>
 </div>
+<p id="section-2.1.2-7"><a href="#code-off-device-model" class="auto internal xref">Figure 3</a> shows a model like the one that could have
+been pointed to by the <code>sdfInstanceOf</code> pointers in the instance message.
+Note how the namespace is managed here to export the model components into
+<code>models:#/sdfThing/boat</code> and <code>models:#/sdfThing/boat/sdfObject/heater</code>.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-8">(This example model only specifies structure; it also could come with
+semantic information such as the units that are used for wgs84 etc.
+In practice, the definition of <code>wgs84</code> etc. probably would come from a common
+library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2-8" class="pilcrow">¶</a></p>
 <span id="name-revised-sdf-model-proposal-"></span><div id="code-off-device-model">
 <figure id="figure-3">
-            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-5.1">
+            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-9.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
