@@ -328,7 +328,6 @@ sdfThing:
       heater:
         sdfProperty:
           isHeating:
-            offDevice: true
             description: The state of the heater on a boat; false for off and true
               for on.
             type: boolean
