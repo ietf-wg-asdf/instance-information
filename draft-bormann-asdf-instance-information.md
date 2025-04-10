@@ -125,10 +125,15 @@ Message:
   Messages are "data in flight", not instance "data at rest" (the
   latter are called "Instance" and are modeled by the interaction
   model).
+
   Depending on the specific message, an abstract data model for the
   message may be provided by the `sdfData` definitions (or of
   declarations that look like these, such as `sdfProperty`) of an SDF
   model.
+
+  Deriving an ecosystem specific representation of a message may be
+  aided by _mapping files_ {{-mapping}} that apply to the SDF model
+  providing the abstract data model.
 
 Instantiation:
 : Instantiation is a process that takes a Model, some Context
@@ -206,7 +211,7 @@ self-describing.
 
 ### Input and output data of specific interactions
 
-Messages always have context, typically describing the "I" and the
+Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
 statements ("the temperature here", "my current draw")...
 
@@ -475,7 +480,10 @@ sdfConstruction:
 {: #code-sdf-construction-delta-message post="fold"
 title="Example for an SDF construction message for proofshot delta"}
 
-Deltas and Default/Base messages could be used in the Series Transfer Pattern {{STP}}.
+Deltas and Default/Base messages could be used in the Series Transfer
+Pattern {{STP}}, which may be one way to model a telemetry stream from a
+device.
+
 
 ## Metadata
 
