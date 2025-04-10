@@ -280,7 +280,7 @@ sdfInstance:
             to 6 p.m.'
 ~~~
 {: #code-off-device-instance post="fold"
-title="SDF instance proposal for Figure 2 in draft-lee-asdf-digital-twin-07"}
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
 ~~~ json-from-yaml
 info:
@@ -338,7 +338,7 @@ sdfData:
             format: "..."
 ~~~
 {: #code-off-device-model post="fold"
-title="Revised SDF model proposal for Figure 2 of draft-lee-asdf-digital-twin-07}
+title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-07]}
 
 ### Construction
 
