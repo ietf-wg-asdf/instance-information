@@ -283,7 +283,16 @@ sdfInstance:
       sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
       "$context":
         scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-      isHeating: true
+      isHeating:
+        "$comment": Example for a proofshot that combines a property state with an event history, where each output value is associated with a timestamp
+        propertyValue: true
+        eventHistory:
+          - outputValue: true
+            timestamp: "2025-04-10T08:25:43.511Z"
+          - outputValue: false
+            timestamp: "2025-04-10T10:25:43.511Z"
+          - outputValue: false
+            timestamp: "2025-04-10T15:25:42.511Z"
       location:
         wgs84:
           latitude: 35.2988233791372
@@ -337,6 +346,11 @@ sdfThing:
             properties:
               value:
                 type: string
+      sdfEvent:
+        isHeating:
+          "$comment": This is not a very good example for a 'namespace clash', but it might suffice for now.
+          sdfOutputData:
+            type: boolean
 sdfData:
   location:
     type: object
