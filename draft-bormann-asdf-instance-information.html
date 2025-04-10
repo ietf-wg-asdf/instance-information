@@ -13,9 +13,8 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them. 
-       The present revision is not much more than a notepad; it is expected
-that it will be respun at least once before the 2025-04-09 ASDF
-meeting. 
+       The present revision –01 has been slightly updated from the
+discussion at the 2025-04-09 ASDF meeting. 
     " name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="IoT" name="keyword">
@@ -1068,7 +1067,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">A Semantic Definition Format for Data and Interactions of Things</dd>
+<dd class="workgroup">ASDF</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
@@ -1100,9 +1099,8 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">The present revision is not much more than a notepad; it is expected
-that it will be respun at least once before the 2025-04-09 ASDF
-meeting.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision –01 has been slightly updated from the
+discussion at the 2025-04-09 ASDF meeting.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1113,7 +1111,7 @@ meeting.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-information/">https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-information/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
-        A Semantic Definition Format for Data and Interactions of Things Working Group mailing list (<span><a href="mailto:asdf@ietf.org">mailto:asdf@ietf.org</a></span>),
+        »A Semantic Definition Format for Data and Interactions of Things« (ASDF) Working Group mailing list (<span><a href="mailto:asdf@ietf.org">mailto:asdf@ietf.org</a></span>),
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/asdf/">https://mailarchive.ietf.org/arch/browse/asdf/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/asdf/">https://www.ietf.org/mailman/listinfo/asdf/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
@@ -1274,14 +1272,24 @@ State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well
 <dt id="section-1.1-3.3">Message:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.4">
             <p id="section-1.1-3.4.1">A Representation that is exchanged in, or is the subject of, an
-Interaction.<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+Interaction.
+Messages are "data in flight", not instance "data at rest" (the
+latter are called "Instance" and are modeled by the interaction
+model).<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.2">Depending on the specific message, an abstract data model for the
+message may be provided by the <code>sdfData</code> definitions (or of
+declarations that look like these, such as <code>sdfProperty</code>) of an SDF
+model.<a href="#section-1.1-3.4.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.3">Deriving an ecosystem specific representation of a message may be
+aided by <em>mapping files</em> <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span> that apply to the SDF model
+providing the abstract data model.<a href="#section-1.1-3.4.3" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.5">Instantiation:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.6">
             <p id="section-1.1-3.6.1">Instantiation is a process that takes a Model, some Context
-Information, and possibly information from a Device and creates a
-Message.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
+Information, and possibly information from a Device and creates an
+Instance.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.7">Instance:</dt>
@@ -1289,7 +1297,10 @@ Message.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
             <p id="section-1.1-3.8.1">Anything that can be interacted with based on the SDF model.
 E.g., the Thing itself (device), a Digital Twin, an Asset Management
 system...
-Instances of a Thing are bound together by some form of identity.
+Instances are modeled as "data at rest", not "data in flight" (the
+latter are called "Message" and actually are/have a Representation).
+Instances that relate to a single Thing are bound together by some
+form of identity.
 Instances become useful if they are "situated", i.e., with a
 physical or digital "address" that they can be found at and made the
 subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
@@ -1375,7 +1386,7 @@ self-describing.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
           <h4 id="name-input-and-output-data-of-sp">
 <a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-input-and-output-data-of-sp" class="section-name selfRef">Input and output data of specific interactions</a>
           </h4>
-<p id="section-2.1.1-1">Messages always have context, typically describing the "I" and the
+<p id="section-2.1.1-1">Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
 statements ("the temperature here", "my current draw")...<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-2">Messages may have to be complemented by this context for
@@ -1393,22 +1404,20 @@ to/from concrete serializations...)<a href="#section-2.1.1-5" class="pilcrow">¶
             </h5>
 <span id="name-example-for-an-sdf-instance"></span><div id="example-context">
 <figure id="figure-1">
-              <div class="lang-json sourcecode" id="section-2.1.1.1-1.1">
-<pre>
-{
+              <div class="lang-json-from-yaml sourcecode" id="section-2.1.1.1-1.1">
+<pre>{
   "namespace": {
     "models": "https://example.com/models",
     "boats": "https://example.com/boats"
   },
   "defaultNamespace": "boats",
-
   "sdfInstance": {
     "$context": {
-        "$comment": "Potential contents for the SDF context",
-        "deviceName": "urn:dev:org:30810-boat007",
-        "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
-        "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
-        "parentInstance": "TODO -- addressing instance in data tree"
+      "$comment": "Potential contents for the SDF context",
+      "deviceName": "urn:dev:org:30810-boat007",
+      "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
+      "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
+      "parentInstance": "TODO -- addressing instance in data tree"
     }
   }
 }
@@ -1433,157 +1442,171 @@ an SDF instance and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</
 <p id="section-2.1.2-3">A proofshot that captures the state of an instance can be modelled as shown in
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>.
 Here, every property of the corresponding SDF model (see <a href="#code-off-device-model" class="auto internal xref">Figure 3</a>)
-is mapped to a concrete value that corresponds with the associated schema information.
-Note that the proofshot also contains values for the implied (offDevice) properties
+is mapped to a concrete value that corresponds with the associated schema information.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-4">As in any instance message, information from the model is not repeated but
+referenced via a pointer into the model tree (<code>sdfInstanceOf</code>); the
+namespace needed for this is set up in the usual <code>namespace</code> section that we
+also have in model files.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-5">Note that in this example, the proofshot also contains values for the implied (offDevice) properties
 that are static (e.g., the physical location assigned to the instance) but still part of
-the instance's proofshot as the location is known.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
-<span id="name-sdf-instance-proposal-for-d"></span><div id="code-off-device-instance">
+the instance's proofshot as the location is known.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
+<span id="name-sdf-instance-proposal-for-f"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="lang-json sourcecode" id="section-2.1.2-4.1">
-<pre>
-{
-    "info": {
-        "title": "An example of the heater #1 in the boat #007",
-        "version": "2025-04-08",
-        "copyright": "Copyright 2025. All rights reserved."
-    },
-    "namespace": {
-        "models": "https://example.com/models",
-        "boats": "https://example.com/boats"
-    },
-    "defaultNamespace": "boats",
+            <div class="lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
-    "sdfInstance": {
-        "boat007": {
-            "sdfInstanceOf": "models:#/sdfThing/boat",
-            "$comment": "TODO: How to deal with wrapped instances..?",
-            "sdfInstance": {
-                "heater01": {
-                    "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-                    "$context": {
-                        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
-                    },
-                    "isHeating": true,
-                    "location": {
-                        "wgs84": {
-                            "latitude": 35.2988233791372,
-                            "longitude": 129.25478376484913,
-                            "altitude": 0.0
-                        },
-                        "postal": {
-                            "city": "Ulsan",
-                            "post-code": "44110",
-                            "country": "South Korea"
-                        },
-                        "w3w": {
-                            "what3words": "toggle.mopped.garages"
-                        }
-                    },
-                    "report": {
-                        "value": "On February 24, 2025, the boat #007's heater #1 was on from 9 a.m. to 6 p.m."
-                    }
-                }
+{
+  "info": {
+    "title": "An example of the heater #1 in the boat #007",
+    "version": "2025-04-08",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "boat007": {
+      "sdfInstanceOf": "models:#/sdfThing/boat",
+      "$comment": "TODO: How to deal with wrapped instances..?",
+      "sdfInstance": {
+        "heater01": {
+          "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+          "$context": {
+            "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
+          },
+          "isHeating": true,
+          "location": {
+            "wgs84": {
+              "latitude": 35.2988233791372,
+              "longitude": 129.25478376484912,
+              "altitude": 0.0
+            },
+            "postal": {
+              "city": "Ulsan",
+              "post-code": "44110",
+              "country": "South Korea"
+            },
+            "w3w": {
+              "what3words": "toggle.mopped.garages"
             }
+          },
+          "report": {
+            "value": "On February 24, 2025, the boat #007's heater #\
+                                      1 was on from 9 a.m. to 6 p.m."
+          }
         }
+      }
     }
+  }
 }
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-sdf-instance-proposal-for-d" class="selfRef">SDF instance proposal for draft-lee-asdf-digital-twin-07, Figure 2</a>
+<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
             </figcaption></figure>
 </div>
+<p id="section-2.1.2-7"><a href="#code-off-device-model" class="auto internal xref">Figure 3</a> shows a model like the one that could have
+been pointed to by the <code>sdfInstanceOf</code> pointers in the instance message.
+Note how the namespace is managed here to export the model components into
+<code>models:#/sdfThing/boat</code> and <code>models:#/sdfThing/boat/sdfObject/heater</code>.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-8">(This example model only specifies structure; it also could come with
+semantic information such as the units that are used for wgs84 etc.
+In practice, the definition of <code>wgs84</code> etc. probably would come from a common
+library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2-8" class="pilcrow">¶</a></p>
 <span id="name-revised-sdf-model-proposal-"></span><div id="code-off-device-model">
 <figure id="figure-3">
-            <div class="breakable lang-json sourcecode" id="section-2.1.2-5.1">
-<pre>
-{
-    "info": {
-        "title": "An example model of a heater on a boat",
-        "version": "2025-04-08",
-        "copyright": "Copyright 2025. All rights reserved."
-    },
-    "namespace": {
-        "models": "https://example.com/models"
-    },
-    "defaultNamespace": "models",
+            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-9.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
-    "sdfThing": {
-        "boat": {
-            "sdfObject": {
-                "heater": {
-                    "sdfProperty": {
-                        "isHeating": {
-                            "offDevice": true,
-                            "description": "The state of the heater on a boat; false for off and true for on.",
-                            "type": "boolean"
-                        },
-                        "location": {
-                            "offDevice": true,
-                            "sdfRef": "#/sdfData/location"
-                        }
-                    },
-                    "report": {
-                        "type": "object",
-                        "properties": {
-                            "value": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
+{
+  "info": {
+    "title": "An example model of a heater on a boat",
+    "version": "2025-04-08",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models"
+  },
+  "defaultNamespace": "models",
+  "sdfThing": {
+    "boat": {
+      "sdfObject": {
+        "heater": {
+          "sdfProperty": {
+            "isHeating": {
+              "offDevice": true,
+              "description": "The state of the heater on a boat; \
+                                     false for off and true for on.",
+              "type": "boolean"
+            },
+            "location": {
+              "offDevice": true,
+              "sdfRef": "#/sdfData/location"
             }
-        }
-    },
-    "sdfData": {
-        "location": {
+          },
+          "report": {
             "type": "object",
             "properties": {
-                "wgs84": {
-                    "type": "object",
-                    "properties": {
-                        "latitude": {
-                            "type": "number"
-                        },
-                        "longitude": {
-                            "type": "number"
-                        },
-                        "altitude": {
-                            "type": "number"
-                        }
-                    }
-                },
-                "postal": {
-                    "type": "object",
-                    "properties": {
-                        "city": {
-                            "type": "string"
-                        },
-                        "post-code": {
-                            "type": "string"
-                        },
-                        "country": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "w3w": {
-                    "type": "object",
-                    "properties": {
-                        "what3words": {
-                            "type": "string",
-                            "format": "..."
-                        }
-                    }
-                }
+              "value": {
+                "type": "string"
+              }
             }
+          }
         }
+      }
     }
+  },
+  "sdfData": {
+    "location": {
+      "type": "object",
+      "properties": {
+        "wgs84": {
+          "type": "object",
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            },
+            "altitude": {
+              "type": "number"
+            }
+          }
+        },
+        "postal": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "post-code": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          }
+        },
+        "w3w": {
+          "type": "object",
+          "properties": {
+            "what3words": {
+              "type": "string",
+              "format": "..."
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-revised-sdf-model-proposal-" class="selfRef">Revised SDF model proposal for draft-lee-asdf-digital-twin-07, Figure 2</a>
+<a href="#name-revised-sdf-model-proposal-" class="selfRef">Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-07]</a>
             </figcaption></figure>
 </div>
 </section>
@@ -1616,11 +1639,13 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
               </h6>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructors">
 <figure id="figure-4">
-                <div class="breakable lang-json sourcecode" id="section-2.1.3.1.1-1.1">
-<pre>
+                <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.3.1.1-1.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 {
   "info": {
-    "title": "Example document for SDF (Semantic Definition Format) with constructors for instantiation",
+    "title": "Example document for SDF (Semantic Definition Format) \
+                                with constructors for instantiation",
     "version": "2019-04-24",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
@@ -1629,12 +1654,12 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
-
   "sdfObject": {
     "temperatureSensor": {
       "sdfProperty": {
         "temperature": {
-          "description": "Temperature value measure by this Thing's temperature sensor.",
+          "description": "Temperature value measure by this Thing's \
+                                                temperature sensor.",
           "type": "number",
           "sdfParameters": [
             "minimum",
@@ -1646,13 +1671,15 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
             "maximum",
             {
               "targetQuality": "unit",
-              "parameterName": "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
+              "parameterName": "#/sdfObject/Switch/sdfConstructors/\
+                                           construct/temperatureUnit"
             }
           ]
         }
       },
-       "sdfConstructors": {
-        "$comment": "TODO: Dicuss whether this should be assumed to be the default constructor",
+      "sdfConstructors": {
+        "$comment": "TODO: Dicuss whether this should be assumed to \
+                                         be the default constructor",
         "construct": {
           "parameters": {
             "minimum": {
@@ -1660,7 +1687,8 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
             },
             "maximum": {
               "required": false,
-              "$comment": "Constructors could allow for further restricting values that can be assigned to affordances",
+              "$comment": "Constructors could allow for further \
+             restricting values that can be assigned to affordances",
               "type": "integer"
             },
             "temperatureUnit": {
@@ -1687,19 +1715,21 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
               </h6>
 <span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-construction-message">
 <figure id="figure-5">
-                <div class="lang-json sourcecode" id="section-2.1.3.1.2-1.1">
-<pre>
+                <div class="lang-json-from-yaml sourcecode" id="section-2.1.3.1.2-1.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 {
   "info": {
     "title": "Example SDF construction message",
-    "$comment": "TODO: What kind of meta data do we need here?"
+    "$comment": "TODO: What kind of metadata do we need here?"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
   "sdfConstruction": {
-    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
+                                          sdfConstructors/construct",
     "arguments": {
       "minimum": 42,
       "temperatureUnit": "Cel"
@@ -1732,19 +1762,21 @@ algorithmically influence the elements of state that one would find in
 a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-constructi"></span><div id="code-sdf-construction-delta-message">
 <figure id="figure-6">
-            <div class="lang-json sourcecode" id="section-2.1.4-6.1">
-<pre>
+            <div class="lang-json-from-yaml sourcecode" id="section-2.1.4-6.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 {
   "info": {
     "title": "Example SDF delta construction message",
-    "$comment": "TODO: What kind of meta data do we need here?"
+    "$comment": "TODO: What kind of metadata do we need here?"
   },
   "namespace": {
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
   "sdfConstruction": {
-    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/sdfConstructors/construct",
+    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
+                                          sdfConstructors/construct",
     "previousProofshot": "???",
     "arguments": {
       "currentTemperature": 24
@@ -1757,7 +1789,9 @@ a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <a href="#name-example-for-an-sdf-constructi" class="selfRef">Example for an SDF construction message for proofshot delta</a>
             </figcaption></figure>
 </div>
-<p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer
+Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may be one way to model a telemetry stream from a
+device.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
