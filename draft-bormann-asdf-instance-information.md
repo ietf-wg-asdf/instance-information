@@ -76,9 +76,10 @@ Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them.
 
-The present revision is not much more than a notepad; it is expected
-that it will be respun at least once before the 2025-04-09 ASDF
-meeting.
+[^status]
+
+[^status]: The present revision –01 has been slightly updated from the
+    discussion at the 2025-04-09 ASDF meeting.
 
 
 --- middle
@@ -437,7 +438,7 @@ title="Example for SDF model with constructors"}
 ~~~ json-from-yaml
 info:
   title: Example SDF construction message
-  "$comment": 'TODO: What kind of meta data do we need here?'
+  "$comment": 'TODO: What kind of metadata do we need here?'
 namespace:
   cap: https://example.com/capability/cap
 defaultNamespace: cap
@@ -467,7 +468,7 @@ a proofshot.
 ~~~ json-from-yaml
 info:
   title: Example SDF delta construction message
-  "$comment": 'TODO: What kind of meta data do we need here?'
+  "$comment": 'TODO: What kind of metadata do we need here?'
 namespace:
   cap: https://example.com/capability/cap
 defaultNamespace: cap
