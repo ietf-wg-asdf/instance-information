@@ -284,7 +284,10 @@ sdfInstance:
       "$context":
         scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
       isHeating:
-        "$comment": Example for a proofshot that combines a property state with an event history, where each output value is associated with a timestamp
+        "$comment": >-
+          Example for a proofshot that combines a property state with an event history, where each output value is associated with a timestamp.
+
+          TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?
         propertyValue: true
         eventHistory:
           - outputValue: true
