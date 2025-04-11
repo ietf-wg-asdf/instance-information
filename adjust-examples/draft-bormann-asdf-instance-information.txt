@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 12 October 2025                              Universität Bremen
-                                                           10 April 2025
+Expires: 13 October 2025                              Universität Bremen
+                                                           11 April 2025
 
 
                       Instance Information for SDF
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 October 2025.
+   This Internet-Draft will expire on 13 October 2025.
 
 Copyright Notice
 
@@ -303,7 +303,9 @@ Table of Contents
            "isHeating": {
              "$comment": "Example for a proofshot that combines a \
    property state with an event history, where each output value is \
-                                           associated with a timestamp",
+   associated with a timestamp.\nTODO: Discuss how to specify how many \
+   events in the history should be displayed -- could this be done via \
+                                                      a constructor?\n",
              "propertyValue": true,
              "eventHistory": [
                {
