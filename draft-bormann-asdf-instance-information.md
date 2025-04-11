@@ -314,6 +314,47 @@ sdfInstance:
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
+<!--
+  Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
+
+  Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this
+-->
+
+~~~ json-from-yaml
+info:
+  title: 'An example of the heater #1 in the boat #007'
+  version: '2025-04-08'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+  boats: https://example.com/boats
+defaultNamespace: boats
+sdfInstance:
+  "models:#/sdfThing/boat/007":
+    heater: models:#/sdfThing/boat/sdfObject/heater/001
+  "models:#/sdfThing/boat/sdfObject/heater/001":
+    "$context":
+      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+    "$comment": isHeating is only referring to the property here for the sake of brevity
+    isHeating: true
+    location:
+      wgs84:
+        latitude: 35.2988233791372
+        longitude: 129.25478376484912
+        altitude: 0.0
+      postal:
+        city: Ulsan
+        post-code: '44110'
+        country: South Korea
+      w3w:
+        what3words: toggle.mopped.garages
+    report:
+      value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
+        to 6 p.m.'
+~~~
+{: #code-off-device-instance-alternative post="fold"
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+
 {{code-off-device-model}} shows a model like the one that could have
 been pointed to by the `sdfInstanceOf` pointers in the instance message.
 Note how the namespace is managed here to export the model components into
