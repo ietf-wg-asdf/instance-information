@@ -445,7 +445,7 @@ which is pretty much a constructor.)
 
 #### Examples
 
-##### Example for an SDF model with constructors
+##### Example for an SDF model with constructors (for creating "less abstract" models)
 
 ~~~ json-from-yaml
 info:
@@ -488,6 +488,44 @@ sdfObject:
 {: #code-sdf-constructors post="fold"
 title="Example for SDF model with constructors"}
 
+~~~ json-from-yaml
+info:
+  title: Example document for SDF (Semantic Definition Format) with constructors for
+    instantiation
+  version: '2019-04-24'
+  copyright: Copyright 2019 Example Corp. All rights reserved.
+  license: https://example.com/license
+namespace:
+  cap: https://example.com/capability/cap
+defaultNamespace: cap
+sdfObject:
+  temperatureSensor:
+    sdfProperty:
+      temperature:
+        description: Temperature value measure by this Thing's temperature sensor.
+        type: number
+        sdfParameter:
+          unit:
+            "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
+            type: string
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+    sdfConstructor:
+      construct:
+        parameters:
+          temperature:
+            required: true
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature"
+          temperateUnit:
+            required: true
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+          ipAddress:
+            "$comment": "Just trying some things out here. Should this parameter target the context or rather an (offDevice?) property?"
+            required: false
+            isContextInformation: true
+~~~
+{: #code-sdf-constructors-proofshot post="fold"
+title="Example for SDF model with constructors for proofshot"}
+
 ##### Example for an SDF construction message
 
 ~~~ json-from-yaml
@@ -505,6 +543,25 @@ sdfConstruction:
 ~~~
 {: #code-sdf-construction-message post="fold"
 title="Example for an SDF construction message"}
+
+##### Alternative Example for an SDF construction message
+
+~~~ json-from-yaml
+info:
+  title: Example SDF construction message
+  "$comment": 'TODO: What kind of metadata do we need here?'
+namespace:
+  cap: https://example.com/capability/cap
+defaultNamespace: cap
+sdfConstruction:
+  sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
+  arguments:
+    temperature: 22
+    temperatureUnit: Cel
+    ipAddress: "192.0.2.42"
+~~~
+{: #code-sdf-construction-message-alternative post="fold"
+title="Alternative Example for an SDF construction message"}
 
 ### Deltas and Default/Base messages
 
