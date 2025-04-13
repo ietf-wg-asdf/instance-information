@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-10T01:49:07.190417+00:00",
+  "timestamp": "2025-04-13T03:15:42.971015+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -112,20 +112,104 @@
       "id": "PR_kwDOOUh3t86R7zwR",
       "title": "Fix figure references in captions",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Since the ordering of the figures has changed in the latest version of draft-lee-asdf-digital-twin, this PR updates the captions within the document to reflect that (sorry for not noticing this earlier).",
       "createdAt": "2025-04-09T11:45:18Z",
-      "updatedAt": "2025-04-09T11:45:49Z",
+      "updatedAt": "2025-04-10T21:48:49Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "de76f338610bd70b8511445ed0d9e1bdc9005d67",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "figure-caption-fix",
       "headRefOid": "e7c2d908e4377ed70e553bf31813fcdbfe5e4ae8",
+      "closedAt": "2025-04-10T12:50:46Z",
+      "mergedAt": "2025-04-10T12:50:46Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "dc1ff614b307aed6e1d2e4a0e1e18b101df80ed5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t86kTg5i",
+          "commit": {
+            "abbreviatedOid": "e7c2d90"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thanks",
+          "createdAt": "2025-04-10T12:50:37Z",
+          "updatedAt": "2025-04-10T12:50:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOOUh3t86SGin-",
+      "title": "Yaml source for figures and other editorial nits in -00",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/4",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-10T13:30:42Z",
+      "updatedAt": "2025-04-10T14:49:19Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "dc1ff614b307aed6e1d2e4a0e1e18b101df80ed5",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "yamlfigs",
+      "headRefOid": "2377010f2d3b3975ba8ea4f50c251fdd34a4e57b",
+      "closedAt": "2025-04-10T14:25:10Z",
+      "mergedAt": "2025-04-10T14:25:10Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "c6872b1dd273209f6512ec8ad6733605b1f9c5c3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t86kVM1Y",
+          "commit": {
+            "abbreviatedOid": "e7b7be1"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T14:14:21Z",
+          "updatedAt": "2025-04-10T14:14:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOOUh3t86SK5a6",
+      "title": "Adjust examples",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/5",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR will eventually incorporate the feedback and discussions from the OneDM meeting on April 10, 2025, into the document.",
+      "createdAt": "2025-04-10T21:51:38Z",
+      "updatedAt": "2025-04-12T06:53:55Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "c6872b1dd273209f6512ec8ad6733605b1f9c5c3",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "adjust-examples",
+      "headRefOid": "7e2febf466f70557bb69675c011933c016e7fb3a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
