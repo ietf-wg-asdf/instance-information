@@ -355,6 +355,55 @@ sdfInstance:
 {: #code-off-device-instance-alternative post="fold"
 title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
+<!--
+  Below you can see another alternative modelling approach where quality and given names are alternated
+-->
+
+~~~ json-from-yaml
+info:
+  title: 'An example of the heater #1 in the boat #007'
+  version: '2025-04-08'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+  boats: https://example.com/boats
+defaultNamespace: boats
+sdfInstance:
+  boat007:
+    sdfInstanceOf: models:#/sdfThing/boat
+    heater:
+      sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
+      "$context":
+        scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+      sdfProperty:
+        isHeating: true
+        location:
+          wgs84:
+            latitude: 35.2988233791372
+            longitude: 129.25478376484912
+            altitude: 0.0
+          postal:
+            city: Ulsan
+            post-code: '44110'
+            country: South Korea
+          w3w:
+            what3words: toggle.mopped.garages
+        report:
+          value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
+            to 6 p.m.'
+      sdfEvent:
+        "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
+        isHeating:
+          - outputValue: true
+            timestamp: "2025-04-10T08:25:43.511Z"
+          - outputValue: false
+            timestamp: "2025-04-10T10:25:43.511Z"
+          - outputValue: false
+            timestamp: "2025-04-10T15:25:42.511Z"
+~~~
+{: #code-instance-alternating post="fold"
+title="SDF instance proposal with alternating quality and given names for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+
 {{code-off-device-model}} shows a model like the one that could have
 been pointed to by the `sdfInstanceOf` pointers in the instance message.
 Note how the namespace is managed here to export the model components into
