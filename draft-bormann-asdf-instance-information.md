@@ -314,11 +314,11 @@ sdfInstance:
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
-<!--
-  Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
+#### Alternative Instance Keys
 
-  Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this
--->
+Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
+
+TODO: Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this
 
 ~~~ json-from-yaml
 info:
@@ -355,9 +355,9 @@ sdfInstance:
 {: #code-off-device-instance-alternative post="fold"
 title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
-<!--
-  Below you can see another alternative modelling approach where quality and given names are alternated
--->
+#### Alternating Quality Names and Given Names
+
+Below you can see another alternative modelling approach where quality and given names are alternated
 
 ~~~ json-from-yaml
 info:
@@ -403,6 +403,8 @@ sdfInstance:
 ~~~
 {: #code-instance-alternating post="fold"
 title="SDF instance proposal with alternating quality and given names for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+
+#### Previous Modelling Approach
 
 {{code-off-device-model}} shows a model like the one that could have
 been pointed to by the `sdfInstanceOf` pointers in the instance message.
@@ -635,7 +637,7 @@ namespace:
 defaultNamespace: cap
 sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  previousProofshot: "???"
+  previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
   arguments:
     currentTemperature: 24
 ~~~
