@@ -532,7 +532,7 @@ which is pretty much a constructor.)
 
 #### Examples
 
-##### Example for an SDF model with constructors (for creating "less abstract" models)
+##### Example for an SDF model with constructors
 
 ~~~ json-from-yaml
 info:
