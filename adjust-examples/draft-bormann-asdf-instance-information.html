@@ -1562,15 +1562,14 @@ sdfThing:
                 type: string
                const: 'On February 24, 2025, the boat #007''s \
                               heater #1 was on from 9 a.m. to 6 p.m.'
-
-      sdfEvent:
-        overheating:
-          description: "This event is emitted when a critical \
+        sdfEvent:
+          overheating:
+            description: "This event is emitted when a critical \
                                               temperature is reached"
-          sdfOutputData:
-            type: number
-            const: 60
-            description: "TODO"
+            sdfOutputData:
+              type: number
+              const: 60
+              description: "TODO"
 sdfData:
   location:
     type: object
@@ -1636,8 +1635,6 @@ sdfData:
       "$context": {
         "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
       },
-      "$comment": "isHeating is only referring to the property here \
-                                            for the sake of brevity",
       "isHeating": true,
       "location": {
         "wgs84": {
@@ -1734,14 +1731,14 @@ library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.
                 }
               }
             }
-          }
-        },
-        "sdfEvent": {
-          "overheating": {
-            "description": "This event is emitted when a critical \
+          },
+          "sdfEvent": {
+            "overheating": {
+              "description": "This event is emitted when a critical \
                                              temperature is reached",
-            "sdfOutputData": {
-              "type": "number"
+              "sdfOutputData": {
+                "type": "number"
+              }
             }
           }
         }
