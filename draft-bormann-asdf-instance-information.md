@@ -627,28 +627,10 @@ sdfConstruction:
   arguments:
     minimum: 42
     temperatureUnit: Cel
+    ipAddress: "192.0.2.42"
 ~~~
 {: #code-sdf-construction-message post="fold"
 title="Example for an SDF construction message"}
-
-##### Alternative Example for an SDF construction message
-
-~~~ json-from-yaml
-info:
-  title: Example SDF construction message
-  "$comment": 'TODO: What kind of metadata do we need here?'
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfConstruction:
-  sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  arguments:
-    temperature: 22
-    temperatureUnit: Cel
-    ipAddress: "192.0.2.42"
-~~~
-{: #code-sdf-construction-message-alternative post="fold"
-title="Alternative Example for an SDF construction message"}
 
 ### Deltas and Default/Base messages
 
