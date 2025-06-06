@@ -550,47 +550,6 @@ sdfObject:
       temperature:
         description: Temperature value measure by this Thing's temperature sensor.
         type: number
-        sdfParameters:
-        - minimum
-        - targetQuality: minimum
-          parameterName: minimum
-          constructorName: construct
-        - maximum
-        - targetQuality: unit
-          parameterName: "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
-    sdfConstructors:
-      "$comment": 'TODO: Dicuss whether this should be assumed to be the default constructor'
-      construct:
-        parameters:
-          minimum:
-            required: true
-          maximum:
-            required: false
-            "$comment": Constructors could allow for further restricting values that
-              can be assigned to affordances
-            type: integer
-          temperatureUnit:
-            required: false
-~~~
-{: #code-sdf-constructors post="fold"
-title="Example for SDF model with constructors"}
-
-~~~ json-from-yaml
-info:
-  title: Example document for SDF (Semantic Definition Format) with constructors for
-    instantiation
-  version: '2019-04-24'
-  copyright: Copyright 2019 Example Corp. All rights reserved.
-  license: https://example.com/license
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfObject:
-  temperatureSensor:
-    sdfProperty:
-      temperature:
-        description: Temperature value measure by this Thing's temperature sensor.
-        type: number
         sdfParameter:
           unit:
             "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
@@ -610,10 +569,17 @@ sdfObject:
             required: false
             isContextInformation: true
 ~~~
-{: #code-sdf-constructors-proofshot post="fold"
-title="Example for SDF model with constructors for proofshot"}
+{: #code-sdf-constructors post="fold"
+title="Example for SDF model with constructors"}
 
 ##### Example for an SDF construction message
+
+{{code-sdf-construction-message}} shows a potential SDF construction message that
+allows for the creation of a proofshot from a constructor that is contained within
+an SDF model.
+
+Note that the `ipAddress` can be considered context information or an off-device property.
+TODO: Needs more discussion how to model this kind of information.
 
 ~~~ json-from-yaml
 info:
