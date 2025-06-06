@@ -30,12 +30,12 @@ discussion at the 2025-04-09 ASDF meeting.
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
+    lxml 5.3.1
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
-    setuptools 70.3.0
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-bormann-asdf-instance-information.xml" rel="alternate" type="application/rfc+xml">
@@ -1055,11 +1055,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDF Instance Information</td>
-<td class="right">May 2025</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 22 November 2025</td>
+<td class="center">Expires 8 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-21" class="published">21 May 2025</time>
+<time datetime="2025-06-06" class="published">6 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-22">22 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-08">8 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1136,7 +1136,7 @@ discussion at the 2025-04-09 ASDF meeting.</span><a href="#section-abstract-2" c
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1442,7 +1442,14 @@ an SDF instance and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</
 <p id="section-2.1.2-3">A proofshot that captures the state of an instance can be modelled as shown in
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>.
 Here, every property of the corresponding SDF model (see <a href="#code-off-device-model" class="auto internal xref">Figure 5</a>)
-is mapped to a concrete value that corresponds with the associated schema information.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+is mapped to a concrete value that corresponds with the associated schema information.
+The alternating structure of the SDF model
+(e. g., <code>sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating</code>) is repeated
+in the proofshot, with <code>sdfObject</code> and <code>sdfThing</code> being replaced by <code>sdfInstance</code>.
+While earlier approaches avoided the additional level of nesting by omitting the
+affordance quality name, explicitly including it avoids problems with namespace
+clashes and also allows for a cleaner integration of meta data (such as
+the <code>$context</code>) into the proofshot document.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-4">As in any instance message, information from the model is not repeated but
 referenced via a pointer into the model tree (<code>sdfInstanceOf</code>); the
 namespace needed for this is set up in the usual <code>namespace</code> section that we
@@ -1452,152 +1459,7 @@ that are static (e.g., the physical location assigned to the instance) but still
 the instance's proofshot as the location is known.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "An example of the heater #1 in the boat #007",
-    "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
-  },
-  "defaultNamespace": "boats",
-  "sdfInstance": {
-    "boat007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "heater": {
-        "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-        "$context": {
-          "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
-        },
-        "isHeating": {
-          "$comment": "Example for a proofshot that combines a \
-property state with an event history, where each output value is \
-associated with a timestamp.\nTODO: Discuss how to specify how many \
-events in the history should be displayed -- could this be done via \
-                                                     a constructor?",
-          "propertyValue": true,
-          "eventHistory": [
-            {
-              "outputValue": true,
-              "timestamp": "2025-04-10T08:25:43.511Z"
-            },
-            {
-              "outputValue": false,
-              "timestamp": "2025-04-10T10:25:43.511Z"
-            },
-            {
-              "outputValue": false,
-              "timestamp": "2025-04-10T15:25:42.511Z"
-            }
-          ]
-        },
-        "location": {
-          "wgs84": {
-            "latitude": 35.2988233791372,
-            "longitude": 129.25478376484912,
-            "altitude": 0.0
-          },
-          "postal": {
-            "city": "Ulsan",
-            "post-code": "44110",
-            "country": "South Korea"
-          },
-          "w3w": {
-            "what3words": "toggle.mopped.garages"
-          }
-        },
-        "report": {
-          "value": "On February 24, 2025, the boat #007's heater #1 \
-                                        was on from 9 a.m. to 6 p.m."
-        }
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
-            </figcaption></figure>
-</div>
-<div id="alternative-instance-keys">
-<section id="section-2.1.2.1">
-            <h5 id="name-alternative-instance-keys">
-<a href="#section-2.1.2.1" class="section-number selfRef">2.1.2.1. </a><a href="#name-alternative-instance-keys" class="section-name selfRef">Alternative Instance Keys</a>
-            </h5>
-<p id="section-2.1.2.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#section-2.1.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.1-2">TODO: Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this<a href="#section-2.1.2.1-2" class="pilcrow">¶</a></p>
-<span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-3">
-              <div class="lang-json-from-yaml sourcecode" id="section-2.1.2.1-3.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "An example of the heater #1 in the boat #007",
-    "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
-  },
-  "defaultNamespace": "boats",
-  "sdfInstance": {
-    "models:#/sdfThing/boat/007": {
-      "heater": "models:#/sdfThing/boat/sdfObject/heater/001"
-    },
-    "models:#/sdfThing/boat/sdfObject/heater/001": {
-      "$context": {
-        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
-      },
-      "$comment": "isHeating is only referring to the property here \
-                                            for the sake of brevity",
-      "isHeating": true,
-      "location": {
-        "wgs84": {
-          "latitude": 35.2988233791372,
-          "longitude": 129.25478376484912,
-          "altitude": 0.0
-        },
-        "postal": {
-          "city": "Ulsan",
-          "post-code": "44110",
-          "country": "South Korea"
-        },
-        "w3w": {
-          "what3words": "toggle.mopped.garages"
-        }
-      },
-      "report": {
-        "value": "On February 24, 2025, the boat #007's heater #1 \
-                                        was on from 9 a.m. to 6 p.m."
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
-              </figcaption></figure>
-</div>
-</section>
-</div>
-<div id="alternating-quality-names-and-given-names">
-<section id="section-2.1.2.2">
-            <h5 id="name-alternating-quality-names-a">
-<a href="#section-2.1.2.2" class="section-number selfRef">2.1.2.2. </a><a href="#name-alternating-quality-names-a" class="section-name selfRef">Alternating Quality Names and Given Names</a>
-            </h5>
-<p id="section-2.1.2.2-1">Below you can see another alternative modelling approach where quality and given names are alternated<a href="#section-2.1.2.2-1" class="pilcrow">¶</a></p>
-<span id="name-sdf-instance-proposal-with-a"></span><div id="code-instance-alternating">
-<figure id="figure-4">
-              <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2.2-2.1">
+            <div class="lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1640,25 +1502,6 @@ events in the history should be displayed -- could this be done via \
             "value": "On February 24, 2025, the boat #007's heater #\
                                       1 was on from 9 a.m. to 6 p.m."
           }
-        },
-        "sdfEvent": {
-          "$comment": "TODO: Discuss how to specify how many events \
-in the history should be displayed -- could this be done via a \
-                                                       constructor?",
-          "isHeating": [
-            {
-              "outputValue": true,
-              "timestamp": "2025-04-10T08:25:43.511Z"
-            },
-            {
-              "outputValue": false,
-              "timestamp": "2025-04-10T10:25:43.511Z"
-            },
-            {
-              "outputValue": false,
-              "timestamp": "2025-04-10T15:25:42.511Z"
-            }
-          ]
         }
       }
     }
@@ -1666,121 +1509,258 @@ in the history should be displayed -- could this be done via a \
 }
 </pre>
 </div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
+            </figcaption></figure>
+</div>
+<p id="section-2.1.2-7">Note that, as illustrated by <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 3</a>,
+the proofshot format can be considered syntactic sugar for an SDF model where
+all <code>sdfProperty</code> definitions are given <code>const</code> values.
+However, this concept is not capable of capturing actions and events.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
+<span id="name-sdf-instance-proposal-for-fi"></span><div id="code-instance-syntactic-sugar-illustration">
+<figure id="figure-3">
+            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-8.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+info:
+  title: An example model of a heater on a boat (that resembles a \
+                                                           proofshot)
+  version: '2025-06-06'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+defaultNamespace: models
+sdfThing:
+  boat:
+    sdfObject:
+      heater:
+        sdfProperty:
+          isHeating:
+            description: The state of the heater on a boat; false \
+                                                     for off and true
+              for on.
+            type: boolean
+            const: true
+          location:
+            offDevice: true
+            sdfRef: "#/sdfData/location"
+            const:
+              wgs84:
+                latitude: 35.2988233791372
+                longitude: 129.25478376484912
+                altitude: 0.0
+              postal:
+                city: Ulsan
+                post-code: '44110'
+                country: South Korea
+            w3w:
+              what3words: toggle.mopped.garages
+          report:
+            type: object
+            properties:
+              value:
+                type: string
+               const: 'On February 24, 2025, the boat #007''s \
+                              heater #1 was on from 9 a.m. to 6 p.m.'
+
+      sdfEvent:
+        overheating:
+          description: "This event is emitted when a critical \
+                                               temperature is reached
+          sdfOutputData:
+            type: number
+            const: 60
+            description: "TODO"
+sdfData:
+  location:
+    type: object
+    properties:
+      wgs84:
+        type: object
+        properties:
+          latitude:
+            type: number
+          longitude:
+            type: number
+          altitude:
+            type: number
+      postal:
+        type: object
+        properties:
+          city:
+            type: string
+          post-code:
+            type: string
+          country:
+            type: string
+      w3w:
+        type: object
+        properties:
+          what3words:
+            type: string
+            format: "..."
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-sdf-instance-proposal-for-fi" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
+            </figcaption></figure>
+</div>
+<div id="alternative-instance-keys">
+<section id="section-2.1.2.1">
+            <h5 id="name-alternative-instance-keys">
+<a href="#section-2.1.2.1" class="section-number selfRef">2.1.2.1. </a><a href="#name-alternative-instance-keys" class="section-name selfRef">Alternative Instance Keys</a>
+            </h5>
+<p id="section-2.1.2.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#section-2.1.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.1-2">TODO: Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this<a href="#section-2.1.2.1-2" class="pilcrow">¶</a></p>
+<span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
+<figure id="figure-4">
+              <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2.1-3.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "info": {
+    "title": "An example of the heater #1 in the boat #007",
+    "version": "2025-04-08",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "models:#/sdfThing/boat/007": {
+      "heater": "models:#/sdfThing/boat/sdfObject/heater/001"
+    },
+    "models:#/sdfThing/boat/sdfObject/heater/001": {
+      "$context": {
+        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
+      },
+      "$comment": "isHeating is only referring to the property here \
+                                            for the sake of brevity",
+      "isHeating": true,
+      "location": {
+        "wgs84": {
+          "latitude": 35.2988233791372,
+          "longitude": 129.25478376484912,
+          "altitude": 0.0
+        },
+        "postal": {
+          "city": "Ulsan",
+          "post-code": "44110",
+          "country": "South Korea"
+        },
+        "w3w": {
+          "what3words": "toggle.mopped.garages"
+        }
+      },
+      "report": {
+        "value": "On February 24, 2025, the boat #007's heater #1 \
+                                        was on from 9 a.m. to 6 p.m."
+      },
+      "sdfEvent": {
+        "$comment": "TODO: Discuss how to specify how many events \
+in the history should be displayed -- could this be done via a \
+                                                       constructor?",
+        "overheating": [
+          {
+            "outputValue": 60.0,
+            "timestamp": "2025-04-10T08:25:43.511Z"
+          },
+          {
+            "outputValue": 65.3,
+            "timestamp": "2025-04-10T10:25:43.511Z"
+          }
+        ]
+      }
+    }
+  }
+}
+</pre>
+</div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-sdf-instance-proposal-with-a" class="selfRef">SDF instance proposal with alternating quality and given names for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
+<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
               </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="previous-modelling-approach">
-<section id="section-2.1.2.3">
+<section id="section-2.1.2.2">
             <h5 id="name-previous-modelling-approach">
-<a href="#section-2.1.2.3" class="section-number selfRef">2.1.2.3. </a><a href="#name-previous-modelling-approach" class="section-name selfRef">Previous Modelling Approach</a>
+<a href="#section-2.1.2.2" class="section-number selfRef">2.1.2.2. </a><a href="#name-previous-modelling-approach" class="section-name selfRef">Previous Modelling Approach</a>
             </h5>
-<p id="section-2.1.2.3-1"><a href="#code-off-device-model" class="auto internal xref">Figure 5</a> shows a model like the one that could have
+<p id="section-2.1.2.2-1"><a href="#code-off-device-model" class="auto internal xref">Figure 5</a> shows a model like the one that could have
 been pointed to by the <code>sdfInstanceOf</code> pointers in the instance message.
 Note how the namespace is managed here to export the model components into
-<code>models:#/sdfThing/boat</code> and <code>models:#/sdfThing/boat/sdfObject/heater</code>.<a href="#section-2.1.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.3-2">(This example model only specifies structure; it also could come with
+<code>models:#/sdfThing/boat</code> and <code>models:#/sdfThing/boat/sdfObject/heater</code>.<a href="#section-2.1.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2.2-2">(This example model only specifies structure; it also could come with
 semantic information such as the units that are used for wgs84 etc.
 In practice, the definition of <code>wgs84</code> etc. probably would come from a common
-library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.3-2" class="pilcrow">¶</a></p>
+library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.2-2" class="pilcrow">¶</a></p>
 <span id="name-revised-sdf-model-proposal-"></span><div id="code-off-device-model">
 <figure id="figure-5">
-              <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2.3-3.1">
+              <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2.2-3.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
-{
-  "info": {
-    "title": "An example model of a heater on a boat",
-    "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models"
-  },
-  "defaultNamespace": "models",
-  "sdfThing": {
-    "boat": {
-      "sdfObject": {
-        "heater": {
-          "sdfProperty": {
-            "isHeating": {
-              "description": "The state of the heater on a boat; \
-                                     false for off and true for on.",
-              "type": "boolean"
-            },
-            "location": {
-              "offDevice": true,
-              "sdfRef": "#/sdfData/location"
-            },
-            "report": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "sdfEvent": {
-          "isHeating": {
-            "$comment": "This is not a very good example for a '\
-                    namespace clash', but it might suffice for now.",
-            "sdfOutputData": {
-              "type": "boolean"
-            }
-          }
-        }
-      }
-    }
-  },
-  "sdfData": {
-    "location": {
-      "type": "object",
-      "properties": {
-        "wgs84": {
-          "type": "object",
-          "properties": {
-            "latitude": {
-              "type": "number"
-            },
-            "longitude": {
-              "type": "number"
-            },
-            "altitude": {
-              "type": "number"
-            }
-          }
-        },
-        "postal": {
-          "type": "object",
-          "properties": {
-            "city": {
-              "type": "string"
-            },
-            "post-code": {
-              "type": "string"
-            },
-            "country": {
-              "type": "string"
-            }
-          }
-        },
-        "w3w": {
-          "type": "object",
-          "properties": {
-            "what3words": {
-              "type": "string",
-              "format": "..."
-            }
-          }
-        }
-      }
-    }
-  }
-}
+info:
+  title: An example model of a heater on a boat
+  version: '2025-04-08'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+defaultNamespace: models
+sdfThing:
+  boat:
+    sdfObject:
+      heater:
+        sdfProperty:
+          isHeating:
+            description: The state of the heater on a boat; false \
+                                                     for off and true
+              for on.
+            type: boolean
+          location:
+            offDevice: true
+            sdfRef: "#/sdfData/location"
+          report:
+            type: object
+            properties:
+              value:
+                type: string
+      sdfEvent:
+        overheating:
+          description: "This event is emitted when a critical \
+                                               temperature is reached
+          sdfOutputData:
+            type: number
+sdfData:
+  location:
+    type: object
+    properties:
+      wgs84:
+        type: object
+        properties:
+          latitude:
+            type: number
+          longitude:
+            type: number
+          altitude:
+            type: number
+      postal:
+        type: object
+        properties:
+          city:
+            type: string
+          post-code:
+            type: string
+          country:
+            type: string
+      w3w:
+        type: object
+        properties:
+          what3words:
+            type: string
+            format: "..."
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
