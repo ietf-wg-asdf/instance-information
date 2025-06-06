@@ -388,7 +388,7 @@ Table of Contents
          sdfEvent:
            overheating:
              description: "This event is emitted when a critical \
-                                                  temperature is reached
+                                                 temperature is reached"
              sdfOutputData:
                type: number
                const: 60
