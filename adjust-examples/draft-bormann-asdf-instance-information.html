@@ -1886,75 +1886,6 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
           "description": "Temperature value measure by this Thing's \
                                                 temperature sensor.",
           "type": "number",
-          "sdfParameters": [
-            "minimum",
-            {
-              "targetQuality": "minimum",
-              "parameterName": "minimum",
-              "constructorName": "construct"
-            },
-            "maximum",
-            {
-              "targetQuality": "unit",
-              "parameterName": "#/sdfObject/Switch/sdfConstructors/\
-                                           construct/temperatureUnit"
-            }
-          ]
-        }
-      },
-      "sdfConstructors": {
-        "$comment": "TODO: Dicuss whether this should be assumed to \
-                                         be the default constructor",
-        "construct": {
-          "parameters": {
-            "minimum": {
-              "required": true
-            },
-            "maximum": {
-              "required": false,
-              "$comment": "Constructors could allow for further \
-             restricting values that can be assigned to affordances",
-              "type": "integer"
-            },
-            "temperatureUnit": {
-              "required": false
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
-                </figcaption></figure>
-</div>
-<span id="name-example-for-sdf-model-with-c"></span><div id="code-sdf-constructors-proofshot">
-<figure id="figure-7">
-                <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.3.1.1-2.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "Example document for SDF (Semantic Definition Format) \
-                                with constructors for instantiation",
-    "version": "2019-04-24",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/cap"
-  },
-  "defaultNamespace": "cap",
-  "sdfObject": {
-    "temperatureSensor": {
-      "sdfProperty": {
-        "temperature": {
-          "description": "Temperature value measure by this Thing's \
-                                                temperature sensor.",
-          "type": "number",
           "sdfParameter": {
             "unit": {
               "$comment": "Should schema information be settable \
@@ -1995,8 +1926,8 @@ this parameter target the context or rather an (offDevice?) property\
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-example-for-sdf-model-with-c" class="selfRef">Example for SDF model with constructors for proofshot</a>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
                 </figcaption></figure>
 </div>
 </section>
@@ -2006,9 +1937,14 @@ this parameter target the context or rather an (offDevice?) property\
               <h6 id="name-example-for-an-sdf-construc">
 <a href="#section-2.1.3.1.2" class="section-number selfRef">2.1.3.1.2. </a><a href="#name-example-for-an-sdf-construc" class="section-name selfRef">Example for an SDF construction message</a>
               </h6>
+<p id="section-2.1.3.1.2-1"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 7</a> shows a potential SDF construction message that
+allows for the creation of a proofshot from a constructor that is contained within
+an SDF model.<a href="#section-2.1.3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3.1.2-2">Note that the <code>ipAddress</code> can be considered context information or an off-device property.
+TODO: Needs more discussion how to model this kind of information.<a href="#section-2.1.3.1.2-2" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-construction-message">
-<figure id="figure-8">
-                <div class="lang-json-from-yaml sourcecode" id="section-2.1.3.1.2-1.1">
+<figure id="figure-7">
+                <div class="lang-json-from-yaml sourcecode" id="section-2.1.3.1.2-3.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -2032,7 +1968,7 @@ this parameter target the context or rather an (offDevice?) property\
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-example-for-an-sdf-construct" class="selfRef">Example for an SDF construction message</a>
                 </figcaption></figure>
 </div>
@@ -2055,7 +1991,7 @@ this parameter target the context or rather an (offDevice?) property\
 algorithmically influence the elements of state that one would find in
 a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-constructi"></span><div id="code-sdf-construction-delta-message">
-<figure id="figure-9">
+<figure id="figure-8">
             <div class="lang-json-from-yaml sourcecode" id="section-2.1.4-6.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2080,7 +2016,7 @@ a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-example-for-an-sdf-constructi" class="selfRef">Example for an SDF construction message for proofshot delta</a>
             </figcaption></figure>
 </div>
