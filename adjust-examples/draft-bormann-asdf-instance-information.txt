@@ -344,82 +344,118 @@ Table of Contents
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
-   info:
-     title: An example model of a heater on a boat (that resembles a \
-                                                              proofshot)
-     version: '2025-06-06'
-     copyright: Copyright 2025. All rights reserved.
-   namespace:
-     models: https://example.com/models
-   defaultNamespace: models
-   sdfThing:
-     boat:
-       sdfObject:
-         heater:
-           sdfProperty:
-             isHeating:
-               description: The state of the heater on a boat; false \
-                                                        for off and true
-                 for on.
-               type: boolean
-               const: true
-             location:
-               offDevice: true
-               sdfRef: "#/sdfData/location"
-               const:
-                 wgs84:
-                   latitude: 35.2988233791372
-                   longitude: 129.25478376484912
-                   altitude: 0.0
-                 postal:
-                   city: Ulsan
-                   post-code: '44110'
-                   country: South Korea
-               w3w:
-                 what3words: toggle.mopped.garages
-             report:
-               type: object
-               properties:
-                 value:
-                   type: string
-                  const: 'On February 24, 2025, the boat #007''s \
-                                 heater #1 was on from 9 a.m. to 6 p.m.'
-           sdfEvent:
-             overheating:
-               description: "This event is emitted when a critical \
-                                                 temperature is reached"
-               sdfOutputData:
-                 type: number
-                 const: 60
-                 description: "TODO"
-   sdfData:
-     location:
-       type: object
-       properties:
-         wgs84:
-           type: object
-           properties:
-             latitude:
-               type: number
-             longitude:
-               type: number
-             altitude:
-               type: number
-         postal:
-           type: object
-           properties:
-             city:
-               type: string
-             post-code:
-               type: string
-             country:
-               type: string
-         w3w:
-           type: object
-           properties:
-             what3words:
-               type: string
-               format: "..."
+   {
+     "info": {
+       "title": "An example model of a heater on a boat (that \
+                                                resembles a proofshot)",
+       "version": "2025-06-06",
+       "copyright": "Copyright 2025. All rights reserved."
+     },
+     "namespace": {
+       "models": "https://example.com/models"
+     },
+     "defaultNamespace": "models",
+     "sdfThing": {
+       "boat": {
+         "sdfObject": {
+           "heater": {
+             "sdfProperty": {
+               "isHeating": {
+                 "description": "The state of the heater on a boat; \
+                                        false for off and true for on.",
+                 "type": "boolean",
+                 "const": true
+               },
+               "location": {
+                 "offDevice": true,
+                 "sdfRef": "#/sdfData/location",
+                 "const": {
+                   "wgs84": {
+                     "latitude": 35.2988233791372,
+                     "longitude": 129.25478376484912,
+                     "altitude": 0.0
+                   },
+                   "postal": {
+                     "city": "Ulsan",
+                     "post-code": "44110",
+                     "country": "South Korea"
+                   }
+                 },
+                 "w3w": {
+                   "what3words": "toggle.mopped.garages"
+                 }
+               },
+               "report": {
+                 "type": "object",
+                 "properties": {
+                   "value": {
+                     "type": "string",
+                     "const": "On February 24, 2025, the boat #007's \
+                                 heater #1 was on from 9 a.m. to 6 p.m."
+                   }
+                 }
+               }
+             },
+             "sdfEvent": {
+               "overheating": {
+                 "description": "This event is emitted when a critical \
+                                                temperature is reached",
+                 "sdfOutputData": {
+                   "type": "number",
+                   "const": 60,
+                   "description": "TODO"
+                 }
+               }
+             }
+           }
+         }
+       }
+     },
+     "sdfData": {
+       "location": {
+         "type": "object",
+         "properties": {
+           "wgs84": {
+             "type": "object",
+             "properties": {
+               "latitude": {
+                 "type": "number"
+               },
+               "longitude": {
+                 "type": "number"
+               },
+               "altitude": {
+                 "type": "number"
+               }
+             }
+           },
+           "postal": {
+             "type": "object",
+             "properties": {
+               "city": {
+                 "type": "string"
+               },
+               "post-code": {
+                 "type": "string"
+               },
+               "country": {
+                 "type": "string"
+               }
+             }
+           },
+           "w3w": {
+             "type": "object",
+             "properties": {
+               "what3words": {
+                 "type": "string",
+                 "format": "..."
+               }
+             }
+           }
+         }
+       }
+     }
+   }
 
        Figure 3: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
                               digital-twin-07]
