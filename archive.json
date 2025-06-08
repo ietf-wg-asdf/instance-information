@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-05T01:57:39.452041+00:00",
+  "timestamp": "2025-06-08T02:07:25.087441+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -203,18 +203,26 @@
       "labels": [],
       "body": "This PR will eventually incorporate the feedback and discussions from the OneDM meeting on April 10, 2025, into the document.",
       "createdAt": "2025-04-10T21:51:38Z",
-      "updatedAt": "2025-05-21T20:30:18Z",
+      "updatedAt": "2025-06-06T15:55:45Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "c6872b1dd273209f6512ec8ad6733605b1f9c5c3",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "adjust-examples",
-      "headRefOid": "3cb08b9bdcd0c838d15d07fb70feedf94415b5ff",
+      "headRefOid": "7c0c66c94cb722f6b78e2789c40ebb9c3fd96e94",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@mjkoster @akeranen Thank you once more for the very interesting discussion yesterday! Based on our results, I hope that I was now able to make the PR a bit more concise and improve upon the actual examples, so that an (initial) review should now be possible :) I will probably work a bit more on this over the course of the weekend, but any feedback is greatly appreciated already. \r\n\r\nBtw: You can find a diff of the rendered version [here](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-asdf.github.io/instance-information/draft-bormann-asdf-instance-information.txt&url_2=https://ietf-wg-asdf.github.io/instance-information/adjust-examples/draft-bormann-asdf-instance-information.txt) and the rendered version in full [here](https://ietf-wg-asdf.github.io/instance-information/adjust-examples/draft-bormann-asdf-instance-information.html).",
+          "createdAt": "2025-06-06T15:55:14Z",
+          "updatedAt": "2025-06-06T15:55:44Z"
+        }
+      ],
       "reviews": []
     }
   ]
