@@ -305,6 +305,13 @@ sdfInstance:
             what3words: toggle.mopped.garages
         report:
           value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
+      sdfEvent:
+        "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
+        overheating:
+          - outputValue: 60.0
+            timestamp: "2025-04-10T08:25:43.511Z"
+          - outputValue: 65.3
+            timestamp: "2025-04-10T10:25:43.511Z"
 ~~~
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
@@ -347,8 +354,9 @@ sdfThing:
                 type: string
         sdfEvent:
           overheating:
-            description: "This event is emitted when a critical temperature is reached"
+            description: This event is emitted when a critical temperature is reached.
             sdfOutputData:
+              description: The temperature at the time the event is emitted.
               type: number
 sdfData:
   location:
