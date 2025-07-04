@@ -251,28 +251,30 @@ title="Example for an SDF instance with context information"}
 (See defn above.)
 
 The following examples are based on Figure 2 of {{-digital-twin}}, separated into
-an SDF instance and an SDF model.
+an SDF proofshot and an SDF model.
 
-A proofshot that captures the state of an instance can be modelled as shown in
+A proofshot that captures the state of a boat with a heater is shown in
 {{code-off-device-instance}}.
 Here, every property of the corresponding SDF model (see {{code-off-device-model}})
 is mapped to a concrete value that corresponds with the associated schema information.
 The alternating structure of the SDF model
 (e. g., `sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating`) is repeated
 in the proofshot, with `sdfObject` and `sdfThing` being replaced by `sdfInstance`.
+
 While earlier approaches avoided the additional level of nesting by omitting the
-affordance quality name, explicitly including it avoids problems with namespace
-clashes and also allows for a cleaner integration of meta data (such as
-the `$context`) into the proofshot document.
+affordance quality names (i.e., `sdfProperty`, `sdfAction`, `sdfEvent`),
+including them explicitly avoids problems with namespace clashes and
+allows for a cleaner integration of meta data (via the `$context` keyword).
 
 As in any instance message, information from the model is not repeated but
 referenced via a pointer into the model tree (`sdfInstanceOf`); the
 namespace needed for this is set up in the usual `namespace` section that we
 also have in model files.
 
-Note that in this example, the proofshot also contains values for the implied (offDevice) properties
-that are static (e.g., the physical location assigned to the instance) but still part of
-the instance's proofshot as the location is known.
+Note that in this example, the proofshot also contains values for the implicit
+(`offDevice`) properties that are static (e.g., the physical location assigned
+to the instance) but are still part of the instance's proofshot as its location
+is fixed -- this boat apparently never leaves the harbor.
 
 ~~~ json-from-yaml
 info:
