@@ -309,139 +309,7 @@ sdfInstance:
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
-Note that, as illustrated by {{code-instance-syntactic-sugar-illustration}},
-the proofshot format can be considered syntactic sugar for an SDF model where
-all `sdfProperty` definitions are given `const` values.
-However, this concept is not capable of capturing actions and events.
-
-<!-- TODO: Also consider long-running actions, links between affordances-->
-
-~~~ json-from-yaml
-info:
-  title: An example model of a heater on a boat (that resembles a proofshot)
-  version: '2025-06-06'
-  copyright: Copyright 2025. All rights reserved.
-namespace:
-  models: https://example.com/models
-defaultNamespace: models
-sdfThing:
-  boat:
-    sdfObject:
-      heater:
-        sdfProperty:
-          isHeating:
-            description: The state of the heater on a boat; false for off and true
-              for on.
-            type: boolean
-            const: true
-          location:
-            offDevice: true
-            sdfRef: "#/sdfData/location"
-            const:
-              wgs84:
-                latitude: 35.2988233791372
-                longitude: 129.25478376484912
-                altitude: 0.0
-              postal:
-                city: Ulsan
-                post-code: '44110'
-                country: South Korea
-            w3w:
-              what3words: toggle.mopped.garages
-          report:
-            type: object
-            properties:
-              value:
-                type: string
-                const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
-        sdfEvent:
-          overheating:
-            description: "This event is emitted when a critical temperature is reached"
-            sdfOutputData:
-              type: number
-              const: 60
-              description: "TODO"
-sdfData:
-  location:
-    type: object
-    properties:
-      wgs84:
-        type: object
-        properties:
-          latitude:
-            type: number
-          longitude:
-            type: number
-          altitude:
-            type: number
-      postal:
-        type: object
-        properties:
-          city:
-            type: string
-          post-code:
-            type: string
-          country:
-            type: string
-      w3w:
-        type: object
-        properties:
-          what3words:
-            type: string
-            format: "..."
-~~~
-{: #code-instance-syntactic-sugar-illustration post="fold"
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
-
-
-#### Alternative Instance Keys
-
-Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
-
-TODO: Not sure if it is a good idea to mix JSON pointers with instance IDs but it might at least be a concise way of modelling this
-
-~~~ json-from-yaml
-info:
-  title: 'An example of the heater #1 in the boat #007'
-  version: '2025-04-08'
-  copyright: Copyright 2025. All rights reserved.
-namespace:
-  models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
-sdfInstance:
-  "models:#/sdfThing/boat/007":
-    heater: models:#/sdfThing/boat/sdfObject/heater/001
-  "models:#/sdfThing/boat/sdfObject/heater/001":
-    "$context":
-      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    isHeating: true
-    location:
-      wgs84:
-        latitude: 35.2988233791372
-        longitude: 129.25478376484912
-        altitude: 0.0
-      postal:
-        city: Ulsan
-        post-code: '44110'
-        country: South Korea
-      w3w:
-        what3words: toggle.mopped.garages
-    report:
-      value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
-        to 6 p.m.'
-    sdfEvent:
-      "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
-      overheating:
-        - outputValue: 60.0
-          timestamp: "2025-04-10T08:25:43.511Z"
-        - outputValue: 65.3
-          timestamp: "2025-04-10T10:25:43.511Z"
-~~~
-{: #code-off-device-instance-alternative post="fold"
-title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
-
-#### Previous Modelling Approach
+#### Corresponding SDF Model
 
 {{code-off-device-model}} shows a model like the one that could have
 been pointed to by the `sdfInstanceOf` pointers in the instance message.
@@ -653,6 +521,144 @@ Multiple models may apply to the same device (including but not only revisions o
 (TODO)
 
 --- back
+
+# Roads Not Taken
+
+This appendix documents previous modelling approaches that we eventually
+decided against pursuing further.
+Its main purpose is to illustrate our development process, showing
+which kind of alternatives we considered before choosing a particular way
+to describe instance information.
+We will remove this appendix as soon as this document is about to be finished.
+
+## Using SDF Models as Proofshots
+
+As shown in {{code-instance-syntactic-sugar-illustration}},
+the proofshot format could have also been modeled via SDF models where
+all `sdfProperty` definitions are given `const`values.
+However, this concept is not capable of capturing actions and events.
+
+~~~ json-from-yaml
+info:
+  title: An example model of a heater on a boat (that resembles a proofshot)
+  version: '2025-06-06'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+defaultNamespace: models
+sdfThing:
+  boat:
+    sdfObject:
+      heater:
+        sdfProperty:
+          isHeating:
+            description: The state of the heater on a boat; false for off and true
+              for on.
+            type: boolean
+            const: true
+          location:
+            offDevice: true
+            sdfRef: "#/sdfData/location"
+            const:
+              wgs84:
+                latitude: 35.2988233791372
+                longitude: 129.25478376484912
+                altitude: 0.0
+              postal:
+                city: Ulsan
+                post-code: '44110'
+                country: South Korea
+            w3w:
+              what3words: toggle.mopped.garages
+          report:
+            type: object
+            properties:
+              value:
+                type: string
+                const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
+        sdfEvent:
+          overheating:
+            description: "This event is emitted when a critical temperature is reached"
+            sdfOutputData:
+              type: number
+              const: 60
+              description: "TODO"
+sdfData:
+  location:
+    type: object
+    properties:
+      wgs84:
+        type: object
+        properties:
+          latitude:
+            type: number
+          longitude:
+            type: number
+          altitude:
+            type: number
+      postal:
+        type: object
+        properties:
+          city:
+            type: string
+          post-code:
+            type: string
+          country:
+            type: string
+      w3w:
+        type: object
+        properties:
+          what3words:
+            type: string
+            format: "..."
+~~~
+{: #code-instance-syntactic-sugar-illustration post="fold"
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+
+### Alternative Instance Keys
+
+Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
+
+~~~ json-from-yaml
+info:
+  title: 'An example of the heater #1 in the boat #007'
+  version: '2025-04-08'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+  boats: https://example.com/boats
+defaultNamespace: boats
+sdfInstance:
+  "models:#/sdfThing/boat/007":
+    heater: models:#/sdfThing/boat/sdfObject/heater/001
+  "models:#/sdfThing/boat/sdfObject/heater/001":
+    "$context":
+      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+    isHeating: true
+    location:
+      wgs84:
+        latitude: 35.2988233791372
+        longitude: 129.25478376484912
+        altitude: 0.0
+      postal:
+        city: Ulsan
+        post-code: '44110'
+        country: South Korea
+      w3w:
+        what3words: toggle.mopped.garages
+    report:
+      value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
+        to 6 p.m.'
+    sdfEvent:
+      "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
+      overheating:
+        - outputValue: 60.0
+          timestamp: "2025-04-10T08:25:43.511Z"
+        - outputValue: 65.3
+          timestamp: "2025-04-10T10:25:43.511Z"
+~~~
+{: #code-off-device-instance-alternative post="fold"
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
 # Acknowledgments
 {:unnumbered}
