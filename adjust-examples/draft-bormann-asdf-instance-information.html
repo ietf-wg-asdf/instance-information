@@ -1451,28 +1451,29 @@ to/from concrete serializations...)<a href="#section-2.1.1-5" class="pilcrow">¶
           </h4>
 <p id="section-2.1.2-1">(See defn above.)<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.1.2-2">The following examples are based on Figure 2 of <span>[<a href="#I-D.lee-asdf-digital-twin-07" class="cite xref">I-D.lee-asdf-digital-twin-07</a>]</span>, separated into
-an SDF instance and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-3">A proofshot that captures the state of an instance can be modelled as shown in
+an SDF proofshot and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-3">A proofshot that captures the state of a boat with a heater is shown in
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>.
 Here, every property of the corresponding SDF model (see <a href="#code-off-device-model" class="auto internal xref">Figure 3</a>)
 is mapped to a concrete value that corresponds with the associated schema information.
 The alternating structure of the SDF model
 (e. g., <code>sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating</code>) is repeated
-in the proofshot, with <code>sdfObject</code> and <code>sdfThing</code> being replaced by <code>sdfInstance</code>.
-While earlier approaches avoided the additional level of nesting by omitting the
-affordance quality name, explicitly including it avoids problems with namespace
-clashes and also allows for a cleaner integration of meta data (such as
-the <code>$context</code>) into the proofshot document.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-4">As in any instance message, information from the model is not repeated but
+in the proofshot, with <code>sdfObject</code> and <code>sdfThing</code> being replaced by <code>sdfInstance</code>.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-4">While earlier approaches avoided the additional level of nesting by omitting the
+affordance quality names (i.e., <code>sdfProperty</code>, <code>sdfAction</code>, <code>sdfEvent</code>),
+including them explicitly avoids problems with namespace clashes and
+allows for a cleaner integration of meta data (via the <code>$context</code> keyword).<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-5">As in any instance message, information from the model is not repeated but
 referenced via a pointer into the model tree (<code>sdfInstanceOf</code>); the
 namespace needed for this is set up in the usual <code>namespace</code> section that we
-also have in model files.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-5">Note that in this example, the proofshot also contains values for the implied (offDevice) properties
-that are static (e.g., the physical location assigned to the instance) but still part of
-the instance's proofshot as the location is known.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
+also have in model files.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-6">Note that in this example, the proofshot also contains values for the implicit
+(<code>offDevice</code>) properties that are static (e.g., the physical location assigned
+to the instance) but are still part of the instance's proofshot as its location
+is fixed -- this boat apparently never leaves the harbor.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-6.1">
+            <div class="breakable lang-json-from-yaml sourcecode" id="section-2.1.2-7.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
