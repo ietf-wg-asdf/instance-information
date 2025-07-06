@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-03T02:00:52.834758+00:00",
+  "timestamp": "2025-07-06T02:09:38.216271+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -203,13 +203,13 @@
       "labels": [],
       "body": "This PR will eventually incorporate the feedback and discussions from the OneDM meeting on April 10, 2025, into the document.",
       "createdAt": "2025-04-10T21:51:38Z",
-      "updatedAt": "2025-06-06T15:55:45Z",
+      "updatedAt": "2025-07-04T17:50:52Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "c6872b1dd273209f6512ec8ad6733605b1f9c5c3",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "adjust-examples",
-      "headRefOid": "7c0c66c94cb722f6b78e2789c40ebb9c3fd96e94",
+      "headRefOid": "770610b49a57ac4ae90b89c72b453ecf142f2899",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -223,7 +223,28 @@
           "updatedAt": "2025-06-06T15:55:44Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t86yBe2L",
+          "commit": {
+            "abbreviatedOid": "7c0c66c"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-04T11:18:06Z",
+          "updatedAt": "2025-07-04T11:18:06Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "I think this is now moving to \"roads not taken\".\r\nWe want to be able to use an SDF model to describe (constrain) instances; we probably don't want to make SDF models a meta-model of themselves...\r\nThe proofshot example shows actual values; the semantic information from the model (e.g., units, ecosystem-specific semantics) still applies but is not part of the proofshot (a reference to the model is).",
+              "createdAt": "2025-07-04T11:18:06Z",
+              "updatedAt": "2025-07-04T11:18:07Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
