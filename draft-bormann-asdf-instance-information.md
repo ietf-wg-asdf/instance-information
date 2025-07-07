@@ -453,32 +453,36 @@ sdfObject:
       temperature:
         description: Temperature value measure by this Thing's temperature sensor.
         type: number
-        sdfParameters:
-        - minimum
-        - targetQuality: minimum
-          parameterName: minimum
-          constructorName: construct
-        - maximum
-        - targetQuality: unit
-          parameterName: "#/sdfObject/Switch/sdfConstructors/construct/temperatureUnit"
-    sdfConstructors:
-      "$comment": 'TODO: Dicuss whether this should be assumed to be the default constructor'
+        sdfParameter:
+          unit:
+            "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
+            type: string
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+    sdfConstructor:
       construct:
         parameters:
-          minimum:
+          temperature:
             required: true
-          maximum:
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature"
+          temperateUnit:
+            required: true
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+          ipAddress:
+            "$comment": "Just trying some things out here. Should this parameter target the context or rather an (offDevice?) property?"
             required: false
-            "$comment": Constructors could allow for further restricting values that
-              can be assigned to affordances
-            type: integer
-          temperatureUnit:
-            required: false
+            isContextInformation: true
 ~~~
 {:sdf #code-sdf-constructors
 title="Example for SDF model with constructors"}
 
 ##### Example for an SDF construction message
+
+{{code-sdf-construction-message}} shows a potential SDF construction message that
+allows for the creation of a proofshot from a constructor that is contained within
+an SDF model.
+
+Note that the `ipAddress` can be considered context information or an off-device property.
+TODO: Needs more discussion how to model this kind of information.
 
 ~~~ sdf
 info:
@@ -492,6 +496,7 @@ sdfConstruction:
   arguments:
     minimum: 42
     temperatureUnit: Cel
+    ipAddress: "192.0.2.42"
 ~~~
 {:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
@@ -519,7 +524,7 @@ namespace:
 defaultNamespace: cap
 sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  previousProofshot: "???"
+    previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
   arguments:
     currentTemperature: 24
 ~~~
