@@ -324,7 +324,7 @@ sdfInstance:
             timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {: #code-off-device-instance post="fold"
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 #### Corresponding SDF Model
 
