@@ -566,24 +566,19 @@ Table of Contents
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
-   {
-     "info": {
-       "title": "Example SDF delta construction message",
-       "$comment": "TODO: What kind of metadata do we need here?"
-     },
-     "namespace": {
-       "cap": "https://example.com/capability/cap"
-     },
-     "defaultNamespace": "cap",
-     "sdfConstruction": {
-       "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
-                                             sdfConstructors/construct",
-       "previousProofshot": "???",
-       "arguments": {
-         "currentTemperature": 24
-       }
-     }
-   }
+   info:
+     title: Example SDF delta construction message
+     "$comment": 'TODO: What kind of metadata do we need here?'
+   namespace:
+     cap: https://example.com/capability/cap
+   defaultNamespace: cap
+   sdfConstruction:
+     sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/\
+                                                               construct
+       previousProofshot: TODO (Can we provide an ID or just a \
+                                                        timestamp here?)
+     arguments:
+       currentTemperature: 24
 
    Figure 6: Example for an SDF construction message for proofshot delta
 
