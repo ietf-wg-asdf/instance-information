@@ -318,10 +318,10 @@ sdfInstance:
         sdfEvent:
           # Not a great event example IMHO... but this currently models an event history
           maintenanceSchedule:
-          - outputValue: Replace me
-            timestamp: '2025-04-10T08:25:43.511Z'
-          - outputValue: Replace me
-            timestamp: '2025-04-10T10:25:43.511Z'
+          - outputValue: '2025-04-10'
+            timestamp: '2024-04-10T02:00:00Z'
+          - outputValue: '2026-04-10'
+            timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {: #code-off-device-instance post="fold"
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
