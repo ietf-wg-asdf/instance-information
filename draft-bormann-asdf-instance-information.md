@@ -307,7 +307,7 @@ sdfInstance:
         w3w:
           what3words: toggle.mopped.garages
       owner: ExamTech Ltd.
-    sdfObject:
+    sdfInstance:
       heater:
         sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
         sdfProperty:
