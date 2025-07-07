@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 5 January 2026                               Universität Bremen
-                                                             4 July 2025
+Expires: 8 January 2026                               Universität Bremen
+                                                             7 July 2025
 
 
                       Instance Information for SDF
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2026.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -536,37 +536,38 @@ Table of Contents
              "description": "Temperature value measure by this Thing's \
                                                    temperature sensor.",
              "type": "number",
-             "sdfParameter": {
-               "unit": {
-                 "$comment": "Should schema information be settable \
-   via a constructor at all? This question might indicate that we need \
-                                       different kinds of constructors",
-                 "type": "string",
-                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                       temperature/unit"
+             "sdfParameters": [
+               "minimum",
+               {
+                 "targetQuality": "minimum",
+                 "parameterName": "minimum",
+                 "constructorName": "construct"
+               },
+               "maximum",
+               {
+                 "targetQuality": "unit",
+                 "parameterName": "#/sdfObject/Switch/sdfConstructors/\
+                                              construct/temperatureUnit"
                }
-             }
+             ]
            }
          },
-         "sdfConstructor": {
+         "sdfConstructors": {
+           "$comment": "TODO: Dicuss whether this should be assumed to \
+                                            be the default constructor",
            "construct": {
              "parameters": {
-               "temperature": {
-                 "required": true,
-                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                            temperature"
+               "minimum": {
+                 "required": true
                },
-               "temperateUnit": {
-                 "required": true,
-                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                       temperature/unit"
-               },
-               "ipAddress": {
-                 "$comment": "Just trying some things out here. Should \
-   this parameter target the context or rather an (offDevice?) property\
-                                                                     ?",
+               "maximum": {
                  "required": false,
-                 "isContextInformation": true
+                 "$comment": "Constructors could allow for further \
+                restricting values that can be assigned to affordances",
+                 "type": "integer"
+               },
+               "temperatureUnit": {
+                 "required": false
                }
              }
            }
@@ -578,14 +579,6 @@ Table of Contents
              Figure 4: Example for SDF model with constructors
 
 2.1.3.1.2.  Example for an SDF construction message
-
-   Figure 5 shows a potential SDF construction message that allows for
-   the creation of a proofshot from a constructor that is contained
-   within an SDF model.
-
-   Note that the ipAddress can be considered context information or an
-   off-device property.  TODO: Needs more discussion how to model this
-   kind of information.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -603,8 +596,7 @@ Table of Contents
                                              sdfConstructors/construct",
        "arguments": {
          "minimum": 42,
-         "temperatureUnit": "Cel",
-         "ipAddress": "192.0.2.42"
+         "temperatureUnit": "Cel"
        }
      }
    }
@@ -640,8 +632,7 @@ Table of Contents
      "sdfConstruction": {
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                              sdfConstructors/construct",
-       "previousProofshot": "TODO (Can we provide an ID or just a \
-                                                      timestamp here?)",
+       "previousProofshot": "???",
        "arguments": {
          "currentTemperature": 24
        }
@@ -725,16 +716,16 @@ Table of Contents
    [I-D.bormann-asdf-sdf-mapping]
               Bormann, C. and J. Romann, "Semantic Definition Format
               (SDF): Mapping files", Work in Progress, Internet-Draft,
-              draft-bormann-asdf-sdf-mapping-05, 6 December 2024,
+              draft-bormann-asdf-sdf-mapping-06, 6 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-asdf-
-              sdf-mapping-05>.
+              sdf-mapping-06>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
-              Progress, Internet-Draft, draft-ietf-iotops-7228bis-01, 8
-              January 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-iotops-7228bis-01>.
+              Progress, Internet-Draft, draft-ietf-iotops-7228bis-02, 7
+              July 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-iotops-7228bis-02>.
 
    [I-D.lee-asdf-digital-twin-07]
               Lee, H., Hong, J., Youn, J., and Y. Hong, "Semantic
