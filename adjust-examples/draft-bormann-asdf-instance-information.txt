@@ -360,7 +360,7 @@ Table of Contents
      }
    }
 
-       Figure 2: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
+      Figure 2: SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-
                               digital-twin-08]
 
 2.1.2.1.  Corresponding SDF Model
