@@ -332,7 +332,7 @@ Table of Contents
            },
            "owner": "ExamTech Ltd."
          },
-         "sdfObject": {
+         "sdfInstance": {
            "heater": {
              "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
              "sdfProperty": {
