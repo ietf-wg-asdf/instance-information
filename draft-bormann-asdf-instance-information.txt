@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 8 January 2026                               Universität Bremen
-                                                             7 July 2025
+Expires: 9 January 2026                               Universität Bremen
+                                                             8 July 2025
 
 
                       Instance Information for SDF
@@ -21,8 +21,7 @@ Abstract
    Models to describe them.
 
 
-   // The present revision –01 has been slightly updated from the
-   // discussion at the 2025-04-09 ASDF meeting.
+   // The present revision –03 is intended as input for IETF 123.
 
 About This Document
 
@@ -56,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 9 January 2026.
 
 Copyright Notice
 
