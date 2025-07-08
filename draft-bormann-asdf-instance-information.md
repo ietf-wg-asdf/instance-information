@@ -688,6 +688,9 @@ sdfInstance:
 {: #code-off-device-instance-alternative post="fold"
 title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
+{::include-all lists.md}
+
+
 # Acknowledgments
 {:unnumbered}
 

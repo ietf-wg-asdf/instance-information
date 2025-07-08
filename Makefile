@@ -13,3 +13,7 @@ else
 	    https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 endif
+
+lists.md: draft-bormann-asdf-instance-information.xml
+	kramdown-rfc-extract-figures-tables -trfc $< >$@.new
+	if cmp $@.new $@; then rm -v $@.new; else mv -v $@.new $@; fi
