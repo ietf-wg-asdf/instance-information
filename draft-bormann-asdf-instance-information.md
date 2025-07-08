@@ -84,6 +84,8 @@ Models to describe them.
 
 --- middle
 
+{:sdf: pre="yaml2json" check="json" post="fold"}
+
 # Introduction
 
 The Semantic Definition Format for Data and Interactions of Things
@@ -230,7 +232,7 @@ to/from concrete serializations...)
 
 #### Examples for context information
 
-~~~ json-from-yaml
+~~~ sdf
 namespace:
   models: https://example.com/models
   boats: https://example.com/boats
@@ -243,7 +245,7 @@ sdfInstance:
     scimObjectId: 8988be82-50dc-4249-bed2-60c9c8797677
     parentInstance: TODO -- addressing instance in data tree
 ~~~
-{: #example-context post="fold"
+{:sdf #example-context
 title="Example for an SDF instance with context information"}
 
 ### Proofshots (read device, other component)
@@ -276,7 +278,7 @@ Note that in this example, the proofshot also contains values for the implicit
 to the instance) but are still part of the instance's proofshot as its location
 is fixed -- this boat apparently never leaves the harbor.
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: 'A proofshot example for heater #1 on boat #007'
   version: '2025-04-08'
@@ -322,7 +324,7 @@ sdfInstance:
           - outputValue: '2026-04-10'
             timestamp: '2025-04-10T02:00:00Z'
 ~~~
-{: #code-off-device-instance post="fold"
+{:sdf #code-off-device-instance post="fold"
 title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 #### Corresponding SDF Model
@@ -337,7 +339,7 @@ semantic information such as the units that are used for wgs84 etc.
 In practice, the definition of `wgs84` etc. probably would come from a common
 library and just be referenced via `sdfRef`.)
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: An example model of a heater on a boat
   version: '2025-01-27'
@@ -412,7 +414,7 @@ sdfThing:
               type: string
               format: date-time
 ~~~
-{: #code-off-device-model post="fold"
+{:sdf #code-off-device-model
 title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-08]"}
 
 ### Construction
@@ -435,7 +437,7 @@ which is pretty much a constructor.)
 
 ##### Example for an SDF model with constructors
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: Example document for SDF (Semantic Definition Format) with constructors for
     instantiation
@@ -473,12 +475,12 @@ sdfObject:
           temperatureUnit:
             required: false
 ~~~
-{: #code-sdf-constructors post="fold"
+{:sdf #code-sdf-constructors
 title="Example for SDF model with constructors"}
 
 ##### Example for an SDF construction message
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: Example SDF construction message
   "$comment": 'TODO: What kind of metadata do we need here?'
@@ -491,7 +493,7 @@ sdfConstruction:
     minimum: 42
     temperatureUnit: Cel
 ~~~
-{: #code-sdf-construction-message post="fold"
+{:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
 
 ### Deltas and Default/Base messages
@@ -508,7 +510,7 @@ A construction message may be a delta, or it may have parameters that
 algorithmically influence the elements of state that one would find in
 a proofshot.
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: Example SDF delta construction message
   "$comment": 'TODO: What kind of metadata do we need here?'
@@ -521,7 +523,7 @@ sdfConstruction:
   arguments:
     currentTemperature: 24
 ~~~
-{: #code-sdf-construction-delta-message post="fold"
+{:sdf #code-sdf-construction-delta-message
 title="Example for an SDF construction message for proofshot delta"}
 
 Deltas and Default/Base messages could be used in the Series Transfer
@@ -566,7 +568,7 @@ the proofshot format could have also been modeled via SDF models where
 all `sdfProperty` definitions are given `const`values.
 However, this concept is not capable of capturing actions and events.
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: An example model of a heater on a boat (that resembles a proofshot)
   version: '2025-06-06'
@@ -640,14 +642,14 @@ sdfData:
             type: string
             format: "..."
 ~~~
-{: #code-instance-syntactic-sugar-illustration post="fold"
+{:sdf #code-instance-syntactic-sugar-illustration
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
 ### Alternative Instance Keys
 
 Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.
 
-~~~ json-from-yaml
+~~~ sdf
 info:
   title: 'An example of the heater #1 in the boat #007'
   version: '2025-04-08'
@@ -685,7 +687,7 @@ sdfInstance:
         - outputValue: 65.3
           timestamp: "2025-04-10T10:25:43.511Z"
 ~~~
-{: #code-off-device-instance-alternative post="fold"
+{:sdf #code-off-device-instance-alternative
 title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
 
 {::include-all lists.md}
