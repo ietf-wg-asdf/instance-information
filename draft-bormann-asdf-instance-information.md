@@ -79,8 +79,7 @@ Models to describe them.
 
 [^status]
 
-[^status]: The present revision –01 has been slightly updated from the
-    discussion at the 2025-04-09 ASDF meeting.
+[^status]: The present revision –03 is intended as input for IETF 123.
 
 
 --- middle
