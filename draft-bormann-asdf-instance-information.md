@@ -284,6 +284,7 @@ info:
   title: 'A proofshot example for heater #1 on boat #007'
   version: '2025-04-08'
   copyright: Copyright 2025. All rights reserved.
+  proofshotId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
 namespace:
   models: https://example.com/models
   boats: https://example.com/boats
@@ -531,6 +532,35 @@ Deltas and Default/Base messages could be used in the Series Transfer
 Pattern {{STP}}, which may be one way to model a telemetry stream from a
 device.
 
+A potential example for the use of proofshot deltas is shown in {{code-sdf-proofshot-delta}}.
+Here, the proofshot delta refers to the previous example in {{code-off-device-instance}} via its `proofshotId`, which is included in the `previousProofshot` quality.
+Compared to the previous proofshot, only the status property of the boat's heater has changed from `error` to `operational`.
+Via an algorithm such as JSON Merge Patch {{-merge-patch}}, the actual proofshot can be resolved by applying the delta to the previous version.
+
+In future versions of this document, we will evaluate whether JSON Merge Patch is sufficient to fulfill the requirements for the resolution algorithm which have to formulated and refined themselves.
+
+~~~ sdf
+info:
+  title: Example SDF delta proofshot
+  previousProofshot: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
+  proofshotId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+  version: '2025-04-08'
+  copyright: Copyright 2025. All rights reserved.
+namespace:
+  models: https://example.com/models
+  boats: https://example.com/boats
+defaultNamespace: boats
+sdfInstance:
+  boat007:
+    sdfInstanceOf: models:#/sdfThing/boat
+    sdfInstance:
+      heater:
+        sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
+        sdfProperty:
+          status: operational
+~~~
+{:sdf #code-sdf-proofshot-delta
+title="Example for an SDF proofshot delta that overrides the status property of the boat's heater."}
 
 ## Metadata
 
