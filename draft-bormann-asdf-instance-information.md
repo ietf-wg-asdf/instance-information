@@ -428,14 +428,20 @@ an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
 device).
 
+Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+It is still up for discussion whether this concept justifies a new keyword or whether construction and other lifecycle management processes should be modeled as `sdfAction`s instead.
+
 (Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)
 
-#### Examples
+#### Examples for SDF Constructors
 
-##### Example for an SDF model with constructors
+This section contains examples for both approaches discussed above:
+{{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperature` and `temperatureUnit`) and optional constructor parameters (in this example, the `ipAddress` is optional).
+The example shows that the names of constructor parameters may deviate from the quality names in the model (`temperatureUnit` vs `unit`) as the target quality is specified via a JSON pointer.
+Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `$context` of the proofshot.
 
 ~~~ sdf
 info:
@@ -475,7 +481,13 @@ sdfObject:
 {:sdf #code-sdf-constructors
 title="Example for SDF model with constructors"}
 
-##### Example for an SDF construction message
+The alternative approach is shown in TODO.
+Here, the constructor is modeled as an `sdfAction` that contains the same set of parameters in its `sdfInputData`.
+
+(Add example here and discuss more pros and cons of the two formats.)
+
+
+#### Example for an SDF construction message
 
 {{code-sdf-construction-message}} shows a potential SDF construction message that
 allows for the creation of a proofshot from a constructor that is contained within
