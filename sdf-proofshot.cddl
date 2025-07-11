@@ -18,6 +18,9 @@ sdfinfo = {
  ;
  ; Allows this proofshot to only contain values that have acually
  ; changed, turning it into a "Delta".
+ ;
+ ; DISCUSS: Is this the right place to put this information?
+ ;          Should the identifier have a specific format?
  ? previousProofshot: text
  ? modified: modified-date-time
  ? features: [
