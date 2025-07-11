@@ -14,6 +14,11 @@ sdfinfo = {
  ? version: text
  ? copyright: text
  ? license: text
+ ; Identifier used to connect this proofshot to a previous one.
+ ;
+ ; Allows this proofshot to only contain values that have acually
+ ; changed, turning it into a "Delta".
+ ? previousProofshot: text
  ? modified: modified-date-time
  ? features: [
              ]
