@@ -470,7 +470,7 @@ sdfObject:
           temperature:
             required: true
             target: "#/sdfObject/temperatureSensor/sdfProperty/temperature"
-          temperateUnit:
+          temperatureUnit:
             required: true
             target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
           ipAddress:
