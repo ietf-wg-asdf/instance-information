@@ -570,7 +570,7 @@ Table of Contents
                  "target": "#/sdfObject/temperatureSensor/sdfProperty/\
                                                             temperature"
                },
-               "temperateUnit": {
+               "temperatureUnit": {
                  "required": true,
                  "target": "#/sdfObject/temperatureSensor/sdfProperty/\
                                                        temperature/unit"
@@ -622,7 +622,7 @@ Table of Contents
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                              sdfConstructors/construct",
        "arguments": {
-         "minimum": 42,
+         "temperature": 42,
          "temperatureUnit": "Cel",
          "ipAddress": "192.0.2.42"
        }
@@ -663,7 +663,7 @@ Table of Contents
        "previousProofshot": "TODO (Can we provide an ID or just a \
                                                       timestamp here?)",
        "arguments": {
-         "currentTemperature": 24
+         "temperature": 24
        }
      }
    }
