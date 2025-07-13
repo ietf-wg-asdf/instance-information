@@ -506,7 +506,7 @@ defaultNamespace: cap
 sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
   arguments:
-    minimum: 42
+    temperature: 42
     temperatureUnit: Cel
     ipAddress: "192.0.2.42"
 ~~~
@@ -538,7 +538,7 @@ sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
   previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
   arguments:
-    currentTemperature: 24
+    temperature: 24
 ~~~
 {:sdf #code-sdf-construction-delta-message
 title="Example for an SDF construction message for proofshot delta"}
