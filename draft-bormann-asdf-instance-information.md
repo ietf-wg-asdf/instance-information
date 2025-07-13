@@ -536,7 +536,7 @@ namespace:
 defaultNamespace: cap
 sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-    previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
+  previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
   arguments:
     currentTemperature: 24
 ~~~
