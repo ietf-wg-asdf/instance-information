@@ -297,7 +297,8 @@ Table of Contents
      "info": {
        "title": "A proofshot example for heater #1 on boat #007",
        "version": "2025-04-08",
-       "copyright": "Copyright 2025. All rights reserved."
+       "copyright": "Copyright 2025. All rights reserved.",
+       "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
      },
      "namespace": {
        "models": "https://example.com/models",
@@ -674,6 +675,50 @@ Table of Contents
    Pattern [STP], which may be one way to model a telemetry stream from
    a device.
 
+   A potential example for the use of proofshot deltas is shown in
+   Figure 7.  Here, the proofshot delta refers to the previous example
+   in Figure 2 via its proofshotId, which is included in the
+   previousProofshot quality.  Compared to the previous proofshot, only
+   the status property of the boat's heater has changed from error to
+   operational.  Via an algorithm such as JSON Merge Patch [RFC7386],
+   the actual proofshot can be resolved by applying the delta to the
+   previous version.
+
+   In future versions of this document, we will evaluate whether JSON
+   Merge Patch is sufficient to fulfill the requirements for the
+   resolution algorithm which have to formulated and refined themselves.
+
+   {
+     "info": {
+       "title": "Example SDF delta proofshot",
+       "previousProofshot": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+       "proofshotId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+       "version": "2025-04-08",
+       "copyright": "Copyright 2025. All rights reserved."
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "boats": "https://example.com/boats"
+     },
+     "defaultNamespace": "boats",
+     "sdfInstance": {
+       "boat007": {
+         "sdfInstanceOf": "models:#/sdfThing/boat",
+         "sdfInstance": {
+           "heater": {
+             "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+             "sdfProperty": {
+               "status": "operational"
+             }
+           }
+         }
+       }
+     }
+   }
+
+      Figure 7: Example for an SDF proofshot delta that overrides the
+                   status property of the boat's heater.
+
 2.2.  Metadata
 
    One interesting piece of offDevice information is the model itself,
@@ -784,6 +829,10 @@ Table of Contents
               Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
               <https://www.rfc-editor.org/rfc/rfc6690>.
 
+   [RFC7386]  Hoffman, P. and J. Snell, "JSON Merge Patch", RFC 7386,
+              DOI 10.17487/RFC7386, October 2014,
+              <https://www.rfc-editor.org/rfc/rfc7386>.
+
    [RFC9039]  Arkko, J., Jennings, C., and Z. Shelby, "Uniform Resource
               Names for Device Identifiers", RFC 9039,
               DOI 10.17487/RFC9039, June 2021,
@@ -806,7 +855,7 @@ Appendix A.  Roads Not Taken
 
 A.1.  Using SDF Models as Proofshots
 
-   As shown in Figure 7, the proofshot format could have also been
+   As shown in Figure 8, the proofshot format could have also been
    modeled via SDF models where all sdfProperty definitions are given
    constvalues.  However, this concept is not capable of capturing
    actions and events.
@@ -926,7 +975,7 @@ A.1.  Using SDF Models as Proofshots
      }
    }
 
-       Figure 7: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
+       Figure 8: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
                               digital-twin-07]
 
 A.1.1.  Alternative Instance Keys
@@ -994,7 +1043,7 @@ A.1.1.  Alternative Instance Keys
      }
    }
 
-     Figure 8: SDF instance proposal (with IDs as part of the instance
+     Figure 9: SDF instance proposal (with IDs as part of the instance
             keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]
 
 Acknowledgments

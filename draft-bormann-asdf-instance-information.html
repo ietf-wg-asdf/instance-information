@@ -1478,7 +1478,8 @@ is fixed -- this boat apparently never leaves the harbor.<a href="#section-2.1.2
   "info": {
     "title": "A proofshot example for heater #1 on boat #007",
     "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved."
+    "copyright": "Copyright 2025. All rights reserved.",
+    "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
   },
   "namespace": {
     "models": "https://example.com/models",
@@ -1873,6 +1874,47 @@ a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer
 Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may be one way to model a telemetry stream from a
 device.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-8">A potential example for the use of proofshot deltas is shown in <a href="#code-sdf-proofshot-delta" class="auto internal xref">Figure 7</a>.
+Here, the proofshot delta refers to the previous example in <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> via its <code>proofshotId</code>, which is included in the <code>previousProofshot</code> quality.
+Compared to the previous proofshot, only the status property of the boat's heater has changed from <code>error</code> to <code>operational</code>.
+Via an algorithm such as JSON Merge Patch <span>[<a href="#RFC7386" class="cite xref">RFC7386</a>]</span>, the actual proofshot can be resolved by applying the delta to the previous version.<a href="#section-2.1.4-8" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-9">In future versions of this document, we will evaluate whether JSON Merge Patch is sufficient to fulfill the requirements for the resolution algorithm which have to formulated and refined themselves.<a href="#section-2.1.4-9" class="pilcrow">¶</a></p>
+<span id="name-example-for-an-sdf-proofsho"></span><div id="code-sdf-proofshot-delta">
+<figure id="figure-7">
+            <div class="lang-sdf sourcecode" id="section-2.1.4-10.1">
+<pre>{
+  "info": {
+    "title": "Example SDF delta proofshot",
+    "previousProofshot": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+    "proofshotId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+    "version": "2025-04-08",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "boat007": {
+      "sdfInstanceOf": "models:#/sdfThing/boat",
+      "sdfInstance": {
+        "heater": {
+          "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+          "sdfProperty": {
+            "status": "operational"
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-for-an-sdf-proofsho" class="selfRef">Example for an SDF proofshot delta that overrides the status property of the boat's heater.</a>
+            </figcaption></figure>
+</div>
 </section>
 </div>
 </section>
@@ -1990,6 +2032,10 @@ Multiple models may apply to the same device (including but not only revisions o
         <dd>
 <span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7386">[RFC7386]</dt>
+        <dd>
+<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Snell</span>, <span class="refTitle">"JSON Merge Patch"</span>, <span class="seriesInfo">RFC 7386</span>, <span class="seriesInfo">DOI 10.17487/RFC7386</span>, <time datetime="2014-10" class="refDate">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7386">https://www.rfc-editor.org/rfc/rfc7386</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9039">[RFC9039]</dt>
         <dd>
 <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">Z. Shelby</span>, <span class="refTitle">"Uniform Resource Names for Device Identifiers"</span>, <span class="seriesInfo">RFC 9039</span>, <span class="seriesInfo">DOI 10.17487/RFC9039</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9039">https://www.rfc-editor.org/rfc/rfc9039</a>&gt;</span>. </dd>
@@ -2019,12 +2065,12 @@ We will remove this appendix as soon as this document is about to be finished.<a
         <h3 id="name-using-sdf-models-as-proofsh">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
         </h3>
-<p id="appendix-A.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 7</a>,
+<p id="appendix-A.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 8</a>,
 the proofshot format could have also been modeled via SDF models where
 all <code>sdfProperty</code> definitions are given <code>const</code>values.
 However, this concept is not capable of capturing actions and events.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
-<figure id="figure-7">
+<figure id="figure-8">
           <div class="breakable lang-sdf sourcecode" id="appendix-A.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2142,7 +2188,7 @@ However, this concept is not capable of capturing actions and events.<a href="#a
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
           </figcaption></figure>
 </div>
@@ -2153,7 +2199,7 @@ However, this concept is not capable of capturing actions and events.<a href="#a
           </h4>
 <p id="appendix-A.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-A.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-8">
+<figure id="figure-9">
             <div class="breakable lang-sdf sourcecode" id="appendix-A.1.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2216,7 +2262,7 @@ in the history should be displayed -- could this be done via a \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]</a>
             </figcaption></figure>
 </div>
