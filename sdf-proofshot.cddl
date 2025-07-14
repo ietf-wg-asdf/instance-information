@@ -53,7 +53,7 @@ instancequalities = {
 
 paedataqualities = (
  ; Models the current state of the instance's properties
- ? sdfProperty: named<allowed-types>
+ ? sdfProperty: allowed-types
 
  ; Models the current state of the instance's action affordances
  ;  
@@ -64,7 +64,7 @@ paedataqualities = (
  ? sdfEvent: named<eventhistory>
 )
 
-eventhistory = * eventqualities
+eventhistory = [* eventqualities]
 
 eventqualities = {
     outputValue: allowed-types
