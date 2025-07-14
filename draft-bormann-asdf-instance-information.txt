@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 9 January 2026                               Universität Bremen
-                                                             8 July 2025
+Expires: 15 January 2026                              Universität Bremen
+                                                            14 July 2025
 
 
                       Instance Information for SDF
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2026.
+   This Internet-Draft will expire on 15 January 2026.
 
 Copyright Notice
 
@@ -505,14 +505,29 @@ Table of Contents
    construction output (e.g., a public key or an IP address if those are
    generated on device).
 
+   Construction messages need to refer to some kind of constructor in
+   order to be able to start the actual construction process.  It is
+   still up for discussion whether this concept justifies a new keyword
+   or whether construction and other lifecycle management processes
+   should be modeled as sdfActions instead.
+
    (Note that it is not quite clear what a destructor would be for a
    physical instance -- apart from a scrap metal press, but according to
    RFC 8576 we would want to move a system to a re-usable initial state,
    which is pretty much a constructor.)
 
-2.1.3.1.  Examples
+2.1.3.1.  Examples for SDF Constructors
 
-2.1.3.1.1.  Example for an SDF model with constructors
+   This section contains examples for both approaches discussed above:
+   Figure 4 introduces an sdfConstructor keyword which allows for
+   defining both mandatory (in this example: temperature and
+   temperatureUnit) and optional constructor parameters (in this
+   example, the ipAddress is optional).  The example shows that the
+   names of constructor parameters may deviate from the quality names in
+   the model (temperatureUnit vs unit) as the target quality is
+   specified via a JSON pointer.  Additionally, this constructor example
+   explicitly labels the ipAddress as information that belongs to the
+   $context of the proofshot.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -535,38 +550,37 @@ Table of Contents
              "description": "Temperature value measure by this Thing's \
                                                    temperature sensor.",
              "type": "number",
-             "sdfParameters": [
-               "minimum",
-               {
-                 "targetQuality": "minimum",
-                 "parameterName": "minimum",
-                 "constructorName": "construct"
-               },
-               "maximum",
-               {
-                 "targetQuality": "unit",
-                 "parameterName": "#/sdfObject/Switch/sdfConstructors/\
-                                              construct/temperatureUnit"
+             "sdfParameter": {
+               "unit": {
+                 "$comment": "Should schema information be settable \
+   via a constructor at all? This question might indicate that we need \
+                                       different kinds of constructors",
+                 "type": "string",
+                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                       temperature/unit"
                }
-             ]
+             }
            }
          },
-         "sdfConstructors": {
-           "$comment": "TODO: Dicuss whether this should be assumed to \
-                                            be the default constructor",
+         "sdfConstructor": {
            "construct": {
              "parameters": {
-               "minimum": {
-                 "required": true
-               },
-               "maximum": {
-                 "required": false,
-                 "$comment": "Constructors could allow for further \
-                restricting values that can be assigned to affordances",
-                 "type": "integer"
+               "temperature": {
+                 "required": true,
+                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                            temperature"
                },
                "temperatureUnit": {
-                 "required": false
+                 "required": true,
+                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                       temperature/unit"
+               },
+               "ipAddress": {
+                 "$comment": "Just trying some things out here. Should \
+   this parameter target the context or rather an (offDevice?) property\
+                                                                     ?",
+                 "required": false,
+                 "isContextInformation": true
                }
              }
            }
@@ -577,7 +591,21 @@ Table of Contents
 
              Figure 4: Example for SDF model with constructors
 
-2.1.3.1.2.  Example for an SDF construction message
+   The alternative approach is shown in TODO.  Here, the constructor is
+   modeled as an sdfAction that contains the same set of parameters in
+   its sdfInputData.
+
+   (Add example here and discuss more pros and cons of the two formats.)
+
+2.1.3.2.  Example for an SDF construction message
+
+   Figure 5 shows a potential SDF construction message that allows for
+   the creation of a proofshot from a constructor that is contained
+   within an SDF model.
+
+   Note that the ipAddress can be considered context information or an
+   off-device property.  TODO: Needs more discussion how to model this
+   kind of information.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -594,8 +622,9 @@ Table of Contents
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                              sdfConstructors/construct",
        "arguments": {
-         "minimum": 42,
-         "temperatureUnit": "Cel"
+         "temperature": 42,
+         "temperatureUnit": "Cel",
+         "ipAddress": "192.0.2.42"
        }
      }
    }
@@ -631,9 +660,10 @@ Table of Contents
      "sdfConstruction": {
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                              sdfConstructors/construct",
-       "previousProofshot": "???",
+       "previousProofshot": "TODO (Can we provide an ID or just a \
+                                                      timestamp here?)",
        "arguments": {
-         "currentTemperature": 24
+         "temperature": 24
        }
      }
    }

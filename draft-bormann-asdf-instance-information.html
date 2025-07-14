@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 9 January 2026</td>
+<td class="center">Expires 15 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-08" class="published">8 July 2025</time>
+<time datetime="2025-07-14" class="published">14 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-09">9 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-01-15">15 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1696,23 +1696,24 @@ identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
 device).<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-3">(Note that it is not quite clear what a destructor would be for a
+<p id="section-2.1.3-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+It is still up for discussion whether this concept justifies a new keyword or whether construction and other lifecycle management processes should be modeled as <code>sdfAction</code>s instead.<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-4">(Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
-which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
-<div id="examples">
+which is pretty much a constructor.)<a href="#section-2.1.3-4" class="pilcrow">¶</a></p>
+<div id="examples-for-sdf-constructors">
 <section id="section-2.1.3.1">
-            <h5 id="name-examples">
-<a href="#section-2.1.3.1" class="section-number selfRef">2.1.3.1. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
+            <h5 id="name-examples-for-sdf-constructo">
+<a href="#section-2.1.3.1" class="section-number selfRef">2.1.3.1. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
             </h5>
-<div id="example-for-an-sdf-model-with-constructors">
-<section id="section-2.1.3.1.1">
-              <h6 id="name-example-for-an-sdf-model-wi">
-<a href="#section-2.1.3.1.1" class="section-number selfRef">2.1.3.1.1. </a><a href="#name-example-for-an-sdf-model-wi" class="section-name selfRef">Example for an SDF model with constructors</a>
-              </h6>
+<p id="section-2.1.3.1-1">This section contains examples for both approaches discussed above:
+<a href="#code-sdf-constructors" class="auto internal xref">Figure 4</a> introduces an <code>sdfConstructor</code> keyword which allows for defining both mandatory (in this example: <code>temperature</code> and <code>temperatureUnit</code>) and optional constructor parameters (in this example, the <code>ipAddress</code> is optional).
+The example shows that the names of constructor parameters may deviate from the quality names in the model (<code>temperatureUnit</code> vs <code>unit</code>) as the target quality is specified via a JSON pointer.
+Additionally, this constructor example explicitly labels the <code>ipAddress</code> as information that belongs to the <code>$context</code> of the proofshot.<a href="#section-2.1.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructors">
 <figure id="figure-4">
-                <div class="breakable lang-sdf sourcecode" id="section-2.1.3.1.1-1.1">
+              <div class="breakable lang-sdf sourcecode" id="section-2.1.3.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1734,38 +1735,37 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
           "description": "Temperature value measure by this Thing's \
                                                 temperature sensor.",
           "type": "number",
-          "sdfParameters": [
-            "minimum",
-            {
-              "targetQuality": "minimum",
-              "parameterName": "minimum",
-              "constructorName": "construct"
-            },
-            "maximum",
-            {
-              "targetQuality": "unit",
-              "parameterName": "#/sdfObject/Switch/sdfConstructors/\
-                                           construct/temperatureUnit"
+          "sdfParameter": {
+            "unit": {
+              "$comment": "Should schema information be settable \
+via a constructor at all? This question might indicate that we need \
+                                    different kinds of constructors",
+              "type": "string",
+              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                    temperature/unit"
             }
-          ]
+          }
         }
       },
-      "sdfConstructors": {
-        "$comment": "TODO: Dicuss whether this should be assumed to \
-                                         be the default constructor",
+      "sdfConstructor": {
         "construct": {
           "parameters": {
-            "minimum": {
-              "required": true
-            },
-            "maximum": {
-              "required": false,
-              "$comment": "Constructors could allow for further \
-             restricting values that can be assigned to affordances",
-              "type": "integer"
+            "temperature": {
+              "required": true,
+              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                         temperature"
             },
             "temperatureUnit": {
-              "required": false
+              "required": true,
+              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                    temperature/unit"
+            },
+            "ipAddress": {
+              "$comment": "Just trying some things out here. Should \
+this parameter target the context or rather an (offDevice?) property\
+                                                                  ?",
+              "required": false,
+              "isContextInformation": true
             }
           }
         }
@@ -1777,18 +1777,26 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
-                </figcaption></figure>
+              </figcaption></figure>
 </div>
+<p id="section-2.1.3.1-3">The alternative approach is shown in TODO.
+Here, the constructor is modeled as an <code>sdfAction</code> that contains the same set of parameters in its <code>sdfInputData</code>.<a href="#section-2.1.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.3.1-4">(Add example here and discuss more pros and cons of the two formats.)<a href="#section-2.1.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="example-for-an-sdf-construction-message">
-<section id="section-2.1.3.1.2">
-              <h6 id="name-example-for-an-sdf-construc">
-<a href="#section-2.1.3.1.2" class="section-number selfRef">2.1.3.1.2. </a><a href="#name-example-for-an-sdf-construc" class="section-name selfRef">Example for an SDF construction message</a>
-              </h6>
+<section id="section-2.1.3.2">
+            <h5 id="name-example-for-an-sdf-construc">
+<a href="#section-2.1.3.2" class="section-number selfRef">2.1.3.2. </a><a href="#name-example-for-an-sdf-construc" class="section-name selfRef">Example for an SDF construction message</a>
+            </h5>
+<p id="section-2.1.3.2-1"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a> shows a potential SDF construction message that
+allows for the creation of a proofshot from a constructor that is contained within
+an SDF model.<a href="#section-2.1.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3.2-2">Note that the <code>ipAddress</code> can be considered context information or an off-device property.
+TODO: Needs more discussion how to model this kind of information.<a href="#section-2.1.3.2-2" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-construction-message">
 <figure id="figure-5">
-                <div class="lang-sdf sourcecode" id="section-2.1.3.1.2-1.1">
+              <div class="lang-sdf sourcecode" id="section-2.1.3.2-3.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1804,8 +1812,9 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
     "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                           sdfConstructors/construct",
     "arguments": {
-      "minimum": 42,
-      "temperatureUnit": "Cel"
+      "temperature": 42,
+      "temperatureUnit": "Cel",
+      "ipAddress": "192.0.2.42"
     }
   }
 }
@@ -1813,9 +1822,7 @@ which is pretty much a constructor.)<a href="#section-2.1.3-3" class="pilcrow">�
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-example-for-an-sdf-construct" class="selfRef">Example for an SDF construction message</a>
-                </figcaption></figure>
-</div>
-</section>
+              </figcaption></figure>
 </div>
 </section>
 </div>
@@ -1850,9 +1857,10 @@ a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
   "sdfConstruction": {
     "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                           sdfConstructors/construct",
-    "previousProofshot": "???",
+    "previousProofshot": "TODO (Can we provide an ID or just a \
+                                                   timestamp here?)",
     "arguments": {
-      "currentTemperature": 24
+      "temperature": 24
     }
   }
 }
