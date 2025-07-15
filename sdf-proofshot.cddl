@@ -58,7 +58,7 @@ paedataqualities = (
  ; Models the current state of the instance's action affordances
  ;  
  ; DISCUSS: How should the state of actions be modeled?
- ? sdfAction: any
+ ? sdfAction: named<any>
  
  ; Models an history for every event affordance
  ? sdfEvent: named<eventhistory>
