@@ -617,7 +617,7 @@ However, this concept is not capable of capturing actions and events.
 
 ~~~ sdf
 info:
-  title: "An example of the heater #1 in the boat #007"
+  title: "An example model of the heater #1 in the boat #007 (that resembles a proofshot)"
   version: 2025-07-15
   copyright: Copyright 2025. All rights reserved.
 namespace:
