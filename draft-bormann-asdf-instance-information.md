@@ -701,7 +701,7 @@ namespace:
   boats: https://example.com/boats
 defaultNamespace: boats
 sdfInstance:
-  "models:#/sdfThing/boat/007":
+  models:#/sdfThing/boat/007:
     sdfInstanceOf: models:#/sdfThing/boat
     heater: models:#/sdfThing/boat/sdfObject/heater/001
     "$context":
@@ -719,11 +719,11 @@ sdfInstance:
       w3w:
         what3words: toggle.mopped.garages
     owner: ExamTech Ltd.
-    models:#/sdfThing/boat/sdfObject/heater/001:
-      characteristic: 12V electric heater, 800W, automatic cutoff
-      status: error
-      report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
-        a.m. to 6 p.m.'
+  models:#/sdfThing/boat/sdfObject/heater/001:
+    characteristic: 12V electric heater, 800W, automatic cutoff
+    status: error
+    report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
+      a.m. to 6 p.m.'
     sdfEvent:
       maintenanceSchedule:
       - outputValue: '2025-04-10'
