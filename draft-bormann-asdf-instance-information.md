@@ -693,44 +693,47 @@ Below you can see an alternative instance modelling approach with IDs as (part o
 
 ~~~ sdf
 info:
-  title: 'An example of the heater #1 in the boat #007'
-  version: '2025-04-08'
+  title: 'A proofshot example for heater #1 on boat #007'
+  version: '2025-07-15'
   copyright: Copyright 2025. All rights reserved.
+  proofshotId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
 namespace:
   models: https://example.com/models
   boats: https://example.com/boats
 defaultNamespace: boats
 sdfInstance:
   "models:#/sdfThing/boat/007":
+    sdfInstanceOf: models:#/sdfThing/boat
     heater: models:#/sdfThing/boat/sdfObject/heater/001
-  "models:#/sdfThing/boat/sdfObject/heater/001":
     "$context":
       scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    isHeating: true
+    identifier: urn:boat:007:heater:1
     location:
       wgs84:
         latitude: 35.2988233791372
         longitude: 129.25478376484912
-        altitude: 0.0
+        altitude: 0
       postal:
         city: Ulsan
         post-code: '44110'
         country: South Korea
       w3w:
         what3words: toggle.mopped.garages
-    report:
-      value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
-        to 6 p.m.'
+    owner: ExamTech Ltd.
+    models:#/sdfThing/boat/sdfObject/heater/001:
+      characteristic: 12V electric heater, 800W, automatic cutoff
+      status: error
+      report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
+        a.m. to 6 p.m.'
     sdfEvent:
-      "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
-      overheating:
-        - outputValue: 60.0
-          timestamp: "2025-04-10T08:25:43.511Z"
-        - outputValue: 65.3
-          timestamp: "2025-04-10T10:25:43.511Z"
+      maintenanceSchedule:
+      - outputValue: '2025-04-10'
+        timestamp: '2024-04-10T02:00:00Z'
+      - outputValue: '2026-04-10'
+        timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {:sdf #code-off-device-instance-alternative
-title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 {::include-all lists.md}
 
