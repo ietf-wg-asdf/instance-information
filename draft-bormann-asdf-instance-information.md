@@ -618,80 +618,74 @@ However, this concept is not capable of capturing actions and events.
 
 ~~~ sdf
 info:
-  title: An example model of a heater on a boat (that resembles a proofshot)
-  version: '2025-06-06'
+  title: "An example of the heater #1 in the boat #007"
+  version: 2025-07-15
   copyright: Copyright 2025. All rights reserved.
 namespace:
   models: https://example.com/models
 defaultNamespace: models
 sdfThing:
-  boat:
+  boat007:
+    label: "Digital Twin of Boat #007"
+    description: A ship equipped with heating and navigation systems
+    sdfProperty:
+      identifier:
+        offDevice: true
+        type: string
+        const: urn:boat:007:heater:1
+      location:
+        offDevice: true
+        type: object
+        const:
+          wgs84:
+            latitude: 35.2988233791372
+            longitude: 129.25478376484912
+            altitude: 0.0
+          postal:
+            city: Ulsan
+            post-code: '44110'
+            country: South Korea
+          w3w:
+            what3words: toggle.mopped.garages
+      owner:
+        offDevice: true
+        type: string
+        default: ExamTech Ltd.
+        const: ExamTech Ltd.
+    sdfRequired: "#/sdfThing/boat007/sdfObject/heater1"
     sdfObject:
       heater:
+        label: Cabin Heater
+        description: Temperature control system for cabin heating
         sdfProperty:
-          isHeating:
-            description: The state of the heater on a boat; false for off and true
-              for on.
-            type: boolean
-            const: true
-          location:
-            offDevice: true
-            sdfRef: "#/sdfData/location"
-            const:
-              wgs84:
-                latitude: 35.2988233791372
-                longitude: 129.25478376484912
-                altitude: 0.0
-              postal:
-                city: Ulsan
-                post-code: '44110'
-                country: South Korea
-            w3w:
-              what3words: toggle.mopped.garages
+          characteristic:
+            description: Technical summary of the heater
+            type: string
+            default: 12V electric heater, 800W, automatic cutoff
+            const: 12V electric heater, 800W, automatic cutoff
+          status:
+            description: Current operational status
+            type: string
+            enum:
+              - on
+              - off
+              - error
+            default: off
+            const: off
           report:
-            type: object
-            properties:
-              value:
-                type: string
-                const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
+            type: string
+            const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
         sdfEvent:
           overheating:
-            description: "This event is emitted when a critical temperature is reached"
+            "$comment": Note that it is unclear how to properly model events or event history with the approach illustrated by this example.
+            maintenanceSchedule: "Next scheduled maintenance date"
             sdfOutputData:
-              type: number
-              const: 60
-              description: "TODO"
-sdfData:
-  location:
-    type: object
-    properties:
-      wgs84:
-        type: object
-        properties:
-          latitude:
-            type: number
-          longitude:
-            type: number
-          altitude:
-            type: number
-      postal:
-        type: object
-        properties:
-          city:
-            type: string
-          post-code:
-            type: string
-          country:
-            type: string
-      w3w:
-        type: object
-        properties:
-          what3words:
-            type: string
-            format: "..."
+              type: string
+              format: date-time
+              const: 2025-07-15T07:27:15+0000
 ~~~
 {:sdf #code-instance-syntactic-sugar-illustration
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 ### Alternative Instance Keys
 
