@@ -60,7 +60,6 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
-  I-D.lee-asdf-digital-twin-07: digital-twin-old
   I-D.lee-asdf-digital-twin-08: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
@@ -618,80 +617,74 @@ However, this concept is not capable of capturing actions and events.
 
 ~~~ sdf
 info:
-  title: An example model of a heater on a boat (that resembles a proofshot)
-  version: '2025-06-06'
+  title: "An example model of the heater #1 in the boat #007 (that resembles a proofshot)"
+  version: 2025-07-15
   copyright: Copyright 2025. All rights reserved.
 namespace:
   models: https://example.com/models
 defaultNamespace: models
 sdfThing:
-  boat:
+  boat007:
+    label: "Digital Twin of Boat #007"
+    description: A ship equipped with heating and navigation systems
+    sdfProperty:
+      identifier:
+        offDevice: true
+        type: string
+        const: urn:boat:007:heater:1
+      location:
+        offDevice: true
+        type: object
+        const:
+          wgs84:
+            latitude: 35.2988233791372
+            longitude: 129.25478376484912
+            altitude: 0.0
+          postal:
+            city: Ulsan
+            post-code: '44110'
+            country: South Korea
+          w3w:
+            what3words: toggle.mopped.garages
+      owner:
+        offDevice: true
+        type: string
+        default: ExamTech Ltd.
+        const: ExamTech Ltd.
+    sdfRequired: "#/sdfThing/boat007/sdfObject/heater1"
     sdfObject:
       heater:
+        label: Cabin Heater
+        description: Temperature control system for cabin heating
         sdfProperty:
-          isHeating:
-            description: The state of the heater on a boat; false for off and true
-              for on.
-            type: boolean
-            const: true
-          location:
-            offDevice: true
-            sdfRef: "#/sdfData/location"
-            const:
-              wgs84:
-                latitude: 35.2988233791372
-                longitude: 129.25478376484912
-                altitude: 0.0
-              postal:
-                city: Ulsan
-                post-code: '44110'
-                country: South Korea
-            w3w:
-              what3words: toggle.mopped.garages
+          characteristic:
+            description: Technical summary of the heater
+            type: string
+            default: 12V electric heater, 800W, automatic cutoff
+            const: 12V electric heater, 800W, automatic cutoff
+          status:
+            description: Current operational status
+            type: string
+            enum:
+              - on
+              - off
+              - error
+            default: off
+            const: off
           report:
-            type: object
-            properties:
-              value:
-                type: string
-                const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
+            type: string
+            const: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m. to 6 p.m.'
         sdfEvent:
           overheating:
-            description: "This event is emitted when a critical temperature is reached"
+            "$comment": Note that it is unclear how to properly model events or event history with the approach illustrated by this example.
+            maintenanceSchedule: "Next scheduled maintenance date"
             sdfOutputData:
-              type: number
-              const: 60
-              description: "TODO"
-sdfData:
-  location:
-    type: object
-    properties:
-      wgs84:
-        type: object
-        properties:
-          latitude:
-            type: number
-          longitude:
-            type: number
-          altitude:
-            type: number
-      postal:
-        type: object
-        properties:
-          city:
-            type: string
-          post-code:
-            type: string
-          country:
-            type: string
-      w3w:
-        type: object
-        properties:
-          what3words:
-            type: string
-            format: "..."
+              type: string
+              format: date-time
+              const: 2025-07-15T07:27:15+0000
 ~~~
 {:sdf #code-instance-syntactic-sugar-illustration
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 ### Alternative Instance Keys
 
@@ -699,44 +692,47 @@ Below you can see an alternative instance modelling approach with IDs as (part o
 
 ~~~ sdf
 info:
-  title: 'An example of the heater #1 in the boat #007'
-  version: '2025-04-08'
+  title: 'A proofshot example for heater #1 on boat #007'
+  version: '2025-07-15'
   copyright: Copyright 2025. All rights reserved.
+  proofshotId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
 namespace:
   models: https://example.com/models
   boats: https://example.com/boats
 defaultNamespace: boats
 sdfInstance:
-  "models:#/sdfThing/boat/007":
+  models:#/sdfThing/boat/007:
+    sdfInstanceOf: models:#/sdfThing/boat
     heater: models:#/sdfThing/boat/sdfObject/heater/001
-  "models:#/sdfThing/boat/sdfObject/heater/001":
     "$context":
       scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    isHeating: true
+    identifier: urn:boat:007:heater:1
     location:
       wgs84:
         latitude: 35.2988233791372
         longitude: 129.25478376484912
-        altitude: 0.0
+        altitude: 0
       postal:
         city: Ulsan
         post-code: '44110'
         country: South Korea
       w3w:
         what3words: toggle.mopped.garages
-    report:
-      value: 'On February 24, 2025, the boat #007''s heater #1 was on from 9 a.m.
-        to 6 p.m.'
+    owner: ExamTech Ltd.
+  models:#/sdfThing/boat/sdfObject/heater/001:
+    characteristic: 12V electric heater, 800W, automatic cutoff
+    status: error
+    report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
+      a.m. to 6 p.m.'
     sdfEvent:
-      "$comment": "TODO: Discuss how to specify how many events in the history should be displayed -- could this be done via a constructor?"
-      overheating:
-        - outputValue: 60.0
-          timestamp: "2025-04-10T08:25:43.511Z"
-        - outputValue: 65.3
-          timestamp: "2025-04-10T10:25:43.511Z"
+      maintenanceSchedule:
+      - outputValue: '2025-04-10'
+        timestamp: '2024-04-10T02:00:00Z'
+      - outputValue: '2026-04-10'
+        timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {:sdf #code-off-device-instance-alternative
-title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-07]"}
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
 {::include-all lists.md}
 
