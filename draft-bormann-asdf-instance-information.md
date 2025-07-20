@@ -507,7 +507,6 @@ sdfObject:
         unit:
           "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
           type: string
-          # target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
     sdfAction:
       construct:
         sdfInputData:
@@ -515,6 +514,7 @@ sdfObject:
           type: object
           properties:
             temperatureUnit:
+              type: string
               # target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
             ipAddress:
               "$comment": How can we express that this is context information?
