@@ -14,7 +14,7 @@ else
 endif
 endif
 
-sourcecode: draft-bormann-asdf-sdf-mapping.xml
+sourcecode: draft-bormann-asdf-instance-information.xml
 	kramdown-rfc-extract-sourcecode -tfiles $^
 
 sdfcheck: sourcecode
