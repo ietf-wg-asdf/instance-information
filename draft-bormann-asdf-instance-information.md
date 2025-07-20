@@ -488,7 +488,7 @@ Here, the constructor is modeled as an `sdfAction` that contains the same set of
 
 While this approach has advantages – we do not need to introduce new keywords to achieve a similar functionality and can simply use a plain JSON object as the construction message – a few things in this example are still unclear, especially when it comes to the mapping of constructor parameters to target affordances in the model and the designation of parameters as context information.
 Lastly, it is currently unclear what kind of schema information should be provided for the action's `sdfOutputData`.
-As a return value, a pointer to the instantiated device or the models describing it could make sense.
+As a return value, a pointer to the instantiated device and/or the models describing it could make sense.
 
 ~~~ sdf
 info:
