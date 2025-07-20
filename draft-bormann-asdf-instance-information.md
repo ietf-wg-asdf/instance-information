@@ -509,13 +509,15 @@ sdfObject:
           type: string
     sdfAction:
       construct:
+        targetMap:
+          - source: "#/sdfObject/temperatureSensor/sdfAction/construct/sdfInputData/properties/temperatureUnit"
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
         sdfInputData:
           "$comment": "DISCUSS: How can we establish a connection between constructor parameters and target properties?"
           type: object
           properties:
             temperatureUnit:
               type: string
-              # target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
             ipAddress:
               "$comment": How can we express that this is context information?
               # isContextInformation: true
