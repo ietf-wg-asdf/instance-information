@@ -659,7 +659,7 @@ However, this concept is not capable of capturing actions and events.
 ~~~ sdf
 info:
   title: "An example model of the heater #1 in the boat #007 (that resembles a proofshot)"
-  version: 2025-07-15
+  version: '2025-07-15'
   copyright: Copyright 2025. All rights reserved.
 namespace:
   models: https://example.com/models
@@ -722,7 +722,7 @@ sdfThing:
             sdfOutputData:
               type: string
               format: date-time
-              const: 2025-07-15T07:27:15+0000
+              const: '2025-07-15T07:27:15+0000'
 ~~~
 {:sdf #code-instance-syntactic-sugar-illustration
 title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
