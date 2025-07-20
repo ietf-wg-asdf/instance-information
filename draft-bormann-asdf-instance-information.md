@@ -520,7 +520,7 @@ sdfObject:
               type: string
             ipAddress:
               "$comment": How can we express that this is context information?
-              # isContextInformation: true
+              isContextInformation: true
           required:
             - temperatureUnit
         sdfOutputData:
