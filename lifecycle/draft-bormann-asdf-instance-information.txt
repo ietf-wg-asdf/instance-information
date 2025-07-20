@@ -604,7 +604,7 @@ Table of Contents
    designation of parameters as context information.  Lastly, it is
    currently unclear what kind of schema information should be provided
    for the action's sdfOutputData.  As a return value, a pointer to the
-   instantiated device or the models describing it could make sense.
+   instantiated device and/or the models describing it could make sense.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
