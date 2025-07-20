@@ -482,11 +482,52 @@ sdfObject:
 {:sdf #code-sdf-constructors
 title="Example for SDF model with constructors"}
 
-The alternative approach is shown in TODO.
+The alternative approach is shown in {{code-sdf-constructor-action}}.
 Here, the constructor is modeled as an `sdfAction` that contains the same set of parameters in its `sdfInputData`.
 
-(Add example here and discuss more pros and cons of the two formats.)
+While this approach has advantages – we do not need to introduce new keywords to achieve a similar functionality and can simply use a plain JSON object as the construction message – a few things in this example are still unclear, especially when it comes to the mapping of constructor parameters to target affordances in the model and the designation of parameters as context information.
+Lastly, it is currently unclear what kind of schema information should be provided for the action's `sdfOutputData`.
+As a return value, a pointer to the instantiated device and/or the models describing it could make sense.
 
+~~~ sdf
+info:
+  title: Example document for SDF with actions as constructors for instantiation
+  version: '2019-04-24'
+  copyright: Copyright 2019 Example Corp. All rights reserved.
+  license: https://example.com/license
+namespace:
+  cap: https://example.com/capability/cap
+defaultNamespace: cap
+sdfObject:
+  temperatureSensor:
+    sdfProperty:
+      temperature:
+        description: Temperature value measure by this Thing's temperature sensor.
+        type: number
+        unit:
+          "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
+          type: string
+    sdfAction:
+      construct:
+        sdfInputData:
+          "$comment": "DISCUSS: How can we establish a connection between constructor parameters and target properties?"
+          type: object
+          properties:
+            temperatureUnit:
+              type: string
+              target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+            ipAddress:
+              "$comment": How can we express that this is context information?
+              isContextInformation: true
+          required:
+            - temperatureUnit
+        sdfOutputData:
+          type: object
+          properties:
+            "$comment": "DISCUSS: What kind of schema information should we provide here?"
+~~~
+{:sdf #code-sdf-constructor-action
+title="Example for SDF model with constructors"}
 
 #### Example for an SDF construction message
 
