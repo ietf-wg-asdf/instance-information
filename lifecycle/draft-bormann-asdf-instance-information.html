@@ -1818,21 +1818,15 @@ a constructor at all? This question might indicate that we need \
       },
       "sdfAction": {
         "construct": {
-          "targetMap": [
-            {
-              "source": "#/sdfObject/temperatureSensor/sdfAction/\
-                  construct/sdfInputData/properties/temperatureUnit",
-              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                    temperature/unit"
-            }
-          ],
           "sdfInputData": {
             "$comment": "DISCUSS: How can we establish a connection \
               between constructor parameters and target properties?",
             "type": "object",
             "properties": {
               "temperatureUnit": {
-                "type": "string"
+                "type": "string",
+                "target": "#/sdfObject/temperatureSensor/sdfProperty\
+                                                   /temperature/unit"
               },
               "ipAddress": {
                 "$comment": "How can we express that this is \
