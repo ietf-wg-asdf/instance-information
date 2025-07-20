@@ -1951,7 +1951,7 @@ device.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-8">A potential example for the use of proofshot deltas is shown in <a href="#code-sdf-proofshot-delta" class="auto internal xref">Figure 8</a>.
 Here, the proofshot delta refers to the previous example in <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> via its <code>proofshotId</code>, which is included in the <code>previousProofshot</code> quality.
 Compared to the previous proofshot, only the status property of the boat's heater has changed from <code>error</code> to <code>operational</code>.
-Via an algorithm such as JSON Merge Patch <span>[<a href="#RFC7386" class="cite xref">RFC7386</a>]</span>, the actual proofshot can be resolved by applying the delta to the previous version.<a href="#section-2.1.4-8" class="pilcrow">¶</a></p>
+Via an algorithm such as JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span>, the actual proofshot can be resolved by applying the delta to the previous version.<a href="#section-2.1.4-8" class="pilcrow">¶</a></p>
 <p id="section-2.1.4-9">In future versions of this document, we will evaluate whether JSON Merge Patch is sufficient to fulfill the requirements for the resolution algorithm which have to formulated and refined themselves.<a href="#section-2.1.4-9" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-proofsho"></span><div id="code-sdf-proofshot-delta">
 <figure id="figure-8">
@@ -2102,9 +2102,9 @@ Multiple models may apply to the same device (including but not only revisions o
         <dd>
 <span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC7386">[RFC7386]</dt>
+<dt id="RFC7396">[RFC7396]</dt>
         <dd>
-<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Snell</span>, <span class="refTitle">"JSON Merge Patch"</span>, <span class="seriesInfo">RFC 7386</span>, <span class="seriesInfo">DOI 10.17487/RFC7386</span>, <time datetime="2014-10" class="refDate">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7386">https://www.rfc-editor.org/rfc/rfc7386</a>&gt;</span>. </dd>
+<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Snell</span>, <span class="refTitle">"JSON Merge Patch"</span>, <span class="seriesInfo">RFC 7396</span>, <span class="seriesInfo">DOI 10.17487/RFC7396</span>, <time datetime="2014-10" class="refDate">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7396">https://www.rfc-editor.org/rfc/rfc7396</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9039">[RFC9039]</dt>
         <dd>
