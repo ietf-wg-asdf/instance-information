@@ -514,18 +514,12 @@ sdfObject:
           "$comment": "DISCUSS: How can we establish a connection between constructor parameters and target properties?"
           type: object
           properties:
-            temperature:
-              required: true
-              # target: "#/sdfObject/temperatureSensor/sdfProperty/temperature"
             temperatureUnit:
-              required: true
               # target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
             ipAddress:
               "$comment": How can we express that this is context information?
-              required: false
               # isContextInformation: true
           required:
-            - temperature
             - temperatureUnit
         sdfOutputData:
           type: object
