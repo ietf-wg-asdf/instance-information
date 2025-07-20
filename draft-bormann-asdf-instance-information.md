@@ -53,7 +53,7 @@ informative:
     seriesinfo:
       Ph.D.: Dissertation, University of California, Irvine
   RFC6690: link-format
-  RFC7386: merge-patch
+  RFC7396: merge-patch
   # I-D.laari-asdf-relations: sdfrel
   # I-D.bormann-asdf-sdftype-link: sdflink
   I-D.bormann-asdf-sdf-mapping: mapping
