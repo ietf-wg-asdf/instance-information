@@ -79,7 +79,7 @@ Models to describe them.
 
 [^status]
 
-[^status]: The present revision –03 is intended as input for IETF 123.
+[^status]: The present revision –05 is intended as input for IETF 123, with a few observations from the Hackathon addressed and this status paragraph updated.
 
 
 --- middle
