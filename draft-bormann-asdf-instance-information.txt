@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 21 January 2026                              Universität Bremen
-                                                            20 July 2025
+Expires: 22 January 2026                              Universität Bremen
+                                                            21 July 2025
 
 
                       Instance Information for SDF
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2026.
+   This Internet-Draft will expire on 22 January 2026.
 
 Copyright Notice
 
@@ -521,14 +521,13 @@ Table of Contents
 
    This section contains examples for both approaches discussed above:
    Figure 4 introduces an sdfConstructor keyword which allows for
-   defining both mandatory (in this example: temperature and
-   temperatureUnit) and optional constructor parameters (in this
-   example, the ipAddress is optional).  The example shows that the
-   names of constructor parameters may deviate from the quality names in
-   the model (temperatureUnit vs unit) as the target quality is
-   specified via a JSON pointer.  Additionally, this constructor example
-   explicitly labels the ipAddress as information that belongs to the
-   $context of the proofshot.
+   defining both mandatory (in this example: temperatureUnit) and
+   optional constructor parameters (in this example: ipAddress).  The
+   example shows that the names of constructor parameters may deviate
+   from the quality names in the model (temperatureUnit vs unit) as the
+   target quality is specified via a JSON pointer.  Additionally, this
+   constructor example explicitly labels the ipAddress as information
+   that belongs to the $context of the proofshot.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -556,9 +555,7 @@ Table of Contents
                  "$comment": "Should schema information be settable \
    via a constructor at all? This question might indicate that we need \
                                        different kinds of constructors",
-                 "type": "string",
-                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                       temperature/unit"
+                 "type": "string"
                }
              }
            }
@@ -566,11 +563,6 @@ Table of Contents
          "sdfConstructor": {
            "construct": {
              "parameters": {
-               "temperature": {
-                 "required": true,
-                 "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                            temperature"
-               },
                "temperatureUnit": {
                  "required": true,
                  "target": "#/sdfObject/temperatureSensor/sdfProperty/\
@@ -697,7 +689,6 @@ Table of Contents
        "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                              sdfConstructors/construct",
        "arguments": {
-         "temperature": 42,
          "temperatureUnit": "Cel",
          "ipAddress": "192.0.2.42"
        }
@@ -864,9 +855,9 @@ Table of Contents
    [I-D.bormann-asdf-sdf-mapping]
               Bormann, C. and J. Romann, "Semantic Definition Format
               (SDF): Mapping files", Work in Progress, Internet-Draft,
-              draft-bormann-asdf-sdf-mapping-06, 6 July 2025,
+              draft-bormann-asdf-sdf-mapping-07, 20 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-bormann-asdf-
-              sdf-mapping-06>.
+              sdf-mapping-07>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,

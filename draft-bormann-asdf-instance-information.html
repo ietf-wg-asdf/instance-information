@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 21 January 2026</td>
+<td class="center">Expires 22 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-20" class="published">20 July 2025</time>
+<time datetime="2025-07-21" class="published">21 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-21">21 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-01-22">22 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1709,7 +1709,7 @@ which is pretty much a constructor.)<a href="#section-2.1.3-4" class="pilcrow">�
 <a href="#section-2.1.3.1" class="section-number selfRef">2.1.3.1. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
             </h5>
 <p id="section-2.1.3.1-1">This section contains examples for both approaches discussed above:
-<a href="#code-sdf-constructors" class="auto internal xref">Figure 4</a> introduces an <code>sdfConstructor</code> keyword which allows for defining both mandatory (in this example: <code>temperature</code> and <code>temperatureUnit</code>) and optional constructor parameters (in this example, the <code>ipAddress</code> is optional).
+<a href="#code-sdf-constructors" class="auto internal xref">Figure 4</a> introduces an <code>sdfConstructor</code> keyword which allows for defining both mandatory (in this example: <code>temperatureUnit</code>) and optional constructor parameters (in this example: <code>ipAddress</code>).
 The example shows that the names of constructor parameters may deviate from the quality names in the model (<code>temperatureUnit</code> vs <code>unit</code>) as the target quality is specified via a JSON pointer.
 Additionally, this constructor example explicitly labels the <code>ipAddress</code> as information that belongs to the <code>$context</code> of the proofshot.<a href="#section-2.1.3.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructors">
@@ -1741,9 +1741,7 @@ Additionally, this constructor example explicitly labels the <code>ipAddress</co
               "$comment": "Should schema information be settable \
 via a constructor at all? This question might indicate that we need \
                                     different kinds of constructors",
-              "type": "string",
-              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                    temperature/unit"
+              "type": "string"
             }
           }
         }
@@ -1751,11 +1749,6 @@ via a constructor at all? This question might indicate that we need \
       "sdfConstructor": {
         "construct": {
           "parameters": {
-            "temperature": {
-              "required": true,
-              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                         temperature"
-            },
             "temperatureUnit": {
               "required": true,
               "target": "#/sdfObject/temperatureSensor/sdfProperty/\
@@ -1887,7 +1880,6 @@ TODO: Needs more discussion how to model this kind of information.<a href="#sect
     "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
                                           sdfConstructors/construct",
     "arguments": {
-      "temperature": 42,
       "temperatureUnit": "Cel",
       "ipAddress": "192.0.2.42"
     }
@@ -2080,7 +2072,7 @@ Multiple models may apply to the same device (including but not only revisions o
 <dd class="break"></dd>
 <dt id="I-D.bormann-asdf-sdf-mapping">[I-D.bormann-asdf-sdf-mapping]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-06</span>, <time datetime="2025-07-06" class="refDate">6 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-06">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-07</span>, <time datetime="2025-07-20" class="refDate">20 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
         <dd>
