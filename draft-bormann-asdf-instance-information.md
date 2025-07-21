@@ -440,7 +440,7 @@ which is pretty much a constructor.)
 #### Examples for SDF Constructors
 
 This section contains examples for both approaches discussed above:
-{{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperature` and `temperatureUnit`) and optional constructor parameters (in this example, the `ipAddress` is optional).
+{{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperatureUnit`) and optional constructor parameters (in this example: `ipAddress`).
 The example shows that the names of constructor parameters may deviate from the quality names in the model (`temperatureUnit` vs `unit`) as the target quality is specified via a JSON pointer.
 Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `$context` of the proofshot.
 
@@ -464,13 +464,9 @@ sdfObject:
           unit:
             "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
             type: string
-            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
     sdfConstructor:
       construct:
         parameters:
-          temperature:
-            required: true
-            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature"
           temperatureUnit:
             required: true
             target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
@@ -548,7 +544,6 @@ defaultNamespace: cap
 sdfConstruction:
   sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
   arguments:
-    temperature: 42
     temperatureUnit: Cel
     ipAddress: "192.0.2.42"
 ~~~
@@ -569,6 +564,7 @@ A construction message may be a delta, or it may have parameters that
 algorithmically influence the elements of state that one would find in
 a proofshot.
 
+<!-- DISCUSS: Is a construction message the right way to create a proofshot delta? -->
 ~~~ sdf
 info:
   title: Example SDF delta construction message
