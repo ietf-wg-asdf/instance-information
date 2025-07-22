@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-20T02:22:35.830924+00:00",
+  "timestamp": "2025-07-22T02:07:43.195306+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -60,9 +60,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "In this issue, we can list the requirements we need to fulfill to cover NIPC via the instance information document. The following list is just an initial starting point that will be extended over the course of future discussions.\n\n\n- [ ] Include an `instanceId` in the events contained in an event history?\n- [ ] Include an `instanceId` action states?\n- [ ] Clarify where to put context information such as the SCIM ID (currently, this information is placed in the `$context`)\n- [ ] ...\n\nIt would also be great if @bbrinckman could give us direct feedback on what the proofshot format needs to work with NIPC and what potential requirements are. ",
+      "body": "In this issue, we can list the requirements we need to fulfill to cover NIPC via the instance information document. The following list is just an initial starting point that will be extended over the course of future discussions.\n\n\n- [ ] Include an `instanceId` in the events contained in an event history?\n- [ ] Include an `instanceId` action states?\n- [ ] Clarify where to put context information such as the SCIM ID (currently, this information is placed in the `$context`)\n- [ ] Discuss and clarify how ~~`protocolMap`~~ `sdfProtocolMap` fits into the instance information concept\n\nIt would also be great if @bbrinckman could give us direct feedback on what the proofshot format needs to work with NIPC and what potential requirements are. ",
       "createdAt": "2025-07-13T17:51:53Z",
-      "updatedAt": "2025-07-13T17:51:53Z",
+      "updatedAt": "2025-07-20T09:38:00Z",
       "closedAt": null,
       "comments": []
     }
@@ -445,24 +445,26 @@
       "id": "PR_kwDOOUh3t86e79fc",
       "title": "Start specifying an action-based constructor approach",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "As discussed yesterday, this PR provides an initial example for an alternative constructor approach where `sdfAction`s are reused instead of introducing a new keyword.\r\n\r\nThere are still a number of aspects that require discussion here, but the PR should be a first step toward making a more informed discussion.",
       "createdAt": "2025-07-15T08:15:57Z",
-      "updatedAt": "2025-07-19T18:53:57Z",
+      "updatedAt": "2025-07-20T12:08:41Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "19fe889dd0a27d3f310af1e58b0cdd782cfb3dc7",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "lifecycle",
-      "headRefOid": "f2bc066b9c1b30e95018a3f55b637bd484cce5da",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ea1358193e1cdf07fb6ed114ac1c8e8dcd6f9f53",
+      "closedAt": "2025-07-20T12:08:40Z",
+      "mergedAt": "2025-07-20T12:08:40Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "c085c048414443e7b203b3747a5741119e79f54c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -479,9 +481,49 @@
           "comments": [
             {
               "originalPosition": 31,
-              "body": "- Move `target` under `construct`\r\n  - Link to question: What model is valid here?\r\n- Remove `temperature` and required\r\n- Use as basis for further discussion",
+              "body": "- [x] Move `target` under `construct`\r\n  - Link to question: What model is valid here?\r\n- [x] Remove `temperature` and required\r\n- [ ] Use as basis for further discussion",
               "createdAt": "2025-07-19T18:53:56Z",
-              "updatedAt": "2025-07-19T18:53:57Z"
+              "updatedAt": "2025-07-20T07:49:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t86089_8",
+          "commit": {
+            "abbreviatedOid": "ddd36a1"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-20T07:47:33Z",
+          "updatedAt": "2025-07-20T07:47:33Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "One thing I noticed here is that the example is now rather a factory for models instead of documents related to instances (with the `ipAdress` being an exception as a piece of context information).\r\n\r\nI guess the question would be what kinds of output we produce from the constructor \u2013 would it be an extended model and a proofshot? Or rather a mapping file and a proofshot?",
+              "createdAt": "2025-07-20T07:47:33Z",
+              "updatedAt": "2025-07-20T07:48:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t8609Zzy",
+          "commit": {
+            "abbreviatedOid": "fb6c43b"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-20T12:07:52Z",
+          "updatedAt": "2025-07-20T12:07:52Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nLastly, it is currently unclear what kind of schema information should be provided for the action's `sdfOutputData`.\r\nAs a return value, a pointer to the instantiated device and/or the models describing it could make sense.\r\n```",
+              "createdAt": "2025-07-20T12:07:52Z",
+              "updatedAt": "2025-07-20T12:07:52Z"
             }
           ]
         }
@@ -492,24 +534,54 @@
       "id": "PR_kwDOOUh3t86fshiO",
       "title": "Add rules for CDDL validation to Makefile",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR takes over the code for validating the SDF models within the draft from the SDF Mapping repository.",
       "createdAt": "2025-07-19T18:46:05Z",
-      "updatedAt": "2025-07-19T18:46:05Z",
+      "updatedAt": "2025-07-20T10:38:50Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "6f14634c7c1ad6819411243661dbd43ac52e5a78",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "sdf-check",
-      "headRefOid": "a1af5472cc4cf2645ac58104d49cff88569ad415",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "6d7a3d2a0b0721834254765781dec2e540dba422",
+      "closedAt": "2025-07-20T10:38:50Z",
+      "mergedAt": "2025-07-20T10:38:50Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "38787e2bdcd99e8bb58da293eec5d721c7e9dd66"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOOUh3t86fu8ra",
+      "title": "Remove temperature and a redundant required indication from proofshots",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/15",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Looking at the diff of the two latest draft versions, I noticed a couple of small mistakes which I wanted to fix with this PR. I also added a \"DISCUSS\" comment to the example for the proofshot delta constructor, which might not be that suitable as an example after all.",
+      "createdAt": "2025-07-20T12:42:22Z",
+      "updatedAt": "2025-07-21T12:27:19Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "17b6b9906b036cdc5b84c0555663849f8bf005da",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "fix-temperature",
+      "headRefOid": "bfe54c799c75878e5117454800e564629140db15",
+      "closedAt": "2025-07-21T12:27:18Z",
+      "mergedAt": "2025-07-21T12:27:18Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "ad953912c92cb52f46c28619fbcfe505781dbdf8"
+      },
       "comments": [],
       "reviews": []
     }
