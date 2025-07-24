@@ -315,7 +315,6 @@ Table of Contents
        sdfInstanceOf: models:#/sdfThing/boat
        sdfContext
          scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-       sdfProperty:
          identifier: urn:boat:007:heater:1
          location:
            wgs84:
@@ -666,10 +665,6 @@ Table of Contents
    Figure 6 shows a potential SDF construction message that allows for
    the creation of a proofshot from a constructor that is contained
    within an SDF model.
-
-   Note that the ipAddress can be considered context information or an
-   off-device property.  TODO: Needs more discussion how to model this
-   kind of information.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
