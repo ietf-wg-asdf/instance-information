@@ -300,7 +300,6 @@ sdfInstance:
     sdfInstanceOf: models:#/sdfThing/boat
     sdfContext
       scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    sdfProperty:
       identifier: urn:boat:007:heater:1
       location:
         wgs84:
