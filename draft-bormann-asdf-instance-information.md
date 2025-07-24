@@ -200,6 +200,10 @@ Non-affordance:
   interactions with other Instances than the Thing (called "offDevice"
   now), this term is now considered confusing as it would often just
   be an affordance of another Instance than the Thing.
+  In this draft version, we are trying to use a new keyword called
+  `sdfContext` that is supposed to be slightly more accurate while also
+  including the new `$context` concept that was introduced in previous
+  draft versions.
 
 # Instance Information and SDF
 
@@ -238,7 +242,7 @@ namespace:
   boats: https://example.com/boats
 defaultNamespace: boats
 sdfInstance:
-  "$context":
+  sdfContext:
     "$comment": Potential contents for the SDF context
     deviceName: urn:dev:org:30810-boat007
     deviceEui64Address: 50:32:5F:FF:FE:E7:67:28
@@ -265,8 +269,7 @@ in the proofshot, with `sdfObject` and `sdfThing` being replaced by `sdfInstance
 
 While earlier approaches avoided the additional level of nesting by omitting the
 affordance quality names (i.e., `sdfProperty`, `sdfAction`, `sdfEvent`),
-including them explicitly avoids problems with namespace clashes and
-allows for a cleaner integration of meta data (via the `$context` keyword).
+including them explicitly avoids problems with namespace clashes.
 
 As in any instance message, information from the model is not repeated but
 referenced via a pointer into the model tree (`sdfInstanceOf`); the
@@ -274,9 +277,13 @@ namespace needed for this is set up in the usual `namespace` section that we
 also have in model files.
 
 Note that in this example, the proofshot also contains values for the implicit
-(`offDevice`) properties that are static (e.g., the physical location assigned
+("offDevice") properties that are static (e.g., the physical location assigned
 to the instance) but are still part of the instance's proofshot as its location
 is fixed -- this boat apparently never leaves the harbor.
+
+Since we are now using the `sdfContext` keyword from CITATION_NEEDED instead of
+`offDevice` for describing this kind of information, we have replaced the previously
+introduced `$context` keyword accodingly.
 
 ~~~ sdf
 info:
@@ -291,9 +298,7 @@ defaultNamespace: boats
 sdfInstance:
   boat007:
     sdfInstanceOf: models:#/sdfThing/boat
-    "$comment": Should the context be modeled via an additional quality? Or should
-      it rather become another kind of property?
-    "$context": # DISCUSS: We could also remove the leading "$" of the context
+    sdfContext
       scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
     sdfProperty:
       identifier: urn:boat:007:heater:1
@@ -442,7 +447,7 @@ which is pretty much a constructor.)
 This section contains examples for both approaches discussed above:
 {{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperatureUnit`) and optional constructor parameters (in this example: `ipAddress`).
 The example shows that the names of constructor parameters may deviate from the quality names in the model (`temperatureUnit` vs `unit`) as the target quality is specified via a JSON pointer.
-Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `$context` of the proofshot.
+Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `sdfContext` of the proofshot.
 
 ~~~ sdf
 info:
@@ -456,6 +461,10 @@ namespace:
 defaultNamespace: cap
 sdfObject:
   temperatureSensor:
+    sdfContext:
+      ipAddress:
+        type: string
+        format: TODO
     sdfProperty:
       temperature:
         description: Temperature value measure by this Thing's temperature sensor.
@@ -471,9 +480,8 @@ sdfObject:
             required: true
             target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
           ipAddress:
-            "$comment": "Just trying some things out here. Should this parameter target the context or rather an (offDevice?) property?"
             required: false
-            isContextInformation: true
+            target: "#/sdfObject/temperatureSensor/sdfContext/ipAdress"
 ~~~
 {:sdf #code-sdf-constructors
 title="Example for SDF model with constructors"}
@@ -496,6 +504,10 @@ namespace:
 defaultNamespace: cap
 sdfObject:
   temperatureSensor:
+    sdfContext:
+      ipAddress:
+        type: string
+        format: TODO
     sdfProperty:
       temperature:
         description: Temperature value measure by this Thing's temperature sensor.
@@ -513,8 +525,8 @@ sdfObject:
               type: string
               target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
             ipAddress:
-              "$comment": How can we express that this is context information?
-              isContextInformation: true
+              type: string
+              target: "#/sdfObject/temperatureSensor/sdfContext/ipAddress"
           required:
             - temperatureUnit
         sdfOutputData:
@@ -664,13 +676,13 @@ sdfThing:
   boat007:
     label: "Digital Twin of Boat #007"
     description: A ship equipped with heating and navigation systems
-    sdfProperty:
+    sdfContext:
+      scimObjectId:
+        type: string
       identifier:
-        offDevice: true
         type: string
         const: urn:boat:007:heater:1
       location:
-        offDevice: true
         type: object
         const:
           wgs84:
@@ -684,7 +696,6 @@ sdfThing:
           w3w:
             what3words: toggle.mopped.garages
       owner:
-        offDevice: true
         type: string
         default: ExamTech Ltd.
         const: ExamTech Ltd.
@@ -741,8 +752,7 @@ sdfInstance:
   models:#/sdfThing/boat/007:
     sdfInstanceOf: models:#/sdfThing/boat
     heater: models:#/sdfThing/boat/sdfObject/heater/001
-    "$context":
-      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+    scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
     identifier: urn:boat:007:heater:1
     location:
       wgs84:
