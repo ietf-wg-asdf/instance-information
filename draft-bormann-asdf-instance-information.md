@@ -542,8 +542,6 @@ title="Example for SDF model with constructors"}
 allows for the creation of a proofshot from a constructor that is contained within
 an SDF model.
 
-Note that the `ipAddress` can be considered context information or an off-device property.
-TODO: Needs more discussion how to model this kind of information.
 
 ~~~ sdf
 info:
