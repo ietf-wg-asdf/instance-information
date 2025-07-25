@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 25 January 2026</td>
+<td class="center">Expires 26 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1071,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-24" class="published">24 July 2025</time>
+<time datetime="2025-07-25" class="published">25 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-25">25 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-01-26">26 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1477,53 +1477,71 @@ is fixed -- this boat apparently never leaves the harbor.<a href="#section-2.1.2
 introduced <code>$context</code> keyword accodingly.<a href="#section-2.1.2-7" class="pilcrow">¶</a></p>
 <span id="name-sdf-proofshot-proposal-for-"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="lang-sdf sourcecode" id="section-2.1.2-8.1">
+            <div class="breakable lang-sdf sourcecode" id="section-2.1.2-8.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
-info:
-  title: 'A proofshot example for heater #1 on boat #007'
-  version: '2025-04-08'
-  copyright: Copyright 2025. All rights reserved.
-  proofshotId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
-namespace:
-  models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
-sdfInstance:
-  boat007:
-    sdfInstanceOf: models:#/sdfThing/boat
-    sdfContext
-      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-      identifier: urn:boat:007:heater:1
-      location:
-        wgs84:
-          latitude: 35.2988233791372
-          longitude: 129.25478376484912
-          altitude: 0
-        postal:
-          city: Ulsan
-          post-code: '44110'
-          country: South Korea
-        w3w:
-          what3words: toggle.mopped.garages
-      owner: ExamTech Ltd.
-    sdfInstance:
-      heater:
-        sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
-        sdfProperty:
-          characteristic: 12V electric heater, 800W, automatic cutoff
-          status: error
-          report: 'On February 24, 2025, the boat #007''s heater #1 \
-                                                        was on from 9
-            a.m. to 6 p.m.'
-        sdfEvent:
-          # Not a great event example IMHO... but this currently \
-                                              models an event history
-          maintenanceSchedule:
-          - outputValue: '2025-04-10'
-            timestamp: '2024-04-10T02:00:00Z'
-          - outputValue: '2026-04-10'
-            timestamp: '2025-04-10T02:00:00Z'
+{
+  "info": {
+    "title": "A proofshot example for heater #1 on boat #007",
+    "version": "2025-04-08",
+    "copyright": "Copyright 2025. All rights reserved.",
+    "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "boat007": {
+      "sdfInstanceOf": "models:#/sdfThing/boat",
+      "sdfContext": {
+        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763",
+        "identifier": "urn:boat:007:heater:1",
+        "location": {
+          "wgs84": {
+            "latitude": 35.2988233791372,
+            "longitude": 129.25478376484912,
+            "altitude": 0
+          },
+          "postal": {
+            "city": "Ulsan",
+            "post-code": "44110",
+            "country": "South Korea"
+          },
+          "w3w": {
+            "what3words": "toggle.mopped.garages"
+          }
+        },
+        "owner": "ExamTech Ltd."
+      },
+      "sdfInstance": {
+        "heater": {
+          "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
+          "sdfProperty": {
+            "characteristic": "12V electric heater, 800W, automatic \
+                                                             cutoff",
+            "status": "error",
+            "report": "On February 24, 2025, the boat #007's heater \
+                                     #1 was on from 9 a.m. to 6 p.m."
+          },
+          "sdfEvent": {
+            "maintenanceSchedule": [
+              {
+                "outputValue": "2025-04-10",
+                "timestamp": "2024-04-10T02:00:00Z"
+              },
+              {
+                "outputValue": "2026-04-10",
+                "timestamp": "2025-04-10T02:00:00Z"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
