@@ -478,21 +478,24 @@ sdfObject:
       construct:
         sdfInputData:
           sdfRelation:
-            "$comment": Do we need to import the relation type from a namespace definition?
-            relType: constructor
-            target: '#/sdfObject/temperatureSensor'
+            constructor:
+              "$comment": Do we need to import the relation type from a namespace definition?
+              relType: constructor
+              target: '#/sdfObject/temperatureSensor'
           type: object
           properties:
             temperatureUnit:
               type: string
               sdfRelation:
-              relType: constructorParameter
-              target: '#/sdfObject/temperatureSensor/sdfProperty/temperature/unit'
+                parameter:
+                  relType: constructorParameter
+                  target: '#/sdfObject/temperatureSensor/sdfProperty/temperature/unit'
             ipAddress:
               type: string
               sdfRelation:
-                relType: constructorParameter
-                target: '#/sdfObject/temperatureSensor/sdfContext/ipAddress'
+                paramter:
+                  relType: constructorParameter
+                  target: '#/sdfObject/temperatureSensor/sdfContext/ipAddress'
           required:
             - temperatureUnit
         sdfOutputData:
