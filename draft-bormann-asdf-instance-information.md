@@ -738,6 +738,51 @@ sdfInstance:
 {:sdf #code-off-device-instance-alternative
 title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
 
+## New Keyword for SDF Constructors
+
+In previous revisions, we considered introducing a new keywords (`sdfConstructor`, `sdfParameter`) to describe
+constructors in SDF.
+However, as we have realized that the same information can be modelled using existing concepts and keywords (`sdfAction`, `sdfRelation`)
+we have decided to abandon that idea.
+This appendix section documents our previous approach.
+
+~~~ sdf
+info:
+  title: Example document for SDF (Semantic Definition Format) with constructors for
+    instantiation
+  version: '2019-04-24'
+  copyright: Copyright 2019 Example Corp. All rights reserved.
+  license: https://example.com/license
+namespace:
+  cap: https://example.com/capability/cap
+defaultNamespace: cap
+sdfObject:
+  temperatureSensor:
+    sdfContext:
+      ipAddress:
+        type: string
+        format: TODO
+    sdfProperty:
+      temperature:
+        description: Temperature value measure by this Thing's temperature sensor.
+        type: number
+        sdfParameter:
+          unit:
+            "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
+            type: string
+    sdfConstructor:
+      construct:
+        parameters:
+          temperatureUnit:
+            required: true
+            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+          ipAddress:
+            required: false
+            target: "#/sdfObject/temperatureSensor/sdfContext/ipAdress"
+~~~
+{:sdf #code-sdf-constructors
+title="Example for SDF model with constructors"}
+
 {::include-all lists.md}
 
 
