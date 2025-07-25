@@ -1230,6 +1230,9 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-new-keyword-for-sdf-constru" class="internal xref">New Keyword for SDF Constructors</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
@@ -2258,6 +2261,83 @@ model events or event history with the approach illustrated by this \
             </figcaption></figure>
 </div>
 </section>
+</div>
+</section>
+</div>
+<div id="new-keyword-for-sdf-constructors">
+<section id="appendix-A.2">
+        <h3 id="name-new-keyword-for-sdf-constru">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-new-keyword-for-sdf-constru" class="section-name selfRef">New Keyword for SDF Constructors</a>
+        </h3>
+<p id="appendix-A.2-1">In previous revisions, we considered introducing a new keywords (<code>sdfConstructor</code>, <code>sdfParameter</code>) to describe
+constructors in SDF.
+However, as we have realized that the same information can be modelled using existing concepts and keywords (<code>sdfAction</code>, <code>sdfRelation</code>)
+we have decided to abandon that idea.
+This appendix section documents our previous approach.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<span id="name-example-for-sdf-model-with-c"></span><div id="code-sdf-constructors">
+<figure id="figure-10">
+          <div class="breakable lang-sdf sourcecode" id="appendix-A.2-2.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "info": {
+    "title": "Example document for SDF (Semantic Definition Format) \
+                                with constructors for instantiation",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "temperatureSensor": {
+      "sdfContext": {
+        "ipAddress": {
+          "type": "string",
+          "format": "TODO"
+        }
+      },
+      "sdfProperty": {
+        "temperature": {
+          "description": "Temperature value measure by this Thing's \
+                                                temperature sensor.",
+          "type": "number",
+          "sdfParameter": {
+            "unit": {
+              "$comment": "Should schema information be settable \
+via a constructor at all? This question might indicate that we need \
+                                    different kinds of constructors",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "sdfConstructor": {
+        "construct": {
+          "parameters": {
+            "temperatureUnit": {
+              "required": true,
+              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
+                                                    temperature/unit"
+            },
+            "ipAddress": {
+              "required": false,
+              "target": "#/sdfObject/temperatureSensor/sdfContext/\
+                                                            ipAdress"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-example-for-sdf-model-with-c" class="selfRef">Example for SDF model with constructors</a>
+          </figcaption></figure>
 </div>
 </section>
 </div>
