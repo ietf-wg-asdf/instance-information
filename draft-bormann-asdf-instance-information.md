@@ -41,6 +41,7 @@ normative:
   I-D.ietf-asdf-sdf: sdf
   RFC8288: link
   STD97: http
+  I-D.laari-asdf-relations: sdfrel
 
 informative:
   REST:
@@ -54,7 +55,6 @@ informative:
       Ph.D.: Dissertation, University of California, Irvine
   RFC6690: link-format
   RFC7396: merge-patch
-  # I-D.laari-asdf-relations: sdfrel
   # I-D.bormann-asdf-sdftype-link: sdflink
   I-D.bormann-asdf-sdf-mapping: mapping
   # RFC9423: attr
@@ -429,62 +429,28 @@ an IP address); its processing might also generate construction output
 device).
 
 Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
-It is still up for discussion whether this concept justifies a new keyword or whether construction and other lifecycle management processes should be modeled as `sdfAction`s instead.
+Constructors are modeled via the `sdfAction` quality and are linked to definitions within the model via `sdfRelation`s {{-sdfrel}}.
+The "entry point" of the constructor is specified via the relation type `constructor`, while the constructor parameters are
+linked to the affordances they initialize via the `constructorParameter` relation type.
+<!-- TODO: This requires discussion. -->
+If a constructor is pointing to an `sdfThing`, it MUST define parameters for all the `sdfThing`s and `sdfObject`s it may
+contain as children.
 
-(Note that it is not quite clear what a destructor would be for a
+Note that the use of `sdfRelation` is a new addition in this revision and requires more discussion regarding the relation type and
+the way relations should be used in the constructor.
+
+(Also note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)
 
 #### Examples for SDF Constructors
 
-This section contains examples for both approaches discussed above:
-{{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperatureUnit`) and optional constructor parameters (in this example: `ipAddress`).
-The example shows that the names of constructor parameters may deviate from the quality names in the model (`temperatureUnit` vs `unit`) as the target quality is specified via a JSON pointer.
-Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `sdfContext` of the proofshot.
+{{code-sdf-constructor-action}} shows an example for an `sdfAction`-based constructor.
+Here, the constructor contains a set of parameters in its `sdfInputData`, one of which
+is an `sdfProperty` with the other one being an `sdfContext` definition.
 
-~~~ sdf
-info:
-  title: Example document for SDF (Semantic Definition Format) with constructors for
-    instantiation
-  version: '2019-04-24'
-  copyright: Copyright 2019 Example Corp. All rights reserved.
-  license: https://example.com/license
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfObject:
-  temperatureSensor:
-    sdfContext:
-      ipAddress:
-        type: string
-        format: TODO
-    sdfProperty:
-      temperature:
-        description: Temperature value measure by this Thing's temperature sensor.
-        type: number
-        sdfParameter:
-          unit:
-            "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
-            type: string
-    sdfConstructor:
-      construct:
-        parameters:
-          temperatureUnit:
-            required: true
-            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
-          ipAddress:
-            required: false
-            target: "#/sdfObject/temperatureSensor/sdfContext/ipAdress"
-~~~
-{:sdf #code-sdf-constructors
-title="Example for SDF model with constructors"}
-
-The alternative approach is shown in {{code-sdf-constructor-action}}.
-Here, the constructor is modeled as an `sdfAction` that contains the same set of parameters in its `sdfInputData`.
-
-While this approach has advantages – we do not need to introduce new keywords to achieve a similar functionality and can simply use a plain JSON object as the construction message – a few things in this example are still unclear, especially when it comes to the mapping of constructor parameters to target affordances in the model and the designation of parameters as context information.
-Lastly, it is currently unclear what kind of schema information should be provided for the action's `sdfOutputData`.
+It is currently still unclear what kind of schema information should be provided for the action's `sdfOutputData`.
 As a return value, a pointer to the instantiated device and/or the models describing it could make sense.
 
 ~~~ sdf
@@ -507,20 +473,26 @@ sdfObject:
         description: Temperature value measure by this Thing's temperature sensor.
         type: number
         unit:
-          "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
           type: string
     sdfAction:
       construct:
         sdfInputData:
-          "$comment": "DISCUSS: How can we establish a connection between constructor parameters and target properties?"
+          sdfRelation:
+            "$comment": Do we need to import the relation type from a namespace definition?
+            relType: constructor
+            target: '#/sdfObject/temperatureSensor'
           type: object
           properties:
             temperatureUnit:
               type: string
-              target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
+              sdfRelation:
+              relType: constructorParameter
+              target: '#/sdfObject/temperatureSensor/sdfProperty/temperature/unit'
             ipAddress:
               type: string
-              target: "#/sdfObject/temperatureSensor/sdfContext/ipAddress"
+              sdfRelation:
+                relType: constructorParameter
+                target: '#/sdfObject/temperatureSensor/sdfContext/ipAddress'
           required:
             - temperatureUnit
         sdfOutputData:
@@ -536,20 +508,13 @@ title="Example for SDF model with constructors"}
 {{code-sdf-construction-message}} shows a potential SDF construction message that
 allows for the creation of a proofshot from a constructor that is contained within
 an SDF model.
+Since the construction message follows the structure defined in `sdfInputData` above,
+it is a simple JSON object without additional metadata.
 
 
-~~~ sdf
-info:
-  title: Example SDF construction message
-  "$comment": 'TODO: What kind of metadata do we need here?'
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfConstruction:
-  sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  arguments:
-    temperatureUnit: Cel
-    ipAddress: "192.0.2.42"
+~~~ yaml2json
+temperatureUnit: Cel
+ipAddress: "192.0.0.42"
 ~~~
 {:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
