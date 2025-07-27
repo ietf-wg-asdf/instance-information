@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-22T02:07:43.195306+00:00",
+  "timestamp": "2025-07-27T02:23:31.776095+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -63,6 +63,38 @@
       "body": "In this issue, we can list the requirements we need to fulfill to cover NIPC via the instance information document. The following list is just an initial starting point that will be extended over the course of future discussions.\n\n\n- [ ] Include an `instanceId` in the events contained in an event history?\n- [ ] Include an `instanceId` action states?\n- [ ] Clarify where to put context information such as the SCIM ID (currently, this information is placed in the `$context`)\n- [ ] Discuss and clarify how ~~`protocolMap`~~ `sdfProtocolMap` fits into the instance information concept\n\nIt would also be great if @bbrinckman could give us direct feedback on what the proofshot format needs to work with NIPC and what potential requirements are. ",
       "createdAt": "2025-07-13T17:51:53Z",
       "updatedAt": "2025-07-20T09:38:00Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOOUh3t87CRRP1",
+      "title": "Take context into account when generating proofshot content",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/16",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "During the ASDF session at IETF 123, it came up that the content of proofshot might differ depending on the context, for example for privacy reasons. This could lead to the omission of some qualities in the proofshot or different values that are assigned to them.",
+      "createdAt": "2025-07-24T10:03:15Z",
+      "updatedAt": "2025-07-24T10:03:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOOUh3t87CVz5Z",
+      "title": "Consider describing `offDevice` information with `sdfContext` quality",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/17",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "For a potential alignment with the ETRI-Draft on `sdfNonAffordance`-Information, we should consider using a keyword such as `sdfContext` instead, that was one of the potential proposals made by @jungha-hong during the ASDF meeting at IETF 123. In a PR, we should update the examples with the potential new keyword in order to investigate how well it can cover our use cases and requirements.",
+      "createdAt": "2025-07-24T16:31:13Z",
+      "updatedAt": "2025-07-24T16:31:13Z",
       "closedAt": null,
       "comments": []
     }
@@ -582,6 +614,79 @@
       "mergeCommit": {
         "oid": "ad953912c92cb52f46c28619fbcfe505781dbdf8"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOOUh3t86gfaDu",
+      "title": "Model context and offDevice information via sdfContext",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/18",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR contains a proposal for replacing and unifying the previous usages of `offDevice` and `$context` via an `sdfContext` quality (which is a potential replacement for the `sdfNonAffordance` quality introduced by @jungha-hong et al.).\r\n\r\nReading through the updated examples, I think this resolves some of the open questions in the draft document quite well and contributes to a cleaner separation of model and instance information.\r\n\r\nWhen merged, this PR resolves #17.",
+      "createdAt": "2025-07-24T16:48:44Z",
+      "updatedAt": "2025-07-25T09:39:55Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "sdfContext",
+      "headRefOid": "19573394779075ffa0cf8af883a645d761d7b94b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t862FEf9",
+          "commit": {
+            "abbreviatedOid": "1957339"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-25T09:39:55Z",
+          "updatedAt": "2025-07-25T09:39:55Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "This is an example comment",
+              "createdAt": "2025-07-25T09:39:55Z",
+              "updatedAt": "2025-07-25T09:39:55Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOOUh3t86glwzW",
+      "title": "Experiment with `sdfRelation` for specifying constructors and parameter targets",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/19",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This morning, I had the idea that `sdfRelation` might be a good way of linking constructors and their parameters to their designated targets without introducing new targets. This solution would also resolve the question of how to identify a constructor. The question of how to indicate a constructor _preference_ is still open, though.\r\n\r\nThis PR depends on #18 and should be merged afterward in order to decrease the diff size.",
+      "createdAt": "2025-07-25T08:26:25Z",
+      "updatedAt": "2025-07-25T13:49:34Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "constructor-relation",
+      "headRefOid": "75426dc05a4dd84ea10ce843b508d9ddc5cdbeb2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
