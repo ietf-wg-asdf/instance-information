@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-27T02:23:31.776095+00:00",
+  "timestamp": "2025-07-29T02:25:37.585183+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -676,7 +676,7 @@
       "labels": [],
       "body": "This morning, I had the idea that `sdfRelation` might be a good way of linking constructors and their parameters to their designated targets without introducing new targets. This solution would also resolve the question of how to identify a constructor. The question of how to indicate a constructor _preference_ is still open, though.\r\n\r\nThis PR depends on #18 and should be merged afterward in order to decrease the diff size.",
       "createdAt": "2025-07-25T08:26:25Z",
-      "updatedAt": "2025-07-25T13:49:34Z",
+      "updatedAt": "2025-07-27T22:17:54Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
@@ -688,7 +688,28 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t862X1I1",
+          "commit": {
+            "abbreviatedOid": "75426dc"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-27T22:17:53Z",
+          "updatedAt": "2025-07-27T22:17:54Z",
+          "comments": [
+            {
+              "originalPosition": 192,
+              "body": "Regarding constructors, I had two additional ideas in the meantime:\r\n\r\n1. We could simply model different constructors by offering different sets of `sdfInputData` parameters via `sdfChoice`. This assumes, though, that the output format would stay consistent (e.g., since we are only returning a pointer to the result).\r\n2. The preference of constructors could also be modeled by using `sdfRelation`, although the details need to be discussed here \u2013 should there be transitive `sdfRelations` between constructors, with `sdfRelation`s between the \u201cadjacent\u201d ones? Or could we also have an `sdfRelation` with multiple `target`s and then apply a mapping of priorities to that?",
+              "createdAt": "2025-07-27T22:17:53Z",
+              "updatedAt": "2025-07-27T22:17:54Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
