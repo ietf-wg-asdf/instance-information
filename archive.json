@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-29T02:25:37.585183+00:00",
+  "timestamp": "2025-08-03T02:25:37.420663+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -60,9 +60,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "In this issue, we can list the requirements we need to fulfill to cover NIPC via the instance information document. The following list is just an initial starting point that will be extended over the course of future discussions.\n\n\n- [ ] Include an `instanceId` in the events contained in an event history?\n- [ ] Include an `instanceId` action states?\n- [ ] Clarify where to put context information such as the SCIM ID (currently, this information is placed in the `$context`)\n- [ ] Discuss and clarify how ~~`protocolMap`~~ `sdfProtocolMap` fits into the instance information concept\n\nIt would also be great if @bbrinckman could give us direct feedback on what the proofshot format needs to work with NIPC and what potential requirements are. ",
+      "body": "In this issue, we can list the requirements we need to fulfill to cover NIPC via the instance information document. The following list is just an initial starting point that will be extended over the course of future discussions.\n\n\n- [ ] Include an `instanceId` in the events contained in an event history?\n- [ ] Include an `instanceId` action states?\n- [ ] Clarify where to put context information such as the SCIM ID (currently, this information is placed in the `$context`)\n- [x] Discuss and clarify how ~~`protocolMap`~~ `sdfProtocolMap` fits into the instance information concept\n    - `sdfProtocolMap` does not include instance, but (ecosystem-specific) model information, therefore it does not have to be covered by this specification at all\n\nIt would also be great if @bbrinckman could give us direct feedback on what the proofshot format needs to work with NIPC and what potential requirements are. ",
       "createdAt": "2025-07-13T17:51:53Z",
-      "updatedAt": "2025-07-20T09:38:00Z",
+      "updatedAt": "2025-07-31T14:46:51Z",
       "closedAt": null,
       "comments": []
     },
@@ -95,6 +95,22 @@
       "body": "For a potential alignment with the ETRI-Draft on `sdfNonAffordance`-Information, we should consider using a keyword such as `sdfContext` instead, that was one of the potential proposals made by @jungha-hong during the ASDF meeting at IETF 123. In a PR, we should update the examples with the potential new keyword in order to investigate how well it can cover our use cases and requirements.",
       "createdAt": "2025-07-24T16:31:13Z",
       "updatedAt": "2025-07-24T16:31:13Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOOUh3t87Djkku",
+      "title": "Consider specifying an SDF Protocol Binding in the draft",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/20",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This morning, I had the idea that could adapt the structure of the proofshot documents for designing an SDF way for the specification of protocol bindings.\n\nIn the examples below, you first find a simple SDF model:\n\n``` yaml\ninfo:\n  title: Example SDF Model that serves as a demonstration for a protocol binding.\nsdfObject:\n  smartlamp:\n    sdfProperty:\n      status:\n        description: Indicates whether the lamp is on or off.\n        type: boolean\n        writable: false\n      brightness:\n        description: Indicates the brightness of the lamp.\n        type: number\n        minimum: 0\n        maximum: 1000\n    sdfAction:\n      toggle:\n        description: Toggles the status of the lamp.\n```\n\nThat model is bound to CoAP resources via a protocol binding document (see below) that is quite similar to the proofshots we currently have defined in the instance-information draft (note the structure that replicates the one of the original SDF model as well as the `sdfBindingFor`).\n\n```yaml\ninfo:\n  title: A CoAP protocol binding example based on a smartlight.\n  version: '2025-04-08'\n  copyright: Copyright 2025. All rights reserved.\nnamespace:\n  lamps: https://example.com/lamps\n  coap: https://example.com/coap-binding\ndefaultNamespace: lamps\nsdfInstance:\n  boat007:\n    sdfBindingFor: lamps:#/sdfObject/smartlamp\n    sdfProperty:\n      status:\n        readProperty:\n          - \"coap:href\": coaps://example.org/status\n            \"coap:method\": GET # Could also be assumed the default\n            \"coap:contentFormat\": 50\n        observeProperty:\n          - \"coap:href\": coaps://example.org/status\n            \"coap:method\": GET # Could also be assumed the default\n            \"coap:contentFormat\": 50\n      brightness:\n        readProperty:\n          - \"coap:href\": coaps://example.org/brigtness\n            \"coap:method\": GET # Could also be assumed the default\n            \"coap:contentFormat\": 60\n        observeProperty:\n          - \"coap:href\": coaps://example.org/brigtness\n            \"coap:method\": GET # Could also be assumed the default\n            \"coap:contentFormat\": 60\n        writeProperty:\n          - \"coap:href\": coaps://example.org/brigtness\n            \"coap:method\": PUT # Could also be assumed the default\n            \"coap:contentFormat\": 60\n    sdfProperty:\n      toggle:\n        invokeAction:\n          - \"coap:href\": coaps://example.org/toggle\n            \"coap:method\": POST # Could also be assumed the default\n```\n\nCurrently, the binding only contains `href`s, `contentFormat`s as well as the CoAP method that is supposed to be used with the respective resource. As the actual bindings are defined within objects of JSON arrays, it is possible to define multiple bindings for the same affordance. We would need to discuss whether these arrays should be able to contain multiple bindings to different protocols, or one protocol binding document should only contain bindings to a single protocol, with the ability to compose multiple documents together.\n\nAlso note that we would need to discuss the \"operation types\" to which we want to map the different operations that are possible for each affordance type. The example above is currently heavily influenced by Web of Things when it comes to the `op` types, but needs to reworked in that regard. ",
+      "createdAt": "2025-07-31T15:26:50Z",
+      "updatedAt": "2025-07-31T15:35:59Z",
       "closedAt": null,
       "comments": []
     }
