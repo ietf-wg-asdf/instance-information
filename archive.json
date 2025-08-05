@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-03T02:25:37.420663+00:00",
+  "timestamp": "2025-08-05T02:19:18.831436+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -645,7 +645,7 @@
       "labels": [],
       "body": "This PR contains a proposal for replacing and unifying the previous usages of `offDevice` and `$context` via an `sdfContext` quality (which is a potential replacement for the `sdfNonAffordance` quality introduced by @jungha-hong et al.).\r\n\r\nReading through the updated examples, I think this resolves some of the open questions in the draft document quite well and contributes to a cleaner separation of model and instance information.\r\n\r\nWhen merged, this PR resolves #17.",
       "createdAt": "2025-07-24T16:48:44Z",
-      "updatedAt": "2025-07-25T09:39:55Z",
+      "updatedAt": "2025-08-03T13:09:37Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
@@ -657,28 +657,7 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": [
-        {
-          "id": "PRR_kwDOOUh3t862FEf9",
-          "commit": {
-            "abbreviatedOid": "1957339"
-          },
-          "author": "JKRhb",
-          "authorAssociation": "COLLABORATOR",
-          "state": "COMMENTED",
-          "body": "",
-          "createdAt": "2025-07-25T09:39:55Z",
-          "updatedAt": "2025-07-25T09:39:55Z",
-          "comments": [
-            {
-              "originalPosition": 7,
-              "body": "This is an example comment",
-              "createdAt": "2025-07-25T09:39:55Z",
-              "updatedAt": "2025-07-25T09:39:55Z"
-            }
-          ]
-        }
-      ]
+      "reviews": []
     },
     {
       "number": 19,
