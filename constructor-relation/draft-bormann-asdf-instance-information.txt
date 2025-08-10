@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 26 January 2026                              Universität Bremen
-                                                            25 July 2025
+Expires: 11 February 2026                             Universität Bremen
+                                                          10 August 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 January 2026.
+   This Internet-Draft will expire on 11 February 2026.
 
 Copyright Notice
 
@@ -396,19 +396,14 @@ Table of Contents
        "boat": {
          "description": "A boat equipped with heating and navigation \
                                                                systems",
-         "sdfProperty": {
+         "sdfContext": {
            "identifier": {
-             "$comment": "Is this actually off-device?",
-             "type": "string",
-             "offdevice": true
+             "type": "string"
            },
            "owner": {
-             "$comment": "Is this actually off-device?",
-             "type": "string",
-             "offdevice": true
+             "type": "string"
            },
            "location": {
-             "offdevice": true,
              "type": "object",
              "properties": {
                "wgs84": {
@@ -772,9 +767,9 @@ Table of Contents
               Koster, M., Bormann, C., and A. Keränen, "Semantic
               Definition Format (SDF) for Data and Interactions of
               Things", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-23, 17 March 2025,
+              asdf-sdf-24, 27 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-23>.
+              sdf-24>.
 
    [I-D.laari-asdf-relations]
               Laari, P., "Extended relation information for Semantic
