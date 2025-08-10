@@ -355,17 +355,12 @@ defaultNamespace: models
 sdfThing:
   boat:
     description: A boat equipped with heating and navigation systems
-    sdfProperty:
+    sdfContext:
       identifier:
-        "$comment": Is this actually off-device?
         type: string
-        offdevice: true
       owner:
-        "$comment": Is this actually off-device?
         type: string
-        offdevice: true
       location:
-        offdevice: true
         type: object
         properties:
           wgs84:
