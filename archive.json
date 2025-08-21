@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-12T01:59:16.447484+00:00",
+  "timestamp": "2025-08-21T01:52:23.369983+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -645,7 +645,7 @@
       "labels": [],
       "body": "This PR contains a proposal for replacing and unifying the previous usages of `offDevice` and `$context` via an `sdfContext` quality (which is a potential replacement for the `sdfNonAffordance` quality introduced by @jungha-hong et al.).\r\n\r\nReading through the updated examples, I think this resolves some of the open questions in the draft document quite well and contributes to a cleaner separation of model and instance information.\r\n\r\nWhen merged, this PR resolves #17.",
       "createdAt": "2025-07-24T16:48:44Z",
-      "updatedAt": "2025-08-10T14:03:53Z",
+      "updatedAt": "2025-08-20T06:53:21Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
@@ -656,8 +656,37 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "## OneDM Meeting 2025-08-20\r\n\r\n- \"Litmus test\" needed\r\n  - Collect examples for categories (location, information from asset management systems, model number/SKU, ...)\r\n    - TODO: Should avoid the term \"static\" in this context\r\n      - \"Encoded in the document itself\" \u2013 model vs instance? Need to cleanly separate the two types of information items\r\n        - SDF model can control the shape of `sdfContext` via `sdfData`\r\n    - Access Control needs to be modelled as well \u2013 not everyone should be able to find out a purchase order, for example\r\n  - Provide guidance to make the decision on `sdfProperty` and `sdfContext`\r\n    - Guidelines might be ecosystem-specific\r\n  - Evaluate whether there are other aspects that are \"hiding\" in `sdfProperty`\r\n- Evaluate how/whether WoT is expressing information similar to `sdfContext`\r\n  - There might be no \"native\" way to do this in WoT TD yet\r\n  - Talk to Ege/Cristiano about this, could become a topic in one of the next TD calls\r\n    - \"Identified the need for a uniform way for adding out-of-band information to a model\"\r\n",
+          "createdAt": "2025-08-20T06:35:40Z",
+          "updatedAt": "2025-08-20T06:53:21Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t8663BGp",
+          "commit": {
+            "abbreviatedOid": "7ef75e1"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-20T06:36:54Z",
+          "updatedAt": "2025-08-20T06:36:54Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "TODO: Mark this as an Editor's note.",
+              "createdAt": "2025-08-20T06:36:54Z",
+              "updatedAt": "2025-08-20T06:36:55Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 19,
