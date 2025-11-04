@@ -41,6 +41,7 @@ normative:
   I-D.ietf-asdf-sdf: sdf
   RFC8288: link
   STD97: http
+  I-D.ietf-asdf-sdf-nonaffordance: non-affordance
 
 informative:
   REST:
@@ -281,7 +282,7 @@ Note that in this example, the proofshot also contains values for the implicit
 to the instance) but are still part of the instance's proofshot as its location
 is fixed -- this boat apparently never leaves the harbor.
 
-Since we are now using the `sdfContext` keyword from CITATION_NEEDED instead of
+Since we are now using the `sdfContext` keyword from {{-non-affordance}} instead of
 `offDevice` for describing this kind of information, we have replaced the previously
 introduced `$context` keyword accodingly.
 
