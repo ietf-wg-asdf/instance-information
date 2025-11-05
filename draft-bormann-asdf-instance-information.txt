@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 24 January 2026                              Universität Bremen
-                                                            23 July 2025
+Expires: 9 May 2026                                   Universität Bremen
+                                                         5 November 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2026.
+   This Internet-Draft will expire on 9 May 2026.
 
 Copyright Notice
 
@@ -828,9 +828,9 @@ Table of Contents
               Koster, M., Bormann, C., and A. Keränen, "Semantic
               Definition Format (SDF) for Data and Interactions of
               Things", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-23, 17 March 2025,
+              asdf-sdf-25, 13 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-23>.
+              sdf-25>.
 
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
@@ -864,9 +864,9 @@ Table of Contents
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
-              Progress, Internet-Draft, draft-ietf-iotops-7228bis-02, 7
-              July 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-iotops-7228bis-02>.
+              Progress, Internet-Draft, draft-ietf-iotops-7228bis-03, 4
+              November 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-iotops-7228bis-03>.
 
    [I-D.lee-asdf-digital-twin-08]
               Lee, H., Hong, J., Youn, J., and Y. Hong, "Semantic
