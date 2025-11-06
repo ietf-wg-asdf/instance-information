@@ -61,7 +61,7 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
-  I-D.lee-asdf-digital-twin-08: digital-twin
+  I-D.lee-asdf-digital-twin-09: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
     title: Terminology for Layers
@@ -332,7 +332,7 @@ sdfInstance:
             timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {:sdf #code-off-device-instance post="fold"
-title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
 
 #### Corresponding SDF Model
 
@@ -417,7 +417,7 @@ sdfThing:
               format: date-time
 ~~~
 {:sdf #code-off-device-model
-title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-08]"}
+title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-09]"}
 
 ### Construction
 
@@ -726,7 +726,7 @@ sdfThing:
               const: '2025-07-15T07:27:15+0000'
 ~~~
 {:sdf #code-instance-syntactic-sugar-illustration
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
 
 ### Alternative Instance Keys
 
@@ -773,7 +773,7 @@ sdfInstance:
         timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {:sdf #code-off-device-instance-alternative
-title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
 
 {::include-all lists.md}
 
