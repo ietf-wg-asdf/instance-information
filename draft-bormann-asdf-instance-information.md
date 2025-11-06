@@ -287,70 +287,47 @@ As in the case of the Context Snapshot, the Proofshot may also contain concrete
 values that reflect context information associated with a device via the
 `sdfContext` keyword {{-non-affordance}}.
 
-The following examples are based on Figure 2 of {{-digital-twin}}, separated into
-an SDF proofshot and an SDF model.
-{{code-off-device-instance}} shows a proofshot that captures the state of a boat
-with a heater is shown in {{code-off-device-instance}}.
-Here, every property of the corresponding SDF model (see {{code-off-device-model}})
-is mapped to a concrete value that corresponds with the associated schema information.
+The following examples are based on {{-non-affordance}} and {{-digital-twin}}.
+{{code-off-device-instance}} shows a proofshot that captures the state of a
+sensor.
+Here, every property and context definition of the corresponding SDF model
+(see {{code-off-device-model}}) is mapped to a concrete value that corresponds
+with the associated schema information.
 The alternating structure of the SDF model
-(e. g., `sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating`) is repeated
-in the proofshot, with the top-level `sdfThing` being replaced by `sdfInstance`,
+(e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated
+in the proofshot, with the top-level `sdfObject` being replaced by `sdfInstance`,
 which serves as the "entry point" to the instance message.
+
 Via the `model` quality in `sdfInstanceOf`, the exact `sdfThing` or `sdfObject`
 that corresponds with the `sdfInstance` is specified;
 the namespace needed for this is set up in the usual `namespace` section that we
 also have in model files.
 
-Since we are now using the `sdfContext` keyword from {{-non-affordance}} instead of
-`offDevice` for describing this kind of information, we have replaced the previously
-introduced `$context` keyword accodingly.
+[^context-note]
+
+[^context-note]: Since we are now using the `sdfContext` keyword from {{-non-affordance}} for describing both "off-device" and context information, we have replaced the previously introduced `$context` keyword accodingly.
 
 ~~~ sdf
 info:
-  title: 'A proofshot example for heater #1 on boat #007'
-  version: '2025-04-08'
-  copyright: Copyright 2025. All rights reserved.
-  messageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
+  sensors: https://example.com/sensor
+defaultNamespace: models
 sdfInstanceOf:
-  model: models:#/sdfThing/boat
+  model: sensors:#/sdfObject/envSensor
 sdfInstance:
   sdfContext:
-    scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    identifier: urn:boat:007:heater:1
-    owner: ExamTech Ltd.
-    location:
-      wgs84:
-        latitude: 35.2988233791372
-        longitude: 129.25478376484912
-        altitude: 0
-      postal:
-        city: Ulsan
-        post-code: '44110'
-        country: South Korea
-      w3w:
-        what3words: toggle.mopped.garages
-  sdfObject:
-    heater:
-      sdfProperty:
-        characteristic: 12V electric heater, 800W, automatic cutoff
-        status: error
-        report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
-          a.m. to 6 p.m.'
-      sdfEvent:
-        # Not a great event example IMHO... but this currently models an event history
-        maintenanceSchedule:
-        - outputValue: '2025-04-10'
-          timestamp: '2024-04-10T02:00:00Z'
-        - outputValue: '2026-04-10'
-          timestamp: '2025-04-10T02:00:00Z'
+    timestamp: '2025-07-01T12:00:00Z'
+    thingId: envSensor:abc123
+    installationInfo:
+      mountType: ceiling
+  sdfProperty:
+    temperature: 23.124
+
 ~~~
 {:sdf #code-off-device-instance post="fold"
-title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
+title="SDF proofshot example."}
 
 #### Corresponding SDF Model
 
@@ -367,79 +344,39 @@ In practice, the definition of `wgs84` etc. probably would come from a common
 library and just be referenced via `sdfRef`.)
 
 ~~~ sdf
-info:
-  title: An example model of a heater on a boat
-  version: '2025-01-27'
-  copyright: Copyright 2025. All rights reserved.
 namespace:
   models: https://example.com/models
+  sensors: https://example.com/sensors
 defaultNamespace: models
-sdfThing:
-  boat:
-    description: A boat equipped with heating and navigation systems
+sdfObject:
+  envSensor:
     sdfContext:
-      scimObjectId:
+      timestamp:
         type: string
-      identifier:
+      thingId:
         type: string
-      owner:
-        type: string
-      location:
+      deviceIdentity:
+        manufacturer:
+          type: string
+        firmwareVersion:
+          type: string
+      installationInfo:
         type: object
         properties:
-          wgs84:
-            type: object
-            properties:
-              latitude:
-                type: number
-              longitude:
-                type: number
-              altitude:
-                type: number
-          postal:
-            type: object
-            properties:
-              city:
-                type: string
-              post-code:
-                type: string
-              country:
-                type: string
-          w3w:
-            type: object
-            properties:
-              what3words:
-                type: string
-                format: "..."
-    sdfObject:
-      heater:
-        label: Cabin Heater
-        description: Temperature control system for cabin heating
-        sdfProperty:
-          characteristic:
-            description: Technical summary of the heater
-            type: string
-            default: 12V electric heater, 800W, automatic cutoff
-          status:
-            description: Current operational status
-            type: string
+          floor:
+            type: integer
+          mountType:
             enum:
-            - 'on'
-            - 'off'
-            - error
-            default: 'off'
-          report:
-            type: string
-        sdfEvent:
-          maintenanceSchedule:
-            "$comment": Should this actually be modeled as an event..?
-            description: Next scheduled maintenance date
-            sdfOutputData:
-              type: string
-              format: date-time
+            - ceiling
+            - wall
+    sdfProperty:
+      temperature:
+        type: number
+        unit: Cel
+
 ~~~
 {:sdf #code-off-device-model
-title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-09]"}
+title="SDF Model that serves as a reference point for the instance message in this draft"}
 
 ### Construction
 
