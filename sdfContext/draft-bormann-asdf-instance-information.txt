@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 8 May 2026                                   Universität Bremen
-                                                         4 November 2025
+Expires: 10 May 2026                                  Universität Bremen
+                                                         6 November 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 May 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 Copyright Notice
 
