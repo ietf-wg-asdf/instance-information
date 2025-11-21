@@ -13,7 +13,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them. 
-       The present revision –05 is intended as input for IETF 123, with a few observations from the Hackathon addressed and this status paragraph updated. 
+       The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1057,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 9 May 2026</td>
+<td class="center">Expires 25 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-05" class="published">5 November 2025</time>
+<time datetime="2025-11-21" class="published">21 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-09">9 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-25">25 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2"><span class="cref" id="status">The present revision –05 is intended as input for IETF 123, with a few observations from the Hackathon addressed and this status paragraph updated.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1133,7 +1133,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1183,13 +1183,16 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
                     <p id="section-toc.1-1.2.2.1.2.1.1"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-input-and-output-data-of-sp" class="internal xref">Input and output data of specific interactions</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
-                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-proofshots-read-device-othe" class="internal xref">Proofshots (read device, other component)</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-context-snapshots" class="internal xref">Context Snapshots</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.3">
-                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-construction" class="internal xref">Construction</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-proofshots-read-device-othe" class="internal xref">Proofshots (read device, other component)</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.4">
-                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-deltas-and-default-base-mes" class="internal xref">Deltas and Default/Base messages</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-construction" class="internal xref">Construction</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.5">
+                    <p id="section-toc.1-1.2.2.1.2.5.1"><a href="#section-2.1.5" class="auto internal xref">2.1.5</a>.  <a href="#name-deltas-and-patch-messages" class="internal xref">Deltas and Patch Messages</a></p>
 </li>
                 </ul>
 </li>
@@ -1338,6 +1341,8 @@ simply setting a Proofshot.<a href="#section-1.1-3.10.3" class="pilcrow">¶</a><
 <p id="section-1.1-3.10.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.10.4" class="pilcrow">¶</a></p>
 <p id="section-1.1-3.10.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.10.5" class="pilcrow">¶</a></p>
 <p id="section-1.1-3.10.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.10.6" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.10.7">TODO: Also mention the other message types we had so far (context snapshot,
+      context patch, identity manifest) here?<a href="#section-1.1-3.10.7" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.11">Construction:</dt>
@@ -1368,7 +1373,10 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
             <p id="section-1.2-1.2.1">Originally a term for information that is the subject of
 interactions with other Instances than the Thing (called "offDevice"
 now), this term is now considered confusing as it would often just
-be an affordance of another Instance than the Thing.<a href="#section-1.2-1.2.1" class="pilcrow">¶</a></p>
+be an affordance of another Instance than the Thing.
+In this draft version, we are trying to use a new keyword called
+<code>sdfContext</code> that is supposed to be slightly more accurate, replacing
+the <code>$context</code> concept that was used in previous draft versions.<a href="#section-1.2-1.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1407,27 +1415,43 @@ a source of context information.<a href="#section-2.1.1-3" class="pilcrow">¶</a
 <p id="section-2.1.1-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
 <p id="section-2.1.1-5">(Describe how protocol bindings can be used to convert these messages
 to/from concrete serializations...)<a href="#section-2.1.1-5" class="pilcrow">¶</a></p>
-<div id="examples-for-context-information">
-<section id="section-2.1.1.1">
-            <h5 id="name-examples-for-context-inform">
-<a href="#section-2.1.1.1" class="section-number selfRef">2.1.1.1. </a><a href="#name-examples-for-context-inform" class="section-name selfRef">Examples for context information</a>
-            </h5>
+<p id="section-2.1.1-6">TODO: Reference sdfProtocolMap<a href="#section-2.1.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="context-snapshots">
+<section id="section-2.1.2">
+          <h4 id="name-context-snapshots">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-context-snapshots" class="section-name selfRef">Context Snapshots</a>
+          </h4>
+<p id="section-2.1.2-1">Context information may be provided via the keyword <code>sdfContext</code> <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>,
+which replaces the <code>$context</code> keyword used in earlier draft versions.
+With this new approach, the context information that is included in the
+instance message is now controlled by the model and the corresponding schema
+information (as the <code>sdfContext</code> definition in the SDF model is structurally
+similar to <code>sdfData</code>).<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for an instance message (effectively a
+context snapshot)<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-instance"></span><div id="example-context">
 <figure id="figure-1">
-              <div class="lang-sdf sourcecode" id="section-2.1.1.1-1.1">
+            <div class="lang-sdf sourcecode" id="section-2.1.2-3.1">
 <pre>{
+  "info": {
+    "messageId": "8988be82-50dc-4249-bed2-60c9c8797623"
+  },
   "namespace": {
     "models": "https://example.com/models",
     "boats": "https://example.com/boats"
   },
   "defaultNamespace": "boats",
+  "sdfInstanceOf": {
+    "model": "models:#/sdfObject/boat"
+  },
   "sdfInstance": {
-    "$context": {
+    "sdfContext": {
       "$comment": "Potential contents for the SDF context",
       "deviceName": "urn:dev:org:30810-boat007",
       "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
-      "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677",
-      "parentInstance": "TODO -- addressing instance in data tree"
+      "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677"
     }
   }
 }
@@ -1435,240 +1459,136 @@ to/from concrete serializations...)<a href="#section-2.1.1-5" class="pilcrow">¶
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-example-for-an-sdf-instance" class="selfRef">Example for an SDF instance with context information</a>
-              </figcaption></figure>
-</div>
-</section>
+            </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="proofshots-read-device-other-component">
-<section id="section-2.1.2">
+<section id="section-2.1.3">
           <h4 id="name-proofshots-read-device-othe">
-<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-proofshots-read-device-othe" class="section-name selfRef">Proofshots (read device, other component)</a>
+<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-proofshots-read-device-othe" class="section-name selfRef">Proofshots (read device, other component)</a>
           </h4>
-<p id="section-2.1.2-1">(See defn above.)<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-2">The following examples are based on Figure 2 of <span>[<a href="#I-D.lee-asdf-digital-twin-08" class="cite xref">I-D.lee-asdf-digital-twin-08</a>]</span>, separated into
-an SDF proofshot and an SDF model.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-3">A proofshot that captures the state of a boat with a heater is shown in
-<a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>.
-Here, every property of the corresponding SDF model (see <a href="#code-off-device-model" class="auto internal xref">Figure 3</a>)
-is mapped to a concrete value that corresponds with the associated schema information.
+<p id="section-2.1.3-1">(See defn above.)<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-2">Proofshots are similar to context snapshots, with the important difference that
+they are not reporting the context information associated with an entity but
+also state information associated with its interaction affordances (properties,
+actions, and events).
+TODO: Note that the while the format for describing the state of properties is clearly
+governed by the schema information from the corresponding <code>sdfProperty</code>
+definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
+<code>sdfEvents</code>.
+As in the case of the Context Snapshot, the Proofshot may also contain concrete
+values that reflect context information associated with a device via the
+<code>sdfContext</code> keyword <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-3">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
+<a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> shows a proofshot that captures the state of a
+sensor.
+Here, every property and context definition of the corresponding SDF model
+(see <a href="#code-off-device-model" class="auto internal xref">Figure 3</a>) is mapped to a concrete value that corresponds
+with the associated schema information.
 The alternating structure of the SDF model
-(e. g., <code>sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating</code>) is repeated
-in the proofshot, with <code>sdfObject</code> and <code>sdfThing</code> being replaced by <code>sdfInstance</code>.<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-4">While earlier approaches avoided the additional level of nesting by omitting the
-affordance quality names (i.e., <code>sdfProperty</code>, <code>sdfAction</code>, <code>sdfEvent</code>),
-including them explicitly avoids problems with namespace clashes and
-allows for a cleaner integration of meta data (via the <code>$context</code> keyword).<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-5">As in any instance message, information from the model is not repeated but
-referenced via a pointer into the model tree (<code>sdfInstanceOf</code>); the
-namespace needed for this is set up in the usual <code>namespace</code> section that we
-also have in model files.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-6">Note that in this example, the proofshot also contains values for the implicit
-(<code>offDevice</code>) properties that are static (e.g., the physical location assigned
-to the instance) but are still part of the instance's proofshot as its location
-is fixed -- this boat apparently never leaves the harbor.<a href="#section-2.1.2-6" class="pilcrow">¶</a></p>
-<span id="name-sdf-proofshot-proposal-for-"></span><div id="code-off-device-instance">
+(e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated
+in the proofshot, with the top-level <code>sdfObject</code> being replaced by <code>sdfInstance</code>,
+which serves as the "entry point" to the instance message.<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-4">Via the <code>model</code> quality in <code>sdfInstanceOf</code>, the exact <code>sdfThing</code> or <code>sdfObject</code>
+that corresponds with the <code>sdfInstance</code> is specified;
+the namespace needed for this is set up in the usual <code>namespace</code> section that we
+also have in model files.<a href="#section-2.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-5"><span class="cref" id="context-note">Since we are now using the <code>sdfContext</code> keyword from <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> for describing both "off-device" and context information, we have replaced the previously introduced <code>$context</code> keyword accodingly.</span><a href="#section-2.1.3-5" class="pilcrow">¶</a></p>
+<span id="name-sdf-proofshot-example"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-            <div class="breakable lang-sdf sourcecode" id="section-2.1.2-7.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
+            <div class="lang-sdf sourcecode" id="section-2.1.3-6.1">
+<pre>{
   "info": {
-    "title": "A proofshot example for heater #1 on boat #007",
-    "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved.",
-    "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
   "namespace": {
     "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
+    "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "boats",
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
   "sdfInstance": {
-    "boat007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "$comment": "Should the context be modeled via an additional \
-      quality? Or should it rather become another kind of property?",
-      "$context": {
-        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
-      },
-      "sdfProperty": {
-        "identifier": "urn:boat:007:heater:1",
-        "location": {
-          "wgs84": {
-            "latitude": 35.2988233791372,
-            "longitude": 129.25478376484912,
-            "altitude": 0
-          },
-          "postal": {
-            "city": "Ulsan",
-            "post-code": "44110",
-            "country": "South Korea"
-          },
-          "w3w": {
-            "what3words": "toggle.mopped.garages"
-          }
-        },
-        "owner": "ExamTech Ltd."
-      },
-      "sdfInstance": {
-        "heater": {
-          "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-          "sdfProperty": {
-            "characteristic": "12V electric heater, 800W, automatic \
-                                                             cutoff",
-            "status": "error",
-            "report": "On February 24, 2025, the boat #007's heater \
-                                     #1 was on from 9 a.m. to 6 p.m."
-          },
-          "sdfEvent": {
-            "maintenanceSchedule": [
-              {
-                "outputValue": "2025-04-10",
-                "timestamp": "2024-04-10T02:00:00Z"
-              },
-              {
-                "outputValue": "2026-04-10",
-                "timestamp": "2025-04-10T02:00:00Z"
-              }
-            ]
-          }
-        }
+    "sdfContext": {
+      "timestamp": "2025-07-01T12:00:00Z",
+      "thingId": "envSensor:abc123",
+      "installationInfo": {
+        "mountType": "ceiling"
       }
+    },
+    "sdfProperty": {
+      "temperature": 23.124
     }
   }
 }
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-sdf-proofshot-proposal-for-" class="selfRef">SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]</a>
+<a href="#name-sdf-proofshot-example" class="selfRef">SDF proofshot example.</a>
             </figcaption></figure>
 </div>
 <div id="corresponding-sdf-model">
-<section id="section-2.1.2.1">
+<section id="section-2.1.3.1">
             <h5 id="name-corresponding-sdf-model">
-<a href="#section-2.1.2.1" class="section-number selfRef">2.1.2.1. </a><a href="#name-corresponding-sdf-model" class="section-name selfRef">Corresponding SDF Model</a>
+<a href="#section-2.1.3.1" class="section-number selfRef">2.1.3.1. </a><a href="#name-corresponding-sdf-model" class="section-name selfRef">Corresponding SDF Model</a>
             </h5>
-<p id="section-2.1.2.1-1"><a href="#code-off-device-model" class="auto internal xref">Figure 3</a> shows a model like the one that could have
-been pointed to by the <code>sdfInstanceOf</code> pointers in the instance message.
-Note how the namespace is managed here to export the model components into
-<code>models:#/sdfThing/boat</code> and <code>models:#/sdfThing/boat/sdfObject/heater</code>.<a href="#section-2.1.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2.1-2">(This example model only specifies structure; it also could come with
+<p id="section-2.1.3.1-1"><a href="#code-off-device-model" class="auto internal xref">Figure 3</a> shows a model like the one that could have
+been pointed to by the <code>model</code> pointer within the <code>sdfInstanceOf</code> quality in the
+instance message.
+Note how the namespace is managed here to export the <code>boat</code> component into
+<code>models:#/sdfThing/boat</code>, which is the "entry point" used in the instance
+messages above.<a href="#section-2.1.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3.1-2">(This example model only specifies structure; it also could come with
 semantic information such as the units that are used for wgs84 etc.
 In practice, the definition of <code>wgs84</code> etc. probably would come from a common
-library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.1-2" class="pilcrow">¶</a></p>
-<span id="name-revised-sdf-model-proposal-"></span><div id="code-off-device-model">
+library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.3.1-2" class="pilcrow">¶</a></p>
+<span id="name-sdf-model-that-serves-as-a-"></span><div id="code-off-device-model">
 <figure id="figure-3">
-              <div class="breakable lang-sdf sourcecode" id="section-2.1.2.1-3.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "An example model of a heater on a boat",
-    "version": "2025-01-27",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
+              <div class="lang-sdf sourcecode" id="section-2.1.3.1-3.1">
+<pre>{
   "namespace": {
-    "models": "https://example.com/models"
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensors"
   },
   "defaultNamespace": "models",
-  "sdfThing": {
-    "boat": {
-      "description": "A boat equipped with heating and navigation \
-                                                            systems",
-      "sdfProperty": {
-        "identifier": {
-          "$comment": "Is this actually off-device?",
-          "type": "string",
-          "offdevice": true
+  "sdfObject": {
+    "envSensor": {
+      "sdfContext": {
+        "timestamp": {
+          "type": "string"
         },
-        "owner": {
-          "$comment": "Is this actually off-device?",
-          "type": "string",
-          "offdevice": true
+        "thingId": {
+          "type": "string"
         },
-        "location": {
-          "offdevice": true,
+        "deviceIdentity": {
+          "manufacturer": {
+            "type": "string"
+          },
+          "firmwareVersion": {
+            "type": "string"
+          }
+        },
+        "installationInfo": {
           "type": "object",
           "properties": {
-            "wgs84": {
-              "type": "object",
-              "properties": {
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "altitude": {
-                  "type": "number"
-                }
-              }
+            "floor": {
+              "type": "integer"
             },
-            "postal": {
-              "type": "object",
-              "properties": {
-                "city": {
-                  "type": "string"
-                },
-                "post-code": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                }
-              }
-            },
-            "w3w": {
-              "type": "object",
-              "properties": {
-                "what3words": {
-                  "type": "string",
-                  "format": "..."
-                }
-              }
+            "mountType": {
+              "enum": [
+                "ceiling",
+                "wall"
+              ]
             }
           }
         }
       },
-      "sdfObject": {
-        "heater": {
-          "label": "Cabin Heater",
-          "description": "Temperature control system for cabin \
-                                                            heating",
-          "sdfProperty": {
-            "characteristic": {
-              "description": "Technical summary of the heater",
-              "type": "string",
-              "default": "12V electric heater, 800W, automatic \
-                                                              cutoff"
-            },
-            "status": {
-              "description": "Current operational status",
-              "type": "string",
-              "enum": [
-                "on",
-                "off",
-                "error"
-              ],
-              "default": "off"
-            },
-            "report": {
-              "type": "string"
-            }
-          },
-          "sdfEvent": {
-            "maintenanceSchedule": {
-              "$comment": "Should this actually be modeled as an \
-                                                           event..?",
-              "description": "Next scheduled maintenance date",
-              "sdfOutputData": {
-                "type": "string",
-                "format": "date-time"
-              }
-            }
-          }
+      "sdfProperty": {
+        "temperature": {
+          "type": "number",
+          "unit": "Cel"
         }
       }
     }
@@ -1677,7 +1597,7 @@ library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-revised-sdf-model-proposal-" class="selfRef">Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-08]</a>
+<a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance message in this draft</a>
               </figcaption></figure>
 </div>
 </section>
@@ -1685,80 +1605,106 @@ library and just be referenced via <code>sdfRef</code>.)<a href="#section-2.1.2.
 </section>
 </div>
 <div id="construction">
-<section id="section-2.1.3">
+<section id="section-2.1.4">
           <h4 id="name-construction">
-<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-construction" class="section-name selfRef">Construction</a>
+<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-construction" class="section-name selfRef">Construction</a>
           </h4>
-<p id="section-2.1.3-1">Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
-They are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-2">A construction message for a temperature sensor might assign an
+<p id="section-2.1.4-1">Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
+They are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-2">A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device).<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
-It is still up for discussion whether this concept justifies a new keyword or whether construction and other lifecycle management processes should be modeled as <code>sdfAction</code>s instead.<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-4">(Note that it is not quite clear what a destructor would be for a
+device). This output -- which can once again be modeled as an instance message
+-- may be referred to as an <em>identity manifest</em> when it primarily contains
+identity-related context information.<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
+although the way the <code>sdfAction</code> is going to be used exactly is not entirely
+clear yet.
+As the device that is being constructed will not be initialized before the
+construction has finished, the <code>sdfAction</code> has to be modeled as an external or
+"off-device" action. This raises the question whether the <code>sdfAction</code> still
+belongs into the SDF model that corresponds with the class the resulting device
+instance belongs to.<a href="#section-2.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-4">(Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
-which is pretty much a constructor.)<a href="#section-2.1.3-4" class="pilcrow">¶</a></p>
+which is pretty much a constructor.)<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
 <div id="examples-for-sdf-constructors">
-<section id="section-2.1.3.1">
+<section id="section-2.1.4.1">
             <h5 id="name-examples-for-sdf-constructo">
-<a href="#section-2.1.3.1" class="section-number selfRef">2.1.3.1. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
+<a href="#section-2.1.4.1" class="section-number selfRef">2.1.4.1. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
             </h5>
-<p id="section-2.1.3.1-1">This section contains examples for both approaches discussed above:
-<a href="#code-sdf-constructors" class="auto internal xref">Figure 4</a> introduces an <code>sdfConstructor</code> keyword which allows for defining both mandatory (in this example: <code>temperatureUnit</code>) and optional constructor parameters (in this example: <code>ipAddress</code>).
-The example shows that the names of constructor parameters may deviate from the quality names in the model (<code>temperatureUnit</code> vs <code>unit</code>) as the target quality is specified via a JSON pointer.
-Additionally, this constructor example explicitly labels the <code>ipAddress</code> as information that belongs to the <code>$context</code> of the proofshot.<a href="#section-2.1.3.1-1" class="pilcrow">¶</a></p>
-<span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructors">
+<p id="section-2.1.4.1-1"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 4</a> shows a potential approach for describing
+constructors via the <code>sdfAction</code> keyword with a set of construction parameters
+contained in its <code>sdfInputData</code>.<a href="#section-2.1.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.4.1-2">As the constructor action is modeled as being detached from the device and
+performed by an external <code>constructor</code> in this example, both the resulting model
+and the initial instance description (which can be considered an identity
+manifest) are returned.
+The schema information that governs the shape of both the model and the instance
+message are referred to via the <code>sdfRef</code> keyword.<a href="#section-2.1.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.4.1-3">DISCUSS: Note that the action may also return a pointer to an external SDF model
+and provide the additional information from the constructor via an SDF Mapping
+File. These are aspects that still require discussion, examples, and
+implementation experience.<a href="#section-2.1.4.1-3" class="pilcrow">¶</a></p>
+<span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructor-action">
 <figure id="figure-4">
-              <div class="breakable lang-sdf sourcecode" id="section-2.1.3.1-2.1">
+              <div class="breakable lang-sdf sourcecode" id="section-2.1.4.1-4.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
   "info": {
-    "title": "Example document for SDF (Semantic Definition Format) \
-                                with constructors for instantiation",
+    "title": "Example document for SDF with actions as constructors \
+                                                  for instantiation",
     "version": "2019-04-24",
     "copyright": "Copyright 2019 Example Corp. All rights reserved.",
     "license": "https://example.com/license"
   },
   "namespace": {
+    "sdf": "https://example.com/common/sdf/definitions",
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
   "sdfObject": {
-    "temperatureSensor": {
-      "sdfProperty": {
-        "temperature": {
-          "description": "Temperature value measure by this Thing's \
-                                                temperature sensor.",
-          "type": "number",
-          "sdfParameter": {
-            "unit": {
-              "$comment": "Should schema information be settable \
-via a constructor at all? This question might indicate that we need \
-                                    different kinds of constructors",
-              "type": "string"
-            }
-          }
-        }
-      },
-      "sdfConstructor": {
+    "constructor": {
+      "sdfAction": {
         "construct": {
-          "parameters": {
-            "temperatureUnit": {
-              "required": true,
-              "target": "#/sdfObject/temperatureSensor/sdfProperty/\
-                                                    temperature/unit"
+          "sdfInputData": {
+            "$comment": "DISCUSS: Do we need to establish a \
+connection between constructor parameters and the resulting \
+                                                  instance message?",
+            "type": "object",
+            "properties": {
+              "temperatureUnit": {
+                "type": "string"
+              },
+              "ipAddress": {
+                "type": "string"
+              }
             },
-            "ipAddress": {
-              "$comment": "Just trying some things out here. Should \
-this parameter target the context or rather an (offDevice?) property\
-                                                                  ?",
-              "required": false,
-              "isContextInformation": true
+            "required": [
+              "temperatureUnit"
+            ]
+          },
+          "sdfOutputData": {
+            "$comment": "Would we point to the JSON Schema \
+                                                  definitions here?",
+            "type": "object",
+            "properties": {
+              "model": {
+                "type": "object",
+                "properties": {
+                  "sdfRef": "sdf:#/sdf/model/format"
+                }
+              },
+              "instance": {
+                "type": "object",
+                "properties": {
+                  "sdfRef": "sdf:#/instance/message/format"
+                }
+              }
             }
           }
         }
@@ -1772,98 +1718,19 @@ this parameter target the context or rather an (offDevice?) property\
 <a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
               </figcaption></figure>
 </div>
-<p id="section-2.1.3.1-3">The alternative approach is shown in <a href="#code-sdf-constructor-action" class="auto internal xref">Figure 5</a>.
-Here, the constructor is modeled as an <code>sdfAction</code> that contains the same set of parameters in its <code>sdfInputData</code>.<a href="#section-2.1.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.3.1-4">While this approach has advantages – we do not need to introduce new keywords to achieve a similar functionality and can simply use a plain JSON object as the construction message – a few things in this example are still unclear, especially when it comes to the mapping of constructor parameters to target affordances in the model and the designation of parameters as context information.
-Lastly, it is currently unclear what kind of schema information should be provided for the action's <code>sdfOutputData</code>.
-As a return value, a pointer to the instantiated device and/or the models describing it could make sense.<a href="#section-2.1.3.1-4" class="pilcrow">¶</a></p>
-<span id="name-example-for-sdf-model-with-c"></span><div id="code-sdf-constructor-action">
-<figure id="figure-5">
-              <div class="breakable lang-sdf sourcecode" id="section-2.1.3.1-5.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "Example document for SDF with actions as constructors \
-                                                  for instantiation",
-    "version": "2019-04-24",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
-  "namespace": {
-    "cap": "https://example.com/capability/cap"
-  },
-  "defaultNamespace": "cap",
-  "sdfObject": {
-    "temperatureSensor": {
-      "sdfProperty": {
-        "temperature": {
-          "description": "Temperature value measure by this Thing's \
-                                                temperature sensor.",
-          "type": "number",
-          "unit": {
-            "$comment": "Should schema information be settable via \
-a constructor at all? This question might indicate that we need \
-                                    different kinds of constructors",
-            "type": "string"
-          }
-        }
-      },
-      "sdfAction": {
-        "construct": {
-          "sdfInputData": {
-            "$comment": "DISCUSS: How can we establish a connection \
-              between constructor parameters and target properties?",
-            "type": "object",
-            "properties": {
-              "temperatureUnit": {
-                "type": "string",
-                "target": "#/sdfObject/temperatureSensor/sdfProperty\
-                                                   /temperature/unit"
-              },
-              "ipAddress": {
-                "$comment": "How can we express that this is \
-                                               context information?",
-                "isContextInformation": true
-              }
-            },
-            "required": [
-              "temperatureUnit"
-            ]
-          },
-          "sdfOutputData": {
-            "type": "object",
-            "properties": {
-              "$comment": "DISCUSS: What kind of schema information \
-                                             should we provide here?"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-for-sdf-model-with-c" class="selfRef">Example for SDF model with constructors</a>
-              </figcaption></figure>
-</div>
 </section>
 </div>
 <div id="example-for-an-sdf-construction-message">
-<section id="section-2.1.3.2">
+<section id="section-2.1.4.2">
             <h5 id="name-example-for-an-sdf-construc">
-<a href="#section-2.1.3.2" class="section-number selfRef">2.1.3.2. </a><a href="#name-example-for-an-sdf-construc" class="section-name selfRef">Example for an SDF construction message</a>
+<a href="#section-2.1.4.2" class="section-number selfRef">2.1.4.2. </a><a href="#name-example-for-an-sdf-construc" class="section-name selfRef">Example for an SDF construction message</a>
             </h5>
-<p id="section-2.1.3.2-1"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 6</a> shows a potential SDF construction message that
-allows for the creation of a proofshot from a constructor that is contained within
-an SDF model.<a href="#section-2.1.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.3.2-2">Note that the <code>ipAddress</code> can be considered context information or an off-device property.
-TODO: Needs more discussion how to model this kind of information.<a href="#section-2.1.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.4.2-1"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a> shows a potential SDF construction message
+that initializes a device. As shown above, the information from the message
+ends up in both an SDF Model (or Mapping File) and an instance message.<a href="#section-2.1.4.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-construction-message">
-<figure id="figure-6">
-              <div class="lang-sdf sourcecode" id="section-2.1.3.2-3.1">
+<figure id="figure-5">
+              <div class="lang-sdf sourcecode" id="section-2.1.4.2-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -1875,18 +1742,22 @@ TODO: Needs more discussion how to model this kind of information.<a href="#sect
     "cap": "https://example.com/capability/cap"
   },
   "defaultNamespace": "cap",
-  "sdfConstruction": {
-    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
-                                          sdfConstructors/construct",
-    "arguments": {
-      "temperatureUnit": "Cel",
-      "ipAddress": "192.0.2.42"
+  "sdfInstanceOf": {
+    "model": "cap:#/sdfObject/temperatureSensor/sdfConstructors/\
+                                                           construct"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "ipAddress": "192.0.2.42",
+      "$comment": "Could the constructor parameter also be \
+                                  considered context information..?",
+      "temperatureUnit": "Cel"
     }
   }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-example-for-an-sdf-construct" class="selfRef">Example for an SDF construction message</a>
               </figcaption></figure>
 </div>
@@ -1894,92 +1765,106 @@ TODO: Needs more discussion how to model this kind of information.<a href="#sect
 </div>
 </section>
 </div>
-<div id="deltas-and-defaultbase-messages">
-<section id="section-2.1.4">
-          <h4 id="name-deltas-and-default-base-mes">
-<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-deltas-and-default-base-mes" class="section-name selfRef">Deltas and Default/Base messages</a>
+<div id="deltas-and-patch-messages">
+<section id="section-2.1.5">
+          <h4 id="name-deltas-and-patch-messages">
+<a href="#section-2.1.5" class="section-number selfRef">2.1.5. </a><a href="#name-deltas-and-patch-messages" class="section-name selfRef">Deltas and Patch Messages</a>
           </h4>
-<p id="section-2.1.4-1">What changed since the last proofshot?<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-2">What is different from the base status of the device?<a href="#section-2.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-3">Can I get the same (equivalent, not identical) coffee I just ordered but with 10 % more milk?<a href="#section-2.1.4-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-4">(Think merge-patch.)<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-5">A construction message may be a delta, or it may have parameters that
-algorithmically influence the elements of state that one would find in
-a proofshot.<a href="#section-2.1.4-5" class="pilcrow">¶</a></p>
-<span id="name-example-for-an-sdf-constructi"></span><div id="code-sdf-construction-delta-message">
-<figure id="figure-7">
-            <div class="lang-sdf sourcecode" id="section-2.1.4-6.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
+<p id="section-2.1.5-1">When the state of a device at a given point in time is known (e.g., due to a
+previous instance message), an external entity might only be interested in the
+changes since that point in time. Or it might want to adjust its state and/or
+context the device operates in. For both purposes, instance messages can be
+used.<a href="#section-2.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.5-2"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 6</a> shows an example that contains an instance message
+reporting a "proofshot delta", that is the state changes that occured compared
+to the ones reported in the previous message (identified via its
+<code>previousMessageId</code>). In this example, only the temperature as measured by the
+sensor has changed, so only that information is included.<a href="#section-2.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.5-3">Delta messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may
+be one way to model a telemetry stream from a device.<a href="#section-2.1.5-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-instance-"></span><div id="code-sdf-delta-message">
+<figure id="figure-6">
+            <div class="lang-sdf sourcecode" id="section-2.1.5-4.1">
+<pre>{
   "info": {
-    "title": "Example SDF delta construction message",
-    "$comment": "TODO: What kind of metadata do we need here?"
+    "title": "Example SDF delta instance message",
+    "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
   "namespace": {
-    "cap": "https://example.com/capability/cap"
+    "cap": "https://example.com/capability/cap",
+    "models": "https://example.com/models"
   },
   "defaultNamespace": "cap",
-  "sdfConstruction": {
-    "sdfConstructor": "cap:#/sdfObject/temperatureSensor/\
-                                          sdfConstructors/construct",
-    "previousProofshot": "TODO (Can we provide an ID or just a \
-                                                   timestamp here?)",
-    "arguments": {
+  "sdfInstanceOf": {
+    "model": "models:/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfProperty": {
       "temperature": 24
     }
   }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-example-for-an-sdf-constructi" class="selfRef">Example for an SDF construction message for proofshot delta</a>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-of-an-sdf-instance-" class="selfRef">Example of an SDF instance message that serves as a proofshot delta.</a>
             </figcaption></figure>
 </div>
-<p id="section-2.1.4-7">Deltas and Default/Base messages could be used in the Series Transfer
-Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may be one way to model a telemetry stream from a
-device.<a href="#section-2.1.4-7" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-8">A potential example for the use of proofshot deltas is shown in <a href="#code-sdf-proofshot-delta" class="auto internal xref">Figure 8</a>.
-Here, the proofshot delta refers to the previous example in <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> via its <code>proofshotId</code>, which is included in the <code>previousProofshot</code> quality.
-Compared to the previous proofshot, only the status property of the boat's heater has changed from <code>error</code> to <code>operational</code>.
-Via an algorithm such as JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span>, the actual proofshot can be resolved by applying the delta to the previous version.<a href="#section-2.1.4-8" class="pilcrow">¶</a></p>
-<p id="section-2.1.4-9">In future versions of this document, we will evaluate whether JSON Merge Patch is sufficient to fulfill the requirements for the resolution algorithm which have to formulated and refined themselves.<a href="#section-2.1.4-9" class="pilcrow">¶</a></p>
-<span id="name-example-for-an-sdf-proofsho"></span><div id="code-sdf-proofshot-delta">
-<figure id="figure-8">
-            <div class="lang-sdf sourcecode" id="section-2.1.4-10.1">
+<p id="section-2.1.5-5">Yet another purpose for instance message might be appyling an update to a
+device's configuration, e.g. via a so-called context patch message.
+Such a message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 7</a>, where a change of the
+device's <code>mountType</code> is reflected. This message type might be especially
+relevant for digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical
+attributes (such as the location) need to be reflected somehow.<a href="#section-2.1.5-5" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-context-p"></span><div id="code-sdf-context-patch">
+<figure id="figure-7">
+            <div class="lang-sdf sourcecode" id="section-2.1.5-6.1">
 <pre>{
   "info": {
-    "title": "Example SDF delta proofshot",
-    "previousProofshot": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
-    "proofshotId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
-    "version": "2025-04-08",
-    "copyright": "Copyright 2025. All rights reserved."
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
   "namespace": {
     "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
+    "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "boats",
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor",
+    "patchMethod": "merge-patch"
+  },
   "sdfInstance": {
-    "boat007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "sdfInstance": {
-        "heater": {
-          "sdfInstanceOf": "models:#/sdfThing/boat/sdfObject/heater",
-          "sdfProperty": {
-            "status": "operational"
-          }
-        }
+    "sdfContext": {
+      "installationInfo": {
+        "mountType": "wall"
       }
     }
   }
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-example-for-an-sdf-proofsho" class="selfRef">Example for an SDF proofshot delta that overrides the status property of the boat's heater.</a>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance message format.</a>
             </figcaption></figure>
 </div>
+<p id="section-2.1.5-7">When comparing  <a href="#code-sdf-delta-message" class="auto internal xref">Figure 6</a> and <a href="#code-sdf-context-patch" class="auto internal xref">Figure 7</a>, we
+can see that the main difference between the messages is the <em>purpose</em> these
+message are being used for. This purpose could be implicitly reflected by the
+nature of the resource that accepts or returns the respective message type.
+It would also be possible to indicate the purpose more explicitly by using a
+different content format when transferring the messages over the wire.
+Another difference, however, lays in the fact that the context patch is not
+including a <code>previousMessageId</code>, which might be sufficient to distinguish the
+two message types.<a href="#section-2.1.5-7" class="pilcrow">¶</a></p>
+<p id="section-2.1.5-8">Despite their different purpose, both messages will apply some kind of patch
+algorithm.
+JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</code> quality.<a href="#section-2.1.5-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2044,6 +1929,10 @@ Multiple models may apply to the same device (including but not only revisions o
         <dd>
 <span class="refAuthor">Koster, M.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">A. Keränen</span>, <span class="refTitle">"Semantic Definition Format (SDF) for Data and Interactions of Things"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-25</span>, <time datetime="2025-10-13" class="refDate">13 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-asdf-sdf-nonaffordance">[I-D.ietf-asdf-sdf-nonaffordance]</dt>
+        <dd>
+<span class="refAuthor">Hong, J.</span> and <span class="refAuthor">H. Lee</span>, <span class="refTitle">"Semantic Definition Format (SDF) Extension for Non-Affordance Information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-nonaffordance-02</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-nonaffordance-02">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-nonaffordance-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8288">[RFC8288]</dt>
         <dd>
 <span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8288">https://www.rfc-editor.org/rfc/rfc8288</a>&gt;</span>. </dd>
@@ -2077,9 +1966,9 @@ Multiple models may apply to the same device (including but not only revisions o
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refAuthor">Ersue, M.</span>, <span class="refAuthor">Keränen, A.</span>, and <span class="refAuthor">C. Gomez</span>, <span class="refTitle">"Terminology for Constrained-Node Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-iotops-7228bis-03</span>, <time datetime="2025-11-04" class="refDate">4 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03">https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.lee-asdf-digital-twin-08">[I-D.lee-asdf-digital-twin-08]</dt>
+<dt id="I-D.lee-asdf-digital-twin-09">[I-D.lee-asdf-digital-twin-09]</dt>
         <dd>
-<span class="refAuthor">Lee, H.</span>, <span class="refAuthor">Hong, J.</span>, <span class="refAuthor">Youn, J.</span>, and <span class="refAuthor">Y. Hong</span>, <span class="refTitle">"Semantic Definition Format (SDF) modeling for Digital Twin"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-lee-asdf-digital-twin-08</span>, <time datetime="2025-06-14" class="refDate">14 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-08">https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Lee, H.</span>, <span class="refAuthor">Hong, J.</span>, <span class="refAuthor">Youn, J.</span>, and <span class="refAuthor">Y. Hong</span>, <span class="refTitle">"Semantic Definition Format (SDF) modeling for Digital Twin"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-lee-asdf-digital-twin-09</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-09">https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="LAYERS">[LAYERS]</dt>
         <dd>
@@ -2126,12 +2015,12 @@ We will remove this appendix as soon as this document is about to be finished.<a
         <h3 id="name-using-sdf-models-as-proofsh">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
         </h3>
-<p id="appendix-A.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 9</a>,
+<p id="appendix-A.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 8</a>,
 the proofshot format could have also been modeled via SDF models where
 all <code>sdfProperty</code> definitions are given <code>const</code>values.
 However, this concept is not capable of capturing actions and events.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
-<figure id="figure-9">
+<figure id="figure-8">
           <div class="breakable lang-sdf sourcecode" id="appendix-A.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2151,14 +2040,15 @@ However, this concept is not capable of capturing actions and events.<a href="#a
       "label": "Digital Twin of Boat #007",
       "description": "A ship equipped with heating and navigation \
                                                             systems",
-      "sdfProperty": {
+      "sdfContext": {
+        "scimObjectId": {
+          "type": "string"
+        },
         "identifier": {
-          "offDevice": true,
           "type": "string",
           "const": "urn:boat:007:heater:1"
         },
         "location": {
-          "offDevice": true,
           "type": "object",
           "const": {
             "wgs84": {
@@ -2177,7 +2067,6 @@ However, this concept is not capable of capturing actions and events.<a href="#a
           }
         },
         "owner": {
-          "offDevice": true,
           "type": "string",
           "default": "ExamTech Ltd.",
           "const": "ExamTech Ltd."
@@ -2235,8 +2124,8 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]</a>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
           </figcaption></figure>
 </div>
 <div id="alternative-instance-keys">
@@ -2246,7 +2135,7 @@ model events or event history with the approach illustrated by this \
           </h4>
 <p id="appendix-A.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-A.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-10">
+<figure id="figure-9">
             <div class="breakable lang-sdf sourcecode" id="appendix-A.1.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2266,9 +2155,7 @@ model events or event history with the approach illustrated by this \
     "models:#/sdfThing/boat/007": {
       "sdfInstanceOf": "models:#/sdfThing/boat",
       "heater": "models:#/sdfThing/boat/sdfObject/heater/001",
-      "$context": {
-        "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763"
-      },
+      "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763",
       "identifier": "urn:boat:007:heater:1",
       "location": {
         "wgs84": {
@@ -2310,8 +2197,8 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
-<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]</a>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
             </figcaption></figure>
 </div>
 </section>
