@@ -41,6 +41,7 @@ normative:
   I-D.ietf-asdf-sdf: sdf
   RFC8288: link
   STD97: http
+  I-D.ietf-asdf-sdf-nonaffordance: non-affordance
 
 informative:
   REST:
@@ -60,7 +61,7 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
-  I-D.lee-asdf-digital-twin-08: digital-twin
+  I-D.lee-asdf-digital-twin-09: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
     title: Terminology for Layers
@@ -80,7 +81,7 @@ Models to describe them.
 
 [^status]
 
-[^status]: The present revision –05 is intended as input for IETF 123, with a few observations from the Hackathon addressed and this status paragraph updated.
+[^status]: The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format.
 
 
 --- middle
@@ -183,6 +184,9 @@ Proofshot:
 
   Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
 
+  TODO: Also mention the other message types we had so far (context snapshot,
+        context patch, identity manifest) here?
+
 Construction:
 : Construction messages enable the creation of a digital Instance,
   e.g., initialization/commissioning of a device or creation of its
@@ -201,6 +205,9 @@ Non-affordance:
   interactions with other Instances than the Thing (called "offDevice"
   now), this term is now considered confusing as it would often just
   be an affordance of another Instance than the Thing.
+  In this draft version, we are trying to use a new keyword called
+  `sdfContext` that is supposed to be slightly more accurate, replacing
+  the `$context` concept that was used in previous draft versions.
 
 # Instance Information and SDF
 
@@ -231,20 +238,35 @@ TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:d
 (Describe how protocol bindings can be used to convert these messages
 to/from concrete serializations...)
 
-#### Examples for context information
+TODO: Reference sdfProtocolMap
+
+### Context Snapshots
+
+Context information may be provided via the keyword `sdfContext` {{-non-affordance}},
+which replaces the `$context` keyword used in earlier draft versions.
+With this new approach, the context information that is included in the
+instance message is now controlled by the model and the corresponding schema
+information (as the `sdfContext` definition in the SDF model is structurally
+similar to `sdfData`).
+
+{{example-context}} gives an example for an instance message (effectively a
+context snapshot)
 
 ~~~ sdf
+info:
+  messageId: 8988be82-50dc-4249-bed2-60c9c8797623
 namespace:
   models: https://example.com/models
   boats: https://example.com/boats
 defaultNamespace: boats
+sdfInstanceOf:
+  model: models:#/sdfObject/boat
 sdfInstance:
-  "$context":
+  sdfContext:
     "$comment": Potential contents for the SDF context
     deviceName: urn:dev:org:30810-boat007
     deviceEui64Address: 50:32:5F:FF:FE:E7:67:28
     scimObjectId: 8988be82-50dc-4249-bed2-60c9c8797677
-    parentInstance: TODO -- addressing instance in data tree
 ~~~
 {:sdf #example-context
 title="Example for an SDF instance with context information"}
@@ -253,88 +275,68 @@ title="Example for an SDF instance with context information"}
 
 (See defn above.)
 
-The following examples are based on Figure 2 of {{-digital-twin}}, separated into
-an SDF proofshot and an SDF model.
+Proofshots are similar to context snapshots, with the important difference that
+they are not reporting the context information associated with an entity but
+also state information associated with its interaction affordances (properties,
+actions, and events).
+TODO: Note that the while the format for describing the state of properties is clearly
+governed by the schema information from the corresponding `sdfProperty`
+definition, it is still unclear how to best model the state of `sdfAction`s and
+`sdfEvents`.
+As in the case of the Context Snapshot, the Proofshot may also contain concrete
+values that reflect context information associated with a device via the
+`sdfContext` keyword {{-non-affordance}}.
 
-A proofshot that captures the state of a boat with a heater is shown in
-{{code-off-device-instance}}.
-Here, every property of the corresponding SDF model (see {{code-off-device-model}})
-is mapped to a concrete value that corresponds with the associated schema information.
+The following examples are based on {{-non-affordance}} and {{-digital-twin}}.
+{{code-off-device-instance}} shows a proofshot that captures the state of a
+sensor.
+Here, every property and context definition of the corresponding SDF model
+(see {{code-off-device-model}}) is mapped to a concrete value that corresponds
+with the associated schema information.
 The alternating structure of the SDF model
-(e. g., `sdfThing/boot007/sdfObject/heater/sdfProperty/isHeating`) is repeated
-in the proofshot, with `sdfObject` and `sdfThing` being replaced by `sdfInstance`.
+(e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated
+in the proofshot, with the top-level `sdfObject` being replaced by `sdfInstance`,
+which serves as the "entry point" to the instance message.
 
-While earlier approaches avoided the additional level of nesting by omitting the
-affordance quality names (i.e., `sdfProperty`, `sdfAction`, `sdfEvent`),
-including them explicitly avoids problems with namespace clashes and
-allows for a cleaner integration of meta data (via the `$context` keyword).
-
-As in any instance message, information from the model is not repeated but
-referenced via a pointer into the model tree (`sdfInstanceOf`); the
-namespace needed for this is set up in the usual `namespace` section that we
+Via the `model` quality in `sdfInstanceOf`, the exact `sdfThing` or `sdfObject`
+that corresponds with the `sdfInstance` is specified;
+the namespace needed for this is set up in the usual `namespace` section that we
 also have in model files.
 
-Note that in this example, the proofshot also contains values for the implicit
-(`offDevice`) properties that are static (e.g., the physical location assigned
-to the instance) but are still part of the instance's proofshot as its location
-is fixed -- this boat apparently never leaves the harbor.
+[^context-note]
+
+[^context-note]: Since we are now using the `sdfContext` keyword from {{-non-affordance}} for describing both "off-device" and context information, we have replaced the previously introduced `$context` keyword accodingly.
 
 ~~~ sdf
 info:
-  title: 'A proofshot example for heater #1 on boat #007'
-  version: '2025-04-08'
-  copyright: Copyright 2025. All rights reserved.
-  proofshotId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
 sdfInstance:
-  boat007:
-    sdfInstanceOf: models:#/sdfThing/boat
-    "$comment": Should the context be modeled via an additional quality? Or should
-      it rather become another kind of property?
-    "$context": # DISCUSS: We could also remove the leading "$" of the context
-      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
-    sdfProperty:
-      identifier: urn:boat:007:heater:1
-      location:
-        wgs84:
-          latitude: 35.2988233791372
-          longitude: 129.25478376484912
-          altitude: 0
-        postal:
-          city: Ulsan
-          post-code: '44110'
-          country: South Korea
-        w3w:
-          what3words: toggle.mopped.garages
-      owner: ExamTech Ltd.
-    sdfInstance:
-      heater:
-        sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
-        sdfProperty:
-          characteristic: 12V electric heater, 800W, automatic cutoff
-          status: error
-          report: 'On February 24, 2025, the boat #007''s heater #1 was on from 9
-            a.m. to 6 p.m.'
-        sdfEvent:
-          # Not a great event example IMHO... but this currently models an event history
-          maintenanceSchedule:
-          - outputValue: '2025-04-10'
-            timestamp: '2024-04-10T02:00:00Z'
-          - outputValue: '2026-04-10'
-            timestamp: '2025-04-10T02:00:00Z'
+  sdfContext:
+    timestamp: '2025-07-01T12:00:00Z'
+    thingId: envSensor:abc123
+    installationInfo:
+      mountType: ceiling
+  sdfProperty:
+    temperature: 23.124
+
 ~~~
 {:sdf #code-off-device-instance post="fold"
-title="SDF proofshot proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF proofshot example."}
 
 #### Corresponding SDF Model
 
 {{code-off-device-model}} shows a model like the one that could have
-been pointed to by the `sdfInstanceOf` pointers in the instance message.
-Note how the namespace is managed here to export the model components into
-`models:#/sdfThing/boat` and `models:#/sdfThing/boat/sdfObject/heater`.
+been pointed to by the `model` pointer within the `sdfInstanceOf` quality in the
+instance message.
+Note how the namespace is managed here to export the `boat` component into
+`models:#/sdfThing/boat`, which is the "entry point" used in the instance
+messages above.
 
 (This example model only specifies structure; it also could come with
 semantic information such as the units that are used for wgs84 etc.
@@ -342,82 +344,39 @@ In practice, the definition of `wgs84` etc. probably would come from a common
 library and just be referenced via `sdfRef`.)
 
 ~~~ sdf
-info:
-  title: An example model of a heater on a boat
-  version: '2025-01-27'
-  copyright: Copyright 2025. All rights reserved.
 namespace:
   models: https://example.com/models
+  sensors: https://example.com/sensors
 defaultNamespace: models
-sdfThing:
-  boat:
-    description: A boat equipped with heating and navigation systems
-    sdfProperty:
-      identifier:
-        "$comment": Is this actually off-device?
+sdfObject:
+  envSensor:
+    sdfContext:
+      timestamp:
         type: string
-        offdevice: true
-      owner:
-        "$comment": Is this actually off-device?
+      thingId:
         type: string
-        offdevice: true
-      location:
-        offdevice: true
+      deviceIdentity:
+        manufacturer:
+          type: string
+        firmwareVersion:
+          type: string
+      installationInfo:
         type: object
         properties:
-          wgs84:
-            type: object
-            properties:
-              latitude:
-                type: number
-              longitude:
-                type: number
-              altitude:
-                type: number
-          postal:
-            type: object
-            properties:
-              city:
-                type: string
-              post-code:
-                type: string
-              country:
-                type: string
-          w3w:
-            type: object
-            properties:
-              what3words:
-                type: string
-                format: "..."
-    sdfObject:
-      heater:
-        label: Cabin Heater
-        description: Temperature control system for cabin heating
-        sdfProperty:
-          characteristic:
-            description: Technical summary of the heater
-            type: string
-            default: 12V electric heater, 800W, automatic cutoff
-          status:
-            description: Current operational status
-            type: string
+          floor:
+            type: integer
+          mountType:
             enum:
-            - 'on'
-            - 'off'
-            - error
-            default: 'off'
-          report:
-            type: string
-        sdfEvent:
-          maintenanceSchedule:
-            "$comment": Should this actually be modeled as an event..?
-            description: Next scheduled maintenance date
-            sdfOutputData:
-              type: string
-              format: date-time
+            - ceiling
+            - wall
+    sdfProperty:
+      temperature:
+        type: number
+        unit: Cel
+
 ~~~
 {:sdf #code-off-device-model
-title="Revised SDF model proposal for Figure 2 of [I-D.lee-asdf-digital-twin-08]"}
+title="SDF Model that serves as a reference point for the instance message in this draft"}
 
 ### Construction
 
@@ -428,10 +387,19 @@ A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device).
+device). This output -- which can once again be modeled as an instance message
+-- may be referred to as an *identity manifest* when it primarily contains
+identity-related context information.
 
 Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
-It is still up for discussion whether this concept justifies a new keyword or whether construction and other lifecycle management processes should be modeled as `sdfAction`s instead.
+In practice, these constructors are going to be modeled as an `sdfAction`,
+although the way the `sdfAction` is going to be used exactly is not entirely
+clear yet.
+As the device that is being constructed will not be initialized before the
+construction has finished, the `sdfAction` has to be modeled as an external or
+"off-device" action. This raises the question whether the `sdfAction` still
+belongs into the SDF model that corresponds with the class the resulting device
+instance belongs to.
 
 (Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
@@ -440,51 +408,21 @@ which is pretty much a constructor.)
 
 #### Examples for SDF Constructors
 
-This section contains examples for both approaches discussed above:
-{{code-sdf-constructors}} introduces an `sdfConstructor` keyword which allows for defining both mandatory (in this example: `temperatureUnit`) and optional constructor parameters (in this example: `ipAddress`).
-The example shows that the names of constructor parameters may deviate from the quality names in the model (`temperatureUnit` vs `unit`) as the target quality is specified via a JSON pointer.
-Additionally, this constructor example explicitly labels the `ipAddress` as information that belongs to the `$context` of the proofshot.
+{{code-sdf-constructor-action}} shows a potential approach for describing
+constructors via the `sdfAction` keyword with a set of construction parameters
+contained in its `sdfInputData`.
 
-~~~ sdf
-info:
-  title: Example document for SDF (Semantic Definition Format) with constructors for
-    instantiation
-  version: '2019-04-24'
-  copyright: Copyright 2019 Example Corp. All rights reserved.
-  license: https://example.com/license
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfObject:
-  temperatureSensor:
-    sdfProperty:
-      temperature:
-        description: Temperature value measure by this Thing's temperature sensor.
-        type: number
-        sdfParameter:
-          unit:
-            "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
-            type: string
-    sdfConstructor:
-      construct:
-        parameters:
-          temperatureUnit:
-            required: true
-            target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
-          ipAddress:
-            "$comment": "Just trying some things out here. Should this parameter target the context or rather an (offDevice?) property?"
-            required: false
-            isContextInformation: true
-~~~
-{:sdf #code-sdf-constructors
-title="Example for SDF model with constructors"}
+As the constructor action is modeled as being detached from the device and
+performed by an external `constructor` in this example, both the resulting model
+and the initial instance description (which can be considered an identity
+manifest) are returned.
+The schema information that governs the shape of both the model and the instance
+message are referred to via the `sdfRef` keyword.
 
-The alternative approach is shown in {{code-sdf-constructor-action}}.
-Here, the constructor is modeled as an `sdfAction` that contains the same set of parameters in its `sdfInputData`.
-
-While this approach has advantages – we do not need to introduce new keywords to achieve a similar functionality and can simply use a plain JSON object as the construction message – a few things in this example are still unclear, especially when it comes to the mapping of constructor parameters to target affordances in the model and the designation of parameters as context information.
-Lastly, it is currently unclear what kind of schema information should be provided for the action's `sdfOutputData`.
-As a return value, a pointer to the instantiated device and/or the models describing it could make sense.
+DISCUSS: Note that the action may also return a pointer to an external SDF model
+and provide the additional information from the constructor via an SDF Mapping
+File. These are aspects that still require discussion, examples, and
+implementation experience.
 
 ~~~ sdf
 info:
@@ -493,47 +431,44 @@ info:
   copyright: Copyright 2019 Example Corp. All rights reserved.
   license: https://example.com/license
 namespace:
+  sdf: https://example.com/common/sdf/definitions
   cap: https://example.com/capability/cap
 defaultNamespace: cap
 sdfObject:
-  temperatureSensor:
-    sdfProperty:
-      temperature:
-        description: Temperature value measure by this Thing's temperature sensor.
-        type: number
-        unit:
-          "$comment": Should schema information be settable via a constructor at all? This question might indicate that we need different kinds of constructors
-          type: string
+  constructor:
     sdfAction:
       construct:
         sdfInputData:
-          "$comment": "DISCUSS: How can we establish a connection between constructor parameters and target properties?"
+          "$comment": "DISCUSS: Do we need to establish a connection between constructor parameters and the resulting instance message?"
           type: object
           properties:
             temperatureUnit:
               type: string
-              target: "#/sdfObject/temperatureSensor/sdfProperty/temperature/unit"
             ipAddress:
-              "$comment": How can we express that this is context information?
-              isContextInformation: true
+              type: string
           required:
             - temperatureUnit
         sdfOutputData:
+          "$comment": Would we point to the JSON Schema definitions here?
           type: object
           properties:
-            "$comment": "DISCUSS: What kind of schema information should we provide here?"
+            model:
+              type: object
+              properties:
+                sdfRef: "sdf:#/sdf/model/format"
+            instance:
+              type: object
+              properties:
+                sdfRef: "sdf:#/instance/message/format"
 ~~~
 {:sdf #code-sdf-constructor-action
 title="Example for SDF model with constructors"}
 
 #### Example for an SDF construction message
 
-{{code-sdf-construction-message}} shows a potential SDF construction message that
-allows for the creation of a proofshot from a constructor that is contained within
-an SDF model.
-
-Note that the `ipAddress` can be considered context information or an off-device property.
-TODO: Needs more discussion how to model this kind of information.
+{{code-sdf-construction-message}} shows a potential SDF construction message
+that initializes a device. As shown above, the information from the message
+ends up in both an SDF Model (or Mapping File) and an instance message.
 
 ~~~ sdf
 info:
@@ -542,79 +477,97 @@ info:
 namespace:
   cap: https://example.com/capability/cap
 defaultNamespace: cap
-sdfConstruction:
-  sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  arguments:
-    temperatureUnit: Cel
+sdfInstanceOf:
+  model: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
+sdfInstance:
+  sdfContext:
     ipAddress: "192.0.2.42"
+    $comment: Could the constructor parameter also be considered context information..?
+    temperatureUnit: Cel
 ~~~
 {:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
 
-### Deltas and Default/Base messages
+### Deltas and Patch Messages
 
-What changed since the last proofshot?
+When the state of a device at a given point in time is known (e.g., due to a
+previous instance message), an external entity might only be interested in the
+changes since that point in time. Or it might want to adjust its state and/or
+context the device operates in. For both purposes, instance messages can be
+used.
 
-What is different from the base status of the device?
+{{code-sdf-delta-message}} shows an example that contains an instance message
+reporting a "proofshot delta", that is the state changes that occured compared
+to the ones reported in the previous message (identified via its
+`previousMessageId`). In this example, only the temperature as measured by the
+sensor has changed, so only that information is included.
 
-Can I get the same (equivalent, not identical) coffee I just ordered but with 10 % more milk?
+Delta messages could be used in the Series Transfer Pattern {{STP}}, which may
+be one way to model a telemetry stream from a device.
 
-(Think merge-patch.)
-
-A construction message may be a delta, or it may have parameters that
-algorithmically influence the elements of state that one would find in
-a proofshot.
-
-<!-- DISCUSS: Is a construction message the right way to create a proofshot delta? -->
 ~~~ sdf
 info:
-  title: Example SDF delta construction message
-  "$comment": 'TODO: What kind of metadata do we need here?'
+  title: Example SDF delta instance message
+  previousMessageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   cap: https://example.com/capability/cap
+  models: https://example.com/models
 defaultNamespace: cap
-sdfConstruction:
-  sdfConstructor: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-  previousProofshot: TODO (Can we provide an ID or just a timestamp here?)
-  arguments:
+sdfInstanceOf:
+  model: models:/sdfObject/envSensor
+sdfInstance:
+  sdfProperty:
     temperature: 24
 ~~~
-{:sdf #code-sdf-construction-delta-message
-title="Example for an SDF construction message for proofshot delta"}
+{:sdf #code-sdf-delta-message
+title="Example of an SDF instance message that serves as a proofshot delta."}
 
-Deltas and Default/Base messages could be used in the Series Transfer
-Pattern {{STP}}, which may be one way to model a telemetry stream from a
-device.
-
-A potential example for the use of proofshot deltas is shown in {{code-sdf-proofshot-delta}}.
-Here, the proofshot delta refers to the previous example in {{code-off-device-instance}} via its `proofshotId`, which is included in the `previousProofshot` quality.
-Compared to the previous proofshot, only the status property of the boat's heater has changed from `error` to `operational`.
-Via an algorithm such as JSON Merge Patch {{-merge-patch}}, the actual proofshot can be resolved by applying the delta to the previous version.
-
-In future versions of this document, we will evaluate whether JSON Merge Patch is sufficient to fulfill the requirements for the resolution algorithm which have to formulated and refined themselves.
+Yet another purpose for instance message might be appyling an update to a
+device's configuration, e.g. via a so-called context patch message.
+Such a message is shown in {{code-sdf-context-patch}}, where a change of the
+device's `mountType` is reflected. This message type might be especially
+relevant for digital twins {{-digital-twin}}, where changes to physical
+attributes (such as the location) need to be reflected somehow.
 
 ~~~ sdf
 info:
-  title: Example SDF delta proofshot
-  previousProofshot: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
-  proofshotId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-  version: '2025-04-08'
-  copyright: Copyright 2025. All rights reserved.
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+  patchMethod: merge-patch
 sdfInstance:
-  boat007:
-    sdfInstanceOf: models:#/sdfThing/boat
-    sdfInstance:
-      heater:
-        sdfInstanceOf: models:#/sdfThing/boat/sdfObject/heater
-        sdfProperty:
-          status: operational
+  sdfContext:
+    installationInfo:
+      mountType: wall
+
 ~~~
-{:sdf #code-sdf-proofshot-delta
-title="Example for an SDF proofshot delta that overrides the status property of the boat's heater."}
+{:sdf #code-sdf-context-patch
+title="Example of an SDF context patch message that uses the common instance message format."}
+
+When comparing  {{code-sdf-delta-message}} and {{code-sdf-context-patch}}, we
+can see that the main difference between the messages is the _purpose_ these
+message are being used for. This purpose could be implicitly reflected by the
+nature of the resource that accepts or returns the respective message type.
+It would also be possible to indicate the purpose more explicitly by using a
+different content format when transferring the messages over the wire.
+Another difference, however, lays in the fact that the context patch is not
+including a `previousMessageId`, which might be sufficient to distinguish the
+two message types.
+
+Despite their different purpose, both messages will apply some kind of patch
+algorithm.
+JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the `patchMethod` field within the `sdfInstanceOf` quality.
 
 ## Metadata
 
@@ -665,13 +618,13 @@ sdfThing:
   boat007:
     label: "Digital Twin of Boat #007"
     description: A ship equipped with heating and navigation systems
-    sdfProperty:
+    sdfContext:
+      scimObjectId:
+        type: string
       identifier:
-        offDevice: true
         type: string
         const: urn:boat:007:heater:1
       location:
-        offDevice: true
         type: object
         const:
           wgs84:
@@ -685,7 +638,6 @@ sdfThing:
           w3w:
             what3words: toggle.mopped.garages
       owner:
-        offDevice: true
         type: string
         default: ExamTech Ltd.
         const: ExamTech Ltd.
@@ -722,7 +674,7 @@ sdfThing:
               const: '2025-07-15T07:27:15+0000'
 ~~~
 {:sdf #code-instance-syntactic-sugar-illustration
-title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
 
 ### Alternative Instance Keys
 
@@ -742,8 +694,7 @@ sdfInstance:
   models:#/sdfThing/boat/007:
     sdfInstanceOf: models:#/sdfThing/boat
     heater: models:#/sdfThing/boat/sdfObject/heater/001
-    "$context":
-      scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
+    scimObjectId: a2e06d16-df2c-4618-aacd-490985a3f763
     identifier: urn:boat:007:heater:1
     location:
       wgs84:
@@ -770,7 +721,7 @@ sdfInstance:
         timestamp: '2025-04-10T02:00:00Z'
 ~~~
 {:sdf #code-off-device-instance-alternative
-title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-08]"}
+title="SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]"}
 
 {::include-all lists.md}
 

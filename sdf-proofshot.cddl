@@ -1,11 +1,12 @@
-start = sdf-proofshot-syntax
+start = sdf-instance-message-syntax
 
-sdf-proofshot-syntax = {
+sdf-instance-message-syntax = {
  ; info will be required in most process policies
  ? info: sdfinfo
  ? namespace: named<text>
  ? defaultNamespace: text
- ? sdfInstance: named<instancequalities>
+ ? sdfInstanceOf: sdf-instance-of
+ ? sdfInstance: sdf-instance
 }
 
 sdfinfo = {
@@ -14,17 +15,22 @@ sdfinfo = {
  ? version: text
  ? copyright: text
  ? license: text
- ; Identifier used to connect this proofshot to a previous one.
+ ? messageId: text
+ ; Identifier used to connect this instance message to a previous one.
  ;
- ; Allows this proofshot to only contain values that have acually
- ; changed, turning it into a "Delta".
- ;
- ; DISCUSS: Is this the right place to put this information?
- ;          Should the identifier have a specific format?
- ? previousProofshot: text
+ ; Allows this instance message to only contain values that have acually
+ ; changed, turning it into a "Delta" or a "Patch", depending on the message
+ ; purpose.
+ ? previousMessageId: text
  ? modified: modified-date-time
  ? features: [
              ]
+ optional-comment
+}
+
+sdf-instance-of = {
+ model: text
+ ? patchMethod: text ; default is merge-patch
  optional-comment
 }
 
@@ -42,16 +48,29 @@ commonqualities = (
 
 ; For describing the state of instances at a given point in time
 ; 
-; An sdfInstance can refer to either an sdfThing or an sdfObject
-instancequalities = {
+; An sdfInstance can refer to either an sdfThing or an sdfObject.
+; Structurally, it is equivalent to that of an sdfThing.
+sdf-instance = thingqualities
+
+objectqualities = {
  commonqualities
- ? sdfInstanceOf: text
- ? $context: named<allowed-types>
- ? sdfInstance: named<instancequalities>
- paedataqualities
+ 
+ cpaedataqualities
 }
 
-paedataqualities = (
+thingqualities = {
+ sdfThing: named<thingqualities>
+
+ sdfObject: named<objectqualities>
+
+ commonqualities
+ 
+ cpaedataqualities
+}
+
+cpaedataqualities = (
+ ? sdfContext: named<allowed-types>
+
  ; Models the current state of the instance's properties
  ? sdfProperty: named<allowed-types>
 
