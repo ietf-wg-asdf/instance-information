@@ -163,6 +163,11 @@ Instance-related Message
 : A message that describes the state or a state change of a specific instance.
   (TBC -- also: do we need this additional term?)
 
+Message Archetype
+: In the context of instance-related messages:
+  A message with specific content and effect, covering a wider set of different use cases.
+  In this document, we are observing a total of four instance-related message archetypes.
+
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
