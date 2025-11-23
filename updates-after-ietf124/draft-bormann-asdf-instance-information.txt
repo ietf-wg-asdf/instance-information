@@ -501,23 +501,29 @@ Table of Contents
    have to replicate a nested structure via sdfThing and/or sdfObject if
    present in the referenced SDF model.
 
-                   +=============+======+=============+
-                   | Quality     | Type | Description |
-                   +=============+======+=============+
-                   | sdfThing    | map  | TODO        |
-                   +-------------+------+-------------+
-                   | sdfObject   | map  | TODO        |
-                   +-------------+------+-------------+
-                   | sdfContext  | map  | TODO        |
-                   +-------------+------+-------------+
-                   | sdfProperty | map  | TODO        |
-                   +-------------+------+-------------+
-                   | sdfAction   | map  | TODO        |
-                   +-------------+------+-------------+
-                   | sdfEvent    | map  | TODO        |
-                   +-------------+------+-------------+
+         +=============+======+==================================+
+         | Quality     | Type | Description                      |
+         +=============+======+==================================+
+         | sdfThing    | map  | Values for the thing entries in  |
+         |             |      | the referenced SDF definition    |
+         +-------------+------+----------------------------------+
+         | sdfObject   | map  | Values for the object entries in |
+         |             |      | the referenced SDF definition    |
+         +-------------+------+----------------------------------+
+         | sdfContext  | map  | Values for the context entries   |
+         |             |      | in the referenced SDF definition |
+         +-------------+------+----------------------------------+
+         | sdfProperty | map  | Values for the properties in the |
+         |             |      | referenced SDF definition        |
+         +-------------+------+----------------------------------+
+         | sdfAction   | map  | Values for the actions in the    |
+         |             |      | referenced SDF definition        |
+         +-------------+------+----------------------------------+
+         | sdfEvent    | map  | Values for the events in the     |
+         |             |      | referenced SDF definition        |
+         +-------------+------+----------------------------------+
 
-                         Table 5: Instance Block
+                          Table 5: Instance Block
 
 4.  Message Archetypes
 
