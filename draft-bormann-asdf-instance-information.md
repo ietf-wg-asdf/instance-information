@@ -158,7 +158,7 @@ Instance:
   subject of an interaction.
 
 Instance-related Message
-: A message that describes the state or a state change of an instance.
+: A message that describes the state or a state change of a specific instance.
   (TBC -- also: do we need this additional term?)
 
 Proofshot:
@@ -215,7 +215,7 @@ Non-affordance:
 
 # Instance Information and SDF
 
-The instantiation of an SDF model does not produce an instance, which is, for example, a physical device or a digital twin.
+The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
 Instead, the instantiation produces an instance-related _message_, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
 Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
 Taking into account previous revisions of this document as well as {{-non-affordance}}, the potential use cases for instance-related messages indicate the following archetypes:
@@ -223,7 +223,7 @@ Taking into account previous revisions of this document as well as {{-non-afford
 1. *Context snapshots* that only report context information about a Thing
 2. *Proofshots* that report a Thing's state (or parts of it), which may include context information
 3. *Delta messages* that indicate state changes compared to a previous context snapshot or proofshot message
-4. *Patch messages* that cause a Thing's state to change
+4. *Patch messages* that indicate state changes to *cause* a Thing's state to change
 5. *Identity manifests* that report information related to a Thing's identity
 6. *Construction messages* that initiate a Thing's (re)configuration or its comissioning
 
@@ -247,7 +247,7 @@ The specification text itself will be accompanied by examples that have been ins
 
 Instance-related messages can be messages that relate to a property, action, or
 event (input or output data), or they can be "proofshots" (extracted state
-information, either in general or in the form of context snapshots etc.).
+information, either in general or in a specific form such as a context snapshot etc.).
 
 Instance-related messages are controlled by a *model*, which normally is the
 interaction model of the device (class-level information).
@@ -339,7 +339,7 @@ In constrast to models, including a `namespace` quality is mandatory as at least
 
 ## Instance-of Block
 
-Destinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
+Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
 Via the `model` keyword, this quality defines the entry point the `sdfInstance` quality from the next section is referring to.
 Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
 
