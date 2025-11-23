@@ -282,7 +282,7 @@ To identify the reference state for a delta/patch, we need
 * device identity (thingId?)
 * state info (timestamp? state/generation identifier?)
 
-### Context Information
+## Context Information
 
 Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
