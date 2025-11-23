@@ -220,29 +220,58 @@ Non-affordance:
 The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
 Instead, the instantiation produces an instance-related _message_, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
 Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
-Taking into account previous revisions of this document as well as {{-non-affordance}}, the potential use cases for instance-related messages indicate the following archetypes:
+Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for instance-related messages:
+The intended effect of a message, which can either be the exposure or an update of a Thing's state;
+and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
-1. *Context snapshots* that only report context information about a Thing
-2. *Proofshots* that report a Thing's state (or parts of it), which may include context information
-3. *Delta messages* that indicate state changes compared to a previous context snapshot or proofshot message
-4. *Patch messages* that indicate state changes to *cause* a Thing's state to change
-5. *Identity manifests* that report information related to a Thing's identity
-6. *Construction messages* that initiate a Thing's (re)configuration or its comissioning
+Based on these considerations (as illustrated by the systematization in {{{#instance-message-dimensions}}}), we can identify the following four message archetypes:
 
-These messages may be further clustered into the following three types:
+<!-- TODO: The names probably need to be improved -->
 
-<!-- TODO: The names need to be improved -->
+1. *State reports* that may contain contain both affordance-related and context information, including information about a Thing's identity,
+2. *Construction messages*, which trigger a Thing's initial configuration process or its commissioning,
+3. *State report updates* that indicate changes that have occurred since a reference state report, and
+4. *State patches* that update the Thing's state.
 
-1. *State reports*, both regarding affordances and context information (which includes information about a Thing's identity),
-2. *State report updates*, indicating changes that have occurred since a reference state report, and
-3. *State patches*, which include the original patch messages as well as construction messages
+<!-- TODO: I am not really happy with the entry names yet-->
+<table>
+  <thead>
+    <tr>
+      <!-- FIXME: This does not work with kramdown-rfc at the moment -->
+      <!-- <th colspan="2" rowspan="2"></th> -->
 
-The uniform message format can be used for all three message types.
+      <th colspan="2"></th>
+      <th colspan="2" align="center">Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2"></td>
+      <td align="center">Freestanding</td>
+      <td align="center">Relative</td>
+    </tr>
+    <tr>
+      <!-- TODO: Vertical alignment is apparently not supported at the moment -->
+      <td rowspan="2" align="center">(Intended) Effect</td>
+      <td align="center">State Exposure</td>
+      <td align="center">Status Report</td>
+      <td align="center">Status Report Update</td>
+    </tr>
+    <tr>
+      <td align="center">State Change</td>
+      <td align="center">Construction</td>
+      <td align="center">State Patch</td>
+    </tr>
+  </tbody>
+</table>
+{: #instance-message-dimensions title="Systematization of instance-related messages along the dimensions \"Content\" and \"(Intended) Effect\"."}
+
+The uniform message format can be used for all four message archetypes.
 {{{#syntax}}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
 This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.
 
 In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
-The specification text itself will be accompanied by examples that have been inspired by {{-non-affordance}} and {{-digital-twin}}.
+The specification text itself will be accompanied by examples that have been inspired by {{-non-affordance}} and {{-digital-twin}} that each correspond with one of the four archetypes.
 
 ## Axioms for instance-related messages
 
@@ -393,7 +422,14 @@ TODO
 
 # Message Purposes and Usecases
 
-As mentioned before, the archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
+As mentioned before, the archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases:
+
+1. *Context snapshots* that only report context information about a Thing
+2. *Proofshots* that report a Thing's state (or parts of it), which may include context information
+3. *Delta messages* that indicate state changes compared to a previous context snapshot or proofshot message
+4. *Patch messages* that indicate state changes to *cause* a Thing's state to change
+5. *Identity manifests* that report information related to a Thing's identity
+6. *Construction messages* that initiate a Thing's (re)configuration or its comissioning
 
 ## Context Snapshots
 
