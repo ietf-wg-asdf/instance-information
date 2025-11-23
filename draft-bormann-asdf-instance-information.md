@@ -303,7 +303,7 @@ TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:d
 
 # Message Format {#message-format}
 
-Instance-related messages share a number of structural features with SDF models regarding metadata and namespace information, but are also different in crucial aspects.
+The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes metadata and namespace information), but is also different in crucial aspects.
 
 TODO: Decide where we want to keep this:
 
