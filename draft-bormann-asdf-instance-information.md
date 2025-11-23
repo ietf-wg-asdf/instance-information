@@ -356,7 +356,9 @@ In the instance block, state information for properties, actions, and events as 
 Depending on the archetype, this information will either be used to report a Thing's current state, to report state _changes_, or to update state via a patch or reconfiguration.
 
 Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
-Note that we might also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
+
+The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the instance-related message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
+Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
 
 | Quality          | Type   | Description |
 |------------------|--------|-------------|
