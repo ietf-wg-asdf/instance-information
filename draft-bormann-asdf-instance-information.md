@@ -109,9 +109,11 @@ exchanged in, or the subject of such, interactions; this is left to the
 specific ecosystems, which tend to have rather different ways to
 represent this information.
 
-This document discusses types of Instance Information and defines
-Abstract (eco-system independent) Representation
-Formats for them as well as ways to use SDF Models to describe them.
+This document discusses Instance Information in different types and roles.
+It defines an *abstraction* of this, as an eco-system independent way to reason about this information.
+This abstraction can be used at a *conceptual* level, e.g., to define models that govern the instance information.
+However, where this is desired, it also can be used as the basis for a concrete *neutral representation* (Format) that can actually be used for interchange to exchange information and parameters for interactions to be performed.
+In either case, the structure and semantics of this information are governed by SDF Models.
 
 ## Conventions and Definitions
 
