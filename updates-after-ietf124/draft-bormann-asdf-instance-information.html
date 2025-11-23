@@ -1559,13 +1559,13 @@ Several media types can be defined for deltas/patches; JSON merge-patch <span>[<
         </h3>
 <p id="section-2.2-1">Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
-statements ("the temperature here", "my current draw")...<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+statements such as "the temperature here" or "my current draw".<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2-2">Messages may have to be complemented by this context for
 interpretation, i.e., the context needed may need to be reified in the
 message (compare the use of SenML "n").
 Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2-3">For this purpose, we are using the <code>sdfContext</code> keyword introduced by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.
-Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfProperty</code><a href="#section-2.2-3" class="pilcrow">¶</a></p>
+Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfProperty</code>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1576,10 +1576,10 @@ Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfP
       <h2 id="name-message-format">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-message-format" class="section-name selfRef">Message Format</a>
       </h2>
-<p id="section-3-1">The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes metadata and namespace information), but is also different in crucial aspects.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">TODO: Decide where we want to keep this:<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Multiple models may apply to the same device (including but not only revisions of the models).<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-3">One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="information-block">
 <section id="section-3.1">
         <h3 id="name-information-block">
