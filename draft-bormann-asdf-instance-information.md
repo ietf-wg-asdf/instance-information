@@ -414,6 +414,8 @@ Note that we also have to replicate a nested structure via `sdfThing` and/or `sd
 
 Based on the common message format defined in {{{#message-format}}} and the systematization from {{{#instance-message-dimensions}}}, we can derive a set of four archetypes that serve different use cases and recipients.
 
+TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
+
 ## State Reports
 
 This instace-related message contains information regarding a Thing's state, both in terms of context information and the state of individual affordances.
