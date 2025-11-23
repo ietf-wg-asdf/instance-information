@@ -416,23 +416,40 @@ Based on the common message format defined in {{{#message-format}}} and the syst
 
 TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
 
+TODO: The description of the individual messages probably has to be expanded. 
+      Maybe some of the content from the six example messages should be moved here.
+
 ## State Reports
 
-This instace-related message contains information regarding a Thing's state, both in terms of context information and the state of individual affordances.
+This instace-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
+In the message, the `previousMessageId` field in the information block MUST NOT be present.
+Furthermore, when transmitting this message in its JSON format, the content type `application/sdf-state-report+json` MUST be indicated if supported by the protocol used for transmission.
 
-TBC
-
-## State Report Updates
-
-TODO
-
-## State Patches
-
-TODO
+State reports MAY only contain values for a *subset* of all possible affordances and context information exposed by a Thing.
+Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
 
 ## Construction Messages
 
 (These might not be covered here but via dedicated actions.)
+
+Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
+Furthermore, construction messages MUST be indicated by a different media type, namely `application/sfd-construction+json`.
+
+## State Report Updates
+
+State report updates are messages that only describe updates relative to a previous message.
+For this purpose, a `previousMessageId` MUST be present in the info block.
+When transmitting state report updates, the media type `application/sdf-state-report-update+json` MUST be used if possible.
+
+By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
+Via the `patchMethod` quality, different patch algorithms MAY be indicated.
+
+## State Patches
+
+State patches are structurally equivalent to state report updates.
+However, they utilize the patch mechanism (using the provided `patchMethod`) to alter the state of a Thing instead of reporting state changes.
+Since they are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
+When transmitting state patches, the media type `application/sdf-state-patch+json` MUST be used if possible.
 
 # Message Purposes and Usecases
 
