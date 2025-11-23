@@ -239,6 +239,7 @@ These messages may be further clustered into the following three types:
 
 The uniform message format can be used for all three message types.
 {{{#syntax}}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
+This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.
 
 In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
 The specification text itself will be accompanied by examples that have been inspired by {{-non-affordance}} and {{-digital-twin}}.
