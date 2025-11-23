@@ -253,53 +253,58 @@ Table of Contents
    present, reporting different kinds of information related to a Thing
    or causing it to change the state of the Thing when consumed by the
    recipient.  Taking into account previous revisions of this document
-   as well as [I-D.ietf-asdf-sdf-nonaffordance], the potential use cases
-   for instance-related messages indicate the following archetypes:
+   as well as [I-D.ietf-asdf-sdf-nonaffordance], we identified two main
+   dimensions for covering the potential use cases for instance-related
+   messages: The intended effect of a message, which can either be the
+   exposure or an update of a Thing's state; and the actual content of
+   the message, which may be freestanding (without a reference to a
+   previous message or state) or relative (with such a reference).
 
-   1.  _Context snapshots_ that only report context information about a
-       Thing
+   Based on these considerations (as illustrated by the systematization
+   in #instance-message-dimensions), we can identify the following four
+   message archetypes:
 
-   2.  _Proofshots_ that report a Thing's state (or parts of it), which
-       may include context information
+   1.  _State reports_ that may contain contain both affordance-related
+       and context information, including information about a Thing's
+       identity,
 
-   3.  _Delta messages_ that indicate state changes compared to a
-       previous context snapshot or proofshot message
+   2.  _Construction messages_, which trigger a Thing's initial
+       configuration process or its commissioning,
 
-   4.  _Patch messages_ that indicate state changes to _cause_ a Thing's
-       state to change
-
-   5.  _Identity manifests_ that report information related to a Thing's
-       identity
-
-   6.  _Construction messages_ that initiate a Thing's (re)configuration
-       or its comissioning
-
-   These messages may be further clustered into the following three
-   types:
-
-   1.  _State reports_, both regarding affordances and context
-       information (which includes information about a Thing's
-       identity),
-
-   2.  _State report updates_, indicating changes that have occurred
+   3.  _State report updates_ that indicate changes that have occurred
        since a reference state report, and
 
-   3.  _State patches_, which include the original patch messages as
-       well as construction messages
+   4.  _State patches_ that update the Thing's state.
 
-   The uniform message format can be used for all three message types.
-   #syntax specifies the formal syntax of instance-related messages all
-   normative statements as well as the examples in this document will
-   adhere to.  This syntax can serve to describe both the abstract
-   structure and the concrete shape of the messages that can be used as
-   a neutral form in interchange.
+   +====================================+==============================+
+   |                                    |           Content            |
+   +====================================+==============+===============+
+   |                                    | Freestanding |    Relative   |
+   +-------------------+----------------+--------------+---------------+
+   | (Intended) Effect |     State      |    Status    | Status Report |
+   |                   |    Exposure    |    Report    |     Update    |
+   |                   +----------------+--------------+---------------+
+   |                   |     State      | Construction |  State Patch  |
+   |                   |     Change     |              |               |
+   +-------------------+----------------+--------------+---------------+
+
+      Table 1: Systematization of instance-related messages along the
+               dimensions "Content" and "(Intended) Effect".
+
+   The uniform message format can be used for all four message
+   archetypes. #syntax specifies the formal syntax of instance-related
+   messages all normative statements as well as the examples in this
+   document will adhere to.  This syntax can serve to describe both the
+   abstract structure and the concrete shape of the messages that can be
+   used as a neutral form in interchange.
 
    In the following, we will first outline a number of general
    principles for instance-related messages, before detailing the
    specific archetypes we define in this document.  The specification
    text itself will be accompanied by examples that have been inspired
    by [I-D.ietf-asdf-sdf-nonaffordance] and
-   [I-D.lee-asdf-digital-twin-09].
+   [I-D.lee-asdf-digital-twin-09] that each correspond with one of the
+   four archetypes.
 
 2.1.  Axioms for instance-related messages
 
@@ -419,7 +424,7 @@ Table of Contents
    |                   |          | semantics                          |
    +-------------------+----------+------------------------------------+
 
-                Table 1: Qualities of the Information Block
+                Table 2: Qualities of the Information Block
 
 3.2.  Namespaces Block
 
@@ -441,7 +446,7 @@ Table of Contents
      |                  |        | default in resolving identifiers  |
      +------------------+--------+-----------------------------------+
 
-                         Table 2: Namespaces Block
+                         Table 3: Namespaces Block
 
 3.3.  Instance-of Block
 
@@ -467,7 +472,7 @@ Table of Contents
    | $comment    | string | Source code comments only, no semantics   |
    +-------------+--------+-------------------------------------------+
 
-                        Table 3: Instance-of Block
+                        Table 4: Instance-of Block
 
 3.4.  Instance Block
 
@@ -506,7 +511,7 @@ Table of Contents
                    | sdfEvent    | map  | TODO        |
                    +-------------+------+-------------+
 
-                         Table 4: Instance Block
+                         Table 5: Instance Block
 
 4.  Message Archetypes
 
@@ -534,7 +539,25 @@ Table of Contents
 
    As mentioned before, the archetypes can be further subdivided into
    (at least) six kinds of messages that all deal with different use
-   cases.
+   cases:
+
+   1.  _Context snapshots_ that only report context information about a
+       Thing
+
+   2.  _Proofshots_ that report a Thing's state (or parts of it), which
+       may include context information
+
+   3.  _Delta messages_ that indicate state changes compared to a
+       previous context snapshot or proofshot message
+
+   4.  _Patch messages_ that indicate state changes to _cause_ a Thing's
+       state to change
+
+   5.  _Identity manifests_ that report information related to a Thing's
+       identity
+
+   6.  _Construction messages_ that initiate a Thing's (re)configuration
+       or its comissioning
 
 5.1.  Context Snapshots
 
