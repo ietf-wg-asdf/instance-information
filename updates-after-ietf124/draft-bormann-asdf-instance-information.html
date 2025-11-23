@@ -1367,7 +1367,7 @@ subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p
           <dd class="break"></dd>
 <dt id="section-1.1-3.9">Instance-related Message</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.10">
-            <p id="section-1.1-3.10.1">A message that describes the state or a state change of an instance.
+            <p id="section-1.1-3.10.1">A message that describes the state or a state change of a specific instance.
 (TBC -- also: do we need this additional term?)<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1441,7 +1441,7 @@ the <code>$context</code> concept that was used in previous draft versions.<a hr
       <h2 id="name-instance-information-and-sd">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-instance-information-and-sd" class="section-name selfRef">Instance Information and SDF</a>
       </h2>
-<p id="section-2-1">The instantiation of an SDF model does not produce an instance, which is, for example, a physical device or a digital twin.
+<p id="section-2-1">The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
 Instead, the instantiation produces an instance-related <em>message</em>, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
 Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
 Taking into account previous revisions of this document as well as <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>, the potential use cases for instance-related messages indicate the following archetypes:<a href="#section-2-1" class="pilcrow">¶</a></p>
@@ -1456,7 +1456,7 @@ Taking into account previous revisions of this document as well as <span>[<a hre
           <p id="section-2-2.3.1"><em>Delta messages</em> that indicate state changes compared to a previous context snapshot or proofshot message<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-2.4">
-          <p id="section-2-2.4.1"><em>Patch messages</em> that cause a Thing's state to change<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-2.4.1"><em>Patch messages</em> that indicate state changes to <em>cause</em> a Thing's state to change<a href="#section-2-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-2.5">
           <p id="section-2-2.5.1"><em>Identity manifests</em> that report information related to a Thing's identity<a href="#section-2-2.5.1" class="pilcrow">¶</a></p>
@@ -1488,7 +1488,7 @@ The specification text itself will be accompanied by examples that have been ins
         </h3>
 <p id="section-2.1-1">Instance-related messages can be messages that relate to a property, action, or
 event (input or output data), or they can be "proofshots" (extracted state
-information, either in general or in the form of context snapshots etc.).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+information, either in general or in a specific form such as a context snapshot etc.).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">Instance-related messages are controlled by a <em>model</em>, which normally is the
 interaction model of the device (class-level information).
 That interaction model may provide a model of the interaction during which the
@@ -1668,7 +1668,7 @@ In constrast to models, including a <code>namespace</code> quality is mandatory 
         <h3 id="name-instance-of-block">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-instance-of-block" class="section-name selfRef">Instance-of Block</a>
         </h3>
-<p id="section-3.3-1">Destinct from SDF models are two instance-specific blocks, the first of which is identified via the <code>sdfInstanceOf</code> keyword.
+<p id="section-3.3-1">Distinct from SDF models are two instance-specific blocks, the first of which is identified via the <code>sdfInstanceOf</code> keyword.
 Via the <code>model</code> keyword, this quality defines the entry point the <code>sdfInstance</code> quality from the next section is referring to.
 Furthermore, via the <code>patchMethod</code> field, a patch algorithm different from JSON Merge Patch can be specified.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span id="name-instance-of-block-2"></span><div id="iobsec">

@@ -178,8 +178,8 @@ Table of Contents
       of an interaction.
 
    Instance-related Message  A message that describes the state or a
-      state change of an instance.  (TBC -- also: do we need this
-      additional term?)
+      state change of a specific instance.  (TBC -- also: do we need
+      this additional term?)
 
    Proofshot:  A message that attempts to describe the state of an
       Instance at a particular moment (which may be part of the
@@ -237,14 +237,14 @@ Table of Contents
 
 2.  Instance Information and SDF
 
-   The instantiation of an SDF model does not produce an instance, which
-   is, for example, a physical device or a digital twin.  Instead, the
-   instantiation produces an instance-related _message_, which adheres
-   to a uniform message format and is always controlled by the
-   corresponding SDF model.  Depending on the recipient and the purpose
-   of the message, different fields of the message format are present,
-   reporting different kinds of information related to a Thing or
-   causing it to change the state of the Thing when consumed by the
+   The instantiation of an SDF model does not directly express an
+   instance, which is, for example, a physical device or a digital twin.
+   Instead, the instantiation produces an instance-related _message_,
+   which adheres to a uniform message format and is always controlled by
+   the corresponding SDF model.  Depending on the recipient and the
+   purpose of the message, different fields of the message format are
+   present, reporting different kinds of information related to a Thing
+   or causing it to change the state of the Thing when consumed by the
    recipient.  Taking into account previous revisions of this document
    as well as [I-D.ietf-asdf-sdf-nonaffordance], the potential use cases
    for instance-related messages indicate the following archetypes:
@@ -258,7 +258,8 @@ Table of Contents
    3.  _Delta messages_ that indicate state changes compared to a
        previous context snapshot or proofshot message
 
-   4.  _Patch messages_ that cause a Thing's state to change
+   4.  _Patch messages_ that indicate state changes to _cause_ a Thing's
+       state to change
 
    5.  _Identity manifests_ that report information related to a Thing's
        identity
@@ -295,8 +296,8 @@ Table of Contents
 
    Instance-related messages can be messages that relate to a property,
    action, or event (input or output data), or they can be "proofshots"
-   (extracted state information, either in general or in the form of
-   context snapshots etc.).
+   (extracted state information, either in general or in a specific form
+   such as a context snapshot etc.).
 
    Instance-related messages are controlled by a _model_, which normally
    is the interaction model of the device (class-level information).
@@ -435,7 +436,7 @@ Table of Contents
 
 3.3.  Instance-of Block
 
-   Destinct from SDF models are two instance-specific blocks, the first
+   Distinct from SDF models are two instance-specific blocks, the first
    of which is identified via the sdfInstanceOf keyword.  Via the model
    keyword, this quality defines the entry point the sdfInstance quality
    from the next section is referring to.  Furthermore, via the
