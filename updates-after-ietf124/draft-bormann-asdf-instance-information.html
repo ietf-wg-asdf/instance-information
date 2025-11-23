@@ -1208,13 +1208,13 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-state-reports" class="internal xref">State Reports</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-state-report-updates" class="internal xref">State Report Updates</a></p>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-state-patches" class="internal xref">State Patches</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-state-report-updates" class="internal xref">State Report Updates</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-state-patches" class="internal xref">State Patches</a></p>
 </li>
             </ul>
 </li>
@@ -1805,37 +1805,51 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
       </h2>
 <p id="section-4-1">Based on the common message format defined in <span class="contact-name">#message-format</span> and the systematization from <span class="contact-name">#instance-message-dimensions</span>, we can derive a set of four archetypes that serve different use cases and recipients.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">TODO: The description of the individual messages probably has to be expanded.
+      Maybe some of the content from the six example messages should be moved here.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <div id="state-reports">
 <section id="section-4.1">
         <h3 id="name-state-reports">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-state-reports" class="section-name selfRef">State Reports</a>
         </h3>
-<p id="section-4.1-1">This instace-related message contains information regarding a Thing's state, both in terms of context information and the state of individual affordances.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">TBC<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="state-report-updates">
-<section id="section-4.2">
-        <h3 id="name-state-report-updates">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-state-report-updates" class="section-name selfRef">State Report Updates</a>
-        </h3>
-<p id="section-4.2-1">TODO<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="state-patches">
-<section id="section-4.3">
-        <h3 id="name-state-patches">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-state-patches" class="section-name selfRef">State Patches</a>
-        </h3>
-<p id="section-4.3-1">TODO<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This instace-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
+In the message, the <code>previousMessageId</code> field in the information block <span class="bcp14">MUST NOT</span> be present.
+Furthermore, when transmitting this message in its JSON format, the content type <code>application/sdf-state-report+json</code> <span class="bcp14">MUST</span> be indicated if supported by the protocol used for transmission.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">State reports <span class="bcp14">MAY</span> only contain values for a <em>subset</em> of all possible affordances and context information exposed by a Thing.
+Security-related aspects, e.g. regarding authentication and authorization, <span class="bcp14">MUST</span> be taken into account when issueing a state report for a requesting party.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="construction-messages">
-<section id="section-4.4">
+<section id="section-4.2">
         <h3 id="name-construction-messages">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
         </h3>
-<p id="section-4.4-1">(These might not be covered here but via dedicated actions.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">(These might not be covered here but via dedicated actions.)<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
+Furthermore, construction messages <span class="bcp14">MUST</span> be indicated by a different media type, namely <code>application/sfd-construction+json</code>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="state-report-updates">
+<section id="section-4.3">
+        <h3 id="name-state-report-updates">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-state-report-updates" class="section-name selfRef">State Report Updates</a>
+        </h3>
+<p id="section-4.3-1">State report updates are messages that only describe updates relative to a previous message.
+For this purpose, a <code>previousMessageId</code> <span class="bcp14">MUST</span> be present in the info block.
+When transmitting state report updates, the media type <code>application/sdf-state-report-update+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
+Via the <code>patchMethod</code> quality, different patch algorithms <span class="bcp14">MAY</span> be indicated.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="state-patches">
+<section id="section-4.4">
+        <h3 id="name-state-patches">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-state-patches" class="section-name selfRef">State Patches</a>
+        </h3>
+<p id="section-4.4-1">State patches are structurally equivalent to state report updates.
+However, they utilize the patch mechanism (using the provided <code>patchMethod</code>) to alter the state of a Thing instead of reporting state changes.
+Since they are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
+When transmitting state patches, the media type <code>application/sdf-state-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1847,39 +1861,25 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
       </h2>
 <p id="section-5-1">The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
 While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">State Reports can be used as<a href="#section-5-2" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5-3">
-<li id="section-5-3.1">
-          <p id="section-5-3.1.1"><em>Context snapshots</em> that only report context information about a Thing,<a href="#section-5-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-5-2">TODO: Consider only describing the different kinds of state reports<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">State Reports can be used as<a href="#section-5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-4.1">
+          <p id="section-5-4.1.1"><em>Context snapshots</em> that only report context information about a Thing,<a href="#section-5-4.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-5-3.2">
-          <p id="section-5-3.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information, or<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-4.2">
+          <p id="section-5-4.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information, or<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-5-3.3">
-          <p id="section-5-3.3.1"><em>Identity manifests</em> that report information related to a Thing's identity.<a href="#section-5-3.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-4.3">
+          <p id="section-5-4.3.1"><em>Identity manifests</em> that report information related to a Thing's identity.<a href="#section-5-4.3.1" class="pilcrow">¶</a></p>
 </li>
-      </ol>
-<p id="section-5-4">In the case of state report updates, we have<a href="#section-5-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5-5">
-<li id="section-5-5.1">
-          <p id="section-5-5.1.1"><em>Deltas</em> that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.<a href="#section-5-5.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ol>
-<p id="section-5-6">State patches can appear as<a href="#section-5-6" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5-7">
-<li id="section-5-7.1">
-          <p id="section-5-7.1.1"><em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-7.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ol>
-<p id="section-5-8">And finally, we have<a href="#section-5-8" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5-9">
-<li id="section-5-9.1">
-          <p id="section-5-9.1.1"><em>Construction messages</em> that initiate a Thing's (re)configuration or its comissioning.<a href="#section-5-9.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ol>
-<p id="section-5-10">As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
-However, the message format stays identical across the three manifestations of the archetype.<a href="#section-5-10" class="pilcrow">¶</a></p>
-<p id="section-5-11">In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.<a href="#section-5-11" class="pilcrow">¶</a></p>
+      </ul>
+<p id="section-5-5">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">And finally, we have the <em>Construction Messages</em> that initiate a Thing's (re)configuration or its comissioning<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
+However, the message format stays identical across the three manifestations of the archetype.<a href="#section-5-8" class="pilcrow">¶</a></p>
+<p id="section-5-9">In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.<a href="#section-5-9" class="pilcrow">¶</a></p>
 <div id="context-snapshots">
 <section id="section-5.1">
         <h3 id="name-context-snapshots">
@@ -2315,7 +2315,7 @@ connection between constructor parameters and the resulting \
       <h2 id="name-iana-considerations">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-9-1">(TODO)<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">TODO: Add media type registrations<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
