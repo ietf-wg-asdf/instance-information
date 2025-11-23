@@ -91,6 +91,7 @@ Table of Contents
      4.1.  State Reports
      4.2.  State Report Updates
      4.3.  State Patches
+     4.4.  Construction Messages
    5.  Message Purposes and Usecases
      5.1.  Context Snapshots
      5.2.  Proofshots
@@ -520,9 +521,9 @@ Table of Contents
 
 4.  Message Archetypes
 
-   Based on the common message format defined in #message-format, we can
-   derive a set of three archetypes that serve different use cases and
-   recipients.
+   Based on the common message format defined in #message-format and the
+   systematization from #instance-message-dimensions, we can derive a
+   set of four archetypes that serve different use cases and recipients.
 
 4.1.  State Reports
 
@@ -540,62 +541,95 @@ Table of Contents
 
    TODO
 
+4.4.  Construction Messages
+
+   (These might not be covered here but via dedicated actions.)
+
 5.  Message Purposes and Usecases
 
-   As mentioned before, the archetypes can be further subdivided into
-   (at least) six kinds of messages that all deal with different use
-   cases:
+   The four archetypes can be further subdivided into (at least) six
+   kinds of messages that all deal with different use cases.  While the
+   archetypes each have their own media type that can be used to
+   identity them during a message exchange, the six concete messages in
+   this section are may only be identified by their content.
+
+   State Reports can be used as
 
    1.  _Context snapshots_ that only report context information about a
-       Thing
+       Thing,
 
    2.  _Proofshots_ that report a Thing's state (or parts of it), which
-       may include context information
+       may include context information, or
 
-   3.  _Delta messages_ that indicate state changes compared to a
-       previous context snapshot or proofshot message
+   3.  _Identity manifests_ that report information related to a Thing's
+       identity.
 
-   4.  _Patch messages_ that indicate state changes to _cause_ a Thing's
-       state to change
+   In the case of state report updates, we have
 
-   5.  _Identity manifests_ that report information related to a Thing's
-       identity
+   1.  _Deltas_ that indicate state changes compared to a previous
+       context snapshot, proofshot message, or identity manifest.
 
-   6.  _Construction messages_ that initiate a Thing's (re)configuration
-       or its comissioning
+   State patches can appear as
+
+   1.  _Patch messages_ that indicate state changes that should be
+       _applied_ to a Thing.
+
+   And finally, we have
+
+   1.  _Construction messages_ that initiate a Thing's (re)configuration
+       or its comissioning.
+
+   As we can see, the great amount of variation within the state report
+   archetype in the case of messages 1 to 3 comes from the different
+   kinds and the characteristic of the information that is the reported
+   in the eventual message.  However, the message format stays identical
+   across the three manifestations of the archetype.
+
+   In the remainder of this section, we will discuss the differences of
+   these three messages in particular and will also deal with the
+   potential modelling of construction messages.
 
 5.1.  Context Snapshots
 
    Context snapshots are state reports that only include context
    information via the sdfContext keyword.
 
-   Figure 1 gives an example for this kind of instance message.
-
-   TODO: Update example
+   Figure 1 gives an example for this kind of instance message by
+   showing a status report message that only contains context
+   information.
 
    {
      "info": {
-       "messageId": "8988be82-50dc-4249-bed2-60c9c8797623"
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
        "models": "https://example.com/models",
-       "boats": "https://example.com/boats"
+       "sensors": "https://example.com/sensors"
      },
-     "defaultNamespace": "boats",
+     "defaultNamespace": "models",
      "sdfInstanceOf": {
-       "model": "models:#/sdfObject/boat"
+       "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "sdfContext": {
-         "$comment": "Potential contents for the SDF context",
-         "deviceName": "urn:dev:org:30810-boat007",
-         "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
-         "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677"
+         "timestamp": "2025-07-01T12:00:00Z",
+         "thingId": "envSensor:abc123",
+         "installationInfo": {
+           "floor": 3,
+           "mountType": "ceiling",
+           "indoorOutdoor": "indoor"
+         }
        }
      }
    }
 
                Figure 1: Example of an SDF context snapshot.
+
+   This kind of message may become especially relevant later in
+   conjunction with the sdfProtocolMap introduced in
+   [I-D.ietf-asdf-sdf-protocol-mapping] for complementing protocol-
+   specific information at the model-level with instance-related context
+   information such as IP addresses.
 
 5.2.  Proofshots
 
@@ -604,21 +638,21 @@ Table of Contents
    Proofshots are similar to context snapshots, with the important
    difference that they are not only reporting the context information
    associated with an entity but also state information associated with
-   its interaction affordances (properties, actions, and events).  TODO:
-   Note that while the format for describing the state of properties is
-   clearly governed by the schema information from the corresponding
-   sdfProperty definition, it is still unclear how to best model the
-   state of sdfActions and sdfEvents.  As in the case of the Context
-   Snapshot, the Proofshot may also contain concrete values that reflect
-   context information associated with a device via the sdfContext
-   keyword [I-D.ietf-asdf-sdf-nonaffordance].
+   its interaction affordances (properties, actions, and events).  As in
+   the case of the Context Snapshot, the Proofshot may also contain
+   concrete values that reflect context information associated with a
+   device via the sdfContext keyword [I-D.ietf-asdf-sdf-nonaffordance].
+
+   TODO: Note that while the format for describing the state of
+   properties is clearly governed by the schema information from the
+   corresponding sdfProperty definition, it is still unclear how to best
+   model the state of sdfActions and sdfEvents.
 
    The following examples are based on [I-D.ietf-asdf-sdf-nonaffordance]
    and [I-D.lee-asdf-digital-twin-09].  Figure 2 shows a proofshot that
    captures the state of a sensor.  Here, every property and context
-   definition of the corresponding SDF model (see Figure 7) is mapped to
-   a concrete value that corresponds with the associated schema
-   information.
+   definition of the corresponding SDF model (see Figure 8) is mapped to
+   a concrete value that satisfies the associated schema.
 
    {
      "info": {
@@ -652,10 +686,9 @@ Table of Contents
 
    Construction messages enable the creation of the digital instance,
    e.g., initialization/commissioning of a device or creation of its
-   digital twins.  As they change the state of the device, they fall
-   into the third category of state patches.  Construction messages are
-   like proofshots, in that they embody a state, however this state
-   needs to be precise so the construction can actually happen.
+   digital twins.  Construction messages are like proofshots, in that
+   they embody a state, however this state needs to be precise so the
+   construction can actually happen.
 
    A construction message for a temperature sensor might assign an
    identity and/or complement it by temporary identity information
@@ -683,32 +716,29 @@ Table of Contents
    which is pretty much a constructor.)
 
    Figure 3 shows a potential SDF construction message that initializes
-   a device.  As shown above, the information from the message ends up
-   in both an SDF Model (or Mapping File) and an instance message.
-
-   TODO: Update example
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
+   a device, setting its manufacturer and firmwareVersion as context
+   information.
 
    {
      "info": {
-       "title": "Example SDF construction message",
-       "$comment": "TODO: What kind of metadata do we need here?"
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
-       "cap": "https://example.com/capability/cap"
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "cap",
+     "defaultNamespace": "models",
      "sdfInstanceOf": {
-       "model": "cap:#/sdfObject/temperatureSensor/sdfConstructors/\
-                                                              construct"
+       "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "sdfContext": {
-         "ipAddress": "192.0.2.42",
-         "$comment": "Could the constructor parameter also be \
-                                     considered context information..?",
-         "temperatureUnit": "Cel"
+         "timestamp": "2025-07-01T08:15:00Z",
+         "thingId": "envSensor:unit42",
+         "deviceIdentity": {
+           "manufacturer": "HealthTech Inc.",
+           "firmwareVersion": "1.4.3"
+         }
        }
      }
    }
@@ -760,15 +790,13 @@ Table of Contents
 
 5.5.  Patch Messages
 
-   TODO: Reword
-
-   Yet another purpose for instance message might be appyling an update
-   to a device's configuration, e.g. via a so-called context patch
-   message.  Such a message is shown in Figure 5, where a change of the
-   device's mountType is reflected.  This message type might be
-   especially relevant for digital twins [I-D.lee-asdf-digital-twin-09],
-   where changes to physical attributes (such as the location) need to
-   be reflected somehow.
+   Yet another purpose for instance messages is the application of
+   updates to a device's configuration via a so-called patch message.
+   Such a message is shown in Figure 5, where a change of the device's
+   mountType is reflected.  This message type might be especially
+   relevant for digital twins [I-D.lee-asdf-digital-twin-09], where
+   changes to physical attributes (such as the location) need to be
+   reflected somehow.
 
    {
      "info": {
@@ -795,6 +823,8 @@ Table of Contents
       Figure 5: Example of an SDF context patch message that uses the
                       common instance message format.
 
+   TODO: Maybe the following can be shortened or even removed
+
    When comparing Figure 4 and Figure 5, we can see that the main
    difference between the messages is the _purpose_ these message are
    being used for.  This purpose could be implicitly reflected by the
@@ -817,13 +847,50 @@ Table of Contents
 
 5.6.  Identity Manifest
 
-   TODO
+   Identity manifests belong like proofshots and context snapshots to
+   the Status Report archetype.  However, their use case is tied more
+   strongly to identity information which may be modeled as context
+   information.
+
+   #code-sdf-identity-manifest shows an example of an identity manifest,
+   that is structurally identical to the construction message shown in
+   #code-sdf-construction-message.  What makes qualifies the message as
+   an identity manifest is its media type, which differs from the
+   construction message, as well as the circumstances under which the
+   message might be emitted -- for instance, as the _result_ of a
+   construction.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "sdfContext": {
+         "timestamp": "2025-07-01T08:15:00Z",
+         "thingId": "envSensor:unit42",
+         "deviceIdentity": {
+           "manufacturer": "HealthTech Inc.",
+           "firmwareVersion": "1.4.3"
+         }
+       }
+     }
+   }
+
+             Figure 6: Example for an SDF construction message
 
 6.  Examples for SDF Constructors
 
-   TODO: This section needs to be updated/reworked
+   TODO: This section needs to be updated/reworked/removed
 
-   Figure 6 shows a potential approach for describing constructors via
+   Figure 7 shows a potential approach for describing constructors via
    the sdfAction keyword with a set of construction parameters contained
    in its sdfInputData.
 
@@ -900,7 +967,7 @@ Table of Contents
      }
    }
 
-             Figure 6: Example for SDF model with constructors
+             Figure 7: Example for SDF model with constructors
 
 7.  Discussion
 
@@ -980,6 +1047,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-bormann-asdf-
               sdf-mapping-07>.
 
+   [I-D.ietf-asdf-sdf-protocol-mapping]
+              Mohan, R., Brinckman, B., and L. Corneo, "Protocol Mapping
+              for SDF", Work in Progress, Internet-Draft, draft-ietf-
+              asdf-sdf-protocol-mapping-01, 16 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
+              sdf-protocol-mapping-01>.
+
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
@@ -1025,7 +1099,7 @@ Table of Contents
 
 Appendix A.  Example SDF Model
 
-   Figure 7 shows the model all of the examples for instance-related
+   Figure 8 shows the model all of the examples for instance-related
    messages are pointing to in this document.  Note how the namespace is
    managed here to export the envSensor component into
    models:#/sdfObject/envSensor, which is the "entry point" used in the
@@ -1079,7 +1153,7 @@ Appendix A.  Example SDF Model
      }
    }
 
-        Figure 7: SDF Model that serves as a reference point for the
+        Figure 8: SDF Model that serves as a reference point for the
                       instance messages in this draft
 
 Appendix B.  Formal Syntax of Instance-related Messages
@@ -1214,7 +1288,7 @@ Appendix C.  Roads Not Taken
 
 C.1.  Using SDF Models as Proofshots
 
-   As shown in Figure 8, the proofshot format could have also been
+   As shown in Figure 9, the proofshot format could have also been
    modeled via SDF models where all sdfProperty definitions are given
    constvalues.  However, this concept is not capable of capturing
    actions and events.
@@ -1320,7 +1394,7 @@ C.1.  Using SDF Models as Proofshots
      }
    }
 
-       Figure 8: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
+       Figure 9: SDF instance proposal for Figure 2 in [I-D.lee-asdf-
                               digital-twin-09]
 
 C.1.1.  Alternative Instance Keys
@@ -1387,8 +1461,8 @@ C.1.1.  Alternative Instance Keys
      }
    }
 
-     Figure 9: SDF instance proposal (with IDs as part of the instance
-            keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]
+         Figure 10: SDF instance proposal (with IDs as part of the
+       instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]
 
 Acknowledgments
 

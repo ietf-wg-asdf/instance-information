@@ -1213,6 +1213,9 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
                 <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-state-patches" class="internal xref">State Patches</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
@@ -1225,7 +1228,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-proofshots" class="internal xref">Proofshots</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-construction-messages-2" class="internal xref">Construction Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-delta-messages" class="internal xref">Delta Messages</a></p>
@@ -1800,7 +1803,7 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
       <h2 id="name-message-archetypes">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-message-archetypes" class="section-name selfRef">Message Archetypes</a>
       </h2>
-<p id="section-4-1">Based on the common message format defined in <span class="contact-name">#message-format</span>, we can derive a set of three archetypes that serve different use cases and recipients.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">Based on the common message format defined in <span class="contact-name">#message-format</span> and the systematization from <span class="contact-name">#instance-message-dimensions</span>, we can derive a set of four archetypes that serve different use cases and recipients.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="state-reports">
 <section id="section-4.1">
         <h3 id="name-state-reports">
@@ -1826,6 +1829,14 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
 <p id="section-4.3-1">TODO<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="construction-messages">
+<section id="section-4.4">
+        <h3 id="name-construction-messages">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
+        </h3>
+<p id="section-4.4-1">(These might not be covered here but via dedicated actions.)<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="message-purposes-and-usecases">
@@ -1833,56 +1844,72 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
       <h2 id="name-message-purposes-and-usecas">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-message-purposes-and-usecas" class="section-name selfRef">Message Purposes and Usecases</a>
       </h2>
-<p id="section-5-1">As mentioned before, the archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases:<a href="#section-5-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-5-2">
-<li id="section-5-2.1">
-          <p id="section-5-2.1.1"><em>Context snapshots</em> that only report context information about a Thing<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
+While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">State Reports can be used as<a href="#section-5-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5-3">
+<li id="section-5-3.1">
+          <p id="section-5-3.1.1"><em>Context snapshots</em> that only report context information about a Thing,<a href="#section-5-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-5-2.2">
-          <p id="section-5-2.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+        <li id="section-5-3.2">
+          <p id="section-5-3.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information, or<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-5-2.3">
-          <p id="section-5-2.3.1"><em>Delta messages</em> that indicate state changes compared to a previous context snapshot or proofshot message<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="section-5-2.4">
-          <p id="section-5-2.4.1"><em>Patch messages</em> that indicate state changes to <em>cause</em> a Thing's state to change<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="section-5-2.5">
-          <p id="section-5-2.5.1"><em>Identity manifests</em> that report information related to a Thing's identity<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li id="section-5-2.6">
-          <p id="section-5-2.6.1"><em>Construction messages</em> that initiate a Thing's (re)configuration or its comissioning<a href="#section-5-2.6.1" class="pilcrow">¶</a></p>
+        <li id="section-5-3.3">
+          <p id="section-5-3.3.1"><em>Identity manifests</em> that report information related to a Thing's identity.<a href="#section-5-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
+<p id="section-5-4">In the case of state report updates, we have<a href="#section-5-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5-5">
+<li id="section-5-5.1">
+          <p id="section-5-5.1.1"><em>Deltas</em> that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.<a href="#section-5-5.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-5-6">State patches can appear as<a href="#section-5-6" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5-7">
+<li id="section-5-7.1">
+          <p id="section-5-7.1.1"><em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-7.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-5-8">And finally, we have<a href="#section-5-8" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5-9">
+<li id="section-5-9.1">
+          <p id="section-5-9.1.1"><em>Construction messages</em> that initiate a Thing's (re)configuration or its comissioning.<a href="#section-5-9.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-5-10">As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
+However, the message format stays identical across the three manifestations of the archetype.<a href="#section-5-10" class="pilcrow">¶</a></p>
+<p id="section-5-11">In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.<a href="#section-5-11" class="pilcrow">¶</a></p>
 <div id="context-snapshots">
 <section id="section-5.1">
         <h3 id="name-context-snapshots">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-context-snapshots" class="section-name selfRef">Context Snapshots</a>
         </h3>
 <p id="section-5.1-1">Context snapshots are state reports that only include context information via the <code>sdfContext</code> keyword.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance message.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">TODO: Update example<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance message by showing a status report message that only contains context information.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-context-s"></span><div id="example-context">
 <figure id="figure-1">
-          <div class="lang-sdf sourcecode" id="section-5.1-4.1">
+          <div class="lang-sdf sourcecode" id="section-5.1-3.1">
 <pre>{
   "info": {
-    "messageId": "8988be82-50dc-4249-bed2-60c9c8797623"
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
   "namespace": {
     "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
+    "sensors": "https://example.com/sensors"
   },
-  "defaultNamespace": "boats",
+  "defaultNamespace": "models",
   "sdfInstanceOf": {
-    "model": "models:#/sdfObject/boat"
+    "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "sdfContext": {
-      "$comment": "Potential contents for the SDF context",
-      "deviceName": "urn:dev:org:30810-boat007",
-      "deviceEui64Address": "50:32:5F:FF:FE:E7:67:28",
-      "scimObjectId": "8988be82-50dc-4249-bed2-60c9c8797677"
+      "timestamp": "2025-07-01T12:00:00Z",
+      "thingId": "envSensor:abc123",
+      "installationInfo": {
+        "floor": 3,
+        "mountType": "ceiling",
+        "indoorOutdoor": "indoor"
+      }
     }
   }
 }
@@ -1892,6 +1919,7 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
 <a href="#name-example-of-an-sdf-context-s" class="selfRef">Example of an SDF context snapshot.</a>
           </figcaption></figure>
 </div>
+<p id="section-5.1-4">This kind of message may become especially relevant later in conjunction with the <code>sdfProtocolMap</code> introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span> for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proofshots">
@@ -1904,22 +1932,20 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
 they are not only reporting the context information associated with an entity but
 also state information associated with its interaction affordances (properties,
 actions, and events).
-TODO: Note that while the format for describing the state of properties is clearly
-governed by the schema information from the corresponding <code>sdfProperty</code>
-definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
-<code>sdfEvent</code>s.
 As in the case of the Context Snapshot, the Proofshot may also contain concrete
 values that reflect context information associated with a device via the
 <code>sdfContext</code> keyword <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
+<p id="section-5.2-3">TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding <code>sdfProperty</code> definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
+<code>sdfEvent</code>s.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> shows a proofshot that captures the state of a
 sensor.
 Here, every property and context definition of the corresponding SDF model
-(see <a href="#code-off-device-model" class="auto internal xref">Figure 7</a>) is mapped to a concrete value that corresponds
-with the associated schema information.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+(see <a href="#code-off-device-model" class="auto internal xref">Figure 8</a>) is mapped to a concrete value that satisfies
+the associated schema.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <span id="name-sdf-proofshot-example"></span><div id="code-off-device-instance">
 <figure id="figure-2">
-          <div class="lang-sdf sourcecode" id="section-5.2-4.1">
+          <div class="lang-sdf sourcecode" id="section-5.2-5.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -1953,13 +1979,12 @@ with the associated schema information.<a href="#section-5.2-3" class="pilcrow">
 </div>
 </section>
 </div>
-<div id="construction-messages">
+<div id="construction-messages-1">
 <section id="section-5.3">
-        <h3 id="name-construction-messages">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
+        <h3 id="name-construction-messages-2">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-construction-messages-2" class="section-name selfRef">Construction Messages</a>
         </h3>
 <p id="section-5.3-1">Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
-As they change the state of the device, they fall into the third category of state patches.
 Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
@@ -1982,33 +2007,30 @@ physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <p id="section-5.3-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> shows a potential SDF construction message
-that initializes a device. As shown above, the information from the message
-ends up in both an SDF Model (or Mapping File) and an instance message.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
-<p id="section-5.3-6">TODO: Update example<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
 <figure id="figure-3">
-          <div class="lang-sdf sourcecode" id="section-5.3-7.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
+          <div class="lang-sdf sourcecode" id="section-5.3-6.1">
+<pre>{
   "info": {
-    "title": "Example SDF construction message",
-    "$comment": "TODO: What kind of metadata do we need here?"
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
   "namespace": {
-    "cap": "https://example.com/capability/cap"
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "cap",
+  "defaultNamespace": "models",
   "sdfInstanceOf": {
-    "model": "cap:#/sdfObject/temperatureSensor/sdfConstructors/\
-                                                           construct"
+    "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "sdfContext": {
-      "ipAddress": "192.0.2.42",
-      "$comment": "Could the constructor parameter also be \
-                                  considered context information..?",
-      "temperatureUnit": "Cel"
+      "timestamp": "2025-07-01T08:15:00Z",
+      "thingId": "envSensor:unit42",
+      "deviceIdentity": {
+        "manufacturer": "HealthTech Inc.",
+        "firmwareVersion": "1.4.3"
+      }
     }
   }
 }
@@ -2074,16 +2096,15 @@ be one way to model a telemetry stream from a device.<a href="#section-5.4-4" cl
         <h3 id="name-patch-messages">
 <a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
         </h3>
-<p id="section-5.5-1">TODO: Reword<a href="#section-5.5-1" class="pilcrow">¶</a></p>
-<p id="section-5.5-2">Yet another purpose for instance message might be appyling an update to a
-device's configuration, e.g. via a so-called context patch message.
+<p id="section-5.5-1">Yet another purpose for instance messages is the application of updates to a
+device's configuration via a so-called patch message.
 Such a message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 5</a>, where a change of the
 device's <code>mountType</code> is reflected. This message type might be especially
 relevant for digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical
-attributes (such as the location) need to be reflected somehow.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
+attributes (such as the location) need to be reflected somehow.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-context-p"></span><div id="code-sdf-context-patch">
 <figure id="figure-5">
-          <div class="lang-sdf sourcecode" id="section-5.5-3.1">
+          <div class="lang-sdf sourcecode" id="section-5.5-2.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -2111,6 +2132,7 @@ attributes (such as the location) need to be reflected somehow.<a href="#section
 <a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance message format.</a>
           </figcaption></figure>
 </div>
+<p id="section-5.5-3">TODO: Maybe the following can be shortened or even removed<a href="#section-5.5-3" class="pilcrow">¶</a></p>
 <p id="section-5.5-4">When comparing  <a href="#code-sdf-delta-message" class="auto internal xref">Figure 4</a> and <a href="#code-sdf-context-patch" class="auto internal xref">Figure 5</a>, we
 can see that the main difference between the messages is the <em>purpose</em> these
 message are being used for. This purpose could be implicitly reflected by the
@@ -2136,7 +2158,42 @@ settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</
         <h3 id="name-identity-manifest">
 <a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-identity-manifest" class="section-name selfRef">Identity Manifest</a>
         </h3>
-<p id="section-5.6-1">TODO<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-1">Identity manifests belong like proofshots and context snapshots to the Status Report archetype.
+However, their use case is tied more strongly to identity information which may be modeled as context information.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-2"><span class="contact-name">#code-sdf-identity-manifest</span> shows an example of an identity manifest, that is structurally identical to the construction message shown in <span class="contact-name">#code-sdf-construction-message</span>.
+What makes qualifies the message as an identity manifest is its media type, which differs from the construction message, as well as the circumstances under which the message might be emitted -- for instance, as the <em>result</em> of a construction.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+<span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-identity-manifest">
+<figure id="figure-6">
+          <div class="lang-sdf sourcecode" id="section-5.6-3.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T08:15:00Z",
+      "thingId": "envSensor:unit42",
+      "deviceIdentity": {
+        "manufacturer": "HealthTech Inc.",
+        "firmwareVersion": "1.4.3"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-for-an-sdf-construct" class="selfRef">Example for an SDF construction message</a>
+          </figcaption></figure>
+</div>
 </section>
 </div>
 </section>
@@ -2146,8 +2203,8 @@ settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</
       <h2 id="name-examples-for-sdf-constructo">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
       </h2>
-<p id="section-6-1">TODO: This section needs to be updated/reworked<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 6</a> shows a potential approach for describing
+<p id="section-6-1">TODO: This section needs to be updated/reworked/removed<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 7</a> shows a potential approach for describing
 constructors via the <code>sdfAction</code> keyword with a set of construction parameters
 contained in its <code>sdfInputData</code>.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">As the constructor action is modeled as being detached from the device and
@@ -2161,7 +2218,7 @@ and provide the additional information from the constructor via an SDF Mapping
 File. These are aspects that still require discussion, examples, and
 implementation experience.<a href="#section-6-4" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructor-action">
-<figure id="figure-6">
+<figure id="figure-7">
         <div class="breakable lang-sdf sourcecode" id="section-6-5.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2225,7 +2282,7 @@ connection between constructor parameters and the resulting \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
 <a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
         </figcaption></figure>
 </div>
@@ -2318,6 +2375,10 @@ connection between constructor parameters and the resulting \
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-07</span>, <time datetime="2025-07-20" class="refDate">20 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.ietf-asdf-sdf-protocol-mapping">[I-D.ietf-asdf-sdf-protocol-mapping]</dt>
+        <dd>
+<span class="refAuthor">Mohan, R.</span>, <span class="refAuthor">Brinckman, B.</span>, and <span class="refAuthor">L. Corneo</span>, <span class="refTitle">"Protocol Mapping for SDF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-protocol-mapping-01</span>, <time datetime="2025-10-16" class="refDate">16 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-01">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span>, <span class="refAuthor">Ersue, M.</span>, <span class="refAuthor">Keränen, A.</span>, and <span class="refAuthor">C. Gomez</span>, <span class="refTitle">"Terminology for Constrained-Node Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-iotops-7228bis-03</span>, <time datetime="2025-11-04" class="refDate">4 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03">https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03</a>&gt;</span>. </dd>
@@ -2360,12 +2421,12 @@ connection between constructor parameters and the resulting \
       <h2 id="name-example-sdf-model">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-sdf-model" class="section-name selfRef">Example SDF Model</a>
       </h2>
-<p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 7</a> shows the model all of the examples for instance-related messages are pointing to in this document.
+<p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 8</a> shows the model all of the examples for instance-related messages are pointing to in this document.
 Note how the namespace is managed here to export the <code>envSensor</code> component into
 <code>models:#/sdfObject/envSensor</code>, which is the "entry point" used in the instance
 messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-model-that-serves-as-a-"></span><div id="code-off-device-model">
-<figure id="figure-7">
+<figure id="figure-8">
         <div class="lang-sdf sourcecode" id="appendix-A-2.1">
 <pre>{
   "namespace": {
@@ -2416,7 +2477,7 @@ messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance messages in this draft</a>
         </figcaption></figure>
 </div>
@@ -2567,12 +2628,12 @@ We will remove this appendix as soon as this document is about to be finished.<a
         <h3 id="name-using-sdf-models-as-proofsh">
 <a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
         </h3>
-<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 8</a>,
+<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 9</a>,
 the proofshot format could have also been modeled via SDF models where
 all <code>sdfProperty</code> definitions are given <code>const</code>values.
 However, this concept is not capable of capturing actions and events.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
-<figure id="figure-8">
+<figure id="figure-9">
           <div class="breakable lang-sdf sourcecode" id="appendix-C.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2676,7 +2737,7 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
           </figcaption></figure>
 </div>
@@ -2687,7 +2748,7 @@ model events or event history with the approach illustrated by this \
           </h4>
 <p id="appendix-C.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-C.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-9">
+<figure id="figure-10">
             <div class="breakable lang-sdf sourcecode" id="appendix-C.1.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2749,7 +2810,7 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
             </figcaption></figure>
 </div>
