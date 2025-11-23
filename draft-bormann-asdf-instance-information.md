@@ -323,7 +323,7 @@ To identify the reference state for a delta/patch, we need
 
 Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
-statements ("the temperature here", "my current draw")...
+statements such as "the temperature here" or "my current draw".
 
 Messages may have to be complemented by this context for
 interpretation, i.e., the context needed may need to be reified in the
@@ -331,18 +331,18 @@ message (compare the use of SenML "n").
 Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.
 
 For this purpose, we are using the `sdfContext` keyword introduced by {{-non-affordance}}.
-Note that `sdfContext` _could_ also be modelled via `sdfProperty`
+Note that `sdfContext` _could_ also be modelled via `sdfProperty`.
 
 TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
 
 # Message Format {#message-format}
 
-The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes metadata and namespace information), but is also different in crucial aspects.
+The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.
 
 TODO: Decide where we want to keep this:
 
-One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Multiple models may apply to the same device (including but not only revisions of the models).
+One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the same models).
 
 ## Information Block
 
