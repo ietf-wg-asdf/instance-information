@@ -243,7 +243,7 @@ The specification text itself will be accompanied by examples that have been ins
 
 ## Axioms for instance-related messages
 
-<!-- TODO: Better integrate this into the document -->
+<!-- TODO: Integrate this into the document in a better way -->
 
 Instance-related messages can be messages that relate to a property, action, or
 event (input or output data), or they can be "proofshots" (extracted state
