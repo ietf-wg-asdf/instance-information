@@ -416,7 +416,7 @@ Based on the common message format defined in {{{#message-format}}} and the syst
 
 TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
 
-TODO: The description of the individual messages probably has to be expanded. 
+TODO: The description of the individual messages probably has to be expanded.
       Maybe some of the content from the six example messages should be moved here.
 
 ## State Reports
