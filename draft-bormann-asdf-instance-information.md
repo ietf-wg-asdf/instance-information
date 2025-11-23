@@ -456,23 +456,19 @@ When transmitting state patches, the media type `application/sdf-state-patch+jso
 The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
 While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.
 
+TODO: Consider only describing the different kinds of state reports
+
 State Reports can be used as
 
-1. *Context snapshots* that only report context information about a Thing,
-2. *Proofshots* that report a Thing's state (or parts of it), which may include context information, or
-3. *Identity manifests* that report information related to a Thing's identity.
+- *Context snapshots* that only report context information about a Thing,
+- *Proofshots* that report a Thing's state (or parts of it), which may include context information, or
+- *Identity manifests* that report information related to a Thing's identity.
 
-In the case of state report updates, we have
+In the case of state report updates, we have *Deltas* that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.
 
-4. *Deltas* that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.
+State patches can appear as *Patch messages* that indicate state changes that should be *applied* to a Thing.
 
-State patches can appear as
-
-5. *Patch messages* that indicate state changes that should be *applied* to a Thing.
-
-And finally, we have
-
-6. *Construction messages* that initiate a Thing's (re)configuration or its comissioning.
+And finally, we have the *Construction Messages* that initiate a Thing's (re)configuration or its comissioning
 
 As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
 However, the message format stays identical across the three manifestations of the archetype.
