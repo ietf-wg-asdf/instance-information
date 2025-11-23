@@ -252,7 +252,7 @@ Based on these considerations (as illustrated by the systematization in {{{#inst
     </tr>
     <tr>
       <!-- TODO: Vertical alignment is apparently not supported at the moment -->
-      <td rowspan="2" align="center">(Intended) Effect</td>
+      <td rowspan="2" align="center"><strong>(Intended) Effect</strong></td>
       <td align="center">State Exposure</td>
       <td align="center">Status Report</td>
       <td align="center">Status Report Update</td>
