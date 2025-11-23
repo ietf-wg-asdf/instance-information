@@ -302,6 +302,11 @@ TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:d
 
 Instance-related messages share a number of structural features with SDF models regarding metadata and namespace information, but are also different in crucial aspects.
 
+TODO: Decide whether we want to keep this somewhere:
+
+One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the models).
+
 ## Information Block
 
 The information block contains the same qualities as an SDF model and, additionally, a mandatory `messageId` to uniquely identify the message.
@@ -362,11 +367,6 @@ Note that we might also have to replicate a nested structure via `sdfThing` and/
 | sdfAction        | map    | TODO        |
 | sdfEvent         | map    | TODO        |
 {: #ibsec title="Instance Block"}
-
-## Metadata
-
-One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Multiple models may apply to the same device (including but not only revisions of the models).
 
 # Message Archetypes
 
