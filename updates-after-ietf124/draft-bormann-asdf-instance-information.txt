@@ -359,7 +359,7 @@ Table of Contents
    SDF models regarding metadata and namespace information, but are also
    different in crucial aspects.
 
-   TODO: Decide whether we want to keep this somewhere:
+   TODO: Decide where we want to keep this:
 
    One interesting piece of offDevice information is the model itself,
    including sdfinfo and the defaultnamespace.  This is of course not
@@ -472,9 +472,14 @@ Table of Contents
    location pointed to via the model specfied in sdfInstanceOf, the
    instance message has to follow the structure of this part of the
    model (although, depending on the archetype, information that has not
-   changed or will not be updated can be left out.)  Note that we might
-   also have to replicate a nested structure via sdfThing and/or
-   sdfObject if present in the referenced SDF model.
+   changed or will not be updated can be left out.)
+
+   The alternating structure of the SDF model (e. g.,
+   sdfObject/envSensor/sdfProperty/temperature) is repeated within the
+   instance-related message, with the top-level sdfObject or sdfThing
+   being replaced by sdfInstance at the entry point.  Note that we also
+   have to replicate a nested structure via sdfThing and/or sdfObject if
+   present in the referenced SDF model.
 
                    +=============+======+=============+
                    | Quality     | Type | Description |
