@@ -1373,40 +1373,47 @@ subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p
 (TBC -- also: do we need this additional term?)<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.11">Proofshot:</dt>
+<dt id="section-1.1-3.11">Message Archetype</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.12">
-            <p id="section-1.1-3.12.1">A message that attempts to describe the state of an Instance at a
+            <p id="section-1.1-3.12.1">In the context of instance-related messages:
+A message with specific content and effect, covering a wider set of different use cases.
+In this document, we are observing a total of four instance-related message archetypes.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.13">Proofshot:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.14">
+            <p id="section-1.1-3.14.1">A message that attempts to describe the state of an Instance at a
 particular moment (which may be part of the context).
 We are not saying that the Proofshot <em>is</em> the instance because there
 may be different ways to make one from an Instance (or to consume
 one in updating the state of the Instance), and because the
-proofshot, being a message, is not situated.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.2">Proofshots are snapshots, and they are "proofs" in the photographic
+proofshot, being a message, is not situated.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.2">Proofshots are snapshots, and they are "proofs" in the photographic
 sense, i.e., they may not be of perfect quality.
 Not all state that is characteristic of an Instance may be included
 in a Proofshot (e.g., information about an active action that is not
 embedded in an action resource).
 Proofshots may depend on additional context (such as the identity of
-the Instance and a Timestamp).<a href="#section-1.1-3.12.2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.3">An interaction affordance to obtain a Proofshot may not be provided
+the Instance and a Timestamp).<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.3">An interaction affordance to obtain a Proofshot may not be provided
 by every Instance.
 An Instance may provide separate Construction affordances instead of
-simply setting a Proofshot.<a href="#section-1.1-3.12.3" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.12.4" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.12.5" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.12.6" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.12.7">TODO: Also mention the other message types we had so far (context snapshot,
-      context patch, identity manifest) here?<a href="#section-1.1-3.12.7" class="pilcrow">¶</a></p>
+simply setting a Proofshot.<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.14.4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.14.5" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.14.6" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.7">TODO: Also mention the other message types we had so far (context snapshot,
+      context patch, identity manifest) here?<a href="#section-1.1-3.14.7" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.13">Construction:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.14">
-            <p id="section-1.1-3.14.1">Construction messages enable the creation of a digital Instance,
+<dt id="section-1.1-3.15">Construction:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.16">
+            <p id="section-1.1-3.16.1">Construction messages enable the creation of a digital Instance,
 e.g., initialization/commissioning of a device or creation of its
 digital twins.
 They are like proofshots, in that they embody a state, however this
-state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.2">Discuss YANG config=true approach.<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
+state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.16.2">Discuss YANG config=true approach.<a href="#section-1.1-3.16.2" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
