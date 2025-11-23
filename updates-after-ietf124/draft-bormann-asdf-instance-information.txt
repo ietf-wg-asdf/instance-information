@@ -276,20 +276,20 @@ Table of Contents
 
    4.  _State patches_ that update the Thing's state.
 
-   +====================================+==============================+
-   |                                    |           Content            |
-   +====================================+==============+===============+
-   |                                    | Freestanding |    Relative   |
-   +-------------------+----------------+--------------+---------------+
-   | (Intended) Effect |     State      |    Status    | Status Report |
-   |                   |    Exposure    |    Report    |     Update    |
-   |                   +----------------+--------------+---------------+
-   |                   |     State      | Construction |  State Patch  |
-   |                   |     Change     |              |               |
-   +-------------------+----------------+--------------+---------------+
+     +================================+==============================+
+     |                                |           Content            |
+     +================================+==============+===============+
+     |                                | Freestanding |    Relative   |
+     +---------------------+----------+--------------+---------------+
+     | *(Intended) Effect* |  State   |    Status    | Status Report |
+     |                     | Exposure |    Report    |     Update    |
+     |                     +----------+--------------+---------------+
+     |                     |  State   | Construction |  State Patch  |
+     |                     |  Change  |              |               |
+     +---------------------+----------+--------------+---------------+
 
-      Table 1: Systematization of instance-related messages along the
-               dimensions "Content" and "(Intended) Effect".
+        Table 1: Systematization of instance-related messages along
+             the dimensions "Content" and "(Intended) Effect".
 
    The uniform message format can be used for all four message
    archetypes. #syntax specifies the formal syntax of instance-related
