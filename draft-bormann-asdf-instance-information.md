@@ -398,14 +398,16 @@ Since we are using the `sdfInstance` keyword as an entry point at the location p
 The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the instance-related message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
 Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
 
-| Quality          | Type   | Description |
-|------------------|--------|-------------|
-| sdfThing         | map    | TODO        |
-| sdfObject        | map    | TODO        |
-| sdfContext       | map    | TODO        |
-| sdfProperty      | map    | TODO        |
-| sdfAction        | map    | TODO        |
-| sdfEvent         | map    | TODO        |
+<!-- TODO: The descriptions need some refinement here. Also: Maybe we need to specify the shape of the qualities in addional sections -->
+
+| Quality          | Type   | Description                                                     |
+|------------------|--------|-----------------------------------------------------------------|
+| sdfThing         | map    | Values for the thing entries in the referenced SDF definition   |
+| sdfObject        | map    | Values for the object entries in the referenced SDF definition  |
+| sdfContext       | map    | Values for the context entries in the referenced SDF definition |
+| sdfProperty      | map    | Values for the properties in the referenced SDF definition      |
+| sdfAction        | map    | Values for the actions in the referenced SDF definition         |
+| sdfEvent         | map    | Values for the events in the referenced SDF definition          |
 {: #ibsec title="Instance Block"}
 
 # Message Archetypes
