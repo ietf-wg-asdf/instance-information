@@ -249,8 +249,8 @@ Instance-related messages can be messages that relate to a property, action, or
 event (input or output data), or they can be "proofshots" (extracted state
 information, either in general or in a specific form such as a context snapshot etc.).
 
-Instance-related messages are controlled by a *model*, which normally is the
-interaction model of the device (class-level information).
+Instance-related messages are controlled by a *model* (class-level information),
+which normally is the interaction model of the device.
 That interaction model may provide a model of the interaction during which the
 instance-related message is interchanged (at least conceptually), or it may be a
 "built-in" interaction (such as a proofshot, a context snapshot, ...) that is
