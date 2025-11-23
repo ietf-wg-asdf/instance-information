@@ -3,7 +3,7 @@ start = sdf-instance-message-syntax
 sdf-instance-message-syntax = {
  ; info will be required in most process policies
  ? info: sdfinfo
- ? namespace: named<text>
+ namespace: named<text>
  ? defaultNamespace: text
  ? sdfInstanceOf: sdf-instance-of
  ? sdfInstance: sdf-instance
