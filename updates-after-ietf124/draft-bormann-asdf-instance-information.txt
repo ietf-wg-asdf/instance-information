@@ -81,7 +81,7 @@ Table of Contents
      1.2.  Terms we are trying not to use
    2.  Instance Information and SDF
      2.1.  Axioms for instance-related messages
-       2.1.1.  Context Information
+     2.2.  Context Information
    3.  Message Format
      3.1.  Information Block
      3.2.  Namespaces Block
@@ -334,7 +334,7 @@ Table of Contents
 
    *  state info (timestamp? state/generation identifier?)
 
-2.1.1.  Context Information
+2.2.  Context Information
 
    Messages always have context, typically describing the "me" and the
    "you" of the interaction, the "now" and "here", allowing deictic
