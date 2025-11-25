@@ -230,7 +230,7 @@ Taking into account previous revisions of this document as well as {{-non-afford
 The intended effect of a message, which can either be the exposure or an update of a Thing's state;
 and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
-Based on these considerations (as illustrated by the systematization in {{{#instance-message-dimensions}}}), we can identify the following four message archetypes:
+Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
 <!-- TODO: The names probably need to be improved -->
 
@@ -273,7 +273,7 @@ Based on these considerations (as illustrated by the systematization in {{{#inst
 {: #instance-message-dimensions title="Systematization of instance-related messages along the dimensions \"Content\" and \"(Intended) Effect\"."}
 
 The uniform message format can be used for all four message archetypes.
-{{{#syntax}}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
+{{syntax}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
 This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.
 
 In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
@@ -412,7 +412,7 @@ Note that we also have to replicate a nested structure via `sdfThing` and/or `sd
 
 # Message Archetypes
 
-Based on the common message format defined in {{{#message-format}}} and the systematization from {{{#instance-message-dimensions}}}, we can derive a set of four archetypes that serve different use cases and recipients.
+Based on the common message format defined in {{message-format}} and the systematization from {{instance-message-dimensions}}, we can derive a set of four archetypes that serve different use cases and recipients.
 
 TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
 
@@ -690,7 +690,7 @@ settable via the `patchMethod` field within the `sdfInstanceOf` quality.
 Identity manifests belong like proofshots and context snapshots to the Status Report archetype.
 However, their use case is tied more strongly to identity information which may be modeled as context information.
 
-{{{#code-sdf-identity-manifest}}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{{#code-sdf-construction-message}}}.
+{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{code-sdf-construction-message}}.
 What makes qualifies the message as an identity manifest is its media type, which differs from the construction message, as well as the circumstances under which the message might be emitted -- for instance, as the *result* of a construction.
 
 ~~~ sdf
