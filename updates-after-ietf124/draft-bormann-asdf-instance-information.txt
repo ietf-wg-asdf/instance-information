@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 27 May 2026                                  Universität Bremen
-                                                        23 November 2025
+Expires: 29 May 2026                                  Universität Bremen
+                                                        25 November 2025
 
 
                       Instance Information for SDF
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 May 2026.
+   This Internet-Draft will expire on 29 May 2026.
 
 Copyright Notice
 
@@ -267,8 +267,7 @@ Table of Contents
    previous message or state) or relative (with such a reference).
 
    Based on these considerations (as illustrated by the systematization
-   in #instance-message-dimensions), we can identify the following four
-   message archetypes:
+   in Table 1), we can identify the following four message archetypes:
 
    1.  _State reports_ that may contain contain both affordance-related
        and context information, including information about a Thing's
@@ -298,11 +297,11 @@ Table of Contents
              the dimensions "Content" and "(Intended) Effect".
 
    The uniform message format can be used for all four message
-   archetypes. #syntax specifies the formal syntax of instance-related
-   messages all normative statements as well as the examples in this
-   document will adhere to.  This syntax can serve to describe both the
-   abstract structure and the concrete shape of the messages that can be
-   used as a neutral form in interchange.
+   archetypes.  Appendix B specifies the formal syntax of instance-
+   related messages all normative statements as well as the examples in
+   this document will adhere to.  This syntax can serve to describe both
+   the abstract structure and the concrete shape of the messages that
+   can be used as a neutral form in interchange.
 
    In the following, we will first outline a number of general
    principles for instance-related messages, before detailing the
@@ -527,9 +526,9 @@ Table of Contents
 
 4.  Message Archetypes
 
-   Based on the common message format defined in #message-format and the
-   systematization from #instance-message-dimensions, we can derive a
-   set of four archetypes that serve different use cases and recipients.
+   Based on the common message format defined in Section 3 and the
+   systematization from Table 1, we can derive a set of four archetypes
+   that serve different use cases and recipients.
 
    TODO: Decide whether we want to add specific CDDL schemas for the
    four archetypes via extension points in the "base schema"
@@ -890,13 +889,12 @@ Table of Contents
    strongly to identity information which may be modeled as context
    information.
 
-   #code-sdf-identity-manifest shows an example of an identity manifest,
-   that is structurally identical to the construction message shown in
-   #code-sdf-construction-message.  What makes qualifies the message as
-   an identity manifest is its media type, which differs from the
-   construction message, as well as the circumstances under which the
-   message might be emitted -- for instance, as the _result_ of a
-   construction.
+   Figure 6 shows an example of an identity manifest, that is
+   structurally identical to the construction message shown in Figure 3.
+   What makes qualifies the message as an identity manifest is its media
+   type, which differs from the construction message, as well as the
+   circumstances under which the message might be emitted -- for
+   instance, as the _result_ of a construction.
 
    {
      "info": {
