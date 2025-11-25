@@ -1495,20 +1495,19 @@ and the actual content of the message, which may be freestanding (without a refe
         </thead>
         <tbody>
           <tr>
-            <td class="text-left" rowspan="1" colspan="2"></td>
-            <td class="text-center" rowspan="1" colspan="1">Freestanding</td>
-            <td class="text-center" rowspan="1" colspan="1">Relative</td>
+            <th class="text-left" rowspan="1" colspan="2"></th>
+            <th class="text-center" rowspan="1" colspan="1">Freestanding</th>
+            <th class="text-center" rowspan="1" colspan="1">Relative</th>
           </tr>
           <tr>
-            <td class="text-center" rowspan="2" colspan="1">
-              <strong>(Intended) Effect</strong>
-            </td>
-            <td class="text-center" rowspan="1" colspan="1">State Exposure</td>
+            <th class="text-center" rowspan="2" colspan="1">(Intended)        <br>
+Effect</th>
+            <th class="text-center" rowspan="1" colspan="1">State Exposure</th>
             <td class="text-center" rowspan="1" colspan="1">Status Report</td>
             <td class="text-center" rowspan="1" colspan="1">Status Report Update</td>
           </tr>
           <tr>
-            <td class="text-center" rowspan="1" colspan="1">State Change</td>
+            <th class="text-center" rowspan="1" colspan="1">State Change</th>
             <td class="text-center" rowspan="1" colspan="1">Construction</td>
             <td class="text-center" rowspan="1" colspan="1">State Patch</td>
           </tr>
@@ -2516,11 +2515,11 @@ sdfinfo = {
  ? copyright: text
  ? license: text
  ? messageId: text
- ; Identifier used to connect this instance message to a previous one.
- ;
- ; Allows this instance message to only contain values that have acually
- ; changed, turning it into a "Delta" or a "Patch", depending on the message
- ; purpose.
+ ; Identifier used to connect this instance message to a previous
+ ; one:
+ ; Allows this instance message to only contain values that have
+ ; actually changed, turning it into a "Delta" or a "Patch",
+ ; depending on the purpose of the message.
  ? previousMessageId: text
  ? modified: modified-date-time
  ? features: [

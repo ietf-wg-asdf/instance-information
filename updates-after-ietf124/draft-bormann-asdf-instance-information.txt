@@ -289,20 +289,21 @@ Table of Contents
 
    4.  _State patches_ that update the Thing's state.
 
-     +================================+==============================+
-     |                                |           Content            |
-     +================================+==============+===============+
-     |                                | Freestanding |    Relative   |
-     +---------------------+----------+--------------+---------------+
-     | *(Intended) Effect* |  State   |    Status    | Status Report |
-     |                     | Exposure |    Report    |     Update    |
-     |                     +----------+--------------+---------------+
-     |                     |  State   | Construction |  State Patch  |
-     |                     |  Change  |              |               |
-     +---------------------+----------+--------------+---------------+
+         +=======================+==============================+
+         |                       |           Content            |
+         +=======================+==============+===============+
+         |                       | Freestanding |    Relative   |
+         +============+==========+==============+===============+
+         | (Intended) |  State   |    Status    | Status Report |
+         |   Effect   | Exposure |    Report    |     Update    |
+         |            +==========+--------------+---------------+
+         |            |  State   | Construction |  State Patch  |
+         |            |  Change  |              |               |
+         +============+==========+--------------+---------------+
 
-        Table 1: Systematization of instance-related messages along
-             the dimensions "Content" and "(Intended) Effect".
+               Table 1: Systematization of instance-related
+               messages along the dimensions "Content" and
+                           "(Intended) Effect".
 
    The uniform message format can be used for all four message
    archetypes.  Appendix B specifies the formal syntax of instance-
@@ -1220,11 +1221,11 @@ Appendix B.  Formal Syntax of Instance-related Messages
     ? copyright: text
     ? license: text
     ? messageId: text
-    ; Identifier used to connect this instance message to a previous one.
-    ;
-    ; Allows this instance message to only contain values that have acually
-    ; changed, turning it into a "Delta" or a "Patch", depending on the message
-    ; purpose.
+    ; Identifier used to connect this instance message to a previous
+    ; one:
+    ; Allows this instance message to only contain values that have
+    ; actually changed, turning it into a "Delta" or a "Patch",
+    ; depending on the purpose of the message.
     ? previousMessageId: text
     ? modified: modified-date-time
     ? features: [
