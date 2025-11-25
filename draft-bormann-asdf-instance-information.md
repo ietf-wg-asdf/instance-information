@@ -116,6 +116,14 @@ This abstraction can be used at a *conceptual* level, e.g., to define models tha
 However, where this is desired, it also can be used as the basis for a concrete *neutral representation* (Format) that can actually be used for interchange to exchange information and parameters for interactions to be performed.
 In either case, the structure and semantics of this information are governed by SDF Models.
 
+This document is truly work in progress.
+It freely copies examples from the {{-non-affordance}} document that evolves in
+parallel, with a goal of further synchronizing the development where that
+hasn't been fully achieved yet.
+After the discussion stabilizes, we'll need to discuss how the
+information should be distributed into the different documents and/or
+how documents should be merged.
+
 ## Conventions and Definitions
 
 The definitions of {{-link-format}}, {{-link}}, and {{-sdf}} apply.
