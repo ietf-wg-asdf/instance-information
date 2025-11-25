@@ -421,7 +421,7 @@ TODO: The description of the individual messages probably has to be expanded.
 
 ## State Reports
 
-This instace-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
+This instance-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
 In the message, the `previousMessageId` field in the information block MUST NOT be present.
 Furthermore, when transmitting this message in its JSON format, the content type `application/sdf-state-report+json` MUST be indicated if supported by the protocol used for transmission.
 
