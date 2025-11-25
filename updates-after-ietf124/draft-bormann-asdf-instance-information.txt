@@ -146,6 +146,14 @@ Table of Contents
    either case, the structure and semantics of this information are
    governed by SDF Models.
 
+   This document is truly work in progress.  It freely copies examples
+   from the [I-D.ietf-asdf-sdf-nonaffordance] document that evolves in
+   parallel, with a goal of further synchronizing the development where
+   that hasn't been fully achieved yet.  After the discussion
+   stabilizes, we'll need to discuss how the information should be
+   distributed into the different documents and/or how documents should
+   be merged.
+
 1.1.  Conventions and Definitions
 
    The definitions of [RFC6690], [RFC8288], and [I-D.ietf-asdf-sdf]
