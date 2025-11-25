@@ -260,19 +260,19 @@ Based on these considerations (as illustrated by the systematization in {{instan
   </thead>
   <tbody>
     <tr>
-      <td colspan="2"></td>
-      <td align="center">Freestanding</td>
-      <td align="center">Relative</td>
+      <th colspan="2"></th>
+      <th align="center">Freestanding</th>
+      <th align="center">Relative</th>
     </tr>
     <tr>
       <!-- TODO: Vertical alignment is apparently not supported at the moment -->
-      <td rowspan="2" align="center"><strong>(Intended) Effect</strong></td>
-      <td align="center">State Exposure</td>
+      <th rowspan="2" align="center">(Intended)<br>Effect</th>
+      <th align="center">State Exposure</th>
       <td align="center">Status Report</td>
       <td align="center">Status Report Update</td>
     </tr>
     <tr>
-      <td align="center">State Change</td>
+      <th align="center">State Change</th>
       <td align="center">Construction</td>
       <td align="center">State Patch</td>
     </tr>
