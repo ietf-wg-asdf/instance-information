@@ -3,7 +3,7 @@ start = sdf-instance-message-syntax
 sdf-instance-message-syntax = {
  ; info will be required in most process policies
  ? info: sdfinfo
- ? namespace: named<text>
+ namespace: named<text>
  ? defaultNamespace: text
  ? sdfInstanceOf: sdf-instance-of
  ? sdfInstance: sdf-instance
@@ -16,11 +16,11 @@ sdfinfo = {
  ? copyright: text
  ? license: text
  ? messageId: text
- ; Identifier used to connect this instance message to a previous one.
- ;
- ; Allows this instance message to only contain values that have acually
- ; changed, turning it into a "Delta" or a "Patch", depending on the message
- ; purpose.
+ ; Identifier used to connect this instance message to a previous
+ ; one:
+ ; Allows this instance message to only contain values that have
+ ; actually changed, turning it into a "Delta" or a "Patch",
+ ; depending on the purpose of the message.
  ? previousMessageId: text
  ? modified: modified-date-time
  ? features: [

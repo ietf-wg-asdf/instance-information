@@ -69,6 +69,7 @@ informative:
     date: false
   STP: I-D.bormann-t2trg-stp
   RFC9039: device-id
+  I-D.ietf-asdf-sdf-protocol-mapping: protocol-map
 ...
 
 --- abstract
@@ -104,14 +105,24 @@ SDF is designed to be independent of specific ecosystems that specify
 conventions for performing these interactions, e.g., over Internet
 protocols or over ecosystem-specific protocol stacks.
 
-SDF does not define representation formats for the _Instance Information_ that is
+SDF does not define representation formats for the *Instance Information* that is
 exchanged in, or the subject of such, interactions; this is left to the
 specific ecosystems, which tend to have rather different ways to
 represent this information.
 
-This document discusses types of Instance Information and will
-ultimately define Abstract (eco-system independent) Representation
-Formats for them as well as ways to use SDF Models to describe them.
+This document discusses Instance Information in different types and roles.
+It defines an *abstraction* of this, as an eco-system independent way to reason about this information.
+This abstraction can be used at a *conceptual* level, e.g., to define models that govern the instance information.
+However, where this is desired, it also can be used as the basis for a concrete *neutral representation* (Format) that can actually be used for interchange to exchange information and parameters for interactions to be performed.
+In either case, the structure and semantics of this information are governed by SDF Models.
+
+This document is truly work in progress.
+It freely copies examples from the {{-non-affordance}} document that evolves in
+parallel, with a goal of further synchronizing the development where that
+hasn't been fully achieved yet.
+After the discussion stabilizes, we'll need to discuss how the
+information should be distributed into the different documents and/or
+how documents should be merged.
 
 ## Conventions and Definitions
 
@@ -137,7 +148,7 @@ Message:
   model.
 
   Deriving an ecosystem specific representation of a message may be
-  aided by _mapping files_ {{-mapping}} that apply to the SDF model
+  aided by *mapping files* {{-mapping}} that apply to the SDF model
   providing the abstract data model.
 
 Instantiation:
@@ -156,6 +167,15 @@ Instance:
   Instances become useful if they are "situated", i.e., with a
   physical or digital "address" that they can be found at and made the
   subject of an interaction.
+
+Instance-related Message
+: A message that describes the state or a state change of a specific instance.
+  (TBC -- also: do we need this additional term?)
+
+Message Archetype
+: In the context of instance-related messages:
+  A message with specific content and effect, covering a wider set of different use cases.
+  In this document, we are observing a total of four instance-related message archetypes.
 
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
@@ -211,101 +231,308 @@ Non-affordance:
 
 # Instance Information and SDF
 
-Instantiation doesn't produce an instance (ouch), which is the device,
-twin, etc., but a message.
+The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
+Instead, the instantiation produces an instance-related *message*, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
+Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
+Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for instance-related messages:
+The intended effect of a message, which can either be the exposure or an update of a Thing's state;
+and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
-## Pre-structured types of messages
+Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
-Pre-structured types of messages are those that relate to an SDF model
-in a way that, together with context and model, they are fully
-self-describing.
+<!-- TODO: The names probably need to be improved -->
 
-### Input and output data of specific interactions
+1. *State reports* that may contain contain both affordance-related and context information, including information about a Thing's identity,
+2. *Construction messages*, which trigger a Thing's initial configuration process or its commissioning,
+3. *State report updates* that indicate changes that have occurred since a reference state report, and
+4. *State patches* that update the Thing's state.
+
+<!-- TODO: I am not really happy with the entry names yet-->
+<table>
+  <thead>
+    <tr>
+      <!-- FIXME: This does not work with kramdown-rfc at the moment -->
+      <!-- <th colspan="2" rowspan="2"></th> -->
+
+      <th colspan="2"></th>
+      <th colspan="2" align="center">Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="2"></th>
+      <th align="center">Freestanding</th>
+      <th align="center">Relative</th>
+    </tr>
+    <tr>
+      <!-- TODO: Vertical alignment is apparently not supported at the moment -->
+      <th rowspan="2" align="center">(Intended)<br>Effect</th>
+      <th align="center">State Exposure</th>
+      <td align="center">Status Report</td>
+      <td align="center">Status Report Update</td>
+    </tr>
+    <tr>
+      <th align="center">State Change</th>
+      <td align="center">Construction</td>
+      <td align="center">State Patch</td>
+    </tr>
+  </tbody>
+</table>
+{: #instance-message-dimensions title="Systematization of instance-related messages along the dimensions \"Content\" and \"(Intended) Effect\"."}
+
+The uniform message format can be used for all four message archetypes.
+{{syntax}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
+This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.
+
+In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
+The specification text itself will be accompanied by examples that have been inspired by {{-non-affordance}} and {{-digital-twin}} that each correspond with one of the four archetypes.
+
+## Axioms for instance-related messages
+
+<!-- TODO: Integrate this into the document in a better way -->
+
+Instance-related messages can be messages that relate to a property, action, or
+event (input or output data), or they can be "proofshots" (extracted state
+information, either in general or in a specific form such as a context snapshot etc.).
+
+Instance-related messages are controlled by a *model* (class-level information),
+which normally is the interaction model of the device.
+That interaction model may provide a model of the interaction during which the
+instance-related message is interchanged (at least conceptually), or it may be a
+"built-in" interaction (such as a proofshot, a context snapshot, ...) that is
+implicitly described by the entirety of the interaction model.
+This may need to be augmented/composed in some way, as device modeling may be
+separate from e.g. asset management system modeling or digital twin modeling.
+Instance-related messages use JSON pointers into the model in order to link the
+instance-related information to the model.
+
+Instance-related messages are conceptual and will often be mapped into
+ecosystem-specific protocol messages (e.g., a bluetooth command).
+It is still useful to be able to represent them in a neutral ("red-star")
+format, which we build here as an adaption of the JSON-based format of the
+models themselves.
+An ecosystem might even decide to use the neutral format as its
+ecosystem-specific format (or as an alternative format).
+
+Instance-related messages may be plain messages, or they may be deltas (from a
+previous state) and/or patches (leading from a previous or the current state to
+a next state).
+Several media types can be defined for deltas/patches; JSON merge-patch {{-merge-patch}} is already in use in SDF (for `sdfRef`) and therefore is a likely candidate.
+(Assume that some of the models will be using
+[Conflict-free replicated data types (CRDTs)][CRDTs] to facilitate patches.)
+
+[CRDTs]: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
+
+To identify the reference state for a delta/patch, we need
+
+* device identity (thingId?)
+* state info (timestamp? state/generation identifier?)
+
+## Context Information
 
 Messages always have context, typically describing the "me" and the
 "you" of the interaction, the "now" and "here", allowing deictic
-statements ("the temperature here", "my current draw")...
+statements such as "the temperature here" or "my current draw".
 
 Messages may have to be complemented by this context for
 interpretation, i.e., the context needed may need to be reified in the
 message (compare the use of SenML "n").
+Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.
 
-TODO: Use NIPC as an example how this could be used, including SCIM as
-a source of context information.
+For this purpose, we are using the `sdfContext` keyword introduced by {{-non-affordance}}.
+Note that `sdfContext` *could* also be modelled via `sdfProperty`.
 
 TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
 
-(Describe how protocol bindings can be used to convert these messages
-to/from concrete serializations...)
+# Message Format {#message-format}
 
-TODO: Reference sdfProtocolMap
+The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.
 
-### Context Snapshots
+TODO: Decide where we want to keep this:
 
-Context information may be provided via the keyword `sdfContext` {{-non-affordance}},
-which replaces the `$context` keyword used in earlier draft versions.
-With this new approach, the context information that is included in the
-instance message is now controlled by the model and the corresponding schema
-information (as the `sdfContext` definition in the SDF model is structurally
-similar to `sdfData`).
+One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the same models).
 
-{{example-context}} gives an example for an instance message (effectively a
-context snapshot)
+## Information Block
+
+The information block contains the same qualities as an SDF model and, additionally, a mandatory `messageId` to uniquely identify the message.
+Furthermore, "status report update" messages can utilize the `previousMessageId` in order to link two messages and indicate the state change.
+
+| Quality            | Type             | Description                                                        |
+|--------------------|------------------|--------------------------------------------------------------------|
+| title              | string           | A short summary to be displayed in search results, etc.            |
+| description        | string           | Long-form text description (no constraints)                        |
+| version            | string           | The incremental version of the definition                          |
+| modified           | string           | Time of the latest modification                                    |
+| copyright          | string           | Link to text or embedded text containing a copyright notice        |
+| license            | string           | Link to text or embedded text containing license terms             |
+| messageId          | string           | Unique identifier of this instance-related message                 |
+| previousMessageId  | string           | Identifier used to connect this instance message to a previous one |
+| features           | array of strings | List of extension features used                                    |
+| $comment           | string           | Source code comments only, no semantics                            |
+{: #infoblockqual title="Qualities of the Information Block"}
+
+## Namespaces Block
+
+Similar to SDF models, instance-related messages contain a namespaces block with a `namespace` map and the `defaultNamespace` setting.
+In constrast to models, including a `namespace` quality is mandatory as at least one namespace reference is needed to be able to refer to the SDF model the instance-related message corresponds with.
+
+| Quality          | Type   | Description                                                                                          |
+|------------------|--------|------------------------------------------------------------------------------------------------------|
+| namespace        | map    | Defines short names mapped to namespace URIs, to be used as identifier prefixes                      |
+| defaultNamespace | string | Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers |
+{: #nssec title="Namespaces Block"}
+
+## Instance-of Block
+
+Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
+Via the `model` keyword, this quality defines the entry point the `sdfInstance` quality from the next section is referring to.
+Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
+
+| Quality          | Type   | Description                                                                                                                                                    |
+|------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| model            | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Has to be based on a namespace identifier from the `namespaces` map. |
+| patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                             |
+| $comment         | string           | Source code comments only, no semantics                                                                                                              |
+{: #iobsec title="Instance-of Block"}
+
+## Instance Block
+
+In the instance block, state information for properties, actions, and events as well as context information can be included.
+Depending on the archetype, this information will either be used to report a Thing's current state, to report state *changes*, or to update state via a patch or reconfiguration.
+
+Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
+
+The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the instance-related message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
+Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
+
+<!-- TODO: The descriptions need some refinement here. Also: Maybe we need to specify the shape of the qualities in addional sections -->
+
+| Quality          | Type   | Description                                                     |
+|------------------|--------|-----------------------------------------------------------------|
+| sdfThing         | map    | Values for the thing entries in the referenced SDF definition   |
+| sdfObject        | map    | Values for the object entries in the referenced SDF definition  |
+| sdfContext       | map    | Values for the context entries in the referenced SDF definition |
+| sdfProperty      | map    | Values for the properties in the referenced SDF definition      |
+| sdfAction        | map    | Values for the actions in the referenced SDF definition         |
+| sdfEvent         | map    | Values for the events in the referenced SDF definition          |
+{: #ibsec title="Instance Block"}
+
+# Message Archetypes
+
+Based on the common message format defined in {{message-format}} and the systematization from {{instance-message-dimensions}}, we can derive a set of four archetypes that serve different use cases and recipients.
+
+TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
+
+TODO: The description of the individual messages probably has to be expanded.
+      Maybe some of the content from the six example messages should be moved here.
+
+## State Reports
+
+This instance-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
+In the message, the `previousMessageId` field in the information block MUST NOT be present.
+Furthermore, when transmitting this message in its JSON format, the content type `application/sdf-state-report+json` MUST be indicated if supported by the protocol used for transmission.
+
+State reports MAY only contain values for a *subset* of all possible affordances and context information exposed by a Thing.
+Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
+
+## Construction Messages
+
+(These might not be covered here but via dedicated actions.)
+
+Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
+Furthermore, construction messages MUST be indicated by a different media type, namely `application/sfd-construction+json`.
+
+## State Report Updates
+
+State report updates are messages that only describe updates relative to a previous message.
+For this purpose, a `previousMessageId` MUST be present in the info block.
+When transmitting state report updates, the media type `application/sdf-state-report-update+json` MUST be used if possible.
+
+By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
+Via the `patchMethod` quality, different patch algorithms MAY be indicated.
+
+## State Patches
+
+State patches are structurally equivalent to state report updates.
+However, they utilize the patch mechanism (using the provided `patchMethod`) to alter the state of a Thing instead of reporting state changes.
+Since they are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
+When transmitting state patches, the media type `application/sdf-state-patch+json` MUST be used if possible.
+
+# Message Purposes and Usecases
+
+The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
+While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.
+
+TODO: Consider only describing the different kinds of state reports
+
+State Reports can be used as
+
+- *Context snapshots* that only report context information about a Thing,
+- *Proofshots* that report a Thing's state (or parts of it), which may include context information, or
+- *Identity manifests* that report information related to a Thing's identity.
+
+In the case of state report updates, we have *Deltas* that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.
+
+State patches can appear as *Patch messages* that indicate state changes that should be *applied* to a Thing.
+
+And finally, we have the *Construction Messages* that initiate a Thing's (re)configuration or its comissioning
+
+As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
+However, the message format stays identical across the three manifestations of the archetype.
+
+In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.
+
+## Context Snapshots
+
+Context snapshots are state reports that only include context information via the `sdfContext` keyword.
+
+{{example-context}} gives an example for this kind of instance message by showing a status report message that only contains context information.
 
 ~~~ sdf
 info:
-  messageId: 8988be82-50dc-4249-bed2-60c9c8797623
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   models: https://example.com/models
-  boats: https://example.com/boats
-defaultNamespace: boats
+  sensors: https://example.com/sensors
+defaultNamespace: models
 sdfInstanceOf:
-  model: models:#/sdfObject/boat
+  model: sensors:#/sdfObject/envSensor
 sdfInstance:
   sdfContext:
-    "$comment": Potential contents for the SDF context
-    deviceName: urn:dev:org:30810-boat007
-    deviceEui64Address: 50:32:5F:FF:FE:E7:67:28
-    scimObjectId: 8988be82-50dc-4249-bed2-60c9c8797677
+    timestamp: '2025-07-01T12:00:00Z'
+    thingId: envSensor:abc123
+    installationInfo:
+      floor: 3
+      mountType: ceiling
+      indoorOutdoor: indoor
 ~~~
 {:sdf #example-context
-title="Example for an SDF instance with context information"}
+title="Example of an SDF context snapshot."}
 
-### Proofshots (read device, other component)
+This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
+
+## Proofshots
 
 (See defn above.)
 
 Proofshots are similar to context snapshots, with the important difference that
-they are not reporting the context information associated with an entity but
+they are not only reporting the context information associated with an entity but
 also state information associated with its interaction affordances (properties,
 actions, and events).
-TODO: Note that the while the format for describing the state of properties is clearly
-governed by the schema information from the corresponding `sdfProperty`
-definition, it is still unclear how to best model the state of `sdfAction`s and
-`sdfEvents`.
 As in the case of the Context Snapshot, the Proofshot may also contain concrete
 values that reflect context information associated with a device via the
 `sdfContext` keyword {{-non-affordance}}.
+
+TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding `sdfProperty` definition, it is still unclear how to best model the state of `sdfAction`s and
+`sdfEvent`s.
 
 The following examples are based on {{-non-affordance}} and {{-digital-twin}}.
 {{code-off-device-instance}} shows a proofshot that captures the state of a
 sensor.
 Here, every property and context definition of the corresponding SDF model
-(see {{code-off-device-model}}) is mapped to a concrete value that corresponds
-with the associated schema information.
-The alternating structure of the SDF model
-(e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated
-in the proofshot, with the top-level `sdfObject` being replaced by `sdfInstance`,
-which serves as the "entry point" to the instance message.
-
-Via the `model` quality in `sdfInstanceOf`, the exact `sdfThing` or `sdfObject`
-that corresponds with the `sdfInstance` is specified;
-the namespace needed for this is set up in the usual `namespace` section that we
-also have in model files.
-
-[^context-note]
-
-[^context-note]: Since we are now using the `sdfContext` keyword from {{-non-affordance}} for describing both "off-device" and context information, we have replaced the previously introduced `$context` keyword accodingly.
+(see {{code-off-device-model}}) is mapped to a concrete value that satisfies
+the associated schema.
 
 ~~~ sdf
 info:
@@ -329,59 +556,10 @@ sdfInstance:
 {:sdf #code-off-device-instance post="fold"
 title="SDF proofshot example."}
 
-#### Corresponding SDF Model
-
-{{code-off-device-model}} shows a model like the one that could have
-been pointed to by the `model` pointer within the `sdfInstanceOf` quality in the
-instance message.
-Note how the namespace is managed here to export the `boat` component into
-`models:#/sdfThing/boat`, which is the "entry point" used in the instance
-messages above.
-
-(This example model only specifies structure; it also could come with
-semantic information such as the units that are used for wgs84 etc.
-In practice, the definition of `wgs84` etc. probably would come from a common
-library and just be referenced via `sdfRef`.)
-
-~~~ sdf
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensors
-defaultNamespace: models
-sdfObject:
-  envSensor:
-    sdfContext:
-      timestamp:
-        type: string
-      thingId:
-        type: string
-      deviceIdentity:
-        manufacturer:
-          type: string
-        firmwareVersion:
-          type: string
-      installationInfo:
-        type: object
-        properties:
-          floor:
-            type: integer
-          mountType:
-            enum:
-            - ceiling
-            - wall
-    sdfProperty:
-      temperature:
-        type: number
-        unit: Cel
-
-~~~
-{:sdf #code-off-device-model
-title="SDF Model that serves as a reference point for the instance message in this draft"}
-
-### Construction
+## Construction Messages
 
 Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
-They are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.
+Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.
 
 A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
@@ -406,7 +584,146 @@ physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)
 
-#### Examples for SDF Constructors
+{{code-sdf-construction-message}} shows a potential SDF construction message
+that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+sdfInstance:
+  sdfContext:
+    timestamp: '2025-07-01T08:15:00Z'
+    thingId: envSensor:unit42
+    deviceIdentity:
+      manufacturer: HealthTech Inc.
+      firmwareVersion: 1.4.3
+~~~
+{:sdf #code-sdf-construction-message
+title="Example for an SDF construction message"}
+
+## Delta Messages
+
+TODO: Reword
+
+When the state of a device at a given point in time is known (e.g., due to a
+previous instance message), an external entity might only be interested in the
+changes since that point in time. Or it might want to adjust its state and/or
+context the device operates in. For both purposes, instance messages can be
+used.
+
+{{code-sdf-delta-message}} shows an example that contains an instance message
+reporting a "proofshot delta", that is the state changes that occured compared
+to the ones reported in the previous message (identified via its
+`previousMessageId`). In this example, only the temperature as measured by the
+sensor has changed, so only that information is included.
+
+Delta messages could be used in the Series Transfer Pattern {{STP}}, which may
+be one way to model a telemetry stream from a device.
+
+~~~ sdf
+info:
+  title: Example SDF delta instance message
+  previousMessageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  cap: https://example.com/capability/cap
+  models: https://example.com/models
+defaultNamespace: cap
+sdfInstanceOf:
+  model: models:/sdfObject/envSensor
+sdfInstance:
+  sdfProperty:
+    temperature: 24
+~~~
+{:sdf #code-sdf-delta-message
+title="Example of an SDF instance message that serves as a delta."}
+
+## Patch Messages
+
+Yet another purpose for instance messages is the application of updates to a
+device's configuration via a so-called patch message.
+Such a message is shown in {{code-sdf-context-patch}}, where a change of the
+device's `mountType` is reflected. This message type might be especially
+relevant for digital twins {{-digital-twin}}, where changes to physical
+attributes (such as the location) need to be reflected somehow.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+  patchMethod: merge-patch
+sdfInstance:
+  sdfContext:
+    installationInfo:
+      mountType: wall
+~~~
+{:sdf #code-sdf-context-patch
+title="Example of an SDF context patch message that uses the common instance message format."}
+
+TODO: Maybe the following can be shortened or even removed
+
+When comparing  {{code-sdf-delta-message}} and {{code-sdf-context-patch}}, we
+can see that the main difference between the messages is the *purpose* these
+message are being used for. This purpose could be implicitly reflected by the
+nature of the resource that accepts or returns the respective message type.
+It would also be possible to indicate the purpose more explicitly by using a
+different content format when transferring the messages over the wire.
+Another difference, however, lays in the fact that the context patch is not
+including a `previousMessageId`, which might be sufficient to distinguish the
+two message types.
+
+Despite their different purpose, both messages will apply some kind of patch
+algorithm.
+JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the `patchMethod` field within the `sdfInstanceOf` quality.
+
+## Identity Manifest
+
+Identity manifests belong like proofshots and context snapshots to the Status Report archetype.
+However, their use case is tied more strongly to identity information which may be modeled as context information.
+
+{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{code-sdf-construction-message}}.
+What makes qualifies the message as an identity manifest is its media type, which differs from the construction message, as well as the circumstances under which the message might be emitted -- for instance, as the *result* of a construction.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+sdfInstance:
+  sdfContext:
+    timestamp: '2025-07-01T08:15:00Z'
+    thingId: envSensor:unit42
+    deviceIdentity:
+      manufacturer: HealthTech Inc.
+      firmwareVersion: 1.4.3
+~~~
+{:sdf #code-sdf-identity-manifest
+title="Example for an SDF construction message"}
+
+# Examples for SDF Constructors
+
+TODO: This section needs to be updated/reworked/removed
 
 {{code-sdf-constructor-action}} shows a potential approach for describing
 constructors via the `sdfAction` keyword with a set of construction parameters
@@ -464,131 +781,71 @@ sdfObject:
 {:sdf #code-sdf-constructor-action
 title="Example for SDF model with constructors"}
 
-#### Example for an SDF construction message
-
-{{code-sdf-construction-message}} shows a potential SDF construction message
-that initializes a device. As shown above, the information from the message
-ends up in both an SDF Model (or Mapping File) and an instance message.
-
-~~~ sdf
-info:
-  title: Example SDF construction message
-  "$comment": 'TODO: What kind of metadata do we need here?'
-namespace:
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
-sdfInstanceOf:
-  model: cap:#/sdfObject/temperatureSensor/sdfConstructors/construct
-sdfInstance:
-  sdfContext:
-    ipAddress: "192.0.2.42"
-    $comment: Could the constructor parameter also be considered context information..?
-    temperatureUnit: Cel
-~~~
-{:sdf #code-sdf-construction-message
-title="Example for an SDF construction message"}
-
-### Deltas and Patch Messages
-
-When the state of a device at a given point in time is known (e.g., due to a
-previous instance message), an external entity might only be interested in the
-changes since that point in time. Or it might want to adjust its state and/or
-context the device operates in. For both purposes, instance messages can be
-used.
-
-{{code-sdf-delta-message}} shows an example that contains an instance message
-reporting a "proofshot delta", that is the state changes that occured compared
-to the ones reported in the previous message (identified via its
-`previousMessageId`). In this example, only the temperature as measured by the
-sensor has changed, so only that information is included.
-
-Delta messages could be used in the Series Transfer Pattern {{STP}}, which may
-be one way to model a telemetry stream from a device.
-
-~~~ sdf
-info:
-  title: Example SDF delta instance message
-  previousMessageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-namespace:
-  cap: https://example.com/capability/cap
-  models: https://example.com/models
-defaultNamespace: cap
-sdfInstanceOf:
-  model: models:/sdfObject/envSensor
-sdfInstance:
-  sdfProperty:
-    temperature: 24
-~~~
-{:sdf #code-sdf-delta-message
-title="Example of an SDF instance message that serves as a proofshot delta."}
-
-Yet another purpose for instance message might be appyling an update to a
-device's configuration, e.g. via a so-called context patch message.
-Such a message is shown in {{code-sdf-context-patch}}, where a change of the
-device's `mountType` is reflected. This message type might be especially
-relevant for digital twins {{-digital-twin}}, where changes to physical
-attributes (such as the location) need to be reflected somehow.
-
-~~~ sdf
-info:
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
-  patchMethod: merge-patch
-sdfInstance:
-  sdfContext:
-    installationInfo:
-      mountType: wall
-
-~~~
-{:sdf #code-sdf-context-patch
-title="Example of an SDF context patch message that uses the common instance message format."}
-
-When comparing  {{code-sdf-delta-message}} and {{code-sdf-context-patch}}, we
-can see that the main difference between the messages is the _purpose_ these
-message are being used for. This purpose could be implicitly reflected by the
-nature of the resource that accepts or returns the respective message type.
-It would also be possible to indicate the purpose more explicitly by using a
-different content format when transferring the messages over the wire.
-Another difference, however, lays in the fact that the context patch is not
-including a `previousMessageId`, which might be sufficient to distinguish the
-two message types.
-
-Despite their different purpose, both messages will apply some kind of patch
-algorithm.
-JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
-algorithm that will be used a little bit differently depending on the message
-type (the context patch will be applied "internally" by the device, while
-the delta message will be processed together with its predecessor by a
-consumer). As there might be cases where the Merge Patch algorithm is not
-sufficient, different algorithms (that can be IANA registered) are going to be
-settable via the `patchMethod` field within the `sdfInstanceOf` quality.
-
-## Metadata
-
-One interesting piece of offDevice information is the model itself, including sdfinfo and the defaultnamespace.  This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Multiple models may apply to the same device (including but not only revisions of the models).
-
 # Discussion
 
 (TODO)
 
 # Security Considerations
 
+- Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters
 
 (TODO)
 
 
 # IANA Considerations
 
-(TODO)
+TODO: Add media type registrations
 
 --- back
+
+
+# Example SDF Model
+
+{{code-off-device-model}} shows the model all of the examples for instance-related messages are pointing to in this document.
+Note how the namespace is managed here to export the `envSensor` component into
+`models:#/sdfObject/envSensor`, which is the "entry point" used in the instance
+messages within the main document.
+
+~~~ sdf
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensors
+defaultNamespace: models
+sdfObject:
+  envSensor:
+    sdfContext:
+      timestamp:
+        type: string
+      thingId:
+        type: string
+      deviceIdentity:
+        manufacturer:
+          type: string
+        firmwareVersion:
+          type: string
+      installationInfo:
+        type: object
+        properties:
+          floor:
+            type: integer
+          mountType:
+            enum:
+            - ceiling
+            - wall
+    sdfProperty:
+      temperature:
+        type: number
+        unit: Cel
+
+~~~
+{:sdf #code-off-device-model
+title="SDF Model that serves as a reference point for the instance messages in this draft"}
+
+# Formal Syntax of Instance-related Messages {#syntax}
+
+~~~ cddl
+{::include sdf-instance-messages.cddl}
+~~~
 
 # Roads Not Taken
 
