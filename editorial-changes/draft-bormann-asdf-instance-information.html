@@ -1,0 +1,2886 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Instance Information for SDF</title>
+<meta content="Carsten Bormann" name="author">
+<meta content="Jan Romann" name="author">
+<meta content="
+       This document discusses types of Instance Information to be used in
+conjunction with the Semantic Definition Format (SDF) for Data and
+Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
+define Representation Formats for them as well as ways to use SDF
+Models to describe them. 
+       The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format. 
+    " name="description">
+<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="IoT" name="keyword">
+<meta content="Link" name="keyword">
+<meta content="Information Model" name="keyword">
+<meta content="Interaction Model" name="keyword">
+<meta content="Data Model" name="keyword">
+<meta content="draft-bormann-asdf-instance-information-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.31.0
+    Python 3.12.12
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.5.0
+    pycountry 24.6.1
+    PyYAML 6.0.2
+    requests 2.32.5
+    wcwidth 0.2.14
+-->
+<link href="draft-bormann-asdf-instance-information.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+}
+dl:not(.dlNewline) > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+}
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+/* Comments */
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:is(:link, :focus, :hover),
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin: 2px 0.5em 0;
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">SDF Instance Information</td>
+<td class="right">November 2025</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Bormann &amp; Romann</td>
+<td class="center">Expires 1 June 2026</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">ASDF</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2025-11-28" class="published">28 November 2025</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2026-06-01">1 June 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">C. Bormann</div>
+<div class="org">Universität Bremen TZI</div>
+</div>
+<div class="author">
+      <div class="author-name">J. Romann</div>
+<div class="org">Universität Bremen</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Instance Information for SDF</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document discusses types of Instance Information to be used in
+conjunction with the Semantic Definition Format (SDF) for Data and
+Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
+define Representation Formats for them as well as ways to use SDF
+Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-information/">https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-information/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        »A Semantic Definition Format for Data and Interactions of Things« (ASDF) Working Group mailing list (<span><a href="mailto:asdf@ietf.org">mailto:asdf@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/asdf/">https://mailarchive.ietf.org/arch/browse/asdf/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/asdf/">https://www.ietf.org/mailman/listinfo/asdf/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/ietf-wg-asdf/instance-information">https://github.com/ietf-wg-asdf/instance-information</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 1 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-terms-we-are-trying-not-to-" class="internal xref">Terms we are trying not to use</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-instance-information-and-sd" class="internal xref">Instance Information and SDF</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-axioms-for-instance-related" class="internal xref">Axioms for instance-related messages</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-context-information" class="internal xref">Context Information</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-message-format" class="internal xref">Message Format</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-information-block" class="internal xref">Information Block</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-namespaces-block" class="internal xref">Namespaces Block</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-instance-of-block" class="internal xref">Instance-of Block</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-instance-block" class="internal xref">Instance Block</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-message-archetypes" class="internal xref">Message Archetypes</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-state-reports" class="internal xref">State Reports</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-state-report-updates" class="internal xref">State Report Updates</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-state-patches" class="internal xref">State Patches</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-message-purposes-and-usecas" class="internal xref">Message Purposes and Usecases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-context-snapshots" class="internal xref">Context Snapshots</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-proofshots" class="internal xref">Proofshots</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-construction-messages-2" class="internal xref">Construction Messages</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-delta-messages" class="internal xref">Delta Messages</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-patch-messages" class="internal xref">Patch Messages</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-identity-manifest" class="internal xref">Identity Manifest</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples-for-sdf-constructo" class="internal xref">Examples for SDF Constructors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-sdf-model" class="internal xref">Example SDF Model</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-formal-syntax-of-instance-r" class="internal xref">Formal Syntax of Instance-related Messages</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-roads-not-taken" class="internal xref">Roads Not Taken</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-using-sdf-models-as-proofsh" class="internal xref">Using SDF Models as Proofshots</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.1">
+                    <p id="section-toc.1-1.13.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-alternative-instance-keys" class="internal xref">Alternative Instance Keys</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Semantic Definition Format for Data and Interactions of Things
+(SDF, <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span>) is a format for domain experts to use in the creation
+and maintenance of data and interaction models in the Internet of
+Things.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">SDF is an Interaction Modeling format, enabling a modeler to describe
+the digital interactions that a class of Things (devices) offers,
+including the abstract data types of messages used in these
+interactions.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">SDF is designed to be independent of specific ecosystems that specify
+conventions for performing these interactions, e.g., over Internet
+protocols or over ecosystem-specific protocol stacks.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">SDF does not define representation formats for the <em>Instance Information</em> that is
+exchanged in, or the subject of such, interactions; this is left to the
+specific ecosystems, which tend to have rather different ways to
+represent this information.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">This document discusses Instance Information in different types and roles.
+It defines an <em>abstraction</em> of this, as an eco-system independent way to reason about this information.
+This abstraction can be used at a <em>conceptual</em> level, e.g., to define models that govern the instance information.
+However, where this is desired, it also can be used as the basis for a concrete <em>neutral representation</em> (Format) that can actually be used for interchange to exchange information and parameters for interactions to be performed.
+In either case, the structure and semantics of this information are governed by SDF Models.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document is truly work in progress.
+It freely copies examples from the <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> document that evolves in
+parallel, with a goal of further synchronizing the development where that
+hasn't been fully achieved yet.
+After the discussion stabilizes, we'll need to discuss how the
+information should be distributed into the different documents and/or
+how documents should be merged.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<div id="conventions-and-definitions">
+<section id="section-1.1">
+        <h3 id="name-conventions-and-definitions">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+        </h3>
+<p id="section-1.1-1">The definitions of <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span>, <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>, and <span>[<a href="#I-D.ietf-asdf-sdf" class="cite xref">I-D.ietf-asdf-sdf</a>]</span> apply.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Terminology may need to be imported from <span>[<a href="#LAYERS" class="cite xref">LAYERS</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-1.1-3">
+          <dt id="section-1.1-3.1">Representation:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.2">
+            <p id="section-1.1-3.2.1">As defined in Section <a href="https://rfc-editor.org/rfc/rfc9110#section-3.2" class="relref">3.2</a> of RFC 9110 <span>[<a href="#STD97" class="cite xref">STD97</a>]</span>, but understood to
+analogously apply to other interaction styles than Representational
+State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.3">Message:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.4">
+            <p id="section-1.1-3.4.1">A Representation that is exchanged in, or is the subject of, an
+Interaction.
+Messages are "data in flight", not instance "data at rest" (the
+latter are called "Instance" and are modeled by the interaction
+model).<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.2">Depending on the specific message, an abstract data model for the
+message may be provided by the <code>sdfData</code> definitions (or of
+declarations that look like these, such as <code>sdfProperty</code>) of an SDF
+model.<a href="#section-1.1-3.4.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.3">Deriving an ecosystem specific representation of a message may be
+aided by <em>mapping files</em> <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span> that apply to the SDF model
+providing the abstract data model.<a href="#section-1.1-3.4.3" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.5">Instantiation:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.6">
+            <p id="section-1.1-3.6.1">Instantiation is a process that takes a Model, some Context
+Information, and possibly information from a Device and creates an
+Instance.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.7">Instance:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.8">
+            <p id="section-1.1-3.8.1">Anything that can be interacted with based on the SDF model.
+E.g., the Thing itself (device), a Digital Twin, an Asset Management
+system...
+Instances are modeled as "data at rest", not "data in flight" (the
+latter are called "Message" and actually are/have a Representation).
+Instances that relate to a single Thing are bound together by some
+form of identity.
+Instances become useful if they are "situated", i.e., with a
+physical or digital "address" that they can be found at and made the
+subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.9">Instance-related Message:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.10">
+            <p id="section-1.1-3.10.1">A message that describes the state or a state change of a specific instance.
+(TBC -- also: do we need this additional term?)<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.11">Message Archetype:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.12">
+            <p id="section-1.1-3.12.1">In the context of instance-related messages:
+A message with specific content and effect, covering a wider set of different use cases.
+In this document, we are observing a total of four instance-related message archetypes.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.13">Proofshot:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.14">
+            <p id="section-1.1-3.14.1">A message that attempts to describe the state of an Instance at a
+particular moment (which may be part of the context).
+We are not saying that the Proofshot <em>is</em> the instance because there
+may be different ways to make one from an Instance (or to consume
+one in updating the state of the Instance), and because the
+proofshot, being a message, is not situated.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.2">Proofshots are snapshots, and they are "proofs" in the photographic
+sense, i.e., they may not be of perfect quality.
+Not all state that is characteristic of an Instance may be included
+in a Proofshot (e.g., information about an active action that is not
+embedded in an action resource).
+Proofshots may depend on additional context (such as the identity of
+the Instance and a Timestamp).<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.3">An interaction affordance to obtain a Proofshot may not be provided
+by every Instance.
+An Instance may provide separate Construction affordances instead of
+simply setting a Proofshot.<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.14.4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.14.5" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.14.6" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.7">TODO: Also mention the other message types we had so far (context snapshot,
+      context patch, identity manifest) here?<a href="#section-1.1-3.14.7" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.15">Construction:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.16">
+            <p id="section-1.1-3.16.1">Construction messages enable the creation of a digital Instance,
+e.g., initialization/commissioning of a device or creation of its
+digital twins.
+They are like proofshots, in that they embody a state, however this
+state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.16.2">Discuss YANG config=true approach.<a href="#section-1.1-3.16.2" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-1.1-4">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in <span>[<a href="#BCP14" class="cite xref">BCP14</a>]</span> (<a href="#RFC2119" class="auto internal xref">RFC2119</a>) (<a href="#RFC8174" class="auto internal xref">RFC8174</a>) when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terms-we-are-trying-not-to-use">
+<section id="section-1.2">
+        <h3 id="name-terms-we-are-trying-not-to-">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terms-we-are-trying-not-to-" class="section-name selfRef">Terms we are trying not to use</a>
+        </h3>
+<span class="break"></span><dl class="dlParallel" id="section-1.2-1">
+          <dt id="section-1.2-1.1">Non-affordance:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.2-1.2">
+            <p id="section-1.2-1.2.1">Originally a term for information that is the subject of
+interactions with other Instances than the Thing (called "offDevice"
+now), this term is now considered confusing as it would often just
+be an affordance of another Instance than the Thing.
+In this draft version, we are trying to use a new keyword called
+<code>sdfContext</code> that is supposed to be slightly more accurate, replacing
+the <code>$context</code> concept that was used in previous draft versions.<a href="#section-1.2-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="instance-information-and-sdf">
+<section id="section-2">
+      <h2 id="name-instance-information-and-sd">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-instance-information-and-sd" class="section-name selfRef">Instance Information and SDF</a>
+      </h2>
+<p id="section-2-1">The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
+Instead, the instantiation produces an instance-related <em>message</em>, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
+Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Taking into account previous revisions of this document as well as <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>, we identified two main dimensions for covering the potential use cases for instance-related messages:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-3">
+<li id="section-2-3.1">
+          <p id="section-2-3.1.1">the intended effect of a message, which can either be the exposure or an update of a Thing's state, and<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-3.2">
+          <p id="section-2-3.2.1">the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<p id="section-2-4">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-5">
+<li id="section-2-5.1">
+          <p id="section-2-5.1.1"><em>State reports</em> that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-5.2">
+          <p id="section-2-5.2.1"><em>Construction messages</em>, which trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-5.3">
+          <p id="section-2-5.3.1"><em>State report updates</em> that indicate changes that have occurred since a reference state report, and<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-5.4">
+          <p id="section-2-5.4.1"><em>State patches</em> that update the Thing's state.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ol>
+<span id="name-systematization-of-instance"></span><div id="instance-message-dimensions">
+<table class="center" id="table-1">
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-systematization-of-instance" class="selfRef">Systematization of instance-related messages along the dimensions "Content" and "(Intended) Effect".</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="2"></th>
+            <th class="text-center" rowspan="1" colspan="2">Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="2"></th>
+            <th class="text-center" rowspan="1" colspan="1">Freestanding</th>
+            <th class="text-center" rowspan="1" colspan="1">Relative</th>
+          </tr>
+          <tr>
+            <th class="text-center" rowspan="2" colspan="1">(Intended)        <br>
+Effect</th>
+            <th class="text-center" rowspan="1" colspan="1">State Exposure</th>
+            <td class="text-center" rowspan="1" colspan="1">Status Report</td>
+            <td class="text-center" rowspan="1" colspan="1">Status Report Update</td>
+          </tr>
+          <tr>
+            <th class="text-center" rowspan="1" colspan="1">State Change</th>
+            <td class="text-center" rowspan="1" colspan="1">Construction</td>
+            <td class="text-center" rowspan="1" colspan="1">State Patch</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<p id="section-2-7">The uniform message format can be used for all four message archetypes.
+<a href="#syntax" class="auto internal xref">Appendix B</a> specifies the formal syntax of instance-related messages that all normative statements as well as the examples in this document will adhere to.
+This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
+The specification text itself will be accompanied by examples that have been inspired by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span> that each correspond with one of the four archetypes.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<div id="axioms-for-instance-related-messages">
+<section id="section-2.1">
+        <h3 id="name-axioms-for-instance-related">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-axioms-for-instance-related" class="section-name selfRef">Axioms for instance-related messages</a>
+        </h3>
+<p id="section-2.1-1">Instance-related messages can be messages that relate to a property, action, or
+event (input or output data), or they can be "proofshots" (extracted state
+information, either in general or in a specific form such as a context snapshot etc.).<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Instance-related messages are controlled by a <em>model</em> (class-level information),
+which normally is the interaction model of the device.
+That interaction model may provide a model of the interaction during which the
+instance-related message is interchanged (at least conceptually), or it may be a
+"built-in" interaction (such as a proofshot, a context snapshot, ...) that is
+implicitly described by the entirety of the interaction model.
+This may need to be augmented/composed in some way, as device modeling may be
+separate from e.g. asset management system modeling or digital twin modeling.
+Instance-related messages use JSON pointers into the model in order to link the
+instance-related information to the model.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Instance-related messages are conceptual and will often be mapped into
+ecosystem-specific protocol messages (e.g., a bluetooth command).
+It is still useful to be able to represent them in a neutral ("red-star")
+format, which we build here as an adaption of the JSON-based format of the
+models themselves.
+An ecosystem might even decide to use the neutral format as its
+ecosystem-specific format (or as an alternative format).<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">Instance-related messages may be plain messages, or they may be deltas (from a
+previous state) and/or patches (leading from a previous or the current state to
+a next state).
+Several media types can be defined for deltas/patches; JSON merge-patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is already in use in SDF (for <code>sdfRef</code>) and therefore is a likely candidate.
+(Assume that some of the models will be using
+<a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">Conflict-free replicated data types (CRDTs)</a> to facilitate patches.)<a href="#section-2.1-4" class="pilcrow">¶</a></p>
+<p id="section-2.1-5">To identify the reference state for a delta/patch, we need<a href="#section-2.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1-6.1">
+            <p id="section-2.1-6.1.1">device identity (thingId?)<a href="#section-2.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.1-6.2">
+            <p id="section-2.1-6.2.1">state info (timestamp? state/generation identifier?)<a href="#section-2.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="context-information">
+<section id="section-2.2">
+        <h3 id="name-context-information">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-context-information" class="section-name selfRef">Context Information</a>
+        </h3>
+<p id="section-2.2-1">Messages always have context, typically describing the "me" and the
+"you" of the interaction, the "now" and "here", allowing deictic
+statements such as "the temperature here" or "my current draw".<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Messages may have to be complemented by this context for
+interpretation, i.e., the context needed may need to be reified in the
+message (compare the use of SenML "n").
+Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">For this purpose, we are using the <code>sdfContext</code> keyword introduced by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.
+Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfProperty</code>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="message-format">
+<section id="section-3">
+      <h2 id="name-message-format">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-message-format" class="section-name selfRef">Message Format</a>
+      </h2>
+<p id="section-3-1">The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">TODO: Decide where we want to keep this:<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-3-3" class="pilcrow">¶</a></p>
+<div id="information-block">
+<section id="section-3.1">
+        <h3 id="name-information-block">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-information-block" class="section-name selfRef">Information Block</a>
+        </h3>
+<p id="section-3.1-1">The information block contains the same qualities as an SDF model and, additionally, a mandatory <code>messageId</code> to uniquely identify the message.
+Furthermore, "status report update" messages can utilize the <code>previousMessageId</code> in order to link two messages and indicate the state change.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<span id="name-qualities-of-the-informatio"></span><div id="infoblockqual">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-qualities-of-the-informatio" class="selfRef">Qualities of the Information Block</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Quality</th>
+              <th class="text-left" rowspan="1" colspan="1">Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">title</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">A short summary to be displayed in search results, etc.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">description</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Long-form text description (no constraints)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">version</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">The incremental version of the definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">modified</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Time of the latest modification</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">copyright</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Link to text or embedded text containing a copyright notice</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">license</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Link to text or embedded text containing license terms</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">messageId</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Unique identifier of this instance-related message</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">previousMessageId</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Identifier used to connect this instance-related message to a previous one</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">features</td>
+              <td class="text-left" rowspan="1" colspan="1">array of strings</td>
+              <td class="text-left" rowspan="1" colspan="1">List of extension features used</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">$comment</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Source code comments only, no semantics</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="namespaces-block">
+<section id="section-3.2">
+        <h3 id="name-namespaces-block">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-namespaces-block" class="section-name selfRef">Namespaces Block</a>
+        </h3>
+<p id="section-3.2-1">Similar to SDF models, instance-related messages contain a namespaces block with a <code>namespace</code> map and the <code>defaultNamespace</code> setting.
+In constrast to models, including a <code>namespace</code> quality is mandatory as at least one namespace reference is needed to be able to refer to the SDF model the instance-related message corresponds with.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<span id="name-namespaces-block-2"></span><div id="nssec">
+<table class="center" id="table-3">
+          <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-namespaces-block-2" class="selfRef">Namespaces Block</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Quality</th>
+              <th class="text-left" rowspan="1" colspan="1">Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">namespace</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Defines short names mapped to namespace URIs, to be used as identifier prefixes</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">defaultNamespace</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Identifies one of the prefixes in the namespace map to be used as a default in resolving identifiers</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="instance-of-block">
+<section id="section-3.3">
+        <h3 id="name-instance-of-block">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-instance-of-block" class="section-name selfRef">Instance-of Block</a>
+        </h3>
+<p id="section-3.3-1">Distinct from SDF models are two instance-specific blocks, the first of which is identified via the <code>sdfInstanceOf</code> keyword.
+Via the <code>model</code> keyword, this quality defines the entry point the <code>sdfInstance</code> quality from the next section is referring to.
+Furthermore, via the <code>patchMethod</code> field, a patch algorithm different from JSON Merge Patch can be specified.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<span id="name-instance-of-block-2"></span><div id="iobsec">
+<table class="center" id="table-4">
+          <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-instance-of-block-2" class="selfRef">Instance-of Block</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Quality</th>
+              <th class="text-left" rowspan="1" colspan="1">Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">model</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Defines the entry point for <code>sdfInstance</code> by pointing to an <code>sdfObject</code> or an <code>sdfThing</code>. Has to be based on a namespace identifier from the <code>namespaces</code> map.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">patchMethod</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">$comment</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Source code comments only, no semantics</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="instance-block">
+<section id="section-3.4">
+        <h3 id="name-instance-block">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-instance-block" class="section-name selfRef">Instance Block</a>
+        </h3>
+<p id="section-3.4-1">In the instance block, state information for properties, actions, and events as well as context information can be included.
+Depending on the archetype, this information will either be used to report a Thing's current state, to report state <em>changes</em>, or to update state via a patch or reconfiguration.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the instance-related message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
+Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<span id="name-instance-block-2"></span><div id="ibsec">
+<table class="center" id="table-5">
+          <caption>
+<a href="#table-5" class="selfRef">Table 5</a>:
+<a href="#name-instance-block-2" class="selfRef">Instance Block</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Quality</th>
+              <th class="text-left" rowspan="1" colspan="1">Type</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfThing</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the thing entries in the referenced SDF definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfObject</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the object entries in the referenced SDF definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfContext</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the context entries in the referenced SDF definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfProperty</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the properties in the referenced SDF definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfAction</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the actions in the referenced SDF definition</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfEvent</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the events in the referenced SDF definition</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="message-archetypes">
+<section id="section-4">
+      <h2 id="name-message-archetypes">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-message-archetypes" class="section-name selfRef">Message Archetypes</a>
+      </h2>
+<p id="section-4-1">Based on the common message format defined in <a href="#message-format" class="auto internal xref">Section 3</a> and the systematization from <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>, we can derive a set of four archetypes that serve different use cases and recipients.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">TODO: The description of the individual messages probably has to be expanded.
+      Maybe some of the content from the six example messages should be moved here.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<div id="state-reports">
+<section id="section-4.1">
+        <h3 id="name-state-reports">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-state-reports" class="section-name selfRef">State Reports</a>
+        </h3>
+<p id="section-4.1-1">This instance-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
+In the message, the <code>previousMessageId</code> field in the information block <span class="bcp14">MUST NOT</span> be present.
+Furthermore, when transmitting this message in its JSON format, the content type <code>application/sdf-state-report+json</code> <span class="bcp14">MUST</span> be indicated if supported by the protocol used for transmission.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">State reports <span class="bcp14">MAY</span> only contain values for a <em>subset</em> of all possible affordances and context information exposed by a Thing.
+Security-related aspects, e.g. regarding authentication and authorization, <span class="bcp14">MUST</span> be taken into account when issueing a state report for a requesting party.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="construction-messages">
+<section id="section-4.2">
+        <h3 id="name-construction-messages">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
+        </h3>
+<p id="section-4.2-1">(These might not be covered here but via dedicated actions.)<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
+Furthermore, construction messages <span class="bcp14">MUST</span> be indicated by a different media type, namely <code>application/sfd-construction+json</code>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="state-report-updates">
+<section id="section-4.3">
+        <h3 id="name-state-report-updates">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-state-report-updates" class="section-name selfRef">State Report Updates</a>
+        </h3>
+<p id="section-4.3-1">State report updates are messages that only describe updates relative to a previous message.
+For this purpose, a <code>previousMessageId</code> <span class="bcp14">MUST</span> be present in the info block.
+When transmitting state report updates, the media type <code>application/sdf-state-report-update+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
+Via the <code>patchMethod</code> quality, different patch algorithms <span class="bcp14">MAY</span> be indicated.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="state-patches">
+<section id="section-4.4">
+        <h3 id="name-state-patches">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-state-patches" class="section-name selfRef">State Patches</a>
+        </h3>
+<p id="section-4.4-1">State patches are structurally equivalent to state report updates.
+However, they utilize the patch mechanism (using the provided <code>patchMethod</code>) to alter the state of a Thing instead of reporting state changes.
+Since they are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
+When transmitting state patches, the media type <code>application/sdf-state-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="message-purposes-and-usecases">
+<section id="section-5">
+      <h2 id="name-message-purposes-and-usecas">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-message-purposes-and-usecas" class="section-name selfRef">Message Purposes and Usecases</a>
+      </h2>
+<p id="section-5-1">The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
+While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">TODO: Consider only describing the different kinds of state reports<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">State Reports can be used as<a href="#section-5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-4.1">
+          <p id="section-5-4.1.1"><em>Context snapshots</em> that only report context information about a Thing,<a href="#section-5-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-4.2">
+          <p id="section-5-4.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information, or<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-4.3">
+          <p id="section-5-4.3.1"><em>Identity manifests</em> that report information related to a Thing's identity.<a href="#section-5-4.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-5-5">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">And finally, we have the <em>Construction Messages</em> that initiate a Thing's (re)configuration or its comissioning<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
+However, the message format stays identical across the three manifestations of the archetype.<a href="#section-5-8" class="pilcrow">¶</a></p>
+<p id="section-5-9">In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.<a href="#section-5-9" class="pilcrow">¶</a></p>
+<div id="context-snapshots">
+<section id="section-5.1">
+        <h3 id="name-context-snapshots">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-context-snapshots" class="section-name selfRef">Context Snapshots</a>
+        </h3>
+<p id="section-5.1-1">Context snapshots are state reports that only include context information via the <code>sdfContext</code> keyword.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance-related message by showing a status report message that only contains context information.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-context-s"></span><div id="example-context">
+<figure id="figure-1">
+          <div class="lang-sdf sourcecode" id="section-5.1-3.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensors"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T12:00:00Z",
+      "thingId": "envSensor:abc123",
+      "installationInfo": {
+        "floor": 3,
+        "mountType": "ceiling",
+        "indoorOutdoor": "indoor"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-example-of-an-sdf-context-s" class="selfRef">Example of an SDF context snapshot.</a>
+          </figcaption></figure>
+</div>
+<p id="section-5.1-4">This kind of message may become especially relevant later in conjunction with the <code>sdfProtocolMap</code> introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span> for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="proofshots">
+<section id="section-5.2">
+        <h3 id="name-proofshots">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-proofshots" class="section-name selfRef">Proofshots</a>
+        </h3>
+<p id="section-5.2-1">(See defn above.)<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Proofshots are similar to context snapshots, with the important difference that
+they are not only reporting the context information associated with an entity but
+also state information associated with its interaction affordances (properties,
+actions, and events).
+As in the case of the Context Snapshot, the Proofshot may also contain concrete
+values that reflect context information associated with a device via the
+<code>sdfContext</code> keyword <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding <code>sdfProperty</code> definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
+<code>sdfEvent</code>s.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
+<a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> shows a proofshot that captures the state of a
+sensor.
+Here, every property and context definition of the corresponding SDF model
+(see <a href="#code-off-device-model" class="auto internal xref">Figure 8</a>) is mapped to a concrete value that satisfies
+the associated schema.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<span id="name-sdf-proofshot-example"></span><div id="code-off-device-instance">
+<figure id="figure-2">
+          <div class="lang-sdf sourcecode" id="section-5.2-5.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T12:00:00Z",
+      "thingId": "envSensor:abc123",
+      "installationInfo": {
+        "mountType": "ceiling"
+      }
+    },
+    "sdfProperty": {
+      "temperature": 23.124
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-sdf-proofshot-example" class="selfRef">SDF proofshot example.</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="construction-messages-1">
+<section id="section-5.3">
+        <h3 id="name-construction-messages-2">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-construction-messages-2" class="section-name selfRef">Construction Messages</a>
+        </h3>
+<p id="section-5.3-1">Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
+Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">A construction message for a temperature sensor might assign an
+identity and/or complement it by temporary identity information (e.g.,
+an IP address); its processing might also generate construction output
+(e.g., a public key or an IP address if those are generated on
+device). This output -- which can once again be modeled as an instance-related
+message -- may be referred to as an <em>identity manifest</em> when it primarily
+contains identity-related context information.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
+although the way the <code>sdfAction</code> is going to be used exactly is not entirely
+clear yet.
+As the device that is being constructed will not be initialized before the
+construction has finished, the <code>sdfAction</code> has to be modeled as an external or
+"off-device" action. This raises the question whether the <code>sdfAction</code> still
+belongs into the SDF model that corresponds with the class the resulting device
+instance belongs to.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">(Note that it is not quite clear what a destructor would be for a
+physical instance -- apart from a scrap metal press, but according to
+RFC 8576 we would want to move a system to a re-usable initial state,
+which is pretty much a constructor.)<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.3-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> shows a potential SDF construction message
+that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
+<figure id="figure-3">
+          <div class="lang-sdf sourcecode" id="section-5.3-6.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T08:15:00Z",
+      "thingId": "envSensor:unit42",
+      "deviceIdentity": {
+        "manufacturer": "HealthTech Inc.",
+        "firmwareVersion": "1.4.3"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-for-an-sdf-construc" class="selfRef">Example for an SDF construction message</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="delta-messages">
+<section id="section-5.4">
+        <h3 id="name-delta-messages">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-delta-messages" class="section-name selfRef">Delta Messages</a>
+        </h3>
+<p id="section-5.4-1">TODO: Reword<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">When the state of a device at a given point in time is known (e.g., due to a
+previous instance-related message), an external entity might only be interested in the
+changes since that point in time. Or it might want to adjust its state and/or
+context the device operates in. For both purposes, instance-related messages
+can be used.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 4</a> shows an example that contains an instance-related
+message reporting a "proofshot delta", that is the state changes that occured
+compared to the ones reported in the previous message (identified via its
+<code>previousMessageId</code>). In this example, only the temperature as measured by the
+sensor has changed, so only that information is included.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">Delta messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may
+be one way to model a telemetry stream from a device.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-instance-"></span><div id="code-sdf-delta-message">
+<figure id="figure-4">
+          <div class="lang-sdf sourcecode" id="section-5.4-5.1">
+<pre>{
+  "info": {
+    "title": "Example SDF delta message",
+    "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "cap": "https://example.com/capability/cap",
+    "models": "https://example.com/models"
+  },
+  "defaultNamespace": "cap",
+  "sdfInstanceOf": {
+    "model": "models:/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfProperty": {
+      "temperature": 24
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-of-an-sdf-instance-" class="selfRef">Example of an SDF instance-related message that serves as a delta.</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="patch-messages">
+<section id="section-5.5">
+        <h3 id="name-patch-messages">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
+        </h3>
+<p id="section-5.5-1">Yet another purpose for instance-related messages is the application of updates
+to a device's configuration via a so-called patch message.
+Such a message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 5</a>, where a change of the
+device's <code>mountType</code> is reflected. This message type might be especially
+relevant for digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical
+attributes (such as the location) need to be reflected somehow.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-context-p"></span><div id="code-sdf-context-patch">
+<figure id="figure-5">
+          <div class="lang-sdf sourcecode" id="section-5.5-2.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor",
+    "patchMethod": "merge-patch"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "installationInfo": {
+        "mountType": "wall"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance-related message format.</a>
+          </figcaption></figure>
+</div>
+<p id="section-5.5-3">TODO: Maybe the following can be shortened or even removed<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+<p id="section-5.5-4">When comparing  <a href="#code-sdf-delta-message" class="auto internal xref">Figure 4</a> and <a href="#code-sdf-context-patch" class="auto internal xref">Figure 5</a>, we
+can see that the main difference between the messages is the <em>purpose</em> these
+message are being used for. This purpose could be implicitly reflected by the
+nature of the resource that accepts or returns the respective message type.
+It would also be possible to indicate the purpose more explicitly by using a
+different content format when transferring the messages over the wire.
+Another difference, however, lays in the fact that the context patch is not
+including a <code>previousMessageId</code>, which might be sufficient to distinguish the
+two message types.<a href="#section-5.5-4" class="pilcrow">¶</a></p>
+<p id="section-5.5-5">Despite their different purpose, both messages will apply some kind of patch
+algorithm.
+JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</code> quality.<a href="#section-5.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="identity-manifest">
+<section id="section-5.6">
+        <h3 id="name-identity-manifest">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-identity-manifest" class="section-name selfRef">Identity Manifest</a>
+        </h3>
+<p id="section-5.6-1">Identity manifests belong like proofshots and context snapshots to the Status Report archetype.
+However, their use case is tied more strongly to identity information which may be modeled as context information.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-2"><a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 6</a> shows an example of an identity manifest, that is structurally identical to the construction message shown in <a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a>.
+What makes qualifies the message as an identity manifest is its media type, which differs from the construction message, as well as the circumstances under which the message might be emitted -- for instance, as the <em>result</em> of a construction.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+<span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-identity-manifest">
+<figure id="figure-6">
+          <div class="lang-sdf sourcecode" id="section-5.6-3.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T08:15:00Z",
+      "thingId": "envSensor:unit42",
+      "deviceIdentity": {
+        "manufacturer": "HealthTech Inc.",
+        "firmwareVersion": "1.4.3"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-example-for-an-sdf-construct" class="selfRef">Example for an SDF construction message</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="examples-for-sdf-constructors">
+<section id="section-6">
+      <h2 id="name-examples-for-sdf-constructo">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
+      </h2>
+<p id="section-6-1">TODO: This section needs to be updated/reworked/removed<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 7</a> shows a potential approach for describing
+constructors via the <code>sdfAction</code> keyword with a set of construction parameters
+contained in its <code>sdfInputData</code>.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">As the constructor action is modeled as being detached from the device and
+performed by an external <code>constructor</code> in this example, both the resulting model
+and the initial instance description (which can be considered an identity
+manifest) are returned.
+The schema information that governs the shape of both the model and the instance
+message are referred to via the <code>sdfRef</code> keyword.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">DISCUSS: Note that the action may also return a pointer to an external SDF model
+and provide the additional information from the constructor via an SDF Mapping
+File. These are aspects that still require discussion, examples, and
+implementation experience.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructor-action">
+<figure id="figure-7">
+        <div class="breakable lang-sdf sourcecode" id="section-6-5.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "info": {
+    "title": "Example document for SDF with actions as constructors \
+                                                  for instantiation",
+    "version": "2019-04-24",
+    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
+    "license": "https://example.com/license"
+  },
+  "namespace": {
+    "sdf": "https://example.com/common/sdf/definitions",
+    "cap": "https://example.com/capability/cap"
+  },
+  "defaultNamespace": "cap",
+  "sdfObject": {
+    "constructor": {
+      "sdfAction": {
+        "construct": {
+          "sdfInputData": {
+            "$comment": "DISCUSS: Do we need to establish a \
+connection between constructor parameters and the resulting instance\
+                                                  -related message?",
+            "type": "object",
+            "properties": {
+              "temperatureUnit": {
+                "type": "string"
+              },
+              "ipAddress": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "temperatureUnit"
+            ]
+          },
+          "sdfOutputData": {
+            "$comment": "Would we point to the JSON Schema \
+                                                  definitions here?",
+            "type": "object",
+            "properties": {
+              "model": {
+                "type": "object",
+                "properties": {
+                  "sdfRef": "sdf:#/sdf/model/format"
+                }
+              },
+              "instance": {
+                "type": "object",
+                "properties": {
+                  "sdfRef": "sdf:#/instance/message/format"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="discussion">
+<section id="section-7">
+      <h2 id="name-discussion">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
+      </h2>
+<p id="section-7-1">(TODO)<a href="#section-7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<ul class="normal">
+<li class="normal" id="section-8-1.1">
+          <p id="section-8-1.1.1">Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters<a href="#section-8-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-8-2">(TODO)<a href="#section-8-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-9">
+      <h2 id="name-iana-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-9-1">TODO: Add media type registrations<a href="#section-9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-10">
+      <h2 id="name-references">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-10.1">
+        <h3 id="name-normative-references">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="BCP14">[BCP14]</dt>
+        <dd>
+<div class="refInstance">Best Current Practice 14, <span>&lt;<a href="https://www.rfc-editor.org/info/bcp14">https://www.rfc-editor.org/info/bcp14</a>&gt;</span>.<br><span>At the time of writing, this BCP comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC2119">
+            <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC8174">
+            <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-asdf-sdf">[I-D.ietf-asdf-sdf]</dt>
+        <dd>
+<span class="refAuthor">Koster, M.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">A. Keränen</span>, <span class="refTitle">"Semantic Definition Format (SDF) for Data and Interactions of Things"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-25</span>, <time datetime="2025-10-13" class="refDate">13 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-25</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-asdf-sdf-nonaffordance">[I-D.ietf-asdf-sdf-nonaffordance]</dt>
+        <dd>
+<span class="refAuthor">Hong, J.</span> and <span class="refAuthor">H. Lee</span>, <span class="refTitle">"Semantic Definition Format (SDF) Extension for Non-Affordance Information"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-nonaffordance-02</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-nonaffordance-02">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-nonaffordance-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8288">[RFC8288]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8288">https://www.rfc-editor.org/rfc/rfc8288</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STD97">[STD97]</dt>
+      <dd>
+<div class="refInstance">Internet Standard 97, <span>&lt;<a href="https://www.rfc-editor.org/info/std97">https://www.rfc-editor.org/info/std97</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC9110">
+            <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9110">https://www.rfc-editor.org/info/rfc9110</a>&gt;</span>. </div>
+</dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-10.2">
+        <h3 id="name-informative-references">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.amsuess-t2trg-raytime">[I-D.amsuess-t2trg-raytime]</dt>
+        <dd>
+<span class="refAuthor">Amsüss, C.</span>, <span class="refTitle">"Raytime: Validating token expiry on an unbounded local time interval"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-amsuess-t2trg-raytime-03</span>, <time datetime="2024-10-19" class="refDate">19 October 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-amsuess-t2trg-raytime-03">https://datatracker.ietf.org/doc/html/draft-amsuess-t2trg-raytime-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.bormann-asdf-sdf-mapping">[I-D.bormann-asdf-sdf-mapping]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">J. Romann</span>, <span class="refTitle">"Semantic Definition Format (SDF): Mapping files"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-asdf-sdf-mapping-07</span>, <time datetime="2025-07-20" class="refDate">20 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07">https://datatracker.ietf.org/doc/html/draft-bormann-asdf-sdf-mapping-07</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-asdf-sdf-protocol-mapping">[I-D.ietf-asdf-sdf-protocol-mapping]</dt>
+        <dd>
+<span class="refAuthor">Mohan, R.</span>, <span class="refAuthor">Brinckman, B.</span>, and <span class="refAuthor">L. Corneo</span>, <span class="refTitle">"Protocol Mapping for SDF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-protocol-mapping-01</span>, <time datetime="2025-10-16" class="refDate">16 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-01">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refAuthor">Ersue, M.</span>, <span class="refAuthor">Keränen, A.</span>, and <span class="refAuthor">C. Gomez</span>, <span class="refTitle">"Terminology for Constrained-Node Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-iotops-7228bis-03</span>, <time datetime="2025-11-04" class="refDate">4 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03">https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.lee-asdf-digital-twin-09">[I-D.lee-asdf-digital-twin-09]</dt>
+        <dd>
+<span class="refAuthor">Lee, H.</span>, <span class="refAuthor">Hong, J.</span>, <span class="refAuthor">Youn, J.</span>, and <span class="refAuthor">Y. Hong</span>, <span class="refTitle">"Semantic Definition Format (SDF) modeling for Digital Twin"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-lee-asdf-digital-twin-09</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-09">https://datatracker.ietf.org/doc/html/draft-lee-asdf-digital-twin-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="LAYERS">[LAYERS]</dt>
+        <dd>
+<span class="refTitle">"Terminology for Layers"</span>, <span class="refContent">WISHI Wiki</span>, <span>&lt;<a href="https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers">https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="REST">[REST]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R.</span>, <span class="refTitle">"Architectural Styles and the Design of Network-based Software Architectures"</span>, <span class="seriesInfo">Ph.D. Dissertation, University of California, Irvine</span>, <time datetime="2000" class="refDate">2000</time>, <span>&lt;<a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf">http://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6690">[RFC6690]</dt>
+        <dd>
+<span class="refAuthor">Shelby, Z.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Link Format"</span>, <span class="seriesInfo">RFC 6690</span>, <span class="seriesInfo">DOI 10.17487/RFC6690</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6690">https://www.rfc-editor.org/rfc/rfc6690</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7396">[RFC7396]</dt>
+        <dd>
+<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Snell</span>, <span class="refTitle">"JSON Merge Patch"</span>, <span class="seriesInfo">RFC 7396</span>, <span class="seriesInfo">DOI 10.17487/RFC7396</span>, <time datetime="2014-10" class="refDate">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7396">https://www.rfc-editor.org/rfc/rfc7396</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9039">[RFC9039]</dt>
+        <dd>
+<span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">Z. Shelby</span>, <span class="refTitle">"Uniform Resource Names for Device Identifiers"</span>, <span class="seriesInfo">RFC 9039</span>, <span class="seriesInfo">DOI 10.17487/RFC9039</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9039">https://www.rfc-editor.org/rfc/rfc9039</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STP">[STP]</dt>
+      <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">K. Hartke</span>, <span class="refTitle">"The Series Transfer Pattern (STP)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bormann-t2trg-stp-03</span>, <time datetime="2020-04-07" class="refDate">7 April 2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-stp-03">https://datatracker.ietf.org/doc/html/draft-bormann-t2trg-stp-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="example-sdf-model">
+<section id="appendix-A">
+      <h2 id="name-example-sdf-model">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-sdf-model" class="section-name selfRef">Example SDF Model</a>
+      </h2>
+<p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 8</a> shows the model all of the examples for instance-related messages are pointing to in this document.
+Note how the namespace is managed here to export the <code>envSensor</code> component into
+<code>models:#/sdfObject/envSensor</code>, which is the "entry point" used in the instance
+messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<span id="name-sdf-model-that-serves-as-a-"></span><div id="code-off-device-model">
+<figure id="figure-8">
+        <div class="lang-sdf sourcecode" id="appendix-A-2.1">
+<pre>{
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensors"
+  },
+  "defaultNamespace": "models",
+  "sdfObject": {
+    "envSensor": {
+      "sdfContext": {
+        "timestamp": {
+          "type": "string"
+        },
+        "thingId": {
+          "type": "string"
+        },
+        "deviceIdentity": {
+          "manufacturer": {
+            "type": "string"
+          },
+          "firmwareVersion": {
+            "type": "string"
+          }
+        },
+        "installationInfo": {
+          "type": "object",
+          "properties": {
+            "floor": {
+              "type": "integer"
+            },
+            "mountType": {
+              "enum": [
+                "ceiling",
+                "wall"
+              ]
+            }
+          }
+        }
+      },
+      "sdfProperty": {
+        "temperature": {
+          "type": "number",
+          "unit": "Cel"
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance-related messages in this draft</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="syntax">
+<section id="appendix-B">
+      <h2 id="name-formal-syntax-of-instance-r">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-formal-syntax-of-instance-r" class="section-name selfRef">Formal Syntax of Instance-related Messages</a>
+      </h2>
+<div class="breakable lang-cddl sourcecode" id="appendix-B-1">
+<pre>
+start = sdf-instance-message-syntax
+
+sdf-instance-message-syntax = {
+ ; info will be required in most process policies
+ ? info: sdfinfo
+ namespace: named&lt;text&gt;
+ ? defaultNamespace: text
+ ? sdfInstanceOf: sdf-instance-of
+ ? sdfInstance: sdf-instance
+}
+
+sdfinfo = {
+ ? title: text
+ ? description: text
+ ? version: text
+ ? copyright: text
+ ? license: text
+ ? messageId: text
+ ; Identifier used to connect this instance message to a previous
+ ; one:
+ ; Allows this instance message to only contain values that have
+ ; actually changed, turning it into a "Delta" or a "Patch",
+ ; depending on the purpose of the message.
+ ? previousMessageId: text
+ ? modified: modified-date-time
+ ? features: [
+             ]
+ optional-comment
+}
+
+sdf-instance-of = {
+ model: text
+ ? patchMethod: text ; default is merge-patch
+ optional-comment
+}
+
+optional-comment = (
+ ? $comment: text       ; source code comments only, no semantics
+)
+
+; Shortcut for a map that gives names to instances of X
+; (has keys of type text and values of type X)
+named&lt;X&gt; = { * text =&gt; X }
+
+commonqualities = (
+ optional-comment
+)
+
+; For describing the state of instances at a given point in time
+;
+; An sdfInstance can refer to either an sdfThing or an sdfObject.
+; Structurally, it is equivalent to that of an sdfThing.
+sdf-instance = thingqualities
+
+objectqualities = {
+ commonqualities
+
+ cpaedataqualities
+}
+
+thingqualities = {
+ sdfThing: named&lt;thingqualities&gt;
+
+ sdfObject: named&lt;objectqualities&gt;
+
+ commonqualities
+
+ cpaedataqualities
+}
+
+cpaedataqualities = (
+ ? sdfContext: named&lt;allowed-types&gt;
+
+ ; Models the current state of the instance's properties
+ ? sdfProperty: named&lt;allowed-types&gt;
+
+ ; Models the current state of the instance's action affordances
+ ;
+ ; DISCUSS: How should the state of actions be modeled?
+ ? sdfAction: named&lt;any&gt;
+
+ ; Models an history for every event affordance
+ ? sdfEvent: named&lt;eventhistory&gt;
+)
+
+eventhistory = [* eventqualities]
+
+eventqualities = {
+    outputValue: allowed-types
+    timestamp: modified-date-time
+}
+
+allowed-types = number / text / bool / null
+              / [* number] / [* text] / [* bool]
+              / {* text =&gt; any}
+
+modified-date-time = text .abnf modified-dt-abnf
+modified-dt-abnf = "modified-dt" .det rfc3339z
+
+; RFC 3339 sans time-numoffset, slightly condensed
+rfc3339z = '
+   date-fullyear   = 4DIGIT
+   date-month      = 2DIGIT  ; 01-12
+   date-mday       = 2DIGIT  ; 01-28, 01-29, 01-30, 01-31 based on
+                             ; month/year
+   time-hour       = 2DIGIT  ; 00-23
+   time-minute     = 2DIGIT  ; 00-59
+   time-second     = 2DIGIT  ; 00-58, 00-59, 00-60 based on leap sec
+                             ; rules
+   time-secfrac    = "." 1*DIGIT
+   DIGIT           =  %x30-39 ; 0-9
+
+   partial-time    = time-hour ":" time-minute ":" time-second
+                     [time-secfrac]
+   full-date       = date-fullyear "-" date-month "-" date-mday
+
+   modified-dt     = full-date ["T" partial-time "Z"]
+'
+</pre><a href="#appendix-B-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="roads-not-taken">
+<section id="appendix-C">
+      <h2 id="name-roads-not-taken">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-roads-not-taken" class="section-name selfRef">Roads Not Taken</a>
+      </h2>
+<p id="appendix-C-1">This appendix documents previous modelling approaches that we eventually
+decided against pursuing further.
+Its main purpose is to illustrate our development process, showing
+which kind of alternatives we considered before choosing a particular way
+to describe instance information.
+We will remove this appendix as soon as this document is about to be finished.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<div id="using-sdf-models-as-proofshots">
+<section id="appendix-C.1">
+        <h3 id="name-using-sdf-models-as-proofsh">
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
+        </h3>
+<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 9</a>,
+the proofshot format could have also been modeled via SDF models where
+all <code>sdfProperty</code> definitions are given <code>const</code>values.
+However, this concept is not capable of capturing actions and events.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
+<figure id="figure-9">
+          <div class="breakable lang-sdf sourcecode" id="appendix-C.1-2.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "info": {
+    "title": "An example model of the heater #1 in the boat #007 (\
+                                        that resembles a proofshot)",
+    "version": "2025-07-15",
+    "copyright": "Copyright 2025. All rights reserved."
+  },
+  "namespace": {
+    "models": "https://example.com/models"
+  },
+  "defaultNamespace": "models",
+  "sdfThing": {
+    "boat007": {
+      "label": "Digital Twin of Boat #007",
+      "description": "A ship equipped with heating and navigation \
+                                                            systems",
+      "sdfContext": {
+        "scimObjectId": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string",
+          "const": "urn:boat:007:heater:1"
+        },
+        "location": {
+          "type": "object",
+          "const": {
+            "wgs84": {
+              "latitude": 35.2988233791372,
+              "longitude": 129.25478376484912,
+              "altitude": 0.0
+            },
+            "postal": {
+              "city": "Ulsan",
+              "post-code": "44110",
+              "country": "South Korea"
+            },
+            "w3w": {
+              "what3words": "toggle.mopped.garages"
+            }
+          }
+        },
+        "owner": {
+          "type": "string",
+          "default": "ExamTech Ltd.",
+          "const": "ExamTech Ltd."
+        }
+      },
+      "sdfRequired": "#/sdfThing/boat007/sdfObject/heater1",
+      "sdfObject": {
+        "heater": {
+          "label": "Cabin Heater",
+          "description": "Temperature control system for cabin \
+                                                            heating",
+          "sdfProperty": {
+            "characteristic": {
+              "description": "Technical summary of the heater",
+              "type": "string",
+              "default": "12V electric heater, 800W, automatic \
+                                                             cutoff",
+              "const": "12V electric heater, 800W, automatic cutoff"
+            },
+            "status": {
+              "description": "Current operational status",
+              "type": "string",
+              "enum": [
+                true,
+                false,
+                "error"
+              ],
+              "default": false,
+              "const": false
+            },
+            "report": {
+              "type": "string",
+              "const": "On February 24, 2025, the boat #007's \
+                              heater #1 was on from 9 a.m. to 6 p.m."
+            }
+          },
+          "sdfEvent": {
+            "overheating": {
+              "$comment": "Note that it is unclear how to properly \
+model events or event history with the approach illustrated by this \
+                                                           example.",
+              "maintenanceSchedule": "Next scheduled maintenance \
+                                                               date",
+              "sdfOutputData": {
+                "type": "string",
+                "format": "date-time",
+                "const": "2025-07-15T07:27:15+0000"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
+          </figcaption></figure>
+</div>
+<div id="alternative-instance-keys">
+<section id="appendix-C.1.1">
+          <h4 id="name-alternative-instance-keys">
+<a href="#appendix-C.1.1" class="section-number selfRef">C.1.1. </a><a href="#name-alternative-instance-keys" class="section-name selfRef">Alternative Instance Keys</a>
+          </h4>
+<p id="appendix-C.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-C.1.1-1" class="pilcrow">¶</a></p>
+<span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
+<figure id="figure-10">
+            <div class="breakable lang-sdf sourcecode" id="appendix-C.1.1-2.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "info": {
+    "title": "A proofshot example for heater #1 on boat #007",
+    "version": "2025-07-15",
+    "copyright": "Copyright 2025. All rights reserved.",
+    "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "boats": "https://example.com/boats"
+  },
+  "defaultNamespace": "boats",
+  "sdfInstance": {
+    "models:#/sdfThing/boat/007": {
+      "sdfInstanceOf": "models:#/sdfThing/boat",
+      "heater": "models:#/sdfThing/boat/sdfObject/heater/001",
+      "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763",
+      "identifier": "urn:boat:007:heater:1",
+      "location": {
+        "wgs84": {
+          "latitude": 35.2988233791372,
+          "longitude": 129.25478376484912,
+          "altitude": 0
+        },
+        "postal": {
+          "city": "Ulsan",
+          "post-code": "44110",
+          "country": "South Korea"
+        },
+        "w3w": {
+          "what3words": "toggle.mopped.garages"
+        }
+      },
+      "owner": "ExamTech Ltd."
+    },
+    "models:#/sdfThing/boat/sdfObject/heater/001": {
+      "characteristic": "12V electric heater, 800W, automatic cutoff\
+                                                                   ",
+      "status": "error",
+      "report": "On February 24, 2025, the boat #007's heater #1 \
+                                       was on from 9 a.m. to 6 p.m.",
+      "sdfEvent": {
+        "maintenanceSchedule": [
+          {
+            "outputValue": "2025-04-10",
+            "timestamp": "2024-04-10T02:00:00Z"
+          },
+          {
+            "outputValue": "2026-04-10",
+            "timestamp": "2025-04-10T02:00:00Z"
+          }
+        ]
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
+            </figcaption></figure>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-D">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-D-1">(TODO)<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-E">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Carsten Bormann</span></div>
+<div dir="auto" class="left"><span class="org">Universität Bremen TZI</span></div>
+<div dir="auto" class="left"><span class="street-address">Postfach 330440</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">D-28359</span> <span class="locality">Bremen</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="tel">
+<span>Phone:</span>
+<a href="tel:+49-421-218-63921" class="tel">+49-421-218-63921</a>
+</div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:cabo@tzi.org" class="email">cabo@tzi.org</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jan Romann</span></div>
+<div dir="auto" class="left"><span class="org">Universität Bremen</span></div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jan.romann@uni-bremen.de" class="email">jan.romann@uni-bremen.de</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
