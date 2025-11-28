@@ -168,11 +168,11 @@ Instance:
   physical or digital "address" that they can be found at and made the
   subject of an interaction.
 
-Instance-related Message
+Instance-related Message:
 : A message that describes the state or a state change of a specific instance.
   (TBC -- also: do we need this additional term?)
 
-Message Archetype
+Message Archetype:
 : In the context of instance-related messages:
   A message with specific content and effect, covering a wider set of different use cases.
   In this document, we are observing a total of four instance-related message archetypes.
