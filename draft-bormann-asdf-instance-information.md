@@ -82,7 +82,7 @@ Models to describe them.
 
 [^status]
 
-[^status]: The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format.
+[^status]: The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format.
 
 
 --- middle
@@ -367,7 +367,7 @@ Furthermore, "status report update" messages can utilize the `previousMessageId`
 | copyright          | string           | Link to text or embedded text containing a copyright notice        |
 | license            | string           | Link to text or embedded text containing license terms             |
 | messageId          | string           | Unique identifier of this instance-related message                 |
-| previousMessageId  | string           | Identifier used to connect this instance message to a previous one |
+| previousMessageId  | string           | Identifier used to connect this instance-related message to a previous one |
 | features           | array of strings | List of extension features used                                    |
 | $comment           | string           | Source code comments only, no semantics                            |
 {: #infoblockqual title="Qualities of the Information Block"}
@@ -401,7 +401,7 @@ Furthermore, via the `patchMethod` field, a patch algorithm different from JSON 
 In the instance block, state information for properties, actions, and events as well as context information can be included.
 Depending on the archetype, this information will either be used to report a Thing's current state, to report state *changes*, or to update state via a patch or reconfiguration.
 
-Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
+Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
 
 The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the instance-related message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
 Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
@@ -487,7 +487,7 @@ In the remainder of this section, we will discuss the differences of these three
 
 Context snapshots are state reports that only include context information via the `sdfContext` keyword.
 
-{{example-context}} gives an example for this kind of instance message by showing a status report message that only contains context information.
+{{example-context}} gives an example for this kind of instance-related message by showing a status report message that only contains context information.
 
 ~~~ sdf
 info:
@@ -565,9 +565,9 @@ A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device). This output -- which can once again be modeled as an instance message
--- may be referred to as an *identity manifest* when it primarily contains
-identity-related context information.
+device). This output -- which can once again be modeled as an instance-related
+message -- may be referred to as an *identity manifest* when it primarily
+contains identity-related context information.
 
 Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
 In practice, these constructors are going to be modeled as an `sdfAction`,
@@ -612,14 +612,14 @@ title="Example for an SDF construction message"}
 TODO: Reword
 
 When the state of a device at a given point in time is known (e.g., due to a
-previous instance message), an external entity might only be interested in the
+previous instance-related message), an external entity might only be interested in the
 changes since that point in time. Or it might want to adjust its state and/or
-context the device operates in. For both purposes, instance messages can be
-used.
+context the device operates in. For both purposes, instance-related messages
+can be used.
 
-{{code-sdf-delta-message}} shows an example that contains an instance message
-reporting a "proofshot delta", that is the state changes that occured compared
-to the ones reported in the previous message (identified via its
+{{code-sdf-delta-message}} shows an example that contains an instance-related
+message reporting a "proofshot delta", that is the state changes that occured
+compared to the ones reported in the previous message (identified via its
 `previousMessageId`). In this example, only the temperature as measured by the
 sensor has changed, so only that information is included.
 
@@ -628,7 +628,7 @@ be one way to model a telemetry stream from a device.
 
 ~~~ sdf
 info:
-  title: Example SDF delta instance message
+  title: Example SDF delta message
   previousMessageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
@@ -642,12 +642,12 @@ sdfInstance:
     temperature: 24
 ~~~
 {:sdf #code-sdf-delta-message
-title="Example of an SDF instance message that serves as a delta."}
+title="Example of an SDF instance-related message that serves as a delta."}
 
 ## Patch Messages
 
-Yet another purpose for instance messages is the application of updates to a
-device's configuration via a so-called patch message.
+Yet another purpose for instance-related messages is the application of updates
+to a device's configuration via a so-called patch message.
 Such a message is shown in {{code-sdf-context-patch}}, where a change of the
 device's `mountType` is reflected. This message type might be especially
 relevant for digital twins {{-digital-twin}}, where changes to physical
@@ -669,7 +669,7 @@ sdfInstance:
       mountType: wall
 ~~~
 {:sdf #code-sdf-context-patch
-title="Example of an SDF context patch message that uses the common instance message format."}
+title="Example of an SDF context patch message that uses the common instance-related message format."}
 
 TODO: Maybe the following can be shortened or even removed
 
@@ -756,7 +756,7 @@ sdfObject:
     sdfAction:
       construct:
         sdfInputData:
-          "$comment": "DISCUSS: Do we need to establish a connection between constructor parameters and the resulting instance message?"
+          "$comment": "DISCUSS: Do we need to establish a connection between constructor parameters and the resulting instance-related message?"
           type: object
           properties:
             temperatureUnit:
@@ -839,7 +839,7 @@ sdfObject:
 
 ~~~
 {:sdf #code-off-device-model
-title="SDF Model that serves as a reference point for the instance messages in this draft"}
+title="SDF Model that serves as a reference point for the instance-related messages in this draft"}
 
 # Formal Syntax of Instance-related Messages {#syntax}
 
