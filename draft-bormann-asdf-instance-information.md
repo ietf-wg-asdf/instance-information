@@ -233,7 +233,8 @@ Non-affordance:
 
 The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
 Instead, the instantiation produces an instance-related *message*, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
-Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
+Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.
+
 Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for instance-related messages:
 The intended effect of a message, which can either be the exposure or an update of a Thing's state;
 and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
