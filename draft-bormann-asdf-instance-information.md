@@ -236,8 +236,9 @@ Instead, the instantiation produces an instance-related *message*, which adheres
 Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.
 
 Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for instance-related messages:
-The intended effect of a message, which can either be the exposure or an update of a Thing's state;
-and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
+
+1. the intended effect of a message, which can either be the exposure or an update of a Thing's state, and
+2. the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
 Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
