@@ -237,7 +237,7 @@ Depending on the recipient and its purpose, a message can be interpreted as a re
 
 Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for instance-related messages:
 
-1. the intended effect of a message, which can either be the exposure or an update of a Thing's state, and
+1. the intended effect of a message, which can either be a report or an update of a Thing's state, and
 2. the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
 Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
