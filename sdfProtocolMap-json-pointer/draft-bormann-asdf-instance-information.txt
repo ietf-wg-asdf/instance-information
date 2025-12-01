@@ -1029,7 +1029,7 @@ Table of Contents
 
      Figure 8: Example of a status report message that provides the IP
         address needed to perform a CoAP-based interaction with the
-                                  sensor.
+                      sensor from the previous figure.
 
    This approach can become very verbose in a nested model and will
    probably need to be revised in future draft revisions.  The general
