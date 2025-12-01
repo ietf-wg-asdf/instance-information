@@ -727,10 +727,10 @@ title="Example for an SDF construction message"}
 
 (This section is currently still experimental.)
 
-When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, sine protocols might need context information such as a hostname or an IP address to actually enable interactions.
-This corresponds with the fact that the parameters related to application-layer protools are actually _class-level_ information and not necessarily instance-specific:
+When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
+This corresponds with the fact that the parameters related to application-layer protools are often _class-level_ information and therefore not necessarily instance-specific:
 All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
-Therefore, we can utilize context information that varies between instances to complement the model information provide by an `sdfProtocolMap`.
+Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
 
 {{{#code-sdf-protocol-map-plus-context}}} illustrates the potential relationship between the two concepts in an SDF model.
 A (hypothetical) CoAP protocol mapping specification could define an interface for parameters such as an IP address.
@@ -759,9 +759,9 @@ sdfObject:
               contentType: 60
 ~~~
 {:sdf #code-sdf-protocol-map-plus-context
-title="Example for an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
+title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
 
-{{{#code-sdf-ipaddress-context}}} shows how a status report (in the "old" terminology: a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
+{{{#code-sdf-ipaddress-context}}} shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
 
 ~~~ sdf
 info:
@@ -779,8 +779,8 @@ sdfInstance:
 {:sdf #code-sdf-ipaddress-context
 title="Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
 
-This approach can become very verbose in a nested model and will probably need to be revised in future draft revisions.
-The general principle, however, points into a promising direction that further develops the principle of cleanly separating class from instance-related information.
+This approach can become very verbose in a nested model and may need refinement in future draft revisions.
+The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.
 
 # Examples for SDF Constructors
 
