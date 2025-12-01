@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 1 June 2026                                  Universität Bremen
-                                                        28 November 2025
+Expires: 4 June 2026                                  Universität Bremen
+                                                         1 December 2025
 
 
                       Instance Information for SDF
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2026.
+   This Internet-Draft will expire on 4 June 2026.
 
 Copyright Notice
 
@@ -271,8 +271,8 @@ Table of Contents
    [I-D.ietf-asdf-sdf-nonaffordance], we identified two main dimensions
    for covering the potential use cases for instance-related messages:
 
-   1.  the intended effect of a message, which can either be the
-       exposure or an update of a Thing's state, and
+   1.  the intended effect of a message, which can either be a report or
+       an update of a Thing's state, and
 
    2.  the actual content of the message, which may be freestanding
        (without a reference to a previous message or state) or relative
