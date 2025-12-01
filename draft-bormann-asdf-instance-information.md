@@ -727,7 +727,7 @@ title="Example for an SDF construction message"}
 
 (This section is currently still experimental.)
 
-When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, the information regarding protocols such as CoAP might need context information such as a hostname or an IP address to actually enable interactions using that protocol.
+When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, sine protocols might need context information such as a hostname or an IP address to actually enable interactions.
 This corresponds with the fact that the parameters related to application-layer protools are actually _class-level_ information and not necessarily instance-specific:
 All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
 Therefore, we can utilize context information that varies between instances to complement the model information provide by an `sdfProtocolMap`.
