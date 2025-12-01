@@ -2220,7 +2220,7 @@ What makes qualifies the message as an identity manifest is its media type, whic
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-linking-sdfprotocolmap-and-" class="section-name selfRef">Linking <code>sdfProtocolMap</code> and <code>sdfContext</code> via JSON Pointers</a>
       </h2>
 <p id="section-6-1">(This section is currently still experimental.)<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">When using the <code>sdfProtocolMap</code> concept introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span>, the information regarding protocols such as CoAP might need context information such as a hostname or an IP address to actually enable interactions using that protocol.
+<p id="section-6-2">When using the <code>sdfProtocolMap</code> concept introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span>, sine protocols might need context information such as a hostname or an IP address to actually enable interactions.
 This corresponds with the fact that the parameters related to application-layer protools are actually <em>class-level</em> information and not necessarily instance-specific:
 All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
 Therefore, we can utilize context information that varies between instances to complement the model information provide by an <code>sdfProtocolMap</code>.<a href="#section-6-2" class="pilcrow">¶</a></p>
