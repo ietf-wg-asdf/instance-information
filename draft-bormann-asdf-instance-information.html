@@ -13,7 +13,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them. 
-       The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format. 
+       The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1053,11 +1053,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDF Instance Information</td>
-<td class="right">November 2025</td>
+<td class="right">December 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 1 June 2026</td>
+<td class="center">Expires 4 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-28" class="published">28 November 2025</time>
+<time datetime="2025-12-01" class="published">1 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-01">1 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-04">4 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2"><span class="cref" id="status">The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance message concepts via a common format.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1133,7 +1133,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1462,23 +1462,29 @@ the <code>$context</code> concept that was used in previous draft versions.<a hr
       </h2>
 <p id="section-2-1">The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
 Instead, the instantiation produces an instance-related <em>message</em>, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
-Depending on the recipient and the purpose of the message, different fields of the message format are present, reporting different kinds of information related to a Thing or causing it to change the state of the Thing when consumed by the recipient.
-Taking into account previous revisions of this document as well as <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>, we identified two main dimensions for covering the potential use cases for instance-related messages:
-The intended effect of a message, which can either be the exposure or an update of a Thing's state;
-and the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-2" class="pilcrow">¶</a></p>
+Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Taking into account previous revisions of this document as well as <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>, we identified two main dimensions for covering the potential use cases for instance-related messages:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-3">
 <li id="section-2-3.1">
-          <p id="section-2-3.1.1"><em>State reports</em> that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-3.1.1">the intended effect of a message, which can either be a report or an update of a Thing's state, and<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-3.2">
-          <p id="section-2-3.2.1"><em>Construction messages</em>, which trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-3.2.1">the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-2-3.3">
-          <p id="section-2-3.3.1"><em>State report updates</em> that indicate changes that have occurred since a reference state report, and<a href="#section-2-3.3.1" class="pilcrow">¶</a></p>
+      </ol>
+<p id="section-2-4">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-5">
+<li id="section-2-5.1">
+          <p id="section-2-5.1.1"><em>State reports</em> that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-2-3.4">
-          <p id="section-2-3.4.1"><em>State patches</em> that update the Thing's state.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
+        <li id="section-2-5.2">
+          <p id="section-2-5.2.1"><em>Construction messages</em>, which trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-5.3">
+          <p id="section-2-5.3.1"><em>State report updates</em> that indicate changes that have occurred since a reference state report, and<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="section-2-5.4">
+          <p id="section-2-5.4.1"><em>State patches</em> that update the Thing's state.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <span id="name-systematization-of-instance"></span><div id="instance-message-dimensions">
@@ -1514,11 +1520,11 @@ Effect</th>
         </tbody>
       </table>
 </div>
-<p id="section-2-5">The uniform message format can be used for all four message archetypes.
-<a href="#syntax" class="auto internal xref">Appendix B</a> specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.
-This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.<a href="#section-2-5" class="pilcrow">¶</a></p>
-<p id="section-2-6">In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
-The specification text itself will be accompanied by examples that have been inspired by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span> that each correspond with one of the four archetypes.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">The uniform message format can be used for all four message archetypes.
+<a href="#syntax" class="auto internal xref">Appendix B</a> specifies the formal syntax of instance-related messages that all normative statements as well as the examples in this document will adhere to.
+This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">In the following, we will first outline a number of general principles for instance-related messages, before detailing the specific archetypes we define in this document.
+The specification text itself will be accompanied by examples that have been inspired by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span> that each correspond with one of the four archetypes.<a href="#section-2-8" class="pilcrow">¶</a></p>
 <div id="axioms-for-instance-related-messages">
 <section id="section-2.1">
         <h3 id="name-axioms-for-instance-related">
@@ -1648,7 +1654,7 @@ Furthermore, "status report update" messages can utilize the <code>previousMessa
             <tr>
               <td class="text-left" rowspan="1" colspan="1">previousMessageId</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">Identifier used to connect this instance message to a previous one</td>
+              <td class="text-left" rowspan="1" colspan="1">Identifier used to connect this instance-related message to a previous one</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">features</td>
@@ -1750,7 +1756,7 @@ Furthermore, via the <code>patchMethod</code> field, a patch algorithm different
         </h3>
 <p id="section-3.4-1">In the instance block, state information for properties, actions, and events as well as context information can be included.
 Depending on the archetype, this information will either be used to report a Thing's current state, to report state <em>changes</em>, or to update state via a patch or reconfiguration.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <p id="section-3.4-3">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the instance-related message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
 Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <span id="name-instance-block-2"></span><div id="ibsec">
@@ -1892,7 +1898,7 @@ However, the message format stays identical across the three manifestations of t
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-context-snapshots" class="section-name selfRef">Context Snapshots</a>
         </h3>
 <p id="section-5.1-1">Context snapshots are state reports that only include context information via the <code>sdfContext</code> keyword.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance message by showing a status report message that only contains context information.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-2"><a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance-related message by showing a status report message that only contains context information.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-context-s"></span><div id="example-context">
 <figure id="figure-1">
           <div class="lang-sdf sourcecode" id="section-5.1-3.1">
@@ -1997,9 +2003,9 @@ Construction messages are like proofshots, in that they embody a state, however 
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device). This output -- which can once again be modeled as an instance message
--- may be referred to as an <em>identity manifest</em> when it primarily contains
-identity-related context information.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+device). This output -- which can once again be modeled as an instance-related
+message -- may be referred to as an <em>identity manifest</em> when it primarily
+contains identity-related context information.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
 In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
 although the way the <code>sdfAction</code> is going to be used exactly is not entirely
@@ -2056,13 +2062,13 @@ that initializes a device, setting its <code>manufacturer</code> and <code>firmw
         </h3>
 <p id="section-5.4-1">TODO: Reword<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4-2">When the state of a device at a given point in time is known (e.g., due to a
-previous instance message), an external entity might only be interested in the
+previous instance-related message), an external entity might only be interested in the
 changes since that point in time. Or it might want to adjust its state and/or
-context the device operates in. For both purposes, instance messages can be
-used.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.4-3"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 4</a> shows an example that contains an instance message
-reporting a "proofshot delta", that is the state changes that occured compared
-to the ones reported in the previous message (identified via its
+context the device operates in. For both purposes, instance-related messages
+can be used.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 4</a> shows an example that contains an instance-related
+message reporting a "proofshot delta", that is the state changes that occured
+compared to the ones reported in the previous message (identified via its
 <code>previousMessageId</code>). In this example, only the temperature as measured by the
 sensor has changed, so only that information is included.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <p id="section-5.4-4">Delta messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may
@@ -2072,7 +2078,7 @@ be one way to model a telemetry stream from a device.<a href="#section-5.4-4" cl
           <div class="lang-sdf sourcecode" id="section-5.4-5.1">
 <pre>{
   "info": {
-    "title": "Example SDF delta instance message",
+    "title": "Example SDF delta message",
     "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
   },
@@ -2093,7 +2099,7 @@ be one way to model a telemetry stream from a device.<a href="#section-5.4-4" cl
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-of-an-sdf-instance-" class="selfRef">Example of an SDF instance message that serves as a delta.</a>
+<a href="#name-example-of-an-sdf-instance-" class="selfRef">Example of an SDF instance-related message that serves as a delta.</a>
           </figcaption></figure>
 </div>
 </section>
@@ -2103,8 +2109,8 @@ be one way to model a telemetry stream from a device.<a href="#section-5.4-4" cl
         <h3 id="name-patch-messages">
 <a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
         </h3>
-<p id="section-5.5-1">Yet another purpose for instance messages is the application of updates to a
-device's configuration via a so-called patch message.
+<p id="section-5.5-1">Yet another purpose for instance-related messages is the application of updates
+to a device's configuration via a so-called patch message.
 Such a message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 5</a>, where a change of the
 device's <code>mountType</code> is reflected. This message type might be especially
 relevant for digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical
@@ -2136,7 +2142,7 @@ attributes (such as the location) need to be reflected somehow.<a href="#section
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance message format.</a>
+<a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance-related message format.</a>
           </figcaption></figure>
 </div>
 <p id="section-5.5-3">TODO: Maybe the following can be shortened or even removed<a href="#section-5.5-3" class="pilcrow">¶</a></p>
@@ -2248,8 +2254,8 @@ implementation experience.<a href="#section-6-4" class="pilcrow">¶</a></p>
         "construct": {
           "sdfInputData": {
             "$comment": "DISCUSS: Do we need to establish a \
-connection between constructor parameters and the resulting \
-                                                  instance message?",
+connection between constructor parameters and the resulting instance\
+                                                  -related message?",
             "type": "object",
             "properties": {
               "temperatureUnit": {
@@ -2485,7 +2491,7 @@ messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a>
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance messages in this draft</a>
+<a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance-related messages in this draft</a>
         </figcaption></figure>
 </div>
 </section>

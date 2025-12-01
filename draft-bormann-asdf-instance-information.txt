@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 1 June 2026                                  Universität Bremen
-                                                        28 November 2025
+Expires: 4 June 2026                                  Universität Bremen
+                                                         1 December 2025
 
 
                       Instance Information for SDF
@@ -23,8 +23,8 @@ Abstract
 
    // The present revision –06 takes into account the discussion that
    // happened during IETF 123 and 124 as well as the interim meetings
-   // inbetween, and intends to harmonize different instance message
-   // concepts via a common format.
+   // inbetween, and intends to harmonize different instance-related
+   // message concepts via a common format.
 
 About This Document
 
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2026.
+   This Internet-Draft will expire on 4 June 2026.
 
 Copyright Notice
 
@@ -262,17 +262,21 @@ Table of Contents
    instance, which is, for example, a physical device or a digital twin.
    Instead, the instantiation produces an instance-related _message_,
    which adheres to a uniform message format and is always controlled by
-   the corresponding SDF model.  Depending on the recipient and the
-   purpose of the message, different fields of the message format are
-   present, reporting different kinds of information related to a Thing
-   or causing it to change the state of the Thing when consumed by the
-   recipient.  Taking into account previous revisions of this document
-   as well as [I-D.ietf-asdf-sdf-nonaffordance], we identified two main
-   dimensions for covering the potential use cases for instance-related
-   messages: The intended effect of a message, which can either be the
-   exposure or an update of a Thing's state; and the actual content of
-   the message, which may be freestanding (without a reference to a
-   previous message or state) or relative (with such a reference).
+   the corresponding SDF model.  Depending on the recipient and its
+   purpose, a message can be interpreted as a report regarding the state
+   of a Thing or the instruction to change it when consumed by the
+   recipient.
+
+   Taking into account previous revisions of this document as well as
+   [I-D.ietf-asdf-sdf-nonaffordance], we identified two main dimensions
+   for covering the potential use cases for instance-related messages:
+
+   1.  the intended effect of a message, which can either be a report or
+       an update of a Thing's state, and
+
+   2.  the actual content of the message, which may be freestanding
+       (without a reference to a previous message or state) or relative
+       (with such a reference).
 
    Based on these considerations (as illustrated by the systematization
    in Table 1), we can identify the following four message archetypes:
@@ -307,10 +311,10 @@ Table of Contents
 
    The uniform message format can be used for all four message
    archetypes.  Appendix B specifies the formal syntax of instance-
-   related messages all normative statements as well as the examples in
-   this document will adhere to.  This syntax can serve to describe both
-   the abstract structure and the concrete shape of the messages that
-   can be used as a neutral form in interchange.
+   related messages that all normative statements as well as the
+   examples in this document will adhere to.  This syntax can serve to
+   describe both the abstract structure and the concrete shape of the
+   messages that can be used as a neutral form in interchange.
 
    In the following, we will first outline a number of general
    principles for instance-related messages, before detailing the
@@ -404,39 +408,40 @@ Table of Contents
    the previousMessageId in order to link two messages and indicate the
    state change.
 
-   +===================+==========+====================================+
-   | Quality           | Type     | Description                        |
-   +===================+==========+====================================+
-   | title             | string   | A short summary to be displayed in |
-   |                   |          | search results, etc.               |
-   +-------------------+----------+------------------------------------+
-   | description       | string   | Long-form text description (no     |
-   |                   |          | constraints)                       |
-   +-------------------+----------+------------------------------------+
-   | version           | string   | The incremental version of the     |
-   |                   |          | definition                         |
-   +-------------------+----------+------------------------------------+
-   | modified          | string   | Time of the latest modification    |
-   +-------------------+----------+------------------------------------+
-   | copyright         | string   | Link to text or embedded text      |
-   |                   |          | containing a copyright notice      |
-   +-------------------+----------+------------------------------------+
-   | license           | string   | Link to text or embedded text      |
-   |                   |          | containing license terms           |
-   +-------------------+----------+------------------------------------+
-   | messageId         | string   | Unique identifier of this          |
-   |                   |          | instance-related message           |
-   +-------------------+----------+------------------------------------+
-   | previousMessageId | string   | Identifier used to connect this    |
-   |                   |          | instance message to a previous one |
-   +-------------------+----------+------------------------------------+
-   | features          | array    | List of extension features used    |
-   |                   | of       |                                    |
-   |                   | strings  |                                    |
-   +-------------------+----------+------------------------------------+
-   | $comment          | string   | Source code comments only, no      |
-   |                   |          | semantics                          |
-   +-------------------+----------+------------------------------------+
+     +===================+=========+=================================+
+     | Quality           | Type    | Description                     |
+     +===================+=========+=================================+
+     | title             | string  | A short summary to be displayed |
+     |                   |         | in search results, etc.         |
+     +-------------------+---------+---------------------------------+
+     | description       | string  | Long-form text description (no  |
+     |                   |         | constraints)                    |
+     +-------------------+---------+---------------------------------+
+     | version           | string  | The incremental version of the  |
+     |                   |         | definition                      |
+     +-------------------+---------+---------------------------------+
+     | modified          | string  | Time of the latest modification |
+     +-------------------+---------+---------------------------------+
+     | copyright         | string  | Link to text or embedded text   |
+     |                   |         | containing a copyright notice   |
+     +-------------------+---------+---------------------------------+
+     | license           | string  | Link to text or embedded text   |
+     |                   |         | containing license terms        |
+     +-------------------+---------+---------------------------------+
+     | messageId         | string  | Unique identifier of this       |
+     |                   |         | instance-related message        |
+     +-------------------+---------+---------------------------------+
+     | previousMessageId | string  | Identifier used to connect this |
+     |                   |         | instance-related message to a   |
+     |                   |         | previous one                    |
+     +-------------------+---------+---------------------------------+
+     | features          | array   | List of extension features used |
+     |                   | of      |                                 |
+     |                   | strings |                                 |
+     +-------------------+---------+---------------------------------+
+     | $comment          | string  | Source code comments only, no   |
+     |                   |         | semantics                       |
+     +-------------------+---------+---------------------------------+
 
                 Table 2: Qualities of the Information Block
 
@@ -498,9 +503,9 @@ Table of Contents
 
    Since we are using the sdfInstance keyword as an entry point at the
    location pointed to via the model specfied in sdfInstanceOf, the
-   instance message has to follow the structure of this part of the
-   model (although, depending on the archetype, information that has not
-   changed or will not be updated can be left out.)
+   instance-related message has to follow the structure of this part of
+   the model (although, depending on the archetype, information that has
+   not changed or will not be updated can be left out.)
 
    The alternating structure of the SDF model (e. g.,
    sdfObject/envSensor/sdfProperty/temperature) is repeated within the
@@ -640,8 +645,8 @@ Table of Contents
    Context snapshots are state reports that only include context
    information via the sdfContext keyword.
 
-   Figure 1 gives an example for this kind of instance message by
-   showing a status report message that only contains context
+   Figure 1 gives an example for this kind of instance-related message
+   by showing a status report message that only contains context
    information.
 
    {
@@ -741,7 +746,7 @@ Table of Contents
    (e.g., an IP address); its processing might also generate
    construction output (e.g., a public key or an IP address if those are
    generated on device).  This output -- which can once again be modeled
-   as an instance message -- may be referred to as an _identity
+   as an instance-related message -- may be referred to as an _identity
    manifest_ when it primarily contains identity-related context
    information.
 
@@ -796,15 +801,15 @@ Table of Contents
    TODO: Reword
 
    When the state of a device at a given point in time is known (e.g.,
-   due to a previous instance message), an external entity might only be
-   interested in the changes since that point in time.  Or it might want
-   to adjust its state and/or context the device operates in.  For both
-   purposes, instance messages can be used.
+   due to a previous instance-related message), an external entity might
+   only be interested in the changes since that point in time.  Or it
+   might want to adjust its state and/or context the device operates in.
+   For both purposes, instance-related messages can be used.
 
-   Figure 4 shows an example that contains an instance message reporting
-   a "proofshot delta", that is the state changes that occured compared
-   to the ones reported in the previous message (identified via its
-   previousMessageId).  In this example, only the temperature as
+   Figure 4 shows an example that contains an instance-related message
+   reporting a "proofshot delta", that is the state changes that occured
+   compared to the ones reported in the previous message (identified via
+   its previousMessageId).  In this example, only the temperature as
    measured by the sensor has changed, so only that information is
    included.
 
@@ -813,7 +818,7 @@ Table of Contents
 
    {
      "info": {
-       "title": "Example SDF delta instance message",
+       "title": "Example SDF delta message",
        "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
@@ -832,12 +837,13 @@ Table of Contents
      }
    }
 
-    Figure 4: Example of an SDF instance message that serves as a delta.
+      Figure 4: Example of an SDF instance-related message that serves
+                                as a delta.
 
 5.5.  Patch Messages
 
-   Yet another purpose for instance messages is the application of
-   updates to a device's configuration via a so-called patch message.
+   Yet another purpose for instance-related messages is the application
+   of updates to a device's configuration via a so-called patch message.
    Such a message is shown in Figure 5, where a change of the device's
    mountType is reflected.  This message type might be especially
    relevant for digital twins [I-D.lee-asdf-digital-twin-09], where
@@ -867,7 +873,7 @@ Table of Contents
    }
 
       Figure 5: Example of an SDF context patch message that uses the
-                      common instance message format.
+                  common instance-related message format.
 
    TODO: Maybe the following can be shortened or even removed
 
@@ -972,8 +978,8 @@ Table of Contents
            "construct": {
              "sdfInputData": {
                "$comment": "DISCUSS: Do we need to establish a \
-   connection between constructor parameters and the resulting \
-                                                     instance message?",
+   connection between constructor parameters and the resulting instance\
+                                                     -related message?",
                "type": "object",
                "properties": {
                  "temperatureUnit": {
@@ -1199,7 +1205,7 @@ Appendix A.  Example SDF Model
    }
 
         Figure 8: SDF Model that serves as a reference point for the
-                      instance messages in this draft
+                  instance-related messages in this draft
 
 Appendix B.  Formal Syntax of Instance-related Messages
 
