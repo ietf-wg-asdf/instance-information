@@ -777,7 +777,7 @@ sdfInstance:
     ipAddress: 192.168.1.5
 ~~~
 {:sdf #code-sdf-ipaddress-context
-title="Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor."}
+title="Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
 
 This approach can become very verbose in a nested model and will probably need to be revised in future draft revisions.
 The general principle, however, points into a promising direction that further develops the principle of cleanly separating class from instance-related information.
