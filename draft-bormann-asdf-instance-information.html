@@ -13,7 +13,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them. 
-       The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format. 
+       The present revision –07 adds an experimental section on linking  sdfProtocolMap  and  sdfContext  which has been yet another result of the discussions that happened during and after IETF 124. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1057,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 4 June 2026</td>
+<td class="center">Expires 5 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-01" class="published">1 December 2025</time>
+<time datetime="2025-12-02" class="published">2 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-04">4 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-05">5 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ conjunction with the Semantic Definition Format (SDF) for Data and
 Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
 define Representation Formats for them as well as ways to use SDF
 Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2"><span class="cref" id="status">The present revision –06 takes into account the discussion that happened during IETF 123 and 124 as well as the interim meetings inbetween, and intends to harmonize different instance-related message concepts via a common format.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">The present revision –07 adds an experimental section on linking <code>sdfProtocolMap</code> and <code>sdfContext</code> which has been yet another result of the discussions that happened during and after IETF 124.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1133,7 +1133,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1242,52 +1242,55 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples-for-sdf-constructo" class="internal xref">Examples for SDF Constructors</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-linking-sdfprotocolmap-and-" class="internal xref">Linking <code>sdfProtocolMap</code> and <code>sdfContext</code> via JSON Pointers</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-examples-for-sdf-constructo" class="internal xref">Examples for SDF Constructors</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-sdf-model" class="internal xref">Example SDF Model</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-formal-syntax-of-instance-r" class="internal xref">Formal Syntax of Instance-related Messages</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-sdf-model" class="internal xref">Example SDF Model</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-roads-not-taken" class="internal xref">Roads Not Taken</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-formal-syntax-of-instance-r" class="internal xref">Formal Syntax of Instance-related Messages</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-roads-not-taken" class="internal xref">Roads Not Taken</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-using-sdf-models-as-proofsh" class="internal xref">Using SDF Models as Proofshots</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1">
+                <p id="section-toc.1-1.14.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-using-sdf-models-as-proofsh" class="internal xref">Using SDF Models as Proofshots</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.1">
-                    <p id="section-toc.1-1.13.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-alternative-instance-keys" class="internal xref">Alternative Instance Keys</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.1.2.1">
+                    <p id="section-toc.1-1.14.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-alternative-instance-keys" class="internal xref">Alternative Instance Keys</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1954,7 +1957,7 @@ values that reflect context information associated with a device via the
 <a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> shows a proofshot that captures the state of a
 sensor.
 Here, every property and context definition of the corresponding SDF model
-(see <a href="#code-off-device-model" class="auto internal xref">Figure 8</a>) is mapped to a concrete value that satisfies
+(see <a href="#code-off-device-model" class="auto internal xref">Figure 10</a>) is mapped to a concrete value that satisfies
 the associated schema.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <span id="name-sdf-proofshot-example"></span><div id="code-off-device-instance">
 <figure id="figure-2">
@@ -2211,28 +2214,118 @@ What makes qualifies the message as an identity manifest is its media type, whic
 </div>
 </section>
 </div>
-<div id="examples-for-sdf-constructors">
+<div id="linking-sdfprotocolmap-and-sdfcontext-via-json-pointers">
 <section id="section-6">
-      <h2 id="name-examples-for-sdf-constructo">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
+      <h2 id="name-linking-sdfprotocolmap-and-">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-linking-sdfprotocolmap-and-" class="section-name selfRef">Linking <code>sdfProtocolMap</code> and <code>sdfContext</code> via JSON Pointers</a>
       </h2>
-<p id="section-6-1">TODO: This section needs to be updated/reworked/removed<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 7</a> shows a potential approach for describing
+<p id="section-6-1">(This section is currently still experimental.)<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">When using the <code>sdfProtocolMap</code> concept introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span>, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
+This corresponds with the fact that the parameters related to application-layer protocols are often <em>class-level</em> information and therefore not necessarily instance-specific:
+All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
+Therefore, we can utilize context information that varies between instances to complement the model information provided via an <code>sdfProtocolMap</code>.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3"><a href="#code-sdf-protocol-map-plus-context" class="auto internal xref">Figure 7</a> illustrates the potential relationship between the two concepts in an SDF model.
+A (hypothetical) CoAP protocol mapping specification could define an interface for parameters such as an IP address.
+Via a <code>contextMap</code> (this name is still under discussion), the <code>sdfProtocolMapping</code> definition within a model could point (via a JSON pointer) to a compatible <code>sdfContext</code> definition that may further restrict the set of allowed values via its schema.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-model-whe"></span><div id="code-sdf-protocol-map-plus-context">
+<figure id="figure-7">
+        <div class="lang-sdf sourcecode" id="section-6-4.1">
+<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfObject": {
+    "sensor": {
+      "sdfContext": {
+        "ipAddress": {
+          "type": "string"
+        }
+      },
+      "sdfProperty": {
+        "temperature": {
+          "type": "number",
+          "sdfProtocolMap": {
+            "coap": {
+              "contextMap": {
+                "ipAddress": "#/sdfObject/sensor/sdfContext/\
+                                                           ipAddress"
+              },
+              "read": {
+                "method": "GET",
+                "href": "/temperature",
+                "contentType": 60
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-example-of-an-sdf-model-whe" class="selfRef">Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address.</a>
+        </figcaption></figure>
+</div>
+<p id="section-6-5"><a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 8</a> shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<span id="name-example-of-a-status-report-"></span><div id="code-sdf-ipaddress-context">
+<figure id="figure-8">
+        <div class="lang-sdf sourcecode" id="section-6-6.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a47"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/sensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "ipAddress": "192.168.1.5"
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-example-of-a-status-report-" class="selfRef">Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a>
+        </figcaption></figure>
+</div>
+<p id="section-6-7">This approach can become very verbose in a nested model and may need refinement in future draft revisions.
+The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.<a href="#section-6-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="examples-for-sdf-constructors">
+<section id="section-7">
+      <h2 id="name-examples-for-sdf-constructo">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
+      </h2>
+<p id="section-7-1">TODO: This section needs to be updated/reworked/removed<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 9</a> shows a potential approach for describing
 constructors via the <code>sdfAction</code> keyword with a set of construction parameters
-contained in its <code>sdfInputData</code>.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">As the constructor action is modeled as being detached from the device and
+contained in its <code>sdfInputData</code>.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">As the constructor action is modeled as being detached from the device and
 performed by an external <code>constructor</code> in this example, both the resulting model
 and the initial instance description (which can be considered an identity
 manifest) are returned.
 The schema information that governs the shape of both the model and the instance
-message are referred to via the <code>sdfRef</code> keyword.<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">DISCUSS: Note that the action may also return a pointer to an external SDF model
+message are referred to via the <code>sdfRef</code> keyword.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">DISCUSS: Note that the action may also return a pointer to an external SDF model
 and provide the additional information from the constructor via an SDF Mapping
 File. These are aspects that still require discussion, examples, and
-implementation experience.<a href="#section-6-4" class="pilcrow">¶</a></p>
+implementation experience.<a href="#section-7-4" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructor-action">
-<figure id="figure-7">
-        <div class="breakable lang-sdf sourcecode" id="section-6-5.1">
+<figure id="figure-9">
+        <div class="breakable lang-sdf sourcecode" id="section-7-5.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -2295,50 +2388,50 @@ connection between constructor parameters and the resulting instance\
 }
 </pre>
 </div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-example-for-sdf-model-with-" class="selfRef">Example for SDF model with constructors</a>
         </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="discussion">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-discussion">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
       </h2>
-<p id="section-7-1">(TODO)<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">(TODO)<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-security-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="section-8-1.1">
-          <p id="section-8-1.1.1">Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters<a href="#section-8-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-9-1.1">
+          <p id="section-9-1.1.1">Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters<a href="#section-9-1.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-8-2">(TODO)<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">(TODO)<a href="#section-9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-iana-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-9-1">TODO: Add media type registrations<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">TODO: Add media type registrations<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-10">
+<section id="section-11">
       <h2 id="name-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-10.1">
+<section id="section-11.1">
         <h3 id="name-normative-references">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="BCP14">[BCP14]</dt>
@@ -2375,9 +2468,9 @@ connection between constructor parameters and the resulting instance\
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-10.2">
+<section id="section-11.2">
         <h3 id="name-informative-references">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.amsuess-t2trg-raytime">[I-D.amsuess-t2trg-raytime]</dt>
@@ -2434,12 +2527,12 @@ connection between constructor parameters and the resulting instance\
       <h2 id="name-example-sdf-model">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-sdf-model" class="section-name selfRef">Example SDF Model</a>
       </h2>
-<p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 8</a> shows the model all of the examples for instance-related messages are pointing to in this document.
+<p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 10</a> shows the model all of the examples for instance-related messages are pointing to in this document.
 Note how the namespace is managed here to export the <code>envSensor</code> component into
 <code>models:#/sdfObject/envSensor</code>, which is the "entry point" used in the instance
 messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-model-that-serves-as-a-"></span><div id="code-off-device-model">
-<figure id="figure-8">
+<figure id="figure-10">
         <div class="lang-sdf sourcecode" id="appendix-A-2.1">
 <pre>{
   "namespace": {
@@ -2490,7 +2583,7 @@ messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
 <a href="#name-sdf-model-that-serves-as-a-" class="selfRef">SDF Model that serves as a reference point for the instance-related messages in this draft</a>
         </figcaption></figure>
 </div>
@@ -2641,12 +2734,12 @@ We will remove this appendix as soon as this document is about to be finished.<a
         <h3 id="name-using-sdf-models-as-proofsh">
 <a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
         </h3>
-<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 9</a>,
+<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 11</a>,
 the proofshot format could have also been modeled via SDF models where
 all <code>sdfProperty</code> definitions are given <code>const</code>values.
 However, this concept is not capable of capturing actions and events.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
-<figure id="figure-9">
+<figure id="figure-11">
           <div class="breakable lang-sdf sourcecode" id="appendix-C.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2750,7 +2843,7 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
           </figcaption></figure>
 </div>
@@ -2761,7 +2854,7 @@ model events or event history with the approach illustrated by this \
           </h4>
 <p id="appendix-C.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-C.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-10">
+<figure id="figure-12">
             <div class="breakable lang-sdf sourcecode" id="appendix-C.1.1-2.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2823,7 +2916,7 @@ model events or event history with the approach illustrated by this \
 }
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
             </figcaption></figure>
 </div>
