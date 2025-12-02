@@ -728,7 +728,7 @@ title="Example for an SDF construction message"}
 (This section is currently still experimental.)
 
 When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
-This corresponds with the fact that the parameters related to application-layer protools are often _class-level_ information and therefore not necessarily instance-specific:
+This corresponds with the fact that the parameters related to application-layer protocols are often _class-level_ information and therefore not necessarily instance-specific:
 All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
 Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
 
