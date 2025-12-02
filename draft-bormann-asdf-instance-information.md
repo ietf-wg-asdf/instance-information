@@ -732,7 +732,7 @@ This corresponds with the fact that the parameters related to application-layer 
 All instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
 Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
 
-{{{#code-sdf-protocol-map-plus-context}}} illustrates the potential relationship between the two concepts in an SDF model.
+{{code-sdf-protocol-map-plus-context}} illustrates the potential relationship between the two concepts in an SDF model.
 A (hypothetical) CoAP protocol mapping specification could define an interface for parameters such as an IP address.
 Via a `contextMap` (this name is still under discussion), the `sdfProtocolMapping` definition within a model could point (via a JSON pointer) to a compatible `sdfContext` definition that may further restrict the set of allowed values via its schema.
 
@@ -761,7 +761,7 @@ sdfObject:
 {:sdf #code-sdf-protocol-map-plus-context
 title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
 
-{{{#code-sdf-ipaddress-context}}} shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
+{{code-sdf-ipaddress-context}} shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
 
 ~~~ sdf
 info:
