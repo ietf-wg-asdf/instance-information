@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 4 June 2026                                  Universität Bremen
-                                                         1 December 2025
+Expires: 5 June 2026                                  Universität Bremen
+                                                         2 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2026.
+   This Internet-Draft will expire on 5 June 2026.
 
 Copyright Notice
 
@@ -945,7 +945,7 @@ Table of Contents
    [I-D.ietf-asdf-sdf-protocol-mapping], some protocols may need context
    information such as a hostname or an IP address to actually be usable
    for interactions.  This corresponds with the fact that the parameters
-   related to application-layer protools are often _class-level_
+   related to application-layer protocols are often _class-level_
    information and therefore not necessarily instance-specific: All
    instances of a smart light may use similar CoAP resources, with the
    only difference being the concrete IP address they are using.
@@ -953,14 +953,13 @@ Table of Contents
    instances to complement the model information provided via an
    sdfProtocolMap.
 
-   #code-sdf-protocol-map-plus-context illustrates the potential
-   relationship between the two concepts in an SDF model.  A
-   (hypothetical) CoAP protocol mapping specification could define an
-   interface for parameters such as an IP address.  Via a contextMap
-   (this name is still under discussion), the sdfProtocolMapping
-   definition within a model could point (via a JSON pointer) to a
-   compatible sdfContext definition that may further restrict the set of
-   allowed values via its schema.
+   Figure 7 illustrates the potential relationship between the two
+   concepts in an SDF model.  A (hypothetical) CoAP protocol mapping
+   specification could define an interface for parameters such as an IP
+   address.  Via a contextMap (this name is still under discussion), the
+   sdfProtocolMapping definition within a model could point (via a JSON
+   pointer) to a compatible sdfContext definition that may further
+   restrict the set of allowed values via its schema.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -1003,11 +1002,10 @@ Table of Contents
       points to the definition of relevant context information: an IP
                                   address.
 
-   #code-sdf-ipaddress-context shows how a status report (in the "old"
-   terminology, the message would be called a context snapshot) can
-   provide the necessary IP address that is needed to actually retrieve
-   the temperature value from the sensor described by the SDF model
-   above.
+   Figure 8 shows how a status report (in the "old" terminology, the
+   message would be called a context snapshot) can provide the necessary
+   IP address that is needed to actually retrieve the temperature value
+   from the sensor described by the SDF model above.
 
    {
      "info": {
