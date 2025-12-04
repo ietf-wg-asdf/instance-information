@@ -470,15 +470,14 @@ TODO: Consider only describing the different kinds of state reports
 
 State Reports can be used as
 
-- *Context snapshots* that only report context information about a Thing,
-- *Proofshots* that report a Thing's state (or parts of it), which may include context information, or
-- *Identity manifests* that report information related to a Thing's identity.
+- *Context snapshots* that only report context information about a Thing or
+- *Proofshots* that report a Thing's state (or parts of it), which may include context information.
 
-In the case of state report updates, we have *Deltas* that indicate state changes compared to a previous context snapshot, proofshot message, or identity manifest.
+In the case of state report updates, we have *Deltas* that indicate state changes compared to a previous context snapshot or proofshot message.
 
 State patches can appear as *Patch messages* that indicate state changes that should be *applied* to a Thing.
 
-And finally, we have the *Construction Messages* that initiate a Thing's (re)configuration or its comissioning
+And finally, we have *Construction Messages* and *Identity Manifests* that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.
 
 As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
 However, the message format stays identical across the three manifestations of the archetype.
@@ -567,9 +566,7 @@ A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device). This output -- which can once again be modeled as an instance-related
-message -- may be referred to as an *identity manifest* when it primarily
-contains identity-related context information.
+device) which can be described via instance-related messages such as a status report.
 
 Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
 In practice, these constructors are going to be modeled as an `sdfAction`,
@@ -607,6 +604,33 @@ sdfInstance:
       firmwareVersion: 1.4.3
 ~~~
 {:sdf #code-sdf-construction-message
+title="Example for an SDF construction message"}
+
+## Identity Manifest
+
+Identity manifests also belong to the construction message archetypes.
+They are special construction messages that only initialize identity-related information related to a Thing, which can also be considered context information.
+
+{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{code-sdf-construction-message}}.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+sdfInstance:
+  sdfContext:
+    timestamp: '2025-07-01T08:15:00Z'
+    thingId: envSensor:unit42
+    deviceIdentity:
+      manufacturer: HealthTech Inc.
+      firmwareVersion: 1.4.3
+~~~
+{:sdf #code-sdf-identity-manifest
 title="Example for an SDF construction message"}
 
 ## Delta Messages
@@ -694,34 +718,6 @@ the delta message will be processed together with its predecessor by a
 consumer). As there might be cases where the Merge Patch algorithm is not
 sufficient, different algorithms (that can be IANA registered) are going to be
 settable via the `patchMethod` field within the `sdfInstanceOf` quality.
-
-## Identity Manifest
-
-Identity manifests belong like proofshots and context snapshots to the Status Report archetype.
-However, their use case is tied more strongly to identity information which may be modeled as context information.
-
-{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{code-sdf-construction-message}}.
-What makes qualifies the message as an identity manifest is its media type, which differs from the construction message, as well as the circumstances under which the message might be emitted -- for instance, as the *result* of a construction.
-
-~~~ sdf
-info:
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
-sdfInstance:
-  sdfContext:
-    timestamp: '2025-07-01T08:15:00Z'
-    thingId: envSensor:unit42
-    deviceIdentity:
-      manufacturer: HealthTech Inc.
-      firmwareVersion: 1.4.3
-~~~
-{:sdf #code-sdf-identity-manifest
-title="Example for an SDF construction message"}
 
 # Linking `sdfProtocolMap` and `sdfContext` via JSON Pointers
 
