@@ -440,10 +440,9 @@ Security-related aspects, e.g. regarding authentication and authorization, MUST 
 
 ## Construction Messages
 
-(These might not be covered here but via dedicated actions.)
-
-Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
-Furthermore, construction messages MUST be indicated by a different media type, namely `application/sfd-construction+json`.
+Construction messages are structurally equivalent to state reports but may only contain context information.
+Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
+Construction messages MUST be indicated by the media type `application/sfd-construction+json` if possible.
 
 ## State Report Updates
 
@@ -456,8 +455,9 @@ Via the `patchMethod` quality, different patch algorithms MAY be indicated.
 
 ## State Patches
 
-State patches are structurally equivalent to state report updates.
-However, they utilize the patch mechanism (using the provided `patchMethod`) to alter the state of a Thing instead of reporting state changes.
+State patches are structurally equivalent to state report updates, but once again are only allowed to contain context information.
+They utilize the patch mechanism (using the provided `patchMethod`) to alter the *state* of a Thing instead of reporting state changes.
+
 Since they are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
 When transmitting state patches, the media type `application/sdf-state-patch+json` MUST be used if possible.
 
@@ -465,8 +465,6 @@ When transmitting state patches, the media type `application/sdf-state-patch+jso
 
 The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
 While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.
-
-TODO: Consider only describing the different kinds of state reports
 
 State Reports can be used as
 
@@ -479,10 +477,7 @@ State patches can appear as *Patch messages* that indicate state changes that sh
 
 And finally, we have *Construction Messages* and *Identity Manifests* that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.
 
-As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
-However, the message format stays identical across the three manifestations of the archetype.
-
-In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.
+In the remainder of this section, we will discuss the differences between the different archetype manifestations.
 
 ## Context Snapshots
 
@@ -568,15 +563,10 @@ an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
 device) which can be described via instance-related messages such as a status report.
 
-Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
 In practice, these constructors are going to be modeled as an `sdfAction`,
 although the way the `sdfAction` is going to be used exactly is not entirely
 clear yet.
-As the device that is being constructed will not be initialized before the
-construction has finished, the `sdfAction` has to be modeled as an external or
-"off-device" action. This raises the question whether the `sdfAction` still
-belongs into the SDF model that corresponds with the class the resulting device
-instance belongs to.
 
 (Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
@@ -585,6 +575,7 @@ which is pretty much a constructor.)
 
 {{code-sdf-construction-message}} shows a potential SDF construction message
 that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
+The construction message also assigns a `thingId` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
 
 ~~~ sdf
 info:
@@ -597,8 +588,8 @@ sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
   sdfContext:
-    timestamp: '2025-07-01T08:15:00Z'
     thingId: envSensor:unit42
+    ipAddress: 192.168.1.5
     deviceIdentity:
       manufacturer: HealthTech Inc.
       firmwareVersion: 1.4.3
@@ -608,10 +599,12 @@ title="Example for an SDF construction message"}
 
 ## Identity Manifest
 
-Identity manifests also belong to the construction message archetypes.
-They are special construction messages that only initialize identity-related information related to a Thing, which can also be considered context information.
+Identity manifests also belong to the construction message archetype.
+They are special construction messages that only initialize identity-related information related to a Thing.
 
-{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message shown in {{code-sdf-construction-message}}.
+{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message from {{code-sdf-construction-message}}, with the non-identity-related information left out.
+
+TODO: Discuss the circumstances under which a construction message is allow to not intialize all construction parameters.
 
 ~~~ sdf
 info:
@@ -624,7 +617,6 @@ sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
   sdfContext:
-    timestamp: '2025-07-01T08:15:00Z'
     thingId: envSensor:unit42
     deviceIdentity:
       manufacturer: HealthTech Inc.
