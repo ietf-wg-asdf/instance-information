@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 7 June 2026                                  Universität Bremen
-                                                         4 December 2025
+Expires: 16 June 2026                                 Universität Bremen
+                                                        13 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 June 2026.
+   This Internet-Draft will expire on 16 June 2026.
 
 Copyright Notice
 
@@ -569,13 +569,12 @@ Table of Contents
 
 4.2.  Construction Messages
 
-   (These might not be covered here but via dedicated actions.)
-
-   Construction messages are structurally equivalent to state reports,
-   with the main difference being that the recipient is supposed to
-   initiate a configuration or comissioning process upon when receiving
-   it.  Furthermore, construction messages MUST be indicated by a
-   different media type, namely application/sfd-construction+json.
+   Construction messages are structurally equivalent to state reports
+   but may only contain context information.  Furthermore, the recipient
+   of a construction message is supposed to initiate a configuration or
+   comissioning process upon recption.  Construction messages MUST be
+   indicated by the media type application/sfd-construction+json if
+   possible.
 
 4.3.  State Report Updates
 
@@ -591,10 +590,12 @@ Table of Contents
 
 4.4.  State Patches
 
-   State patches are structurally equivalent to state report updates.
-   However, they utilize the patch mechanism (using the provided
-   patchMethod) to alter the state of a Thing instead of reporting state
-   changes.  Since they are not referring to a preceding message, a
+   State patches are structurally equivalent to state report updates,
+   but once again are only allowed to contain context information.  They
+   utilize the patch mechanism (using the provided patchMethod) to alter
+   the _state_ of a Thing instead of reporting state changes.
+
+   Since they are not referring to a preceding message, a
    previosMessageId MUST NOT be present in the information block.  When
    transmitting state patches, the media type application/sdf-state-
    patch+json MUST be used if possible.
@@ -606,8 +607,6 @@ Table of Contents
    archetypes each have their own media type that can be used to
    identity them during a message exchange, the six concete messages in
    this section are may only be identified by their content.
-
-   TODO: Consider only describing the different kinds of state reports
 
    State Reports can be used as
 
@@ -630,15 +629,8 @@ Table of Contents
    information such as the Thing's manufacturer or its device
    identifier.
 
-   As we can see, the great amount of variation within the state report
-   archetype in the case of messages 1 to 3 comes from the different
-   kinds and the characteristic of the information that is the reported
-   in the eventual message.  However, the message format stays identical
-   across the three manifestations of the archetype.
-
-   In the remainder of this section, we will discuss the differences of
-   these three messages in particular and will also deal with the
-   potential modelling of construction messages.
+   In the remainder of this section, we will discuss the differences
+   between the different archetype manifestations.
 
 5.1.  Context Snapshots
 
@@ -748,16 +740,11 @@ Table of Contents
    generated on device) which can be described via instance-related
    messages such as a status report.
 
-   Construction messages need to refer to some kind of constructor in
-   order to be able to start the actual construction process.  In
+   The creation of construction messages is linked to the invocation of
+   a constructor that starts the actual construction process.  In
    practice, these constructors are going to be modeled as an sdfAction,
    although the way the sdfAction is going to be used exactly is not
-   entirely clear yet.  As the device that is being constructed will not
-   be initialized before the construction has finished, the sdfAction
-   has to be modeled as an external or "off-device" action.  This raises
-   the question whether the sdfAction still belongs into the SDF model
-   that corresponds with the class the resulting device instance belongs
-   to.
+   entirely clear yet.
 
    (Note that it is not quite clear what a destructor would be for a
    physical instance -- apart from a scrap metal press, but according to
@@ -766,7 +753,9 @@ Table of Contents
 
    Figure 3 shows a potential SDF construction message that initializes
    a device, setting its manufacturer and firmwareVersion as context
-   information.
+   information.  The construction message also assigns a thingId as well
+   as an initial ipAddress that can be used with the interaction
+   affordances that may be present in the corresponding SDF model.
 
    {
      "info": {
@@ -782,8 +771,8 @@ Table of Contents
      },
      "sdfInstance": {
        "sdfContext": {
-         "timestamp": "2025-07-01T08:15:00Z",
          "thingId": "envSensor:unit42",
+         "ipAddress": "192.168.1.5",
          "deviceIdentity": {
            "manufacturer": "HealthTech Inc.",
            "firmwareVersion": "1.4.3"
@@ -796,13 +785,16 @@ Table of Contents
 
 5.4.  Identity Manifest
 
-   Identity manifests also belong to the construction message
-   archetypes.  They are special construction messages that only
-   initialize identity-related information related to a Thing, which can
-   also be considered context information.
+   Identity manifests also belong to the construction message archetype.
+   They are special construction messages that only initialize identity-
+   related information related to a Thing.
 
    Figure 4 shows an example of an identity manifest, that is
-   structurally identical to the construction message shown in Figure 3.
+   structurally identical to the construction message from Figure 3,
+   with the non-identity-related information left out.
+
+   TODO: Discuss the circumstances under which a construction message is
+   allow to not intialize all construction parameters.
 
    {
      "info": {
@@ -818,7 +810,6 @@ Table of Contents
      },
      "sdfInstance": {
        "sdfContext": {
-         "timestamp": "2025-07-01T08:15:00Z",
          "thingId": "envSensor:unit42",
          "deviceIdentity": {
            "manufacturer": "HealthTech Inc.",

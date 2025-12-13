@@ -1057,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 7 June 2026</td>
+<td class="center">Expires 16 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-bormann-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-04" class="published">4 December 2025</time>
+<time datetime="2025-12-13" class="published">13 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-07">7 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-16">16 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1839,9 +1839,9 @@ Security-related aspects, e.g. regarding authentication and authorization, <span
         <h3 id="name-construction-messages">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
         </h3>
-<p id="section-4.2-1">(These might not be covered here but via dedicated actions.)<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Construction messages are structurally equivalent to state reports, with the main difference being that the recipient is supposed to initiate a configuration or comissioning process upon when receiving it.
-Furthermore, construction messages <span class="bcp14">MUST</span> be indicated by a different media type, namely <code>application/sfd-construction+json</code>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">Construction messages are structurally equivalent to state reports but may only contain context information.
+Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
+Construction messages <span class="bcp14">MUST</span> be indicated by the media type <code>application/sfd-construction+json</code> if possible.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="state-report-updates">
@@ -1861,10 +1861,10 @@ Via the <code>patchMethod</code> quality, different patch algorithms <span class
         <h3 id="name-state-patches">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-state-patches" class="section-name selfRef">State Patches</a>
         </h3>
-<p id="section-4.4-1">State patches are structurally equivalent to state report updates.
-However, they utilize the patch mechanism (using the provided <code>patchMethod</code>) to alter the state of a Thing instead of reporting state changes.
-Since they are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
-When transmitting state patches, the media type <code>application/sdf-state-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">State patches are structurally equivalent to state report updates, but once again are only allowed to contain context information.
+They utilize the patch mechanism (using the provided <code>patchMethod</code>) to alter the <em>state</em> of a Thing instead of reporting state changes.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">Since they are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
+When transmitting state patches, the media type <code>application/sdf-state-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1876,22 +1876,19 @@ When transmitting state patches, the media type <code>application/sdf-state-patc
       </h2>
 <p id="section-5-1">The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
 While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">TODO: Consider only describing the different kinds of state reports<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">State Reports can be used as<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-2">State Reports can be used as<a href="#section-5-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-4.1">
-          <p id="section-5-4.1.1"><em>Context snapshots</em> that only report context information about a Thing or<a href="#section-5-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5-3.1">
+          <p id="section-5-3.1.1"><em>Context snapshots</em> that only report context information about a Thing or<a href="#section-5-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-4.2">
-          <p id="section-5-4.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information.<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-3.2">
+          <p id="section-5-3.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-5">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot or proofshot message.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<p id="section-5-7">And finally, we have <em>Construction Messages</em> and <em>Identity Manifests</em> that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.<a href="#section-5-7" class="pilcrow">¶</a></p>
-<p id="section-5-8">As we can see, the great amount of variation within the state report archetype in the case of messages 1 to 3 comes from the different kinds and the characteristic of the information that is the reported in the eventual message.
-However, the message format stays identical across the three manifestations of the archetype.<a href="#section-5-8" class="pilcrow">¶</a></p>
-<p id="section-5-9">In the remainder of this section, we will discuss the differences of these three messages in particular and will also deal with the potential modelling of construction messages.<a href="#section-5-9" class="pilcrow">¶</a></p>
+<p id="section-5-4">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot or proofshot message.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">And finally, we have <em>Construction Messages</em> and <em>Identity Manifests</em> that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">In the remainder of this section, we will discuss the differences between the different archetype manifestations.<a href="#section-5-7" class="pilcrow">¶</a></p>
 <div id="context-snapshots">
 <section id="section-5.1">
         <h3 id="name-context-snapshots">
@@ -2004,21 +2001,17 @@ identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
 device) which can be described via instance-related messages such as a status report.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.3-3">Construction messages need to refer to some kind of constructor in order to be able to start the actual construction process.
+<p id="section-5.3-3">The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
 In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
 although the way the <code>sdfAction</code> is going to be used exactly is not entirely
-clear yet.
-As the device that is being constructed will not be initialized before the
-construction has finished, the <code>sdfAction</code> has to be modeled as an external or
-"off-device" action. This raises the question whether the <code>sdfAction</code> still
-belongs into the SDF model that corresponds with the class the resulting device
-instance belongs to.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+clear yet.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">(Note that it is not quite clear what a destructor would be for a
 physical instance -- apart from a scrap metal press, but according to
 RFC 8576 we would want to move a system to a re-usable initial state,
 which is pretty much a constructor.)<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 <p id="section-5.3-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> shows a potential SDF construction message
-that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.
+The construction message also assigns a <code>thingId</code> as well as an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-5.3-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
 <figure id="figure-3">
           <div class="lang-sdf sourcecode" id="section-5.3-6.1">
@@ -2036,8 +2029,8 @@ that initializes a device, setting its <code>manufacturer</code> and <code>firmw
   },
   "sdfInstance": {
     "sdfContext": {
-      "timestamp": "2025-07-01T08:15:00Z",
       "thingId": "envSensor:unit42",
+      "ipAddress": "192.168.1.5",
       "deviceIdentity": {
         "manufacturer": "HealthTech Inc.",
         "firmwareVersion": "1.4.3"
@@ -2058,12 +2051,13 @@ that initializes a device, setting its <code>manufacturer</code> and <code>firmw
         <h3 id="name-identity-manifest">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-identity-manifest" class="section-name selfRef">Identity Manifest</a>
         </h3>
-<p id="section-5.4-1">Identity manifests also belong to the construction message archetypes.
-They are special construction messages that only initialize identity-related information related to a Thing, which can also be considered context information.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2"><a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 4</a> shows an example of an identity manifest, that is structurally identical to the construction message shown in <a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a>.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">Identity manifests also belong to the construction message archetype.
+They are special construction messages that only initialize identity-related information related to a Thing.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2"><a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 4</a> shows an example of an identity manifest, that is structurally identical to the construction message from <a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a>, with the non-identity-related information left out.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">TODO: Discuss the circumstances under which a construction message is allow to not intialize all construction parameters.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construct"></span><div id="code-sdf-identity-manifest">
 <figure id="figure-4">
-          <div class="lang-sdf sourcecode" id="section-5.4-3.1">
+          <div class="lang-sdf sourcecode" id="section-5.4-4.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -2078,7 +2072,6 @@ They are special construction messages that only initialize identity-related inf
   },
   "sdfInstance": {
     "sdfContext": {
-      "timestamp": "2025-07-01T08:15:00Z",
       "thingId": "envSensor:unit42",
       "deviceIdentity": {
         "manufacturer": "HealthTech Inc.",
