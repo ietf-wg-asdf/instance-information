@@ -513,12 +513,9 @@ This kind of message may become especially relevant later in conjunction with th
 (See defn above.)
 
 Proofshots are similar to context snapshots, with the important difference that
-they are not only reporting the context information associated with an entity but
+they are not only reporting context information about a Thing but
 also state information associated with its interaction affordances (properties,
 actions, and events).
-As in the case of the Context Snapshot, the Proofshot may also contain concrete
-values that reflect context information associated with a device via the
-`sdfContext` keyword {{-non-affordance}}.
 
 TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding `sdfProperty` definition, it is still unclear how to best model the state of `sdfAction`s and
 `sdfEvent`s.
@@ -623,7 +620,7 @@ sdfInstance:
       firmwareVersion: 1.4.3
 ~~~
 {:sdf #code-sdf-identity-manifest
-title="Example for an SDF construction message"}
+title="Example of an SDF identity manifest"}
 
 ## Delta Messages
 
@@ -692,8 +689,8 @@ title="Example of an SDF context patch message that uses the common instance-rel
 TODO: Maybe the following can be shortened or even removed
 
 When comparing  {{code-sdf-delta-message}} and {{code-sdf-context-patch}}, we
-can see that the main difference between the messages is the *purpose* these
-message are being used for. This purpose could be implicitly reflected by the
+can see that the main difference between the messages is the *purpose*
+they are being used for. This purpose could be implicitly reflected by the
 nature of the resource that accepts or returns the respective message type.
 It would also be possible to indicate the purpose more explicitly by using a
 different content format when transferring the messages over the wire.
