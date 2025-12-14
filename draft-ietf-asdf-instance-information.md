@@ -767,16 +767,15 @@ title="Example of a status report message that provides the IP address needed to
 This approach can become very verbose in a nested model and may need refinement in future draft revisions.
 The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.
 
-# Modelling Construction in SDF models
+# Modelling Construction Parameters via SDF Models
 
 As the examples on Construction and State Patch Messages already implied, we
 can model a Thing's configurable parameters via `sdfContext` definitions for
 which the instance-related messages can then provide concrete values.
-{{#code-sdf-construction-sdf-context}} shows an example for how the implied
+{{code-sdf-construction-sdf-context}} shows an example for how the implied
 SDF model could actually look like.
-As we can see, the parameters that can be set during construction are modeled
-as `sdfContext` definitions the entries of `contextMap`s may point to using 
-JSON pointers.
+Here the parameters settable during construction are modeled as `sdfContext`
+definitions the entries of a `contextMap` may point to using JSON pointers.
 
 ~~~ sdf
 namespace:
