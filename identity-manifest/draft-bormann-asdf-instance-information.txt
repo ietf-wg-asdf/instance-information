@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 16 June 2026                                 Universität Bremen
-                                                        13 December 2025
+Expires: 17 June 2026                                 Universität Bremen
+                                                        14 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 June 2026.
+   This Internet-Draft will expire on 17 June 2026.
 
 Copyright Notice
 
@@ -679,12 +679,9 @@ Table of Contents
    (See defn above.)
 
    Proofshots are similar to context snapshots, with the important
-   difference that they are not only reporting the context information
-   associated with an entity but also state information associated with
-   its interaction affordances (properties, actions, and events).  As in
-   the case of the Context Snapshot, the Proofshot may also contain
-   concrete values that reflect context information associated with a
-   device via the sdfContext keyword [I-D.ietf-asdf-sdf-nonaffordance].
+   difference that they are not only reporting context information about
+   a Thing but also state information associated with its interaction
+   affordances (properties, actions, and events).
 
    TODO: Note that while the format for describing the state of
    properties is clearly governed by the schema information from the
@@ -819,7 +816,7 @@ Table of Contents
      }
    }
 
-             Figure 4: Example for an SDF construction message
+               Figure 4: Example of an SDF identity manifest
 
 5.5.  Delta Messages
 
@@ -903,14 +900,14 @@ Table of Contents
    TODO: Maybe the following can be shortened or even removed
 
    When comparing Figure 5 and Figure 6, we can see that the main
-   difference between the messages is the _purpose_ these message are
-   being used for.  This purpose could be implicitly reflected by the
-   nature of the resource that accepts or returns the respective message
-   type.  It would also be possible to indicate the purpose more
-   explicitly by using a different content format when transferring the
-   messages over the wire.  Another difference, however, lays in the
-   fact that the context patch is not including a previousMessageId,
-   which might be sufficient to distinguish the two message types.
+   difference between the messages is the _purpose_ they are being used
+   for.  This purpose could be implicitly reflected by the nature of the
+   resource that accepts or returns the respective message type.  It
+   would also be possible to indicate the purpose more explicitly by
+   using a different content format when transferring the messages over
+   the wire.  Another difference, however, lays in the fact that the
+   context patch is not including a previousMessageId, which might be
+   sufficient to distinguish the two message types.
 
    Despite their different purpose, both messages will apply some kind
    of patch algorithm.  JSON Merge Patch [RFC7396] is probably a strong
