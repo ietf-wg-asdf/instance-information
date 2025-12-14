@@ -475,7 +475,17 @@ In the case of state report updates, we have *Deltas* that indicate state change
 
 State patches can appear as *Patch messages* that indicate state changes that should be *applied* to a Thing.
 
-And finally, we have *Construction Messages* and *Identity Manifests* that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.
+Despite their different purpose, both Status Report Updates and State Patches
+will apply some kind of patch algorithm.
+JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the `patchMethod` field within the `sdfInstanceOf` quality.
+
+Finally, we have *Construction Messages* and *Identity Manifests* that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.
 
 In the remainder of this section, we will discuss the differences between the different archetype manifestations.
 
@@ -685,28 +695,6 @@ sdfInstance:
 ~~~
 {:sdf #code-sdf-context-patch
 title="Example of an SDF context patch message that uses the common instance-related message format."}
-
-TODO: Maybe the following can be shortened or even removed
-
-When comparing  {{code-sdf-delta-message}} and {{code-sdf-context-patch}}, we
-can see that the main difference between the messages is the *purpose*
-they are being used for. This purpose could be implicitly reflected by the
-nature of the resource that accepts or returns the respective message type.
-It would also be possible to indicate the purpose more explicitly by using a
-different content format when transferring the messages over the wire.
-Another difference, however, lays in the fact that the context patch is not
-including a `previousMessageId`, which might be sufficient to distinguish the
-two message types.
-
-Despite their different purpose, both messages will apply some kind of patch
-algorithm.
-JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
-algorithm that will be used a little bit differently depending on the message
-type (the context patch will be applied "internally" by the device, while
-the delta message will be processed together with its predecessor by a
-consumer). As there might be cases where the Merge Patch algorithm is not
-sufficient, different algorithms (that can be IANA registered) are going to be
-settable via the `patchMethod` field within the `sdfInstanceOf` quality.
 
 # Linking `sdfProtocolMap` and `sdfContext` via JSON Pointers
 
