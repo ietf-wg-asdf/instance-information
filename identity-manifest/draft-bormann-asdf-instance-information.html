@@ -1245,7 +1245,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-linking-sdfprotocolmap-and-" class="internal xref">Linking <code>sdfProtocolMap</code> and <code>sdfContext</code> via JSON Pointers</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-examples-for-sdf-constructo" class="internal xref">Examples for SDF Constructors</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-modelling-construction-para" class="internal xref">Modelling Construction Parameters via SDF Models</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
@@ -2288,82 +2288,42 @@ Via a <code>contextMap</code> (this name is still under discussion), the <code>s
 The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.<a href="#section-6-7" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="examples-for-sdf-constructors">
+<div id="modelling-construction-parameters-via-sdf-models">
 <section id="section-7">
-      <h2 id="name-examples-for-sdf-constructo">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-examples-for-sdf-constructo" class="section-name selfRef">Examples for SDF Constructors</a>
+      <h2 id="name-modelling-construction-para">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-modelling-construction-para" class="section-name selfRef">Modelling Construction Parameters via SDF Models</a>
       </h2>
-<p id="section-7-1">TODO: This section needs to be updated/reworked/removed<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2"><a href="#code-sdf-constructor-action" class="auto internal xref">Figure 9</a> shows a potential approach for describing
-constructors via the <code>sdfAction</code> keyword with a set of construction parameters
-contained in its <code>sdfInputData</code>.<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">As the constructor action is modeled as being detached from the device and
-performed by an external <code>constructor</code> in this example, both the resulting model
-and the initial instance description (which can be considered an identity
-manifest) are returned.
-The schema information that governs the shape of both the model and the instance
-message are referred to via the <code>sdfRef</code> keyword.<a href="#section-7-3" class="pilcrow">¶</a></p>
-<p id="section-7-4">DISCUSS: Note that the action may also return a pointer to an external SDF model
-and provide the additional information from the constructor via an SDF Mapping
-File. These are aspects that still require discussion, examples, and
-implementation experience.<a href="#section-7-4" class="pilcrow">¶</a></p>
-<span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-constructor-action">
+<p id="section-7-1">As the examples on Construction and State Patch Messages already implied, we
+can model a Thing's configurable parameters via <code>sdfContext</code> definitions for
+which the instance-related messages can then provide concrete values.
+<a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 9</a> shows an example for how the implied
+SDF model could actually look like.
+Here the parameters settable during construction are modeled as <code>sdfContext</code>
+definitions to which the entries of <code>contextMap</code>s may point using JSON pointers.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-construction-sdf-context">
 <figure id="figure-9">
-        <div class="breakable lang-sdf sourcecode" id="section-7-5.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "Example document for SDF with actions as constructors \
-                                                  for instantiation",
-    "version": "2019-04-24",
-    "copyright": "Copyright 2019 Example Corp. All rights reserved.",
-    "license": "https://example.com/license"
-  },
+        <div class="lang-sdf sourcecode" id="section-7-2.1">
+<pre>{
   "namespace": {
-    "sdf": "https://example.com/common/sdf/definitions",
-    "cap": "https://example.com/capability/cap"
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "cap",
+  "defaultNamespace": "models",
   "sdfObject": {
-    "constructor": {
-      "sdfAction": {
-        "construct": {
-          "sdfInputData": {
-            "$comment": "DISCUSS: Do we need to establish a \
-connection between constructor parameters and the resulting instance\
-                                                  -related message?",
-            "type": "object",
-            "properties": {
-              "temperatureUnit": {
-                "type": "string"
-              },
-              "ipAddress": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "temperatureUnit"
-            ]
-          },
-          "sdfOutputData": {
-            "$comment": "Would we point to the JSON Schema \
-                                                  definitions here?",
-            "type": "object",
-            "properties": {
-              "model": {
-                "type": "object",
-                "properties": {
-                  "sdfRef": "sdf:#/sdf/model/format"
-                }
-              },
-              "instance": {
-                "type": "object",
-                "properties": {
-                  "sdfRef": "sdf:#/instance/message/format"
-                }
-              }
-            }
+    "sensor": {
+      "sdfContext": {
+        "ipAddress": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "sdfProperty": {
+        "temperature": {
+          "type": "number",
+          "contextMap": {
+            "unit": "#/sdfObject/sensor/sdfContext/unit"
           }
         }
       }
