@@ -1887,8 +1887,17 @@ While the archetypes each have their own media type that can be used to identity
       </ul>
 <p id="section-5-4">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot or proofshot message.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">And finally, we have <em>Construction Messages</em> and <em>Identity Manifests</em> that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<p id="section-5-7">In the remainder of this section, we will discuss the differences between the different archetype manifestations.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-6">Despite their different purpose, both Status Report Updates and State Patches
+will apply some kind of patch algorithm.
+JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is probably a strong contender for the default
+algorithm that will be used a little bit differently depending on the message
+type (the context patch will be applied "internally" by the device, while
+the delta message will be processed together with its predecessor by a
+consumer). As there might be cases where the Merge Patch algorithm is not
+sufficient, different algorithms (that can be IANA registered) are going to be
+settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</code> quality.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">Finally, we have <em>Construction Messages</em> and <em>Identity Manifests</em> that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">In the remainder of this section, we will discuss the differences between the different archetype manifestations.<a href="#section-5-8" class="pilcrow">¶</a></p>
 <div id="context-snapshots">
 <section id="section-5.1">
         <h3 id="name-context-snapshots">
@@ -2175,25 +2184,6 @@ attributes (such as the location) need to be reflected somehow.<a href="#section
 <a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance-related message format.</a>
           </figcaption></figure>
 </div>
-<p id="section-5.6-3">TODO: Maybe the following can be shortened or even removed<a href="#section-5.6-3" class="pilcrow">¶</a></p>
-<p id="section-5.6-4">When comparing  <a href="#code-sdf-delta-message" class="auto internal xref">Figure 5</a> and <a href="#code-sdf-context-patch" class="auto internal xref">Figure 6</a>, we
-can see that the main difference between the messages is the <em>purpose</em>
-they are being used for. This purpose could be implicitly reflected by the
-nature of the resource that accepts or returns the respective message type.
-It would also be possible to indicate the purpose more explicitly by using a
-different content format when transferring the messages over the wire.
-Another difference, however, lays in the fact that the context patch is not
-including a <code>previousMessageId</code>, which might be sufficient to distinguish the
-two message types.<a href="#section-5.6-4" class="pilcrow">¶</a></p>
-<p id="section-5.6-5">Despite their different purpose, both messages will apply some kind of patch
-algorithm.
-JSON Merge Patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is probably a strong contender for the default
-algorithm that will be used a little bit differently depending on the message
-type (the context patch will be applied "internally" by the device, while
-the delta message will be processed together with its predecessor by a
-consumer). As there might be cases where the Merge Patch algorithm is not
-sufficient, different algorithms (that can be IANA registered) are going to be
-settable via the <code>patchMethod</code> field within the <code>sdfInstanceOf</code> quality.<a href="#section-5.6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

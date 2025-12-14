@@ -623,7 +623,18 @@ Table of Contents
    State patches can appear as _Patch messages_ that indicate state
    changes that should be _applied_ to a Thing.
 
-   And finally, we have _Construction Messages_ and _Identity Manifests_
+   Despite their different purpose, both Status Report Updates and State
+   Patches will apply some kind of patch algorithm.  JSON Merge Patch
+   [RFC7396] is probably a strong contender for the default algorithm
+   that will be used a little bit differently depending on the message
+   type (the context patch will be applied "internally" by the device,
+   while the delta message will be processed together with its
+   predecessor by a consumer).  As there might be cases where the Merge
+   Patch algorithm is not sufficient, different algorithms (that can be
+   IANA registered) are going to be settable via the patchMethod field
+   within the sdfInstanceOf quality.
+
+   Finally, we have _Construction Messages_ and _Identity Manifests_
    that initiate a Thing's (re)configuration or its comissioning, the
    latter of which perform an initialization primarily with identity
    information such as the Thing's manufacturer or its device
@@ -896,28 +907,6 @@ Table of Contents
 
       Figure 6: Example of an SDF context patch message that uses the
                   common instance-related message format.
-
-   TODO: Maybe the following can be shortened or even removed
-
-   When comparing Figure 5 and Figure 6, we can see that the main
-   difference between the messages is the _purpose_ they are being used
-   for.  This purpose could be implicitly reflected by the nature of the
-   resource that accepts or returns the respective message type.  It
-   would also be possible to indicate the purpose more explicitly by
-   using a different content format when transferring the messages over
-   the wire.  Another difference, however, lays in the fact that the
-   context patch is not including a previousMessageId, which might be
-   sufficient to distinguish the two message types.
-
-   Despite their different purpose, both messages will apply some kind
-   of patch algorithm.  JSON Merge Patch [RFC7396] is probably a strong
-   contender for the default algorithm that will be used a little bit
-   differently depending on the message type (the context patch will be
-   applied "internally" by the device, while the delta message will be
-   processed together with its predecessor by a consumer).  As there
-   might be cases where the Merge Patch algorithm is not sufficient,
-   different algorithms (that can be IANA registered) are going to be
-   settable via the patchMethod field within the sdfInstanceOf quality.
 
 6.  Linking sdfProtocolMap and sdfContext via JSON Pointers
 
