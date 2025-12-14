@@ -767,64 +767,36 @@ title="Example of a status report message that provides the IP address needed to
 This approach can become very verbose in a nested model and may need refinement in future draft revisions.
 The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.
 
-# Examples for SDF Constructors
+# Modelling Construction in SDF models
 
-TODO: This section needs to be updated/reworked/removed
-
-{{code-sdf-constructor-action}} shows a potential approach for describing
-constructors via the `sdfAction` keyword with a set of construction parameters
-contained in its `sdfInputData`.
-
-As the constructor action is modeled as being detached from the device and
-performed by an external `constructor` in this example, both the resulting model
-and the initial instance description (which can be considered an identity
-manifest) are returned.
-The schema information that governs the shape of both the model and the instance
-message are referred to via the `sdfRef` keyword.
-
-DISCUSS: Note that the action may also return a pointer to an external SDF model
-and provide the additional information from the constructor via an SDF Mapping
-File. These are aspects that still require discussion, examples, and
-implementation experience.
+As the examples on Construction and State Patch Messages already implied, we
+can model a Thing's configurable parameters via `sdfContext` definitions for
+which the instance-related messages can then provide concrete values.
+{{#code-sdf-construction-sdf-context}} shows an example for how the implied
+SDF model could actually look like.
+As we can see, the parameters that can be set during construction are modeled
+as `sdfContext` definitions the entries of `contextMap`s may point to using 
+JSON pointers.
 
 ~~~ sdf
-info:
-  title: Example document for SDF with actions as constructors for instantiation
-  version: '2019-04-24'
-  copyright: Copyright 2019 Example Corp. All rights reserved.
-  license: https://example.com/license
 namespace:
-  sdf: https://example.com/common/sdf/definitions
-  cap: https://example.com/capability/cap
-defaultNamespace: cap
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
 sdfObject:
-  constructor:
-    sdfAction:
-      construct:
-        sdfInputData:
-          "$comment": "DISCUSS: Do we need to establish a connection between constructor parameters and the resulting instance-related message?"
-          type: object
-          properties:
-            temperatureUnit:
-              type: string
-            ipAddress:
-              type: string
-          required:
-            - temperatureUnit
-        sdfOutputData:
-          "$comment": Would we point to the JSON Schema definitions here?
-          type: object
-          properties:
-            model:
-              type: object
-              properties:
-                sdfRef: "sdf:#/sdf/model/format"
-            instance:
-              type: object
-              properties:
-                sdfRef: "sdf:#/instance/message/format"
+  sensor:
+    sdfContext:
+      ipAddress:
+        type: string
+      unit:
+        type: string
+    sdfProperty:
+      temperature:
+        type: number
+        contextMap:
+          unit: "#/sdfObject/sensor/sdfContext/unit"
 ~~~
-{:sdf #code-sdf-constructor-action
+{:sdf #code-sdf-construction-sdf-context
 title="Example for SDF model with constructors"}
 
 # Discussion
