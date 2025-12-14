@@ -1024,8 +1024,8 @@ Table of Contents
    sdfContext definitions for which the instance-related messages can
    then provide concrete values.  Figure 9 shows an example for how the
    implied SDF model could actually look like.  Here the parameters
-   settable during construction are modeled as sdfContext definitions to
-   which the entries of contextMaps may point using JSON pointers.
+   settable during construction are modeled as sdfContext definitions
+   the entries of a contextMap may point to using JSON pointers.
 
    {
      "namespace": {
