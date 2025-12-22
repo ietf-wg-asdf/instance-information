@@ -2,23 +2,21 @@
 
 # Instance Information for SDF
 
-This is the working area for the individual Internet-Draft, "Instance Information for SDF".
+This is the working area for the IETF [ASDF Working Group](https://datatracker.ietf.org/group/asdf/documents/) Internet-Draft, "Instance Information for SDF".
 
-* [Editor's Copy](https://ietf-wg-asdf.github.io/instance-information/#go.draft-bormann-asdf-instance-information.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-information)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-bormann-asdf-instance-information)
-* [Compare Editor's Copy to Individual Draft](https://ietf-wg-asdf.github.io/instance-information/#go.draft-bormann-asdf-instance-information.diff)
+* [Editor's Copy](https://ietf-wg-asdf.github.io/instance-information/#go.draft-ietf-asdf-instance-information.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-asdf-instance-information)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-asdf-instance-information)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-asdf.github.io/instance-information/#go.draft-ietf-asdf-instance-information.diff)
 
-[Access to all branches](https://ietf-wg-asdf.github.io/instance-information/)
 
 ## Contributing
 
 See the
 [guidelines for contributions](https://github.com/ietf-wg-asdf/instance-information/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
