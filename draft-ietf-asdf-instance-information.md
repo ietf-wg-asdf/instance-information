@@ -7,7 +7,7 @@ category: std
 stream: IETF
 consensus: true
 
-docname: draft-bormann-asdf-instance-information-latest
+docname: draft-ietf-asdf-instance-information-latest
 number:
 date:
 area: ""
