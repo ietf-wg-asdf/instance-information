@@ -82,7 +82,7 @@ Models to describe them.
 
 [^status]
 
-[^status]: The present revision –07 adds an experimental section on linking `sdfProtocolMap` and `sdfContext` which has been yet another result of the discussions that happened during and after IETF 124.
+[^status]: The present revision is the first one after the adoption by the ASDF Working Group. Content-wise, it is unchanged compared to the preceding individual draft revision.
 
 
 --- middle
