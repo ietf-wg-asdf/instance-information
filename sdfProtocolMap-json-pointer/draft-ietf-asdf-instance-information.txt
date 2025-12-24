@@ -2,15 +2,15 @@
 
 
 
-ASDF                                                          C. Bormann
+A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 5 June 2026                                  Universität Bremen
-                                                         2 December 2025
+Expires: 27 June 2026                                 Universität Bremen
+                                                        24 December 2025
 
 
                       Instance Information for SDF
-             draft-bormann-asdf-instance-information-latest
+              draft-ietf-asdf-instance-information-latest
 
 Abstract
 
@@ -21,21 +21,21 @@ Abstract
    Models to describe them.
 
 
-   // The present revision –07 adds an experimental section on linking
-   // sdfProtocolMap and sdfContext which has been yet another result of
-   // the discussions that happened during and after IETF 124.
+   // The present revision is the first one after the adoption by the
+   // ASDF Working Group.  Content-wise, it is unchanged compared to the
+   // preceding individual draft revision.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-bormann-asdf-instance-
+   https://datatracker.ietf.org/doc/draft-ietf-asdf-instance-
    information/.
 
-   Discussion of this document takes place on the »A Semantic Definition
-   Format for Data and Interactions of Things« (ASDF) Working Group
-   mailing list (mailto:asdf@ietf.org), which is archived at
+   Discussion of this document takes place on the A Semantic Definition
+   Format for Data and Interactions of Things Working Group mailing list
+   (mailto:asdf@ietf.org), which is archived at
    https://mailarchive.ietf.org/arch/browse/asdf/.  Subscribe at
    https://www.ietf.org/mailman/listinfo/asdf/.
 
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 27 June 2026.
 
 Copyright Notice
 
@@ -1199,9 +1199,9 @@ Table of Contents
    [I-D.ietf-asdf-sdf-protocol-mapping]
               Mohan, R., Brinckman, B., and L. Corneo, "Protocol Mapping
               for SDF", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-protocol-mapping-01, 16 October 2025,
+              asdf-sdf-protocol-mapping-02, 2 December 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-protocol-mapping-01>.
+              sdf-protocol-mapping-02>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
