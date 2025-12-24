@@ -87,11 +87,11 @@ Table of Contents
      3.3.  Instance-of Block
      3.4.  Instance Block
    4.  Message Archetypes
-     4.1.  State Reports
+     4.1.  Snapshot Messages
      4.2.  Construction Messages
-     4.3.  State Report Updates
-     4.4.  State Patches
-   5.  Message Purposes and Usecases
+     4.3.  Delta Messages
+     4.4.  Patch Messages
+   5.  Use Cases and Examples
      5.1.  Context Snapshots
      5.2.  Proofshots
      5.3.  Construction Messages
@@ -281,33 +281,33 @@ Table of Contents
    Based on these considerations (as illustrated by the systematization
    in Table 1), we can identify the following four message archetypes:
 
-   1.  _State reports_ that may contain contain both affordance-related
-       and context information, including information about a Thing's
-       identity,
+   1.  _Snapshot_ messages that may contain contain both affordance-
+       related and context information, including information about a
+       Thing's identity,
 
-   2.  _Construction messages_, which trigger a Thing's initial
+   2.  _Construction_ messages that trigger a Thing's initial
        configuration process or its commissioning,
 
-   3.  _State report updates_ that indicate changes that have occurred
-       since a reference state report, and
+   3.  _Delta_ messages that indicate changes that have occurred since a
+       reference state report, and
 
-   4.  _State patches_ that update the Thing's state.
+   4.  _Patch_ messages that update the Thing's state.
 
-         +=======================+==============================+
-         |                       |           Content            |
-         +=======================+==============+===============+
-         |                       | Freestanding |    Relative   |
-         +============+==========+==============+===============+
-         | (Intended) |  State   |    Status    | Status Report |
-         |   Effect   | Exposure |    Report    |     Update    |
-         |            +==========+--------------+---------------+
-         |            |  State   | Construction |  State Patch  |
-         |            |  Change  |              |               |
-         +============+==========+--------------+---------------+
+            +=======================+=========================+
+            |                       |         Content         |
+            +=======================+==============+==========+
+            |                       | Freestanding | Relative |
+            +============+==========+==============+==========+
+            | (Intended) |  State   |   Snapshot   |  Delta   |
+            |   Effect   | Exposure |              |          |
+            |            +==========+--------------+----------+
+            |            |  State   | Construction |  Patch   |
+            |            |  Change  |              |          |
+            +============+==========+--------------+----------+
 
-               Table 1: Systematization of instance-related
-               messages along the dimensions "Content" and
-                           "(Intended) Effect".
+                Table 1: Systematization of instance-related
+                messages along the dimensions "Content" and
+                            "(Intended) Effect".
 
    The uniform message format can be used for all four message
    archetypes.  Appendix B specifies the formal syntax of instance-
@@ -551,21 +551,21 @@ Table of Contents
    expanded.  Maybe some of the content from the six example messages
    should be moved here.
 
-4.1.  State Reports
+4.1.  Snapshot Messages
 
    This instance-related message contains information on a Thing's
    state, both in terms of context information and the state of
    individual affordances.  In the message, the previousMessageId field
    in the information block MUST NOT be present.  Furthermore, when
    transmitting this message in its JSON format, the content type
-   application/sdf-state-report+json MUST be indicated if supported by
-   the protocol used for transmission.
+   application/sdf-snapshot+json MUST be indicated if supported by the
+   protocol used for transmission.
 
-   State reports MAY only contain values for a _subset_ of all possible
-   affordances and context information exposed by a Thing.  Security-
-   related aspects, e.g. regarding authentication and authorization,
-   MUST be taken into account when issueing a state report for a
-   requesting party.
+   Snapshot messages MAY only contain values for a _subset_ of all
+   possible affordances and context information exposed by a Thing.
+   Security-related aspects, e.g. regarding authentication and
+   authorization, MUST be taken into account when issueing a state
+   report for a requesting party.
 
 4.2.  Construction Messages
 
@@ -576,31 +576,31 @@ Table of Contents
    indicated by the media type application/sfd-construction+json if
    possible.
 
-4.3.  State Report Updates
+4.3.  Delta Messages
 
-   State report updates are messages that only describe updates relative
-   to a previous message.  For this purpose, a previousMessageId MUST be
-   present in the info block.  When transmitting state report updates,
-   the media type application/sdf-state-report-update+json MUST be used
-   if possible.
+   Delta messages describe updates to a Thing's state relative to a
+   previous message.  For this purpose, a previousMessageId MUST be
+   present in the info block.  When transmitting delta messages, the
+   media type application/sdf-delta+json MUST be used if possible.
 
    By default, the values contained in the message are applied to the
    preceding message(s) via the JSON Merge Patch algorithm.  Via the
    patchMethod quality, different patch algorithms MAY be indicated.
 
-4.4.  State Patches
+4.4.  Patch Messages
 
-   State patches are structurally equivalent to state report updates,
-   but once again are only allowed to contain context information.  They
-   utilize the patch mechanism (using the provided patchMethod) to alter
-   the _state_ of a Thing instead of reporting state changes.
+   Patch messages are structurally equivalent to delta messages, but
+   once again are only allowed to contain context information.  They
+   utilize a patch _mechanism_ (which may be explicitly indicated via
+   the patchMethod quality) to alter the _state_ of a Thing instead of
+   reporting state _changes_.
 
    Since they are not referring to a preceding message, a
    previosMessageId MUST NOT be present in the information block.  When
-   transmitting state patches, the media type application/sdf-state-
-   patch+json MUST be used if possible.
+   transmitting state patches, the media type application/sdf-patch+json
+   MUST be used if possible.
 
-5.  Message Purposes and Usecases
+5.  Use Cases and Examples
 
    The four archetypes can be further subdivided into (at least) six
    kinds of messages that all deal with different use cases.  While the
@@ -613,10 +613,10 @@ Table of Contents
    *  _Context snapshots_ that only report context information about a
       Thing or
 
-   *  _Proofshots_ that report a Thing's state (or parts of it), which
-      may include context information.
+   *  _Proofshots_ that report a Thing's (partial) state, which may
+      include context information.
 
-   In the case of state report updates, we have _Deltas_ that indicate
+   In the case of status report updates, we have _Deltas_ that indicate
    state changes compared to a previous context snapshot or proofshot
    message.
 

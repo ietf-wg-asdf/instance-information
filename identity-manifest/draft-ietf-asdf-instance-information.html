@@ -1205,21 +1205,21 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-message-archetypes" class="internal xref">Message Archetypes</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-state-reports" class="internal xref">State Reports</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-snapshot-messages" class="internal xref">Snapshot Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-construction-messages" class="internal xref">Construction Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-state-report-updates" class="internal xref">State Report Updates</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-delta-messages" class="internal xref">Delta Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-state-patches" class="internal xref">State Patches</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-patch-messages" class="internal xref">Patch Messages</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-message-purposes-and-usecas" class="internal xref">Message Purposes and Usecases</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-use-cases-and-examples" class="internal xref">Use Cases and Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-context-snapshots" class="internal xref">Context Snapshots</a></p>
@@ -1234,10 +1234,10 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-identity-manifest" class="internal xref">Identity Manifest</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-delta-messages" class="internal xref">Delta Messages</a></p>
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-delta-messages-2" class="internal xref">Delta Messages</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
-                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-patch-messages" class="internal xref">Patch Messages</a></p>
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-patch-messages-2" class="internal xref">Patch Messages</a></p>
 </li>
             </ul>
 </li>
@@ -1478,16 +1478,16 @@ Depending on the recipient and its purpose, a message can be interpreted as a re
 <p id="section-2-4">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-5">
 <li id="section-2-5.1">
-          <p id="section-2-5.1.1"><em>State reports</em> that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.1.1"><em>Snapshot</em> messages that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-5.2">
-          <p id="section-2-5.2.1"><em>Construction messages</em>, which trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.2.1"><em>Construction</em> messages that trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-5.3">
-          <p id="section-2-5.3.1"><em>State report updates</em> that indicate changes that have occurred since a reference state report, and<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.3.1"><em>Delta</em> messages that indicate changes that have occurred since a reference state report, and<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="section-2-5.4">
-          <p id="section-2-5.4.1"><em>State patches</em> that update the Thing's state.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+          <p id="section-2-5.4.1"><em>Patch</em> messages that update the Thing's state.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <span id="name-systematization-of-instance"></span><div id="instance-message-dimensions">
@@ -1512,13 +1512,13 @@ Depending on the recipient and its purpose, a message can be interpreted as a re
             <th class="text-center" rowspan="2" colspan="1">(Intended)        <br>
 Effect</th>
             <th class="text-center" rowspan="1" colspan="1">State Exposure</th>
-            <td class="text-center" rowspan="1" colspan="1">Status Report</td>
-            <td class="text-center" rowspan="1" colspan="1">Status Report Update</td>
+            <td class="text-center" rowspan="1" colspan="1">Snapshot</td>
+            <td class="text-center" rowspan="1" colspan="1">Delta</td>
           </tr>
           <tr>
             <th class="text-center" rowspan="1" colspan="1">State Change</th>
             <td class="text-center" rowspan="1" colspan="1">Construction</td>
-            <td class="text-center" rowspan="1" colspan="1">State Patch</td>
+            <td class="text-center" rowspan="1" colspan="1">Patch</td>
           </tr>
         </tbody>
       </table>
@@ -1822,15 +1822,15 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
 <p id="section-4-2">TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">TODO: The description of the individual messages probably has to be expanded.
       Maybe some of the content from the six example messages should be moved here.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<div id="state-reports">
+<div id="snapshot-messages">
 <section id="section-4.1">
-        <h3 id="name-state-reports">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-state-reports" class="section-name selfRef">State Reports</a>
+        <h3 id="name-snapshot-messages">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-snapshot-messages" class="section-name selfRef">Snapshot Messages</a>
         </h3>
 <p id="section-4.1-1">This instance-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
 In the message, the <code>previousMessageId</code> field in the information block <span class="bcp14">MUST NOT</span> be present.
-Furthermore, when transmitting this message in its JSON format, the content type <code>application/sdf-state-report+json</code> <span class="bcp14">MUST</span> be indicated if supported by the protocol used for transmission.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">State reports <span class="bcp14">MAY</span> only contain values for a <em>subset</em> of all possible affordances and context information exposed by a Thing.
+Furthermore, when transmitting this message in its JSON format, the content type <code>application/sdf-snapshot+json</code> <span class="bcp14">MUST</span> be indicated if supported by the protocol used for transmission.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Snapshot messages <span class="bcp14">MAY</span> only contain values for a <em>subset</em> of all possible affordances and context information exposed by a Thing.
 Security-related aspects, e.g. regarding authentication and authorization, <span class="bcp14">MUST</span> be taken into account when issueing a state report for a requesting party.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1844,35 +1844,35 @@ Furthermore, the recipient of a construction message is supposed to initiate a c
 Construction messages <span class="bcp14">MUST</span> be indicated by the media type <code>application/sfd-construction+json</code> if possible.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="state-report-updates">
+<div id="delta-messages">
 <section id="section-4.3">
-        <h3 id="name-state-report-updates">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-state-report-updates" class="section-name selfRef">State Report Updates</a>
+        <h3 id="name-delta-messages">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-delta-messages" class="section-name selfRef">Delta Messages</a>
         </h3>
-<p id="section-4.3-1">State report updates are messages that only describe updates relative to a previous message.
+<p id="section-4.3-1">Delta messages describe updates to a Thing's state relative to a previous message.
 For this purpose, a <code>previousMessageId</code> <span class="bcp14">MUST</span> be present in the info block.
-When transmitting state report updates, the media type <code>application/sdf-state-report-update+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+When transmitting delta messages, the media type <code>application/sdf-delta+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
 Via the <code>patchMethod</code> quality, different patch algorithms <span class="bcp14">MAY</span> be indicated.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="state-patches">
+<div id="patch-messages">
 <section id="section-4.4">
-        <h3 id="name-state-patches">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-state-patches" class="section-name selfRef">State Patches</a>
+        <h3 id="name-patch-messages">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
         </h3>
-<p id="section-4.4-1">State patches are structurally equivalent to state report updates, but once again are only allowed to contain context information.
-They utilize the patch mechanism (using the provided <code>patchMethod</code>) to alter the <em>state</em> of a Thing instead of reporting state changes.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">Patch messages are structurally equivalent to delta messages, but once again are only allowed to contain context information.
+They utilize a patch <em>mechanism</em> (which may be explicitly indicated via the <code>patchMethod</code> quality) to alter the <em>state</em> of a Thing instead of reporting state <em>changes</em>.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.4-2">Since they are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
-When transmitting state patches, the media type <code>application/sdf-state-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+When transmitting state patches, the media type <code>application/sdf-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="message-purposes-and-usecases">
+<div id="use-cases-and-examples">
 <section id="section-5">
-      <h2 id="name-message-purposes-and-usecas">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-message-purposes-and-usecas" class="section-name selfRef">Message Purposes and Usecases</a>
+      <h2 id="name-use-cases-and-examples">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-use-cases-and-examples" class="section-name selfRef">Use Cases and Examples</a>
       </h2>
 <p id="section-5-1">The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
 While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.<a href="#section-5-1" class="pilcrow">¶</a></p>
@@ -1882,10 +1882,10 @@ While the archetypes each have their own media type that can be used to identity
           <p id="section-5-3.1.1"><em>Context snapshots</em> that only report context information about a Thing or<a href="#section-5-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-3.2">
-          <p id="section-5-3.2.1"><em>Proofshots</em> that report a Thing's state (or parts of it), which may include context information.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-5-3.2.1"><em>Proofshots</em> that report a Thing's (partial) state, which may include context information.<a href="#section-5-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-5-4">In the case of state report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot or proofshot message.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-4">In the case of status report updates, we have <em>Deltas</em> that indicate state changes compared to a previous context snapshot or proofshot message.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <p id="section-5-5">State patches can appear as <em>Patch messages</em> that indicate state changes that should be <em>applied</em> to a Thing.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <p id="section-5-6">Despite their different purpose, both Status Report Updates and State Patches
 will apply some kind of patch algorithm.
@@ -2094,10 +2094,10 @@ They are special construction messages that only initialize identity-related inf
 </div>
 </section>
 </div>
-<div id="delta-messages">
+<div id="delta-messages-1">
 <section id="section-5.5">
-        <h3 id="name-delta-messages">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-delta-messages" class="section-name selfRef">Delta Messages</a>
+        <h3 id="name-delta-messages-2">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-delta-messages-2" class="section-name selfRef">Delta Messages</a>
         </h3>
 <p id="section-5.5-1">TODO: Reword<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.5-2">When the state of a device at a given point in time is known (e.g., due to a
@@ -2143,10 +2143,10 @@ be one way to model a telemetry stream from a device.<a href="#section-5.5-4" cl
 </div>
 </section>
 </div>
-<div id="patch-messages">
+<div id="patch-messages-1">
 <section id="section-5.6">
-        <h3 id="name-patch-messages">
-<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
+        <h3 id="name-patch-messages-2">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-patch-messages-2" class="section-name selfRef">Patch Messages</a>
         </h3>
 <p id="section-5.6-1">Yet another purpose for instance-related messages is the application of updates
 to a device's configuration via a so-called patch message.
