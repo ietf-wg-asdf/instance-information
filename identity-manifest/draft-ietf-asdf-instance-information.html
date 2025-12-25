@@ -1251,23 +1251,16 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-formal-syntax-of-instance-r" class="internal xref">Formal Syntax of Instance-related Messages</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-roads-not-taken" class="internal xref">Roads Not Taken</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-using-sdf-models-as-proofsh" class="internal xref">Using SDF Models as Proofshots</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1.2.1">
-                    <p id="section-toc.1-1.13.2.1.2.1.1"><a href="#appendix-C.1.1" class="auto internal xref">C.1.1</a>.  <a href="#name-alternative-instance-keys" class="internal xref">Alternative Instance Keys</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-list-of-figures" class="internal xref">List of Figures</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-list-of-tables" class="internal xref">List of Tables</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -2557,224 +2550,124 @@ rfc3339z = '
 </div>
 </section>
 </div>
-<div id="roads-not-taken">
+<div id="list-of-figures">
 <section id="appendix-C">
-      <h2 id="name-roads-not-taken">
-<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-roads-not-taken" class="section-name selfRef">Roads Not Taken</a>
+      <h2 id="name-list-of-figures">
+<a href="#name-list-of-figures" class="section-name selfRef">List of Figures</a>
       </h2>
-<p id="appendix-C-1">This appendix documents previous modelling approaches that we eventually
-decided against pursuing further.
-Its main purpose is to illustrate our development process, showing
-which kind of alternatives we considered before choosing a particular way
-to describe instance information.
-We will remove this appendix as soon as this document is about to be finished.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<div id="using-sdf-models-as-proofshots">
-<section id="appendix-C.1">
-        <h3 id="name-using-sdf-models-as-proofsh">
-<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-using-sdf-models-as-proofsh" class="section-name selfRef">Using SDF Models as Proofshots</a>
-        </h3>
-<p id="appendix-C.1-1">As shown in <a href="#code-instance-syntactic-sugar-illustration" class="auto internal xref">Figure 11</a>,
-the proofshot format could have also been modeled via SDF models where
-all <code>sdfProperty</code> definitions are given <code>const</code>values.
-However, this concept is not capable of capturing actions and events.<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
-<span id="name-sdf-instance-proposal-for-f"></span><div id="code-instance-syntactic-sugar-illustration">
-<figure id="figure-11">
-          <div class="breakable lang-sdf sourcecode" id="appendix-C.1-2.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "An example model of the heater #1 in the boat #007 (\
-                                        that resembles a proofshot)",
-    "version": "2025-07-15",
-    "copyright": "Copyright 2025. All rights reserved."
-  },
-  "namespace": {
-    "models": "https://example.com/models"
-  },
-  "defaultNamespace": "models",
-  "sdfThing": {
-    "boat007": {
-      "label": "Digital Twin of Boat #007",
-      "description": "A ship equipped with heating and navigation \
-                                                            systems",
-      "sdfContext": {
-        "scimObjectId": {
-          "type": "string"
-        },
-        "identifier": {
-          "type": "string",
-          "const": "urn:boat:007:heater:1"
-        },
-        "location": {
-          "type": "object",
-          "const": {
-            "wgs84": {
-              "latitude": 35.2988233791372,
-              "longitude": 129.25478376484912,
-              "altitude": 0.0
-            },
-            "postal": {
-              "city": "Ulsan",
-              "post-code": "44110",
-              "country": "South Korea"
-            },
-            "w3w": {
-              "what3words": "toggle.mopped.garages"
-            }
-          }
-        },
-        "owner": {
-          "type": "string",
-          "default": "ExamTech Ltd.",
-          "const": "ExamTech Ltd."
-        }
-      },
-      "sdfRequired": "#/sdfThing/boat007/sdfObject/heater1",
-      "sdfObject": {
-        "heater": {
-          "label": "Cabin Heater",
-          "description": "Temperature control system for cabin \
-                                                            heating",
-          "sdfProperty": {
-            "characteristic": {
-              "description": "Technical summary of the heater",
-              "type": "string",
-              "default": "12V electric heater, 800W, automatic \
-                                                             cutoff",
-              "const": "12V electric heater, 800W, automatic cutoff"
-            },
-            "status": {
-              "description": "Current operational status",
-              "type": "string",
-              "enum": [
-                true,
-                false,
-                "error"
-              ],
-              "default": false,
-              "const": false
-            },
-            "report": {
-              "type": "string",
-              "const": "On February 24, 2025, the boat #007's \
-                              heater #1 was on from 9 a.m. to 6 p.m."
-            }
-          },
-          "sdfEvent": {
-            "overheating": {
-              "$comment": "Note that it is unclear how to properly \
-model events or event history with the approach illustrated by this \
-                                                           example.",
-              "maintenanceSchedule": "Next scheduled maintenance \
-                                                               date",
-              "sdfOutputData": {
-                "type": "string",
-                "format": "date-time",
-                "const": "2025-07-15T07:27:15+0000"
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
-<a href="#name-sdf-instance-proposal-for-f" class="selfRef">SDF instance proposal for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
-          </figcaption></figure>
-</div>
-<div id="alternative-instance-keys">
-<section id="appendix-C.1.1">
-          <h4 id="name-alternative-instance-keys">
-<a href="#appendix-C.1.1" class="section-number selfRef">C.1.1. </a><a href="#name-alternative-instance-keys" class="section-name selfRef">Alternative Instance Keys</a>
-          </h4>
-<p id="appendix-C.1.1-1">Below you can see an alternative instance modelling approach with IDs as (part of the) instance keys.<a href="#appendix-C.1.1-1" class="pilcrow">¶</a></p>
-<span id="name-sdf-instance-proposal-with-"></span><div id="code-off-device-instance-alternative">
-<figure id="figure-12">
-            <div class="breakable lang-sdf sourcecode" id="appendix-C.1.1-2.1">
-<pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "info": {
-    "title": "A proofshot example for heater #1 on boat #007",
-    "version": "2025-07-15",
-    "copyright": "Copyright 2025. All rights reserved.",
-    "proofshotId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b"
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "boats": "https://example.com/boats"
-  },
-  "defaultNamespace": "boats",
-  "sdfInstance": {
-    "models:#/sdfThing/boat/007": {
-      "sdfInstanceOf": "models:#/sdfThing/boat",
-      "heater": "models:#/sdfThing/boat/sdfObject/heater/001",
-      "scimObjectId": "a2e06d16-df2c-4618-aacd-490985a3f763",
-      "identifier": "urn:boat:007:heater:1",
-      "location": {
-        "wgs84": {
-          "latitude": 35.2988233791372,
-          "longitude": 129.25478376484912,
-          "altitude": 0
-        },
-        "postal": {
-          "city": "Ulsan",
-          "post-code": "44110",
-          "country": "South Korea"
-        },
-        "w3w": {
-          "what3words": "toggle.mopped.garages"
-        }
-      },
-      "owner": "ExamTech Ltd."
-    },
-    "models:#/sdfThing/boat/sdfObject/heater/001": {
-      "characteristic": "12V electric heater, 800W, automatic cutoff\
-                                                                   ",
-      "status": "error",
-      "report": "On February 24, 2025, the boat #007's heater #1 \
-                                       was on from 9 a.m. to 6 p.m.",
-      "sdfEvent": {
-        "maintenanceSchedule": [
-          {
-            "outputValue": "2025-04-10",
-            "timestamp": "2024-04-10T02:00:00Z"
-          },
-          {
-            "outputValue": "2026-04-10",
-            "timestamp": "2025-04-10T02:00:00Z"
-          }
-        ]
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
-<a href="#name-sdf-instance-proposal-with-" class="selfRef">SDF instance proposal (with IDs as part of the instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]</a>
-            </figcaption></figure>
-</div>
+<span class="break"></span><dl class="dlCompact dlParallel" id="appendix-C-1">
+        <dt id="appendix-C-1.1">
+<a href="#code-off-device-instance" class="auto internal xref">Figure 1</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.2">
+          <p id="appendix-C-1.2.1"><a href="#code-off-device-instance" class="internal xref">SDF proofshot example.</a><a href="#appendix-C-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.3">
+<a href="#example-context" class="auto internal xref">Figure 2</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.4">
+          <p id="appendix-C-1.4.1"><a href="#example-context" class="internal xref">Example of an SDF context snapshot.</a><a href="#appendix-C-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.5">
+<a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.6">
+          <p id="appendix-C-1.6.1"><a href="#code-sdf-construction-message" class="internal xref">Example for an SDF construction message</a><a href="#appendix-C-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.7">
+<a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 4</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.8">
+          <p id="appendix-C-1.8.1"><a href="#code-sdf-identity-manifest" class="internal xref">Example of an SDF identity manifest</a><a href="#appendix-C-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.9">
+<a href="#code-sdf-delta-message" class="auto internal xref">Figure 5</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.10">
+          <p id="appendix-C-1.10.1"><a href="#code-sdf-delta-message" class="internal xref">Example of an SDF instance-related message that serves as a delta.</a><a href="#appendix-C-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.11">
+<a href="#code-sdf-context-patch" class="auto internal xref">Figure 6</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.12">
+          <p id="appendix-C-1.12.1"><a href="#code-sdf-context-patch" class="internal xref">Example of an SDF context patch message that uses the common instance-related message format.</a><a href="#appendix-C-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.13">
+<a href="#code-sdf-protocol-map-plus-context" class="auto internal xref">Figure 7</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.14">
+          <p id="appendix-C-1.14.1"><a href="#code-sdf-protocol-map-plus-context" class="internal xref">Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address.</a><a href="#appendix-C-1.14.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.15">
+<a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 8</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.16">
+          <p id="appendix-C-1.16.1"><a href="#code-sdf-ipaddress-context" class="internal xref">Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a><a href="#appendix-C-1.16.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.17">
+<a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 9</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.18">
+          <p id="appendix-C-1.18.1"><a href="#code-sdf-construction-sdf-context" class="internal xref">Example for SDF model with constructors</a><a href="#appendix-C-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-C-1.19">
+<a href="#code-off-device-model" class="auto internal xref">Figure 10</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-C-1.20">
+          <p id="appendix-C-1.20.1"><a href="#code-off-device-model" class="internal xref">SDF Model that serves as a reference point for the instance-related messages in this draft</a><a href="#appendix-C-1.20.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
-</section>
-</div>
+<div id="list-of-tables">
+<section id="appendix-D">
+      <h2 id="name-list-of-tables">
+<a href="#name-list-of-tables" class="section-name selfRef">List of Tables</a>
+      </h2>
+<span class="break"></span><dl class="dlCompact dlParallel" id="appendix-D-1">
+        <dt id="appendix-D-1.1">
+<a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-D-1.2">
+          <p id="appendix-D-1.2.1"><a href="#instance-message-dimensions" class="internal xref">Systematization of instance-related messages along the dimensions "Content" and "(Intended) Effect".</a><a href="#appendix-D-1.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-1.3">
+<a href="#infoblockqual" class="auto internal xref">Table 2</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-D-1.4">
+          <p id="appendix-D-1.4.1"><a href="#infoblockqual" class="internal xref">Qualities of the Information Block</a><a href="#appendix-D-1.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-1.5">
+<a href="#nssec" class="auto internal xref">Table 3</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-D-1.6">
+          <p id="appendix-D-1.6.1"><a href="#nssec" class="internal xref">Namespaces Block</a><a href="#appendix-D-1.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-1.7">
+<a href="#iobsec" class="auto internal xref">Table 4</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-D-1.8">
+          <p id="appendix-D-1.8.1"><a href="#iobsec" class="internal xref">Instance-of Block</a><a href="#appendix-D-1.8.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-1.9">
+<a href="#ibsec" class="auto internal xref">Table 5</a>:</dt>
+        <dd style="margin-left: 5.5em" id="appendix-D-1.10">
+          <p id="appendix-D-1.10.1"><a href="#ibsec" class="internal xref">Instance Block</a><a href="#appendix-D-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-D">
+<section id="appendix-E">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-D-1">(TODO)<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-E-1">(TODO)<a href="#appendix-E-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-E">
+<section id="appendix-F">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
