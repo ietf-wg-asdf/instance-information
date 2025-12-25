@@ -14,12 +14,12 @@ else
 endif
 endif
 
-sourcecode: draft-bormann-asdf-instance-information.xml
+sourcecode: draft-ietf-asdf-instance-information.xml
 	kramdown-rfc-extract-sourcecode -tfiles $^
 
 sdfcheck: sourcecode
 	for file in sourcecode/sdf/*.sdf; do echo $$file; cddl sdf-feature.cddl vp $$file; done
 
-lists.md: draft-bormann-asdf-instance-information.xml
+lists.md: draft-ietf-asdf-instance-information.xml
 	kramdown-rfc-extract-figures-tables -trfc $< >$@.new
 	if cmp $@.new $@; then rm -v $@.new; else mv -v $@.new $@; fi
