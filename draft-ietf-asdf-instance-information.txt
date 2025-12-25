@@ -111,6 +111,8 @@ Table of Contents
    Appendix C.  Roads Not Taken
      C.1.  Using SDF Models as Proofshots
        C.1.1.  Alternative Instance Keys
+   List of Figures
+   List of Tables
    Acknowledgments
    Authors' Addresses
 
@@ -1612,6 +1614,39 @@ C.1.1.  Alternative Instance Keys
 
          Figure 12: SDF instance proposal (with IDs as part of the
        instance keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]
+
+List of Figures
+
+   Figure 1:  Example of an SDF context snapshot.
+   Figure 2:  SDF proofshot example.
+   Figure 3:  Example for an SDF construction message
+   Figure 4:  Example of an SDF instance-related message that serves as
+              a delta.
+   Figure 5:  Example of an SDF context patch message that uses the
+              common instance-related message format.
+   Figure 6:  Example for an SDF construction message
+   Figure 7:  Example of an SDF model where a CoAP-based protocol map
+              points to the definition of relevant context information:
+              an IP address.
+   Figure 8:  Example of a status report message that provides the IP
+              address needed to perform a CoAP-based interaction with
+              the sensor from the previous figure.
+   Figure 9:  Example for SDF model with constructors
+   Figure 10:  SDF Model that serves as a reference point for the
+              instance-related messages in this draft
+   Figure 11:  SDF instance proposal for Figure 2 in
+              [I-D.lee-asdf-digital-twin-09]
+   Figure 12:  SDF instance proposal (with IDs as part of the instance
+              keys) for Figure 2 in [I-D.lee-asdf-digital-twin-09]
+
+List of Tables
+
+   Table 1:   Systematization of instance-related messages along the
+              dimensions "Content" and "(Intended) Effect".
+   Table 2:   Qualities of the Information Block
+   Table 3:   Namespaces Block
+   Table 4:   Instance-of Block
+   Table 5:   Instance Block
 
 Acknowledgments
 
