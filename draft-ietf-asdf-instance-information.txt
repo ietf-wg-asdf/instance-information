@@ -5,8 +5,8 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 26 June 2026                                 Universität Bremen
-                                                        23 December 2025
+Expires: 28 June 2026                                 Universität Bremen
+                                                        25 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 June 2026.
+   This Internet-Draft will expire on 28 June 2026.
 
 Copyright Notice
 
