@@ -436,89 +436,8 @@ Furthermore, when transmitting this message in its JSON format, the content type
 Snapshot messages MAY only contain values for a *subset* of all possible affordances and context information exposed by a Thing.
 Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
 
-## Construction Messages
 
-Construction messages are structurally equivalent to state reports but may only contain context information.
-Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
-Construction messages MUST be indicated by the media type `application/sfd-construction+json` if possible.
 
-## Delta Messages
-
-Delta messages describe updates to a Thing's state relative to a previous message.
-For this purpose, a `previousMessageId` MUST be present in the info block.
-When transmitting delta messages, the media type `application/sdf-delta+json` MUST be used if possible.
-
-By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
-Via the `patchMethod` quality, different patch algorithms MAY be indicated.
-
-## Patch Messages
-
-Patch messages are structurally equivalent to delta messages, but once again are only allowed to contain context information.
-They utilize a patch *mechanism* (which may be explicitly indicated via the `patchMethod` quality) to alter the *state* of a Thing instead of reporting state *changes*.
-
-Since they are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
-When transmitting state patches, the media type `application/sdf-patch+json` MUST be used if possible.
-
-# Use Cases and Examples
-
-<!-- TODO: Move the content from this section into the subsections above. -->
-
-The four archetypes can be further subdivided into (at least) six kinds of messages that all deal with different use cases.
-While the archetypes each have their own media type that can be used to identity them during a message exchange, the six concete messages in this section are may only be identified by their content.
-
-State Reports can be used as
-
-- *Context snapshots* that only report context information about a Thing or
-- *Proofshots* that report a Thing's (partial) state, which may include context information.
-
-In the case of status report updates, we have *Deltas* that indicate state changes compared to a previous context snapshot or proofshot message.
-
-State patches can appear as *Patch messages* that indicate state changes that should be *applied* to a Thing.
-
-Despite their different purpose, both Status Report Updates and State Patches
-will apply some kind of patch algorithm.
-JSON Merge Patch {{-merge-patch}} is probably a strong contender for the default
-algorithm that will be used a little bit differently depending on the message
-type (the context patch will be applied "internally" by the device, while
-the delta message will be processed together with its predecessor by a
-consumer). As there might be cases where the Merge Patch algorithm is not
-sufficient, different algorithms (that can be IANA registered) are going to be
-settable via the `patchMethod` field within the `sdfInstanceOf` quality.
-
-Finally, we have *Construction Messages* and *Identity Manifests* that initiate a Thing's (re)configuration or its comissioning, the latter of which perform an initialization primarily with identity information such as the Thing's manufacturer or its device identifier.
-
-In the remainder of this section, we will discuss the differences between the different archetype manifestations.
-
-## Context Snapshots
-
-Context snapshots are state reports that only include context information via the `sdfContext` keyword.
-
-{{example-context}} gives an example for this kind of instance-related message by showing a status report message that only contains context information.
-
-~~~ sdf
-info:
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensors
-defaultNamespace: models
-sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
-sdfInstance:
-  sdfContext:
-    timestamp: '2025-07-01T12:00:00Z'
-    thingId: envSensor:abc123
-    installationInfo:
-      floor: 3
-      mountType: ceiling
-      indoorOutdoor: indoor
-~~~
-{:sdf #example-context
-title="Example of an SDF context snapshot."}
-
-This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
-
-## Proofshots
 
 (See defn above.)
 
@@ -559,7 +478,42 @@ sdfInstance:
 {:sdf #code-off-device-instance post="fold"
 title="SDF proofshot example."}
 
+
+Context snapshots are state reports that only include context information via the `sdfContext` keyword.
+
+{{example-context}} gives an example for this kind of instance-related message by showing a status report message that only contains context information.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensors
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+sdfInstance:
+  sdfContext:
+    timestamp: '2025-07-01T12:00:00Z'
+    thingId: envSensor:abc123
+    installationInfo:
+      floor: 3
+      mountType: ceiling
+      indoorOutdoor: indoor
+~~~
+{:sdf #example-context
+title="Example of an SDF context snapshot."}
+
+This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
+
 ## Construction Messages
+
+Construction messages are structurally equivalent to state reports but may only contain context information.
+Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
+Construction messages MUST be indicated by the media type `application/sfd-construction+json` if possible.
+
+
+
 
 Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
 Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.
@@ -604,8 +558,6 @@ sdfInstance:
 {:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
 
-## Identity Manifest
-
 Identity manifests also belong to the construction message archetype.
 They are special construction messages that only initialize identity-related information related to a Thing.
 
@@ -633,6 +585,13 @@ sdfInstance:
 title="Example of an SDF identity manifest"}
 
 ## Delta Messages
+
+Delta messages describe updates to a Thing's state relative to a previous message.
+For this purpose, a `previousMessageId` MUST be present in the info block.
+When transmitting delta messages, the media type `application/sdf-delta+json` MUST be used if possible.
+
+By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
+Via the `patchMethod` quality, different patch algorithms MAY be indicated.
 
 TODO: Reword
 
@@ -671,6 +630,9 @@ title="Example of an SDF instance-related message that serves as a delta."}
 
 ## Patch Messages
 
+Patch messages are structurally equivalent to delta messages, but once again are only allowed to contain context information.
+They utilize a patch *mechanism* (which may be explicitly indicated via the `patchMethod` quality) to alter the *state* of a Thing instead of reporting state *changes*.
+
 Yet another purpose for instance-related messages is the application of updates
 to a device's configuration via a so-called patch message.
 Such a message is shown in {{code-sdf-context-patch}}, where a change of the
@@ -696,9 +658,14 @@ sdfInstance:
 {:sdf #code-sdf-context-patch
 title="Example of an SDF context patch message that uses the common instance-related message format."}
 
+
+Since patch messages are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
+When transmitting state patches, the media type `application/sdf-patch+json` MUST be used if possible.
+
 # Linking `sdfProtocolMap` and `sdfContext` via JSON Pointers
 
 (This section is currently still experimental.)
+(Maybe this section could rather talk about a "protocol binding mechanism".)
 
 When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
 This corresponds with the fact that the parameters related to application-layer protocols are often _class-level_ information and therefore not necessarily instance-specific:
