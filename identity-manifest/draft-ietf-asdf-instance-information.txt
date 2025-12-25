@@ -5,8 +5,8 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 27 June 2026                                 Universität Bremen
-                                                        24 December 2025
+Expires: 28 June 2026                                 Universität Bremen
+                                                        25 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 June 2026.
+   This Internet-Draft will expire on 28 June 2026.
 
 Copyright Notice
 
@@ -91,21 +91,14 @@ Table of Contents
      4.2.  Construction Messages
      4.3.  Delta Messages
      4.4.  Patch Messages
-   5.  Use Cases and Examples
-     5.1.  Context Snapshots
-     5.2.  Proofshots
-     5.3.  Construction Messages
-     5.4.  Identity Manifest
-     5.5.  Delta Messages
-     5.6.  Patch Messages
-   6.  Linking sdfProtocolMap and sdfContext via JSON Pointers
-   7.  Modelling Construction Parameters via SDF Models
-   8.  Discussion
-   9.  Security Considerations
-   10. IANA Considerations
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   5.  Linking sdfProtocolMap and sdfContext via JSON Pointers
+   6.  Modelling Construction Parameters via SDF Models
+   7.  Discussion
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  Example SDF Model
    Appendix B.  Formal Syntax of Instance-related Messages
    Appendix C.  Roads Not Taken
@@ -567,126 +560,6 @@ Table of Contents
    authorization, MUST be taken into account when issueing a state
    report for a requesting party.
 
-4.2.  Construction Messages
-
-   Construction messages are structurally equivalent to state reports
-   but may only contain context information.  Furthermore, the recipient
-   of a construction message is supposed to initiate a configuration or
-   comissioning process upon recption.  Construction messages MUST be
-   indicated by the media type application/sfd-construction+json if
-   possible.
-
-4.3.  Delta Messages
-
-   Delta messages describe updates to a Thing's state relative to a
-   previous message.  For this purpose, a previousMessageId MUST be
-   present in the info block.  When transmitting delta messages, the
-   media type application/sdf-delta+json MUST be used if possible.
-
-   By default, the values contained in the message are applied to the
-   preceding message(s) via the JSON Merge Patch algorithm.  Via the
-   patchMethod quality, different patch algorithms MAY be indicated.
-
-4.4.  Patch Messages
-
-   Patch messages are structurally equivalent to delta messages, but
-   once again are only allowed to contain context information.  They
-   utilize a patch _mechanism_ (which may be explicitly indicated via
-   the patchMethod quality) to alter the _state_ of a Thing instead of
-   reporting state _changes_.
-
-   Since they are not referring to a preceding message, a
-   previosMessageId MUST NOT be present in the information block.  When
-   transmitting state patches, the media type application/sdf-patch+json
-   MUST be used if possible.
-
-5.  Use Cases and Examples
-
-   The four archetypes can be further subdivided into (at least) six
-   kinds of messages that all deal with different use cases.  While the
-   archetypes each have their own media type that can be used to
-   identity them during a message exchange, the six concete messages in
-   this section are may only be identified by their content.
-
-   State Reports can be used as
-
-   *  _Context snapshots_ that only report context information about a
-      Thing or
-
-   *  _Proofshots_ that report a Thing's (partial) state, which may
-      include context information.
-
-   In the case of status report updates, we have _Deltas_ that indicate
-   state changes compared to a previous context snapshot or proofshot
-   message.
-
-   State patches can appear as _Patch messages_ that indicate state
-   changes that should be _applied_ to a Thing.
-
-   Despite their different purpose, both Status Report Updates and State
-   Patches will apply some kind of patch algorithm.  JSON Merge Patch
-   [RFC7396] is probably a strong contender for the default algorithm
-   that will be used a little bit differently depending on the message
-   type (the context patch will be applied "internally" by the device,
-   while the delta message will be processed together with its
-   predecessor by a consumer).  As there might be cases where the Merge
-   Patch algorithm is not sufficient, different algorithms (that can be
-   IANA registered) are going to be settable via the patchMethod field
-   within the sdfInstanceOf quality.
-
-   Finally, we have _Construction Messages_ and _Identity Manifests_
-   that initiate a Thing's (re)configuration or its comissioning, the
-   latter of which perform an initialization primarily with identity
-   information such as the Thing's manufacturer or its device
-   identifier.
-
-   In the remainder of this section, we will discuss the differences
-   between the different archetype manifestations.
-
-5.1.  Context Snapshots
-
-   Context snapshots are state reports that only include context
-   information via the sdfContext keyword.
-
-   Figure 1 gives an example for this kind of instance-related message
-   by showing a status report message that only contains context
-   information.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensors"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "sdfContext": {
-         "timestamp": "2025-07-01T12:00:00Z",
-         "thingId": "envSensor:abc123",
-         "installationInfo": {
-           "floor": 3,
-           "mountType": "ceiling",
-           "indoorOutdoor": "indoor"
-         }
-       }
-     }
-   }
-
-               Figure 1: Example of an SDF context snapshot.
-
-   This kind of message may become especially relevant later in
-   conjunction with the sdfProtocolMap introduced in
-   [I-D.ietf-asdf-sdf-protocol-mapping] for complementing protocol-
-   specific information at the model-level with instance-related context
-   information such as IP addresses.
-
-5.2.  Proofshots
-
    (See defn above.)
 
    Proofshots are similar to context snapshots, with the important
@@ -700,7 +573,7 @@ Table of Contents
    model the state of sdfActions and sdfEvents.
 
    The following examples are based on [I-D.ietf-asdf-sdf-nonaffordance]
-   and [I-D.lee-asdf-digital-twin-09].  Figure 2 shows a proofshot that
+   and [I-D.lee-asdf-digital-twin-09].  Figure 1 shows a proofshot that
    captures the state of a sensor.  Here, every property and context
    definition of the corresponding SDF model (see Figure 10) is mapped
    to a concrete value that satisfies the associated schema.
@@ -731,9 +604,56 @@ Table of Contents
      }
    }
 
-                      Figure 2: SDF proofshot example.
+                      Figure 1: SDF proofshot example.
 
-5.3.  Construction Messages
+   Context snapshots are state reports that only include context
+   information via the sdfContext keyword.
+
+   Figure 2 gives an example for this kind of instance-related message
+   by showing a status report message that only contains context
+   information.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensors"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "sdfContext": {
+         "timestamp": "2025-07-01T12:00:00Z",
+         "thingId": "envSensor:abc123",
+         "installationInfo": {
+           "floor": 3,
+           "mountType": "ceiling",
+           "indoorOutdoor": "indoor"
+         }
+       }
+     }
+   }
+
+               Figure 2: Example of an SDF context snapshot.
+
+   This kind of message may become especially relevant later in
+   conjunction with the sdfProtocolMap introduced in
+   [I-D.ietf-asdf-sdf-protocol-mapping] for complementing protocol-
+   specific information at the model-level with instance-related context
+   information such as IP addresses.
+
+4.2.  Construction Messages
+
+   Construction messages are structurally equivalent to state reports
+   but may only contain context information.  Furthermore, the recipient
+   of a construction message is supposed to initiate a configuration or
+   comissioning process upon recption.  Construction messages MUST be
+   indicated by the media type application/sfd-construction+json if
+   possible.
 
    Construction messages enable the creation of the digital instance,
    e.g., initialization/commissioning of a device or creation of its
@@ -791,8 +711,6 @@ Table of Contents
 
              Figure 3: Example for an SDF construction message
 
-5.4.  Identity Manifest
-
    Identity manifests also belong to the construction message archetype.
    They are special construction messages that only initialize identity-
    related information related to a Thing.
@@ -829,7 +747,16 @@ Table of Contents
 
                Figure 4: Example of an SDF identity manifest
 
-5.5.  Delta Messages
+4.3.  Delta Messages
+
+   Delta messages describe updates to a Thing's state relative to a
+   previous message.  For this purpose, a previousMessageId MUST be
+   present in the info block.  When transmitting delta messages, the
+   media type application/sdf-delta+json MUST be used if possible.
+
+   By default, the values contained in the message are applied to the
+   preceding message(s) via the JSON Merge Patch algorithm.  Via the
+   patchMethod quality, different patch algorithms MAY be indicated.
 
    TODO: Reword
 
@@ -873,7 +800,13 @@ Table of Contents
       Figure 5: Example of an SDF instance-related message that serves
                                 as a delta.
 
-5.6.  Patch Messages
+4.4.  Patch Messages
+
+   Patch messages are structurally equivalent to delta messages, but
+   once again are only allowed to contain context information.  They
+   utilize a patch _mechanism_ (which may be explicitly indicated via
+   the patchMethod quality) to alter the _state_ of a Thing instead of
+   reporting state _changes_.
 
    Yet another purpose for instance-related messages is the application
    of updates to a device's configuration via a so-called patch message.
@@ -908,9 +841,15 @@ Table of Contents
       Figure 6: Example of an SDF context patch message that uses the
                   common instance-related message format.
 
-6.  Linking sdfProtocolMap and sdfContext via JSON Pointers
+   Since patch messages are not referring to a preceding message, a
+   previosMessageId MUST NOT be present in the information block.  When
+   transmitting state patches, the media type application/sdf-patch+json
+   MUST be used if possible.
 
-   (This section is currently still experimental.)
+5.  Linking sdfProtocolMap and sdfContext via JSON Pointers
+
+   (This section is currently still experimental.)  (Maybe this section
+   could rather talk about a "protocol binding mechanism".)
 
    When using the sdfProtocolMap concept introduced in
    [I-D.ietf-asdf-sdf-protocol-mapping], some protocols may need context
@@ -1006,7 +945,7 @@ Table of Contents
    however, is promising as it follows the principle of cleanly
    separating class from instance-related information.
 
-7.  Modelling Construction Parameters via SDF Models
+6.  Modelling Construction Parameters via SDF Models
 
    As the examples on Construction and State Patch Messages already
    implied, we can model a Thing's configurable parameters via
@@ -1046,11 +985,11 @@ Table of Contents
 
              Figure 9: Example for SDF model with constructors
 
-8.  Discussion
+7.  Discussion
 
    (TODO)
 
-9.  Security Considerations
+8.  Security Considerations
 
    *  Pieces of instance-related information might only be available in
       certain scopes, e.g. certain security-related configuration
@@ -1058,13 +997,13 @@ Table of Contents
 
    (TODO)
 
-10.  IANA Considerations
+9.  IANA Considerations
 
    TODO: Add media type registrations
 
-11.  References
+10.  References
 
-11.1.  Normative References
+10.1.  Normative References
 
    [BCP14]    Best Current Practice 14,
               <https://www.rfc-editor.org/info/bcp14>.
@@ -1108,7 +1047,7 @@ Table of Contents
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/info/rfc9110>.
 
-11.2.  Informative References
+10.2.  Informative References
 
    [I-D.amsuess-t2trg-raytime]
               Amsüss, C., "Raytime: Validating token expiry on an
