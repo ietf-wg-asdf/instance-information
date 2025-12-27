@@ -436,12 +436,34 @@ Furthermore, when transmitting this message in its JSON format, the content type
 Snapshot messages MAY only contain values for a *subset* of all possible affordances and context information exposed by a Thing.
 Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
 
+In practical use, we can at least differentiate two use cases for snapshot messages.
+First, we have *context* snapshots, which only contain context information related to a Thing (indicated via the `sdfContext` quality).
+{{example-context}} gives an example for this kind of instance-related message.
 
+This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
 
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensors
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/envSensor
+sdfInstance:
+  sdfContext:
+    timestamp: '2025-07-01T12:00:00Z'
+    thingId: envSensor:abc123
+    installationInfo:
+      floor: 3
+      mountType: ceiling
+      indoorOutdoor: indoor
+~~~
+{:sdf #example-context
+title="Example of an SDF context snapshot."}
 
-(See defn above.)
-
-Proofshots are similar to context snapshots, with the important difference that
+Second, we have proofshot messages which are similar to context snapshots, with the important difference that
 they are not only reporting context information about a Thing but
 also state information associated with its interaction affordances (properties,
 actions, and events).
@@ -477,34 +499,6 @@ sdfInstance:
 ~~~
 {:sdf #code-off-device-instance post="fold"
 title="SDF proofshot example."}
-
-
-Context snapshots are state reports that only include context information via the `sdfContext` keyword.
-
-{{example-context}} gives an example for this kind of instance-related message by showing a status report message that only contains context information.
-
-~~~ sdf
-info:
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensors
-defaultNamespace: models
-sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
-sdfInstance:
-  sdfContext:
-    timestamp: '2025-07-01T12:00:00Z'
-    thingId: envSensor:abc123
-    installationInfo:
-      floor: 3
-      mountType: ceiling
-      indoorOutdoor: indoor
-~~~
-{:sdf #example-context
-title="Example of an SDF context snapshot."}
-
-This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
 
 ## Construction Messages
 
