@@ -356,7 +356,7 @@ The data model of instance-related messages makes use of the structural features
 ## Information Block
 
 The information block contains the same qualities as an SDF model and, additionally, a mandatory `messageId` to uniquely identify the message.
-Furthermore, "status report update" messages can utilize the `previousMessageId` in order to link two messages and indicate the state change.
+Furthermore, Delta messages can utilize the `previousMessageId` in order to link two messages and indicate the state change.
 
 | Quality            | Type             | Description                                                        |
 |--------------------|------------------|--------------------------------------------------------------------|
@@ -516,7 +516,7 @@ A construction message for a temperature sensor might assign an
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device) which can be described via instance-related messages such as a status report.
+device) which can be described via instance-related messages such as a snapshot message.
 
 The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
 In practice, these constructors are going to be modeled as an `sdfAction`,
@@ -695,7 +695,7 @@ sdfObject:
 {:sdf #code-sdf-protocol-map-plus-context
 title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
 
-{{code-sdf-ipaddress-context}} shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
+{{code-sdf-ipaddress-context}} shows how a snapshot message can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
 
 ~~~ sdf
 info:
@@ -711,7 +711,7 @@ sdfInstance:
     ipAddress: 192.168.1.5
 ~~~
 {:sdf #code-sdf-ipaddress-context
-title="Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
+title="Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
 
 This approach can become very verbose in a nested model and may need refinement in future draft revisions.
 The general principle, however, is promising as it follows the principle of cleanly separating class from instance-related information.
