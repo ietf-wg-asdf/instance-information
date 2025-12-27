@@ -5,8 +5,8 @@
 A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 28 June 2026                                 Universität Bremen
-                                                        25 December 2025
+Expires: 30 June 2026                                 Universität Bremen
+                                                        27 December 2025
 
 
                       Instance Information for SDF
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 June 2026.
+   This Internet-Draft will expire on 30 June 2026.
 
 Copyright Notice
 
@@ -377,12 +377,6 @@ Table of Contents
    TODO: explain how [RFC9039] could be used to obtain device names
    (using urn:dev:org in the example).
 
-3.  Message Format
-
-   The data model of instance-related messages makes use of the
-   structural features of SDF models (e.g., when it comes to metadata
-   and namespace information), but is also different in crucial aspects.
-
    TODO: Decide where we want to keep this:
 
    One interesting piece of offDevice information is the model itself,
@@ -392,12 +386,18 @@ Table of Contents
    Multiple models may apply to the same device (including but not only
    revisions of the same models).
 
+3.  Message Format
+
+   The data model of instance-related messages makes use of the
+   structural features of SDF models (e.g., when it comes to metadata
+   and namespace information), but is also different in crucial aspects.
+
 3.1.  Information Block
 
    The information block contains the same qualities as an SDF model
    and, additionally, a mandatory messageId to uniquely identify the
-   message.  Furthermore, "status report update" messages can utilize
-   the previousMessageId in order to link two messages and indicate the
+   message.  Furthermore, Delta messages can utilize the
+   previousMessageId in order to link two messages and indicate the
    state change.
 
      +===================+=========+=================================+
@@ -559,12 +559,50 @@ Table of Contents
    authorization, MUST be taken into account when issueing a state
    report for a requesting party.
 
-   (See defn above.)
+   In practical use, we can at least differentiate two use cases for
+   snapshot messages.  First, we have _context_ snapshots, which only
+   contain context information related to a Thing (indicated via the
+   sdfContext quality).  Figure 1 gives an example for this kind of
+   instance-related message.
 
-   Proofshots are similar to context snapshots, with the important
-   difference that they are not only reporting context information about
-   a Thing but also state information associated with its interaction
-   affordances (properties, actions, and events).
+   This kind of message may become especially relevant later in
+   conjunction with the sdfProtocolMap introduced in
+   [I-D.ietf-asdf-sdf-protocol-mapping] for complementing protocol-
+   specific information at the model-level with instance-related context
+   information such as IP addresses.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensors"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "sdfContext": {
+         "timestamp": "2025-07-01T12:00:00Z",
+         "thingId": "envSensor:abc123",
+         "installationInfo": {
+           "floor": 3,
+           "mountType": "ceiling",
+           "indoorOutdoor": "indoor"
+         }
+       }
+     }
+   }
+
+               Figure 1: Example of an SDF context snapshot.
+
+   Second, we have proofshot messages which are similar to context
+   snapshots, with the important difference that they are not only
+   reporting context information about a Thing but also state
+   information associated with its interaction affordances (properties,
+   actions, and events).
 
    TODO: Note that while the format for describing the state of
    properties is clearly governed by the schema information from the
@@ -572,7 +610,7 @@ Table of Contents
    model the state of sdfActions and sdfEvents.
 
    The following examples are based on [I-D.ietf-asdf-sdf-nonaffordance]
-   and [I-D.lee-asdf-digital-twin-09].  Figure 1 shows a proofshot that
+   and [I-D.lee-asdf-digital-twin-09].  Figure 2 shows a proofshot that
    captures the state of a sensor.  Here, every property and context
    definition of the corresponding SDF model (see Figure 10) is mapped
    to a concrete value that satisfies the associated schema.
@@ -603,47 +641,7 @@ Table of Contents
      }
    }
 
-                      Figure 1: SDF proofshot example.
-
-   Context snapshots are state reports that only include context
-   information via the sdfContext keyword.
-
-   Figure 2 gives an example for this kind of instance-related message
-   by showing a status report message that only contains context
-   information.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensors"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "sdfContext": {
-         "timestamp": "2025-07-01T12:00:00Z",
-         "thingId": "envSensor:abc123",
-         "installationInfo": {
-           "floor": 3,
-           "mountType": "ceiling",
-           "indoorOutdoor": "indoor"
-         }
-       }
-     }
-   }
-
-               Figure 2: Example of an SDF context snapshot.
-
-   This kind of message may become especially relevant later in
-   conjunction with the sdfProtocolMap introduced in
-   [I-D.ietf-asdf-sdf-protocol-mapping] for complementing protocol-
-   specific information at the model-level with instance-related context
-   information such as IP addresses.
+                      Figure 2: SDF proofshot example.
 
 4.2.  Construction Messages
 
@@ -665,7 +663,7 @@ Table of Contents
    (e.g., an IP address); its processing might also generate
    construction output (e.g., a public key or an IP address if those are
    generated on device) which can be described via instance-related
-   messages such as a status report.
+   messages such as a snapshot message.
 
    The creation of construction messages is linked to the invocation of
    a constructor that starts the actual construction process.  In
@@ -911,9 +909,8 @@ Table of Contents
       points to the definition of relevant context information: an IP
                                   address.
 
-   Figure 8 shows how a status report (in the "old" terminology, the
-   message would be called a context snapshot) can provide the necessary
-   IP address that is needed to actually retrieve the temperature value
+   Figure 8 shows how a snapshot message can provide the necessary IP
+   address that is needed to actually retrieve the temperature value
    from the sensor described by the SDF model above.
 
    {
@@ -935,7 +932,7 @@ Table of Contents
      }
    }
 
-     Figure 8: Example of a status report message that provides the IP
+        Figure 8: Example of a snapshot message that provides the IP
         address needed to perform a CoAP-based interaction with the
                       sensor from the previous figure.
 
@@ -1294,8 +1291,8 @@ Appendix B.  Formal Syntax of Instance-related Messages
 
 List of Figures
 
-   Figure 1:  SDF proofshot example.
-   Figure 2:  Example of an SDF context snapshot.
+   Figure 2:  SDF proofshot example.
+   Figure 1:  Example of an SDF context snapshot.
    Figure 3:  Example for an SDF construction message
    Figure 4:  Example of an SDF identity manifest
    Figure 5:  Example of an SDF instance-related message that serves as
@@ -1305,9 +1302,9 @@ List of Figures
    Figure 7:  Example of an SDF model where a CoAP-based protocol map
               points to the definition of relevant context information:
               an IP address.
-   Figure 8:  Example of a status report message that provides the IP
-              address needed to perform a CoAP-based interaction with
-              the sensor from the previous figure.
+   Figure 8:  Example of a snapshot message that provides the IP address
+              needed to perform a CoAP-based interaction with the sensor
+              from the previous figure.
    Figure 9:  Example for SDF model with constructors
    Figure 10:  SDF Model that serves as a reference point for the
               instance-related messages in this draft

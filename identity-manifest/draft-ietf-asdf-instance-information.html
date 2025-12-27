@@ -1057,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 28 June 2026</td>
+<td class="center">Expires 30 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-25" class="published">25 December 2025</time>
+<time datetime="2025-12-27" class="published">27 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-28">28 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-30">30 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ Models to describe them.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1555,6 +1555,9 @@ Information that enables interactions via application-layer protocols (such as a
 <p id="section-2.2-3">For this purpose, we are using the <code>sdfContext</code> keyword introduced by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.
 Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfProperty</code>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <p id="section-2.2-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">TODO: Decide where we want to keep this:<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2-6">One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
+Multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-2.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1565,16 +1568,13 @@ Note that <code>sdfContext</code> <em>could</em> also be modelled via <code>sdfP
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-message-format" class="section-name selfRef">Message Format</a>
       </h2>
 <p id="section-3-1">The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">TODO: Decide where we want to keep this:<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="information-block">
 <section id="section-3.1">
         <h3 id="name-information-block">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-information-block" class="section-name selfRef">Information Block</a>
         </h3>
 <p id="section-3.1-1">The information block contains the same qualities as an SDF model and, additionally, a mandatory <code>messageId</code> to uniquely identify the message.
-Furthermore, "status report update" messages can utilize the <code>previousMessageId</code> in order to link two messages and indicate the state change.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+Furthermore, Delta messages can utilize the <code>previousMessageId</code> in order to link two messages and indicate the state change.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-qualities-of-the-informatio"></span><div id="infoblockqual">
 <table class="center" id="table-2">
           <caption>
@@ -1802,22 +1802,58 @@ In the message, the <code>previousMessageId</code> field in the information bloc
 Furthermore, when transmitting this message in its JSON format, the content type <code>application/sdf-snapshot+json</code> <span class="bcp14">MUST</span> be indicated if supported by the protocol used for transmission.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">Snapshot messages <span class="bcp14">MAY</span> only contain values for a <em>subset</em> of all possible affordances and context information exposed by a Thing.
 Security-related aspects, e.g. regarding authentication and authorization, <span class="bcp14">MUST</span> be taken into account when issueing a state report for a requesting party.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">(See defn above.)<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">Proofshots are similar to context snapshots, with the important difference that
+<p id="section-4.1-3">In practical use, we can at least differentiate two use cases for snapshot messages.
+First, we have <em>context</em> snapshots, which only contain context information related to a Thing (indicated via the <code>sdfContext</code> quality).
+<a href="#example-context" class="auto internal xref">Figure 1</a> gives an example for this kind of instance-related message.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">This kind of message may become especially relevant later in conjunction with the <code>sdfProtocolMap</code> introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span> for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<span id="name-example-of-an-sdf-context-s"></span><div id="example-context">
+<figure id="figure-1">
+          <div class="lang-sdf sourcecode" id="section-4.1-5.1">
+<pre>{
+  "info": {
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+  },
+  "namespace": {
+    "models": "https://example.com/models",
+    "sensors": "https://example.com/sensors"
+  },
+  "defaultNamespace": "models",
+  "sdfInstanceOf": {
+    "model": "sensors:#/sdfObject/envSensor"
+  },
+  "sdfInstance": {
+    "sdfContext": {
+      "timestamp": "2025-07-01T12:00:00Z",
+      "thingId": "envSensor:abc123",
+      "installationInfo": {
+        "floor": 3,
+        "mountType": "ceiling",
+        "indoorOutdoor": "indoor"
+      }
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-example-of-an-sdf-context-s" class="selfRef">Example of an SDF context snapshot.</a>
+          </figcaption></figure>
+</div>
+<p id="section-4.1-6">Second, we have proofshot messages which are similar to context snapshots, with the important difference that
 they are not only reporting context information about a Thing but
 also state information associated with its interaction affordances (properties,
-actions, and events).<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding <code>sdfProperty</code> definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
-<code>sdfEvent</code>s.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
-<a href="#code-off-device-instance" class="auto internal xref">Figure 1</a> shows a proofshot that captures the state of a
+actions, and events).<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding <code>sdfProperty</code> definition, it is still unclear how to best model the state of <code>sdfAction</code>s and
+<code>sdfEvent</code>s.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-8">The following examples are based on <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>.
+<a href="#code-off-device-instance" class="auto internal xref">Figure 2</a> shows a proofshot that captures the state of a
 sensor.
 Here, every property and context definition of the corresponding SDF model
 (see <a href="#code-off-device-model" class="auto internal xref">Figure 10</a>) is mapped to a concrete value that satisfies
-the associated schema.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+the associated schema.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 <span id="name-sdf-proofshot-example"></span><div id="code-off-device-instance">
-<figure id="figure-1">
-          <div class="lang-sdf sourcecode" id="section-4.1-7.1">
+<figure id="figure-2">
+          <div class="lang-sdf sourcecode" id="section-4.1-9.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -1845,46 +1881,10 @@ the associated schema.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 }
 </pre>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-sdf-proofshot-example" class="selfRef">SDF proofshot example.</a>
           </figcaption></figure>
 </div>
-<p id="section-4.1-8">Context snapshots are state reports that only include context information via the <code>sdfContext</code> keyword.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
-<p id="section-4.1-9"><a href="#example-context" class="auto internal xref">Figure 2</a> gives an example for this kind of instance-related message by showing a status report message that only contains context information.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
-<span id="name-example-of-an-sdf-context-s"></span><div id="example-context">
-<figure id="figure-2">
-          <div class="lang-sdf sourcecode" id="section-4.1-10.1">
-<pre>{
-  "info": {
-    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-  },
-  "namespace": {
-    "models": "https://example.com/models",
-    "sensors": "https://example.com/sensors"
-  },
-  "defaultNamespace": "models",
-  "sdfInstanceOf": {
-    "model": "sensors:#/sdfObject/envSensor"
-  },
-  "sdfInstance": {
-    "sdfContext": {
-      "timestamp": "2025-07-01T12:00:00Z",
-      "thingId": "envSensor:abc123",
-      "installationInfo": {
-        "floor": 3,
-        "mountType": "ceiling",
-        "indoorOutdoor": "indoor"
-      }
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-example-of-an-sdf-context-s" class="selfRef">Example of an SDF context snapshot.</a>
-          </figcaption></figure>
-</div>
-<p id="section-4.1-11">This kind of message may become especially relevant later in conjunction with the <code>sdfProtocolMap</code> introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span> for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="construction-messages">
@@ -1901,7 +1901,7 @@ Construction messages are like proofshots, in that they embody a state, however 
 identity and/or complement it by temporary identity information (e.g.,
 an IP address); its processing might also generate construction output
 (e.g., a public key or an IP address if those are generated on
-device) which can be described via instance-related messages such as a status report.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+device) which can be described via instance-related messages such as a snapshot message.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4">The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
 In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
 although the way the <code>sdfAction</code> is going to be used exactly is not entirely
@@ -2144,8 +2144,8 @@ Via a <code>contextMap</code> (this name is still under discussion), the <code>s
 <a href="#name-example-of-an-sdf-model-whe" class="selfRef">Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address.</a>
         </figcaption></figure>
 </div>
-<p id="section-5-5"><a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 8</a> shows how a status report (in the "old" terminology, the message would be called a context snapshot) can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<span id="name-example-of-a-status-report-"></span><div id="code-sdf-ipaddress-context">
+<p id="section-5-5"><a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 8</a> shows how a snapshot message can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<span id="name-example-of-a-snapshot-messa"></span><div id="code-sdf-ipaddress-context">
 <figure id="figure-8">
         <div class="lang-sdf sourcecode" id="section-5-6.1">
 <pre>{
@@ -2169,7 +2169,7 @@ Via a <code>contextMap</code> (this name is still under discussion), the <code>s
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-example-of-a-status-report-" class="selfRef">Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a>
+<a href="#name-example-of-a-snapshot-messa" class="selfRef">Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a>
         </figcaption></figure>
 </div>
 <p id="section-5-7">This approach can become very verbose in a nested model and may need refinement in future draft revisions.
@@ -2557,13 +2557,13 @@ rfc3339z = '
       </h2>
 <span class="break"></span><dl class="dlCompact dlParallel" id="appendix-C-1">
         <dt id="appendix-C-1.1">
-<a href="#code-off-device-instance" class="auto internal xref">Figure 1</a>:</dt>
+<a href="#code-off-device-instance" class="auto internal xref">Figure 2</a>:</dt>
         <dd style="margin-left: 5.5em" id="appendix-C-1.2">
           <p id="appendix-C-1.2.1"><a href="#code-off-device-instance" class="internal xref">SDF proofshot example.</a><a href="#appendix-C-1.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="appendix-C-1.3">
-<a href="#example-context" class="auto internal xref">Figure 2</a>:</dt>
+<a href="#example-context" class="auto internal xref">Figure 1</a>:</dt>
         <dd style="margin-left: 5.5em" id="appendix-C-1.4">
           <p id="appendix-C-1.4.1"><a href="#example-context" class="internal xref">Example of an SDF context snapshot.</a><a href="#appendix-C-1.4.1" class="pilcrow">¶</a></p>
 </dd>
@@ -2601,7 +2601,7 @@ rfc3339z = '
 <dt id="appendix-C-1.15">
 <a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 8</a>:</dt>
         <dd style="margin-left: 5.5em" id="appendix-C-1.16">
-          <p id="appendix-C-1.16.1"><a href="#code-sdf-ipaddress-context" class="internal xref">Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a><a href="#appendix-C-1.16.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-1.16.1"><a href="#code-sdf-ipaddress-context" class="internal xref">Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a><a href="#appendix-C-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="appendix-C-1.17">
