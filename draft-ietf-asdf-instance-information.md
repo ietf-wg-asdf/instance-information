@@ -344,14 +344,14 @@ Note that `sdfContext` *could* also be modelled via `sdfProperty`.
 
 TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
 
-# Message Format {#message-format}
-
-The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.
-
 TODO: Decide where we want to keep this:
 
 One interesting piece of offDevice information is the model itself, including information block and the default namespace. This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
 Multiple models may apply to the same device (including but not only revisions of the same models).
+
+# Message Format {#message-format}
+
+The data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes to metadata and namespace information), but is also different in crucial aspects.
 
 ## Information Block
 
