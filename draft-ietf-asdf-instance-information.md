@@ -412,10 +412,9 @@ Snapshot messages MAY only contain values for a *subset* of all possible afforda
 Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
 
 In practical use, we can at least differentiate two use cases for snapshot messages.
+
 First, we have *context* snapshots, which only contain context information related to a Thing (indicated via the `sdfContext` quality).
 {{example-context}} gives an example for this kind of instance-related message.
-
-This kind of message may become especially relevant later in conjunction with the `sdfProtocolMap` introduced in {{-protocol-map}} for complementing protocol-specific information at the model-level with instance-related context information such as IP addresses.
 
 ~~~ sdf
 info:
@@ -438,10 +437,7 @@ sdfInstance:
 {:sdf #example-context
 title="Example of an SDF context snapshot."}
 
-Second, we have proofshot messages which are similar to context snapshots, with the important difference that
-they are not only reporting context information about a Thing but
-also state information associated with its interaction affordances (properties,
-actions, and events).
+Second, we have *proofshot* messages which are supersets of context snapshots that may also include state information associated with a Thing's interaction affordances (properties, actions, and events).
 
 [^other-affordances]
 
