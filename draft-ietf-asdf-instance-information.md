@@ -215,17 +215,6 @@ Construction:
 
 {::boilerplate bcp14-tagged-bcp14}
 
-## Terms we are trying not to use
-
-Non-affordance:
-: Originally a term for information that is the subject of
-  interactions with other Instances than the Thing (called "offDevice"
-  now), this term is now considered confusing as it would often just
-  be an affordance of another Instance than the Thing.
-  In this draft version, we are trying to use a new keyword called
-  `sdfContext` that is supposed to be slightly more accurate, replacing
-  the `$context` concept that was used in previous draft versions.
-
 # Instance Information and SDF
 
 The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
