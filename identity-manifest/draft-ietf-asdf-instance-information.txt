@@ -1268,21 +1268,21 @@ Appendix B.  Formal Syntax of Instance-related Messages
 
 List of Figures
 
-   Figure 2:  SDF proofshot example.
    Figure 1:  Example of an SDF context snapshot.
-   Figure 5:  Example for an SDF construction message
-   Figure 6:  Example of an SDF identity manifest
-   Figure 8:  Example of an SDF instance-related message that serves as
-              a delta.
-   Figure 9:  Example of an SDF context patch message that uses the
-              common instance-related message format.
+   Figure 2:  SDF proofshot example.
    Figure 3:  Example of an SDF model where a CoAP-based protocol map
               points to the definition of relevant context information:
               an IP address.
    Figure 4:  Example of a snapshot message that provides the IP address
               needed to perform a CoAP-based interaction with the sensor
               from the previous figure.
+   Figure 5:  Example for an SDF construction message
+   Figure 6:  Example of an SDF identity manifest
    Figure 7:  Example for SDF model with constructors
+   Figure 8:  Example of an SDF instance-related message that serves as
+              a delta.
+   Figure 9:  Example of an SDF context patch message that uses the
+              common instance-related message format.
    Figure 10:  SDF Model that serves as a reference point for the
               instance-related messages in this draft
 
