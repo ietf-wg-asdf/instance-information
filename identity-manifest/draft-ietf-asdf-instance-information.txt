@@ -314,9 +314,8 @@ Table of Contents
    principles for instance-related messages, before detailing the
    specific archetypes we define in this document.  The specification
    text itself will be accompanied by examples that have been inspired
-   by [I-D.ietf-asdf-sdf-nonaffordance] and
-   [I-D.lee-asdf-digital-twin-09] that each correspond with one of the
-   four archetypes.
+   by [I-D.ietf-asdf-sdf-nonaffordance] and [I-D.lee-asdf-digital-twin]
+   that each correspond with one of the four archetypes.
 
 2.1.  Axioms for instance-related messages
 
@@ -952,7 +951,7 @@ Table of Contents
                   common instance-related message format.
 
    Practical uses for patch message include digital twins
-   [I-D.lee-asdf-digital-twin-09], where changes to physical attributes
+   [I-D.lee-asdf-digital-twin], where changes to physical attributes
    (such as the location) need to be reflected in the digital
    representation of a Thing.
 
@@ -1048,7 +1047,7 @@ Table of Contents
               November 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-iotops-7228bis-03>.
 
-   [I-D.lee-asdf-digital-twin-09]
+   [I-D.lee-asdf-digital-twin]
               Lee, H., Hong, J., Youn, J., and Y. Hong, "Semantic
               Definition Format (SDF) modeling for Digital Twin", Work
               in Progress, Internet-Draft, draft-lee-asdf-digital-twin-
