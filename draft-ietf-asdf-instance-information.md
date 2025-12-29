@@ -615,11 +615,8 @@ title="Example of an SDF identity manifest"}
 
 ### Modelling Construction Parameters
 
-As the examples on Construction and State Patch Messages already implied, we
-can model a Thing's configurable parameters via `sdfContext` definitions for
-which the instance-related messages can then provide concrete values.
-{{code-sdf-construction-sdf-context}} shows an example for how the implied
-SDF model could actually look like.
+In SDF models, we can speicify a Thing's configurable parameters via `sdfContext` definitions for which construction messages can provide concrete values.
+{{code-sdf-construction-sdf-context}} shows an example for such an SDF model.
 Here, the parameters settable during construction are modeled as `sdfContext` definitions, to which the entries within `sdfParameters` may point to using JSON pointers.
 
 ~~~ sdf
