@@ -422,9 +422,6 @@ Based on the common message format defined in {{message-format}} and the systema
 
 TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"
 
-TODO: The description of the individual messages probably has to be expanded.
-      Maybe some of the content from the six example messages should be moved here.
-
 ## Snapshot Messages
 
 This instance-related message contains information on a Thing's state, both in terms of context information and the state of individual affordances.
