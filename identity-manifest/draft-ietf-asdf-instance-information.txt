@@ -608,11 +608,10 @@ Table of Contents
    // corresponding sdfProperty definition, it is still unclear how to
    // best model the state of sdfActions and sdfEvents.
 
-   The following examples are based on [I-D.ietf-asdf-sdf-nonaffordance]
-   and [I-D.lee-asdf-digital-twin-09].  Figure 2 shows a proofshot that
-   captures the state of a sensor.  Here, every property and context
-   definition of the corresponding SDF model (see Figure 10) is mapped
-   to a concrete value that satisfies the associated schema.
+   Figure 2 shows a proofshot that captures the state of a sensor.
+   Here, every property and context definition of the corresponding SDF
+   model (see Figure 10) is mapped to a concrete value that satisfies
+   the associated schema.
 
    {
      "info": {
