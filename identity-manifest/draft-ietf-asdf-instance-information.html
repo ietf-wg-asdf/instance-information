@@ -1357,7 +1357,9 @@ subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p
           <dd style="margin-left: 1.5em" id="section-1.1-3.12">
             <p id="section-1.1-3.12.1">In the context of instance-related messages:
 A message with specific content and effect, covering a wider set of different use cases.
-In this document, we are observing a total of four instance-related message archetypes.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
+In this document, we are observing a total of four instance-related message archetypes:
+
+Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.13">Proofshot:</dt>
@@ -1379,11 +1381,6 @@ the Instance and a Timestamp).<a href="#section-1.1-3.14.2" class="pilcrow">¶</
 by every Instance.
 An Instance may provide separate Construction affordances instead of
 simply setting a Proofshot.<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.4">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-1.1-3.14.4" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.5">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-1.1-3.14.5" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.6">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-1.1-3.14.6" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.7">TODO: Also mention the other message types we had so far (context snapshot,
-      context patch, identity manifest) here?<a href="#section-1.1-3.14.7" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-1.1-3.15">Construction:</dt>
@@ -2172,6 +2169,9 @@ When transmitting state patches, the media type <code>application/sdf-patch+json
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
       </h2>
 <p id="section-5-1">(TODO)<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-03#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">

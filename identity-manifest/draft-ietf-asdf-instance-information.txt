@@ -193,7 +193,8 @@ Table of Contents
    Message Archetype:  In the context of instance-related messages: A
       message with specific content and effect, covering a wider set of
       different use cases.  In this document, we are observing a total
-      of four instance-related message archetypes.
+      of four instance-related message archetypes: Snapshot Messages,
+      Construction Messages, Delta Messages, and Patch Messages.
 
    Proofshot:  A message that attempts to describe the state of an
       Instance at a particular moment (which may be part of the
@@ -213,16 +214,6 @@ Table of Contents
       An interaction affordance to obtain a Proofshot may not be
       provided by every Instance.  An Instance may provide separate
       Construction affordances instead of simply setting a Proofshot.
-
-      Discuss Proofshots of a Thing (device) and of other components.
-
-      Discuss concurrency problems with getting and setting Proofshots.
-
-      Discuss Timestamps appropriate for Things (Section 4.4 of
-      [I-D.ietf-iotops-7228bis], [I-D.amsuess-t2trg-raytime]).
-
-      TODO: Also mention the other message types we had so far (context
-      snapshot, context patch, identity manifest) here?
 
    Construction:  Construction messages enable the creation of a digital
       Instance, e.g., initialization/commissioning of a device or
@@ -945,6 +936,13 @@ Table of Contents
 5.  Discussion
 
    (TODO)
+
+   Discuss Proofshots of a Thing (device) and of other components.
+
+   Discuss concurrency problems with getting and setting Proofshots.
+
+   Discuss Timestamps appropriate for Things (Section 4.4 of
+   [I-D.ietf-iotops-7228bis], [I-D.amsuess-t2trg-raytime]).
 
 6.  Security Considerations
 
