@@ -1983,30 +1983,19 @@ Via JSON pointers, the paramter definitions correspond with compatible <code>sdf
         <h3 id="name-construction-messages">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-construction-messages" class="section-name selfRef">Construction Messages</a>
         </h3>
-<p id="section-4.2-1">Construction messages are structurally equivalent to state reports but may only contain context information.
+<p id="section-4.2-1">Construction messages are structurally equivalent to snapshot messages but may only contain context information.
 Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
 Construction messages <span class="bcp14">MUST</span> be indicated by the media type <code>application/sfd-construction+json</code> if possible.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
-Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">A construction message for a temperature sensor might assign an
-identity and/or complement it by temporary identity information (e.g.,
-an IP address); its processing might also generate construction output
-(e.g., a public key or an IP address if those are generated on
-device) which can be described via instance-related messages such as a snapshot message.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
-In practice, these constructors are going to be modeled as an <code>sdfAction</code>,
-although the way the <code>sdfAction</code> is going to be used exactly is not entirely
-clear yet.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.2-5">(Note that it is not quite clear what a destructor would be for a
-physical instance -- apart from a scrap metal press, but according to
-RFC 8576 we would want to move a system to a re-usable initial state,
-which is pretty much a constructor.)<a href="#section-4.2-5" class="pilcrow">¶</a></p>
-<p id="section-4.2-6"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a> shows a potential SDF construction message
-that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.
-The construction message also assigns a <code>thingId</code> as well as an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">A construction message for a temperature sensor might assign an identity and/or complement it by temporary identity information (e.g., an IP address);
+its processing might also generate construction output (e.g., a public key or an IP address if those are generated on device) which can be described via instance-related messages such as snapshot messages.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
+In practice, these constructors are going to be modeled as an <code>sdfAction</code>, although the way the <code>sdfAction</code> is going to be used exactly is not entirely clear yet.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">(Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.)<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<p id="section-4.2-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a> shows a potential SDF construction message that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.
+The construction message also assigns a <code>thingId</code> as well as an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
 <figure id="figure-5">
-          <div class="lang-sdf sourcecode" id="section-4.2-7.1">
+          <div class="lang-sdf sourcecode" id="section-4.2-6.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -2036,13 +2025,13 @@ The construction message also assigns a <code>thingId</code> as well as an initi
 <a href="#name-example-for-an-sdf-construc" class="selfRef">Example for an SDF construction message</a>
           </figcaption></figure>
 </div>
-<p id="section-4.2-8">Identity manifests also belong to the construction message archetype.
-They are special construction messages that only initialize identity-related information related to a Thing.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
-<p id="section-4.2-9"><a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 6</a> shows an example of an identity manifest, that is structurally identical to the construction message from <a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a>, with the non-identity-related information left out.<a href="#section-4.2-9" class="pilcrow">¶</a></p>
-<p id="section-4.2-10">TODO: Discuss the circumstances under which a construction message is allow to not intialize all construction parameters.<a href="#section-4.2-10" class="pilcrow">¶</a></p>
+<p id="section-4.2-7">A special type of construction message that only contains identity-related information may be called an <em>Identity Manifest</em>.
+<a href="#code-sdf-identity-manifest" class="auto internal xref">Figure 6</a> shows an example of an identity manifest that is structurally identical to the construction message from <a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a>, with the non-identity-related information left out.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
+<p id="section-4.2-8">Via <code>sdfRequired</code>, an SDF model can indicate which context information must be present and therefore initialized within an instance.
+All definitions included in <code>sdfRequired</code> <span class="bcp14">MUST</span> also be present in a construction message, while other <code>sdfContext</code> definitions could be left out.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-identity-"></span><div id="code-sdf-identity-manifest">
 <figure id="figure-6">
-          <div class="lang-sdf sourcecode" id="section-4.2-11.1">
+          <div class="lang-sdf sourcecode" id="section-4.2-9.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
@@ -2081,8 +2070,7 @@ can model a Thing's configurable parameters via <code>sdfContext</code> definiti
 which the instance-related messages can then provide concrete values.
 <a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for how the implied
 SDF model could actually look like.
-Here the parameters settable during construction are modeled as <code>sdfContext</code>
-definitions the entries of a <code>contextMap</code> may point to using JSON pointers.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+Here, the parameters settable during construction are modeled as <code>sdfContext</code> definitions, to which the entries within <code>sdfParameters</code> may point to using JSON pointers.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-construction-sdf-context">
 <figure id="figure-7">
             <div class="lang-sdf sourcecode" id="section-4.2.1-2.1">
@@ -2105,7 +2093,7 @@ definitions the entries of a <code>contextMap</code> may point to using JSON poi
       "sdfProperty": {
         "temperature": {
           "type": "number",
-          "contextMap": {
+          "sdfParameters": {
             "unit": "#/sdfObject/sensor/sdfContext/unit"
           }
         }
