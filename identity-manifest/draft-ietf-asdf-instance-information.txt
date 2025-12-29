@@ -79,7 +79,6 @@ Table of Contents
 
    1.  Introduction
      1.1.  Conventions and Definitions
-     1.2.  Terms we are trying not to use
    2.  Instance Information and SDF
      2.1.  Axioms for instance-related messages
      2.2.  Context Information
@@ -238,17 +237,6 @@ Table of Contents
    "OPTIONAL" in this document are to be interpreted as described in
    [BCP14] (RFC2119) (RFC8174) when, and only when, they appear in all
    capitals, as shown here.
-
-1.2.  Terms we are trying not to use
-
-   Non-affordance:  Originally a term for information that is the
-      subject of interactions with other Instances than the Thing
-      (called "offDevice" now), this term is now considered confusing as
-      it would often just be an affordance of another Instance than the
-      Thing.  In this draft version, we are trying to use a new keyword
-      called sdfContext that is supposed to be slightly more accurate,
-      replacing the $context concept that was used in previous draft
-      versions.
 
 2.  Instance Information and SDF
 
