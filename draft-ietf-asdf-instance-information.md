@@ -633,6 +633,37 @@ sdfInstance:
 {:sdf #code-sdf-identity-manifest
 title="Example of an SDF identity manifest"}
 
+### Modelling Construction Parameters
+
+As the examples on Construction and State Patch Messages already implied, we
+can model a Thing's configurable parameters via `sdfContext` definitions for
+which the instance-related messages can then provide concrete values.
+{{code-sdf-construction-sdf-context}} shows an example for how the implied
+SDF model could actually look like.
+Here the parameters settable during construction are modeled as `sdfContext`
+definitions the entries of a `contextMap` may point to using JSON pointers.
+
+~~~ sdf
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfObject:
+  sensor:
+    sdfContext:
+      ipAddress:
+        type: string
+      unit:
+        type: string
+    sdfProperty:
+      temperature:
+        type: number
+        contextMap:
+          unit: "#/sdfObject/sensor/sdfContext/unit"
+~~~
+{:sdf #code-sdf-construction-sdf-context
+title="Example for SDF model with constructors"}
+
 ## Delta Messages
 
 Delta messages describe updates to a Thing's state relative to a previous message.
@@ -710,37 +741,6 @@ title="Example of an SDF context patch message that uses the common instance-rel
 
 Since patch messages are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
 When transmitting state patches, the media type `application/sdf-patch+json` MUST be used if possible.
-
-# Modelling Construction Parameters via SDF Models
-
-As the examples on Construction and State Patch Messages already implied, we
-can model a Thing's configurable parameters via `sdfContext` definitions for
-which the instance-related messages can then provide concrete values.
-{{code-sdf-construction-sdf-context}} shows an example for how the implied
-SDF model could actually look like.
-Here the parameters settable during construction are modeled as `sdfContext`
-definitions the entries of a `contextMap` may point to using JSON pointers.
-
-~~~ sdf
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfObject:
-  sensor:
-    sdfContext:
-      ipAddress:
-        type: string
-      unit:
-        type: string
-    sdfProperty:
-      temperature:
-        type: number
-        contextMap:
-          unit: "#/sdfObject/sensor/sdfContext/unit"
-~~~
-{:sdf #code-sdf-construction-sdf-context
-title="Example for SDF model with constructors"}
 
 # Discussion
 
