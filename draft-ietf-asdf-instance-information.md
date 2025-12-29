@@ -557,34 +557,19 @@ title="Example of a snapshot message that provides the IP address needed to perf
 
 ## Construction Messages
 
-Construction messages are structurally equivalent to state reports but may only contain context information.
+Construction messages are structurally equivalent to snapshot messages but may only contain context information.
 Furthermore, the recipient of a construction message is supposed to initiate a configuration or comissioning process upon recption.
 Construction messages MUST be indicated by the media type `application/sfd-construction+json` if possible.
 
-
-
-
-Construction messages enable the creation of the digital instance, e.g., initialization/commissioning of a device or creation of its digital twins.
-Construction messages are like proofshots, in that they embody a state, however this state needs to be precise so the construction can actually happen.
-
-A construction message for a temperature sensor might assign an
-identity and/or complement it by temporary identity information (e.g.,
-an IP address); its processing might also generate construction output
-(e.g., a public key or an IP address if those are generated on
-device) which can be described via instance-related messages such as a snapshot message.
+A construction message for a temperature sensor might assign an identity and/or complement it by temporary identity information (e.g., an IP address);
+its processing might also generate construction output (e.g., a public key or an IP address if those are generated on device) which can be described via instance-related messages such as snapshot messages.
 
 The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
-In practice, these constructors are going to be modeled as an `sdfAction`,
-although the way the `sdfAction` is going to be used exactly is not entirely
-clear yet.
+In practice, these constructors are going to be modeled as an `sdfAction`, although the way the `sdfAction` is going to be used exactly is not entirely clear yet.
 
-(Note that it is not quite clear what a destructor would be for a
-physical instance -- apart from a scrap metal press, but according to
-RFC 8576 we would want to move a system to a re-usable initial state,
-which is pretty much a constructor.)
+(Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.)
 
-{{code-sdf-construction-message}} shows a potential SDF construction message
-that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
+{{code-sdf-construction-message}} shows a potential SDF construction message that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
 The construction message also assigns a `thingId` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
 
 ~~~ sdf
@@ -607,12 +592,12 @@ sdfInstance:
 {:sdf #code-sdf-construction-message
 title="Example for an SDF construction message"}
 
-Identity manifests also belong to the construction message archetype.
-They are special construction messages that only initialize identity-related information related to a Thing.
+A special type of construction message that only contains identity-related information may be called an *Identity Manifest*.
+{{code-sdf-identity-manifest}} shows an example of an identity manifest that is structurally identical to the construction message from {{code-sdf-construction-message}}, with the non-identity-related information left out.
 
-{{code-sdf-identity-manifest}} shows an example of an identity manifest, that is structurally identical to the construction message from {{code-sdf-construction-message}}, with the non-identity-related information left out.
-
-TODO: Discuss the circumstances under which a construction message is allow to not intialize all construction parameters.
+<!-- TODO: Evaluate whether this approach actually works -->
+Via `sdfRequired`, an SDF model can indicate which context information must be present and therefore initialized within an instance.
+All definitions included in `sdfRequired` MUST also be present in a construction message, while other `sdfContext` definitions could be left out.
 
 ~~~ sdf
 info:
@@ -640,8 +625,7 @@ can model a Thing's configurable parameters via `sdfContext` definitions for
 which the instance-related messages can then provide concrete values.
 {{code-sdf-construction-sdf-context}} shows an example for how the implied
 SDF model could actually look like.
-Here the parameters settable during construction are modeled as `sdfContext`
-definitions the entries of a `contextMap` may point to using JSON pointers.
+Here, the parameters settable during construction are modeled as `sdfContext` definitions, to which the entries within `sdfParameters` may point to using JSON pointers.
 
 ~~~ sdf
 namespace:
@@ -658,7 +642,7 @@ sdfObject:
     sdfProperty:
       temperature:
         type: number
-        contextMap:
+        sdfParameters:
           unit: "#/sdfObject/sensor/sdfContext/unit"
 ~~~
 {:sdf #code-sdf-construction-sdf-context
