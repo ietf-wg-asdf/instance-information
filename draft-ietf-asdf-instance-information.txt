@@ -2,11 +2,11 @@
 
 
 
-A Semantic Definition Format for Data and Interactions of ThingsC. Bormann
+ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 28 June 2026                                 Universität Bremen
-                                                        25 December 2025
+Expires: 2 July 2026                                  Universität Bremen
+                                                        29 December 2025
 
 
                       Instance Information for SDF
@@ -33,9 +33,9 @@ About This Document
    https://datatracker.ietf.org/doc/draft-ietf-asdf-instance-
    information/.
 
-   Discussion of this document takes place on the A Semantic Definition
-   Format for Data and Interactions of Things Working Group mailing list
-   (mailto:asdf@ietf.org), which is archived at
+   Discussion of this document takes place on the "A Semantic Definition
+   Format for Data and Interactions of Things" (ASDF) Working Group
+   mailing list (mailto:asdf@ietf.org), which is archived at
    https://mailarchive.ietf.org/arch/browse/asdf/.  Subscribe at
    https://www.ietf.org/mailman/listinfo/asdf/.
 
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 June 2026.
+   This Internet-Draft will expire on 2 July 2026.
 
 Copyright Notice
 
