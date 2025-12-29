@@ -90,15 +90,15 @@ Table of Contents
      4.1.  Snapshot Messages
        4.1.1.  Protocol Binding Information
      4.2.  Construction Messages
+       4.2.1.  Modelling Construction Parameters
      4.3.  Delta Messages
      4.4.  Patch Messages
-   5.  Modelling Construction Parameters via SDF Models
-   6.  Discussion
-   7.  Security Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   5.  Discussion
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  Example SDF Model
    Appendix B.  Formal Syntax of Instance-related Messages
    List of Figures
@@ -834,111 +834,12 @@ Table of Contents
 
                Figure 6: Example of an SDF identity manifest
 
-4.3.  Delta Messages
-
-   Delta messages describe updates to a Thing's state relative to a
-   previous message.  For this purpose, a previousMessageId MUST be
-   present in the info block.  When transmitting delta messages, the
-   media type application/sdf-delta+json MUST be used if possible.
-
-   By default, the values contained in the message are applied to the
-   preceding message(s) via the JSON Merge Patch algorithm.  Via the
-   patchMethod quality, different patch algorithms MAY be indicated.
-
-   TODO: Reword
-
-   When the state of a device at a given point in time is known (e.g.,
-   due to a previous instance-related message), an external entity might
-   only be interested in the changes since that point in time.  Or it
-   might want to adjust its state and/or context the device operates in.
-   For both purposes, instance-related messages can be used.
-
-   Figure 7 shows an example that contains an instance-related message
-   reporting a "proofshot delta", that is the state changes that occured
-   compared to the ones reported in the previous message (identified via
-   its previousMessageId).  In this example, only the temperature as
-   measured by the sensor has changed, so only that information is
-   included.
-
-   Delta messages could be used in the Series Transfer Pattern [STP],
-   which may be one way to model a telemetry stream from a device.
-
-   {
-     "info": {
-       "title": "Example SDF delta message",
-       "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "cap": "https://example.com/capability/cap",
-       "models": "https://example.com/models"
-     },
-     "defaultNamespace": "cap",
-     "sdfInstanceOf": {
-       "model": "models:/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "sdfProperty": {
-         "temperature": 24
-       }
-     }
-   }
-
-      Figure 7: Example of an SDF instance-related message that serves
-                                as a delta.
-
-4.4.  Patch Messages
-
-   Patch messages are structurally equivalent to delta messages, but
-   once again are only allowed to contain context information.  They
-   utilize a patch _mechanism_ (which may be explicitly indicated via
-   the patchMethod quality) to alter the _state_ of a Thing instead of
-   reporting state _changes_.
-
-   Yet another purpose for instance-related messages is the application
-   of updates to a device's configuration via a so-called patch message.
-   Such a message is shown in Figure 8, where a change of the device's
-   mountType is reflected.  This message type might be especially
-   relevant for digital twins [I-D.lee-asdf-digital-twin-09], where
-   changes to physical attributes (such as the location) need to be
-   reflected somehow.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor",
-       "patchMethod": "merge-patch"
-     },
-     "sdfInstance": {
-       "sdfContext": {
-         "installationInfo": {
-           "mountType": "wall"
-         }
-       }
-     }
-   }
-
-      Figure 8: Example of an SDF context patch message that uses the
-                  common instance-related message format.
-
-   Since patch messages are not referring to a preceding message, a
-   previosMessageId MUST NOT be present in the information block.  When
-   transmitting state patches, the media type application/sdf-patch+json
-   MUST be used if possible.
-
-5.  Modelling Construction Parameters via SDF Models
+4.2.1.  Modelling Construction Parameters
 
    As the examples on Construction and State Patch Messages already
    implied, we can model a Thing's configurable parameters via
    sdfContext definitions for which the instance-related messages can
-   then provide concrete values.  Figure 9 shows an example for how the
+   then provide concrete values.  Figure 7 shows an example for how the
    implied SDF model could actually look like.  Here the parameters
    settable during construction are modeled as sdfContext definitions
    the entries of a contextMap may point to using JSON pointers.
@@ -971,13 +872,112 @@ Table of Contents
      }
    }
 
-             Figure 9: Example for SDF model with constructors
+             Figure 7: Example for SDF model with constructors
 
-6.  Discussion
+4.3.  Delta Messages
+
+   Delta messages describe updates to a Thing's state relative to a
+   previous message.  For this purpose, a previousMessageId MUST be
+   present in the info block.  When transmitting delta messages, the
+   media type application/sdf-delta+json MUST be used if possible.
+
+   By default, the values contained in the message are applied to the
+   preceding message(s) via the JSON Merge Patch algorithm.  Via the
+   patchMethod quality, different patch algorithms MAY be indicated.
+
+   TODO: Reword
+
+   When the state of a device at a given point in time is known (e.g.,
+   due to a previous instance-related message), an external entity might
+   only be interested in the changes since that point in time.  Or it
+   might want to adjust its state and/or context the device operates in.
+   For both purposes, instance-related messages can be used.
+
+   Figure 8 shows an example that contains an instance-related message
+   reporting a "proofshot delta", that is the state changes that occured
+   compared to the ones reported in the previous message (identified via
+   its previousMessageId).  In this example, only the temperature as
+   measured by the sensor has changed, so only that information is
+   included.
+
+   Delta messages could be used in the Series Transfer Pattern [STP],
+   which may be one way to model a telemetry stream from a device.
+
+   {
+     "info": {
+       "title": "Example SDF delta message",
+       "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap",
+       "models": "https://example.com/models"
+     },
+     "defaultNamespace": "cap",
+     "sdfInstanceOf": {
+       "model": "models:/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "sdfProperty": {
+         "temperature": 24
+       }
+     }
+   }
+
+      Figure 8: Example of an SDF instance-related message that serves
+                                as a delta.
+
+4.4.  Patch Messages
+
+   Patch messages are structurally equivalent to delta messages, but
+   once again are only allowed to contain context information.  They
+   utilize a patch _mechanism_ (which may be explicitly indicated via
+   the patchMethod quality) to alter the _state_ of a Thing instead of
+   reporting state _changes_.
+
+   Yet another purpose for instance-related messages is the application
+   of updates to a device's configuration via a so-called patch message.
+   Such a message is shown in Figure 9, where a change of the device's
+   mountType is reflected.  This message type might be especially
+   relevant for digital twins [I-D.lee-asdf-digital-twin-09], where
+   changes to physical attributes (such as the location) need to be
+   reflected somehow.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor",
+       "patchMethod": "merge-patch"
+     },
+     "sdfInstance": {
+       "sdfContext": {
+         "installationInfo": {
+           "mountType": "wall"
+         }
+       }
+     }
+   }
+
+      Figure 9: Example of an SDF context patch message that uses the
+                  common instance-related message format.
+
+   Since patch messages are not referring to a preceding message, a
+   previosMessageId MUST NOT be present in the information block.  When
+   transmitting state patches, the media type application/sdf-patch+json
+   MUST be used if possible.
+
+5.  Discussion
 
    (TODO)
 
-7.  Security Considerations
+6.  Security Considerations
 
    *  Pieces of instance-related information might only be available in
       certain scopes, e.g. certain security-related configuration
@@ -985,13 +985,13 @@ Table of Contents
 
    (TODO)
 
-8.  IANA Considerations
+7.  IANA Considerations
 
    TODO: Add media type registrations
 
-9.  References
+8.  References
 
-9.1.  Normative References
+8.1.  Normative References
 
    [BCP14]    Best Current Practice 14,
               <https://www.rfc-editor.org/info/bcp14>.
@@ -1035,7 +1035,7 @@ Table of Contents
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/info/rfc9110>.
 
-9.2.  Informative References
+8.2.  Informative References
 
    [I-D.amsuess-t2trg-raytime]
               Amsüss, C., "Raytime: Validating token expiry on an
@@ -1287,9 +1287,9 @@ List of Figures
    Figure 1:  Example of an SDF context snapshot.
    Figure 5:  Example for an SDF construction message
    Figure 6:  Example of an SDF identity manifest
-   Figure 7:  Example of an SDF instance-related message that serves as
+   Figure 8:  Example of an SDF instance-related message that serves as
               a delta.
-   Figure 8:  Example of an SDF context patch message that uses the
+   Figure 9:  Example of an SDF context patch message that uses the
               common instance-related message format.
    Figure 3:  Example of an SDF model where a CoAP-based protocol map
               points to the definition of relevant context information:
@@ -1297,7 +1297,7 @@ List of Figures
    Figure 4:  Example of a snapshot message that provides the IP address
               needed to perform a CoAP-based interaction with the sensor
               from the previous figure.
-   Figure 9:  Example for SDF model with constructors
+   Figure 7:  Example for SDF model with constructors
    Figure 10:  SDF Model that serves as a reference point for the
               instance-related messages in this draft
 
