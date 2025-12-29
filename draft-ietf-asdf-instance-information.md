@@ -684,13 +684,10 @@ title="Example of an SDF instance-related message that serves as a delta."}
 
 Patch messages are structurally equivalent to delta messages, but once again are only allowed to contain context information.
 They utilize a patch *mechanism* (which may be explicitly indicated via the `patchMethod` quality) to alter the *state* of a Thing instead of reporting state *changes*.
+Since patch messages are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
+When transmitting state patches, the media type `application/sdf-patch+json` MUST be used if possible.
 
-Yet another purpose for instance-related messages is the application of updates
-to a device's configuration via a so-called patch message.
-Such a message is shown in {{code-sdf-context-patch}}, where a change of the
-device's `mountType` is reflected. This message type might be especially
-relevant for digital twins {{-digital-twin}}, where changes to physical
-attributes (such as the location) need to be reflected somehow.
+An example Patch Message is shown in {{code-sdf-context-patch}}, where a change of the device's `mountType` is signalled.
 
 ~~~ sdf
 info:
@@ -710,9 +707,7 @@ sdfInstance:
 {:sdf #code-sdf-context-patch
 title="Example of an SDF context patch message that uses the common instance-related message format."}
 
-
-Since patch messages are not referring to a preceding message, a `previosMessageId` MUST NOT be present in the information block.
-When transmitting state patches, the media type `application/sdf-patch+json` MUST be used if possible.
+Practical uses for patch message include digital twins {{-digital-twin}}, where changes to physical attributes (such as the location) need to be reflected in the digital representation of a Thing.
 
 # Discussion
 
