@@ -2057,11 +2057,8 @@ All definitions included in <code>sdfRequired</code> <span class="bcp14">MUST</s
           <h4 id="name-modelling-construction-para">
 <a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-modelling-construction-para" class="section-name selfRef">Modelling Construction Parameters</a>
           </h4>
-<p id="section-4.2.1-1">As the examples on Construction and State Patch Messages already implied, we
-can model a Thing's configurable parameters via <code>sdfContext</code> definitions for
-which the instance-related messages can then provide concrete values.
-<a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for how the implied
-SDF model could actually look like.
+<p id="section-4.2.1-1">In SDF models, we can speicify a Thing's configurable parameters via <code>sdfContext</code> definitions for which construction messages can provide concrete values.
+<a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for such an SDF model.
 Here, the parameters settable during construction are modeled as <code>sdfContext</code> definitions, to which the entries within <code>sdfParameters</code> may point to using JSON pointers.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-construction-sdf-context">
 <figure id="figure-7">
