@@ -503,8 +503,8 @@ For example, all instances of a smart light may use similar CoAP resources, with
 Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
 
 {{code-sdf-protocol-map-plus-context}} illustrates the potential relationship between the two concepts in an SDF model.
-Here, a (hypothetical) CoAP protocol mapping specification defines an interface for `parameters` such as an IP address.
-Via JSON pointers, the paramter definitions correspond with compatible `sdfContext` entries that may further restrict the set of allowed values via their schema.
+Here, a (hypothetical) CoAP protocol mapping specification defines an interface for parameters such as an IP address.
+Via JSON pointers, the `sdfParameters` within the `sdfProtocolMap` are linked to compatible `sdfContext` entries that may further restrict the set of allowed values via their schema definitions.
 
 ~~~ sdf
 namespace:
@@ -521,7 +521,7 @@ sdfObject:
         type: number
         sdfProtocolMap:
           coap:
-            parameters:
+            sdfParameters:
               ipAddress: "#/sdfObject/sensor/sdfContext/ipAddress"
             read:
               method: GET
