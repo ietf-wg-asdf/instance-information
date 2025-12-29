@@ -2121,22 +2121,12 @@ For this purpose, a <code>previousMessageId</code> <span class="bcp14">MUST</spa
 When transmitting delta messages, the media type <code>application/sdf-delta+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
 Via the <code>patchMethod</code> quality, different patch algorithms <span class="bcp14">MAY</span> be indicated.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">TODO: Reword<a href="#section-4.3-3" class="pilcrow">¶</a></p>
-<p id="section-4.3-4">When the state of a device at a given point in time is known (e.g., due to a
-previous instance-related message), an external entity might only be interested in the
-changes since that point in time. Or it might want to adjust its state and/or
-context the device operates in. For both purposes, instance-related messages
-can be used.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
-<p id="section-4.3-5"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 8</a> shows an example that contains an instance-related
-message reporting a "proofshot delta", that is the state changes that occured
-compared to the ones reported in the previous message (identified via its
-<code>previousMessageId</code>). In this example, only the temperature as measured by the
-sensor has changed, so only that information is included.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
-<p id="section-4.3-6">Delta messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may
-be one way to model a telemetry stream from a device.<a href="#section-4.3-6" class="pilcrow">¶</a></p>
+<p id="section-4.3-3"><a href="#code-sdf-delta-message" class="auto internal xref">Figure 8</a> shows an example Delta message that reports state changes compared to the ones reported in the previous message (identified via its <code>previousMessageId</code>).
+In this example, only the temperature that has been measured by the sensor has changed, which is why it is the only piece of information that is included.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-4">Delta messages could be used in the Series Transfer Pattern <span>[<a href="#STP" class="cite xref">STP</a>]</span>, which may be one way to model a telemetry stream from a device.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-instance-"></span><div id="code-sdf-delta-message">
 <figure id="figure-8">
-          <div class="lang-sdf sourcecode" id="section-4.3-7.1">
+          <div class="lang-sdf sourcecode" id="section-4.3-5.1">
 <pre>{
   "info": {
     "title": "Example SDF delta message",
