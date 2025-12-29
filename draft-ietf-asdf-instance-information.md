@@ -657,22 +657,10 @@ When transmitting delta messages, the media type `application/sdf-delta+json` MU
 By default, the values contained in the message are applied to the preceding message(s) via the JSON Merge Patch algorithm.
 Via the `patchMethod` quality, different patch algorithms MAY be indicated.
 
-TODO: Reword
+{{code-sdf-delta-message}} shows an example Delta message that reports state changes compared to the ones reported in the previous message (identified via its `previousMessageId`).
+In this example, only the temperature that has been measured by the sensor has changed, which is why it is the only piece of information that is included.
 
-When the state of a device at a given point in time is known (e.g., due to a
-previous instance-related message), an external entity might only be interested in the
-changes since that point in time. Or it might want to adjust its state and/or
-context the device operates in. For both purposes, instance-related messages
-can be used.
-
-{{code-sdf-delta-message}} shows an example that contains an instance-related
-message reporting a "proofshot delta", that is the state changes that occured
-compared to the ones reported in the previous message (identified via its
-`previousMessageId`). In this example, only the temperature as measured by the
-sensor has changed, so only that information is included.
-
-Delta messages could be used in the Series Transfer Pattern {{STP}}, which may
-be one way to model a telemetry stream from a device.
+Delta messages could be used in the Series Transfer Pattern {{STP}}, which may be one way to model a telemetry stream from a device.
 
 ~~~ sdf
 info:
