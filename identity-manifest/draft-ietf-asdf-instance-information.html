@@ -1891,8 +1891,8 @@ This corresponds with the fact that the parameters related to application-layer 
 <p id="section-4.1.1-2">For example, all instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
 Therefore, we can utilize context information that varies between instances to complement the model information provided via an <code>sdfProtocolMap</code>.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3"><a href="#code-sdf-protocol-map-plus-context" class="auto internal xref">Figure 3</a> illustrates the potential relationship between the two concepts in an SDF model.
-Here, a (hypothetical) CoAP protocol mapping specification defines an interface for <code>parameters</code> such as an IP address.
-Via JSON pointers, the paramter definitions correspond with compatible <code>sdfContext</code> entries that may further restrict the set of allowed values via their schema.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
+Here, a (hypothetical) CoAP protocol mapping specification defines an interface for parameters such as an IP address.
+Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMap</code> are linked to compatible <code>sdfContext</code> entries that may further restrict the set of allowed values via their schema definitions.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-model-whe"></span><div id="code-sdf-protocol-map-plus-context">
 <figure id="figure-3">
             <div class="lang-sdf sourcecode" id="section-4.1.1-4.1">
@@ -1916,7 +1916,7 @@ Via JSON pointers, the paramter definitions correspond with compatible <code>sdf
           "type": "number",
           "sdfProtocolMap": {
             "coap": {
-              "parameters": {
+              "sdfParameters": {
                 "ipAddress": "#/sdfObject/sensor/sdfContext/\
                                                            ipAddress"
               },

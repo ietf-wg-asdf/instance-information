@@ -658,9 +658,10 @@ Table of Contents
    Figure 3 illustrates the potential relationship between the two
    concepts in an SDF model.  Here, a (hypothetical) CoAP protocol
    mapping specification defines an interface for parameters such as an
-   IP address.  Via JSON pointers, the paramter definitions correspond
-   with compatible sdfContext entries that may further restrict the set
-   of allowed values via their schema.
+   IP address.  Via JSON pointers, the sdfParameters within the
+   sdfProtocolMap are linked to compatible sdfContext entries that may
+   further restrict the set of allowed values via their schema
+   definitions.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -682,7 +683,7 @@ Table of Contents
              "type": "number",
              "sdfProtocolMap": {
                "coap": {
-                 "parameters": {
+                 "sdfParameters": {
                    "ipAddress": "#/sdfObject/sensor/sdfContext/\
                                                               ipAddress"
                  },
