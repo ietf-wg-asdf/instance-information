@@ -2161,13 +2161,10 @@ In this example, only the temperature that has been measured by the sensor has c
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-patch-messages" class="section-name selfRef">Patch Messages</a>
         </h3>
 <p id="section-4.4-1">Patch messages are structurally equivalent to delta messages, but once again are only allowed to contain context information.
-They utilize a patch <em>mechanism</em> (which may be explicitly indicated via the <code>patchMethod</code> quality) to alter the <em>state</em> of a Thing instead of reporting state <em>changes</em>.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<p id="section-4.4-2">Yet another purpose for instance-related messages is the application of updates
-to a device's configuration via a so-called patch message.
-Such a message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 9</a>, where a change of the
-device's <code>mountType</code> is reflected. This message type might be especially
-relevant for digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical
-attributes (such as the location) need to be reflected somehow.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+They utilize a patch <em>mechanism</em> (which may be explicitly indicated via the <code>patchMethod</code> quality) to alter the <em>state</em> of a Thing instead of reporting state <em>changes</em>.
+Since patch messages are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
+When transmitting state patches, the media type <code>application/sdf-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">An example Patch Message is shown in <a href="#code-sdf-context-patch" class="auto internal xref">Figure 9</a>, where a change of the device's <code>mountType</code> is signalled.<a href="#section-4.4-2" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-context-p"></span><div id="code-sdf-context-patch">
 <figure id="figure-9">
           <div class="lang-sdf sourcecode" id="section-4.4-3.1">
@@ -2198,8 +2195,7 @@ attributes (such as the location) need to be reflected somehow.<a href="#section
 <a href="#name-example-of-an-sdf-context-p" class="selfRef">Example of an SDF context patch message that uses the common instance-related message format.</a>
           </figcaption></figure>
 </div>
-<p id="section-4.4-4">Since patch messages are not referring to a preceding message, a <code>previosMessageId</code> <span class="bcp14">MUST NOT</span> be present in the information block.
-When transmitting state patches, the media type <code>application/sdf-patch+json</code> <span class="bcp14">MUST</span> be used if possible.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.4-4">Practical uses for patch message include digital twins <span>[<a href="#I-D.lee-asdf-digital-twin-09" class="cite xref">I-D.lee-asdf-digital-twin-09</a>]</span>, where changes to physical attributes (such as the location) need to be reflected in the digital representation of a Thing.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

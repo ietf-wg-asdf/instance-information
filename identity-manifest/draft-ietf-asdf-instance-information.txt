@@ -920,15 +920,13 @@ Table of Contents
    once again are only allowed to contain context information.  They
    utilize a patch _mechanism_ (which may be explicitly indicated via
    the patchMethod quality) to alter the _state_ of a Thing instead of
-   reporting state _changes_.
+   reporting state _changes_. Since patch messages are not referring to
+   a preceding message, a previosMessageId MUST NOT be present in the
+   information block.  When transmitting state patches, the media type
+   application/sdf-patch+json MUST be used if possible.
 
-   Yet another purpose for instance-related messages is the application
-   of updates to a device's configuration via a so-called patch message.
-   Such a message is shown in Figure 9, where a change of the device's
-   mountType is reflected.  This message type might be especially
-   relevant for digital twins [I-D.lee-asdf-digital-twin-09], where
-   changes to physical attributes (such as the location) need to be
-   reflected somehow.
+   An example Patch Message is shown in Figure 9, where a change of the
+   device's mountType is signalled.
 
    {
      "info": {
@@ -955,10 +953,10 @@ Table of Contents
       Figure 9: Example of an SDF context patch message that uses the
                   common instance-related message format.
 
-   Since patch messages are not referring to a preceding message, a
-   previosMessageId MUST NOT be present in the information block.  When
-   transmitting state patches, the media type application/sdf-patch+json
-   MUST be used if possible.
+   Practical uses for patch message include digital twins
+   [I-D.lee-asdf-digital-twin-09], where changes to physical attributes
+   (such as the location) need to be reflected in the digital
+   representation of a Thing.
 
 5.  Discussion
 
