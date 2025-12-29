@@ -195,12 +195,6 @@ Proofshot:
   An Instance may provide separate Construction affordances instead of
   simply setting a Proofshot.
 
-  Discuss Proofshots of a Thing (device) and of other components.
-
-  Discuss concurrency problems with getting and setting Proofshots.
-
-  Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
-
   TODO: Also mention the other message types we had so far (context snapshot,
         context patch, identity manifest) here?
 
@@ -692,6 +686,12 @@ Practical uses for patch message include digital twins {{-digital-twin}}, where 
 # Discussion
 
 (TODO)
+
+Discuss Proofshots of a Thing (device) and of other components.
+
+Discuss concurrency problems with getting and setting Proofshots.
+
+Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
 
 # Security Considerations
 
