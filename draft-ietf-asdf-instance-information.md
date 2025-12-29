@@ -74,11 +74,9 @@ informative:
 
 --- abstract
 
-This document discusses types of Instance Information to be used in
-conjunction with the Semantic Definition Format (SDF) for Data and
-Interactions of Things (draft-ietf-asdf-sdf) and will ultimately
-define Representation Formats for them as well as ways to use SDF
-Models to describe them.
+This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (draft-ietf-asdf-sdf).
+Split into four "archetype", the shape of the instance-related messages is governed by corresponding SDF models.
+Context information plays a crucial role both for lifecycle management and the interaction with devices using communication protocols.
 
 [^status]
 
