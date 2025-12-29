@@ -76,7 +76,7 @@ informative:
 
 This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (draft-ietf-asdf-sdf).
 Split into four "archetypes", instance-related messages are always governed by SDF models, strictly separating instance and class information.
-Lastly, context information plays a crucial role both for lifecycle management and actual device interaction.
+*Context* information plays a crucial role both for lifecycle management and actual device interaction.
 
 [^status]
 
