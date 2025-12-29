@@ -602,10 +602,11 @@ Table of Contents
    information associated with its interaction affordances (properties,
    actions, and events).
 
-   TODO: Note that while the format for describing the state of
-   properties is clearly governed by the schema information from the
-   corresponding sdfProperty definition, it is still unclear how to best
-   model the state of sdfActions and sdfEvents.
+
+   // Note that while the format for describing the state of properties
+   // is clearly governed by the schema information from the
+   // corresponding sdfProperty definition, it is still unclear how to
+   // best model the state of sdfActions and sdfEvents.
 
    The following examples are based on [I-D.ietf-asdf-sdf-nonaffordance]
    and [I-D.lee-asdf-digital-twin-09].  Figure 2 shows a proofshot that
