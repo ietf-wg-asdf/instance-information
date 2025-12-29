@@ -463,8 +463,9 @@ they are not only reporting context information about a Thing but
 also state information associated with its interaction affordances (properties,
 actions, and events).
 
-TODO: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding `sdfProperty` definition, it is still unclear how to best model the state of `sdfAction`s and
-`sdfEvent`s.
+[^other-affordances]
+
+[^other-affordances]: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding `sdfProperty` definition, it is still unclear how to best model the state of `sdfAction`s and `sdfEvent`s.
 
 The following examples are based on {{-non-affordance}} and {{-digital-twin}}.
 {{code-off-device-instance}} shows a proofshot that captures the state of a
