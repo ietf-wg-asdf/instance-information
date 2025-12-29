@@ -467,7 +467,6 @@ actions, and events).
 
 [^other-affordances]: Note that while the format for describing the state of properties is clearly governed by the schema information from the corresponding `sdfProperty` definition, it is still unclear how to best model the state of `sdfAction`s and `sdfEvent`s.
 
-The following examples are based on {{-non-affordance}} and {{-digital-twin}}.
 {{code-off-device-instance}} shows a proofshot that captures the state of a
 sensor.
 Here, every property and context definition of the corresponding SDF model
