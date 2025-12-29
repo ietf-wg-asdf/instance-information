@@ -172,7 +172,9 @@ Instance-related Message:
 Message Archetype:
 : In the context of instance-related messages:
   A message with specific content and effect, covering a wider set of different use cases.
-  In this document, we are observing a total of four instance-related message archetypes.
+  In this document, we are observing a total of four instance-related message archetypes:
+  <!-- TODO: Do these also need their own terminology entries? -->
+  Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.
 
 Proofshot:
 : A message that attempts to describe the state of an Instance at a
@@ -194,9 +196,6 @@ Proofshot:
   by every Instance.
   An Instance may provide separate Construction affordances instead of
   simply setting a Proofshot.
-
-  TODO: Also mention the other message types we had so far (context snapshot,
-        context patch, identity manifest) here?
 
 Construction:
 : Construction messages enable the creation of a digital Instance,
