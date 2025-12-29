@@ -11,7 +11,7 @@ docname: draft-ietf-asdf-instance-information-latest
 number:
 date:
 area: "Applications and Real-Time"
-workgroup: "A Semantic Definition Format for Data and Interactions of Things"
+workgroup: ASDF
 keyword:
  - IoT
  - Link
@@ -19,7 +19,7 @@ keyword:
  - Interaction Model
  - Data Model
 venue:
-  group: "A Semantic Definition Format for Data and Interactions of Things"
+  group: "\"A Semantic Definition Format for Data and Interactions of Things\" (ASDF)"
   mail: "asdf@ietf.org"
   github: "ietf-wg-asdf/instance-information"
 
