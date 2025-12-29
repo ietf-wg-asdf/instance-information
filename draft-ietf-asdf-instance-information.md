@@ -80,8 +80,7 @@ Split into four "archetypes", instance-related messages are always governed by S
 
 [^status]
 
-[^status]: The present revision is the first one after the adoption by the ASDF Working Group. Content-wise, it is unchanged compared to the preceding individual draft revision.
-
+[^status]: This revision applies a major restructuring to the document, reduces redundancy, and clarifies the illustration of some of the concepts used throughout the document.
 
 --- middle
 
