@@ -321,7 +321,7 @@ Note that `sdfContext` *could* also be modelled via `sdfProperty`.
 
 TODO: explain how {{RFC9039}} could be used to obtain device names (using `urn:dev:org` in the example).
 
-Note that one interesting piece of context information is the model itself, including information block and the default namespace.
+Note that one interesting piece of context information is the model itself, including the information block and the default namespace.
 This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
 Also note that multiple models may apply to the same device (including but not only revisions of the same models).
 
