@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 2 July 2026                                  Universität Bremen
-                                                        29 December 2025
+Expires: 3 July 2026                                  Universität Bremen
+                                                        30 December 2025
 
 
                       Instance Information for SDF
@@ -24,8 +24,8 @@ Abstract
 
 
    // This revision applies a major restructuring to the document,
-   // reduces redundancy, and clarifies the illustration of some of the
-   // concepts used throughout the document.
+   // reduces redundancy, and clarifies some of the concepts that are
+   // used throughout the document.
 
 About This Document
 
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 July 2026.
+   This Internet-Draft will expire on 3 July 2026.
 
 Copyright Notice
 
@@ -221,8 +221,6 @@ Table of Contents
       they embody a state, however this state needs to be precise so the
       construction can actually happen.
 
-      Discuss YANG config=true approach.
-
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
@@ -358,8 +356,8 @@ Table of Contents
    (using urn:dev:org in the example).
 
    Note that one interesting piece of context information is the model
-   itself, including information block and the default namespace.  This
-   is of course not about the device or its twin (or even its asset
+   itself, including the information block and the default namespace.
+   This is of course not about the device or its twin (or even its asset
    management), because models and devices may want to associate freely.
    Also note that multiple models may apply to the same device
    (including but not only revisions of the same models).
@@ -724,10 +722,11 @@ Table of Contents
    although the way the sdfAction is going to be used exactly is not
    entirely clear yet.
 
-   (Note that it is not quite clear what a destructor would be for a
-   physical instance -- apart from a scrap metal press, but according to
-   RFC 8576 we would want to move a system to a re-usable initial state,
-   which is pretty much a constructor.)
+
+   // Note that it is not quite clear what a destructor would be for a
+   // physical instance -- apart from a scrap metal press, but according
+   // to RFC 8576 we would want to move a system to a re-usable initial
+   // state, which is pretty much a constructor.
 
    Figure 5 shows a potential SDF construction message that initializes
    a device, setting its manufacturer and firmwareVersion as context
@@ -886,8 +885,8 @@ Table of Contents
    Patch messages are structurally equivalent to delta messages, but
    once again are only allowed to contain context information.  They
    utilize a patch _mechanism_ (which may be explicitly indicated via
-   the patchMethod quality) to alter the _state_ of a Thing instead of
-   reporting state _changes_. Since patch messages are not referring to
+   the patchMethod quality) to _alter_ the state of a Thing instead of
+   _reporting_ state changes.  Since patch messages are not referring to
    a preceding message, a previosMessageId MUST NOT be present in the
    information block.  When transmitting state patches, the media type
    application/sdf-patch+json MUST be used if possible.
@@ -935,6 +934,9 @@ Table of Contents
 
    Discuss Timestamps appropriate for Things (Section 4.4 of
    [I-D.ietf-iotops-7228bis], [I-D.amsuess-t2trg-raytime]).
+
+   Discuss YANG config=true approach with regard to construction
+   messages.
 
 6.  Security Considerations
 
