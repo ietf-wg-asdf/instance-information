@@ -204,8 +204,6 @@ Construction:
   They are like proofshots, in that they embody a state, however this
   state needs to be precise so the construction can actually happen.
 
-  Discuss YANG config=true approach.
-
 {::boilerplate bcp14-tagged-bcp14}
 
 # Instance Information and SDF
@@ -686,6 +684,8 @@ Discuss Proofshots of a Thing (device) and of other components.
 Discuss concurrency problems with getting and setting Proofshots.
 
 Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
+
+Discuss YANG config=true approach with regard to construction messages.
 
 # Security Considerations
 
