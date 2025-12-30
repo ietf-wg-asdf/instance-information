@@ -536,7 +536,10 @@ its processing might also generate construction output (e.g., a public key or an
 The creation of construction messages is linked to the invocation of a constructor that starts the actual construction process.
 In practice, these constructors are going to be modeled as an `sdfAction`, although the way the `sdfAction` is going to be used exactly is not entirely clear yet.
 
-(Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.)
+<!-- TODO: Maybe this note could also be removed -->
+[^note-destructor]
+
+[^note-destructor]: Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.
 
 {{code-sdf-construction-message}} shows a potential SDF construction message that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
 The construction message also assigns a `thingId` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
