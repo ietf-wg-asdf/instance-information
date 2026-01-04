@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 3 July 2026                                  Universität Bremen
-                                                        30 December 2025
+Expires: 8 July 2026                                  Universität Bremen
+                                                          4 January 2026
 
 
                       Instance Information for SDF
@@ -59,11 +59,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 July 2026.
+   This Internet-Draft will expire on 8 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -330,12 +330,6 @@ Table of Contents
    free replicated data types (CRDTs) (https://en.wikipedia.org/wiki/
    Conflict-free_replicated_data_type) to facilitate patches.)
 
-   To identify the reference state for a delta/patch, we need
-
-   *  device identity (thingId?)
-
-   *  state info (timestamp? state/generation identifier?)
-
 2.2.  Context Information
 
    Messages always have context, typically describing the "me" and the
@@ -469,6 +463,14 @@ Table of Contents
    Thing's current state, to report state _changes_, or to update state
    via a patch or reconfiguration.
 
+   In addition to the messageId and previousMessageId from the info
+   block, we are able to refer to
+
+   *  the device identity (via the identifier qualitity) and
+
+   *  the point in time when the information regarding the device state
+      has been captured (via the timestamp quality).
+
    Since we are using the sdfInstance keyword as an entry point at the
    location pointed to via the model specfied in sdfInstanceOf, the
    instance-related message has to follow the structure of this part of
@@ -482,27 +484,33 @@ Table of Contents
    have to replicate a nested structure via sdfThing and/or sdfObject if
    present in the referenced SDF model.
 
-         +=============+======+==================================+
-         | Quality     | Type | Description                      |
-         +=============+======+==================================+
-         | sdfThing    | map  | Values for the thing entries in  |
-         |             |      | the referenced SDF definition    |
-         +-------------+------+----------------------------------+
-         | sdfObject   | map  | Values for the object entries in |
-         |             |      | the referenced SDF definition    |
-         +-------------+------+----------------------------------+
-         | sdfContext  | map  | Values for the context entries   |
-         |             |      | in the referenced SDF definition |
-         +-------------+------+----------------------------------+
-         | sdfProperty | map  | Values for the properties in the |
-         |             |      | referenced SDF definition        |
-         +-------------+------+----------------------------------+
-         | sdfAction   | map  | Values for the actions in the    |
-         |             |      | referenced SDF definition        |
-         +-------------+------+----------------------------------+
-         | sdfEvent    | map  | Values for the events in the     |
-         |             |      | referenced SDF definition        |
-         +-------------+------+----------------------------------+
+       +=============+========+====================================+
+       | Quality     | Type   | Description                        |
+       +=============+========+====================================+
+       | identifier  | string | (Optional) identifier of the       |
+       |             |        | instance (e.g., a UUID)            |
+       +-------------+--------+------------------------------------+
+       | timestamp   | string | Indicates the point in time this   |
+       |             |        | instance-related message refers to |
+       +-------------+--------+------------------------------------+
+       | sdfThing    | map    | Values for the thing entries in    |
+       |             |        | the referenced SDF definition      |
+       +-------------+--------+------------------------------------+
+       | sdfObject   | map    | Values for the object entries in   |
+       |             |        | the referenced SDF definition      |
+       +-------------+--------+------------------------------------+
+       | sdfContext  | map    | Values for the context entries in  |
+       |             |        | the referenced SDF definition      |
+       +-------------+--------+------------------------------------+
+       | sdfProperty | map    | Values for the properties in the   |
+       |             |        | referenced SDF definition          |
+       +-------------+--------+------------------------------------+
+       | sdfAction   | map    | Values for the actions in the      |
+       |             |        | referenced SDF definition          |
+       +-------------+--------+------------------------------------+
+       | sdfEvent    | map    | Values for the events in the       |
+       |             |        | referenced SDF definition          |
+       +-------------+--------+------------------------------------+
 
                           Table 5: Instance Block
 
@@ -552,9 +560,9 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
+       "identifier": "envSensor:abc123",
+       "timestamp": "2025-07-01T12:00:00Z",
        "sdfContext": {
-         "timestamp": "2025-07-01T12:00:00Z",
-         "thingId": "envSensor:abc123",
          "installationInfo": {
            "floor": 3,
            "mountType": "ceiling",
@@ -594,9 +602,9 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
+       "identifier": "envSensor:abc123",
+       "timestamp": "2025-07-01T12:00:00Z",
        "sdfContext": {
-         "timestamp": "2025-07-01T12:00:00Z",
-         "thingId": "envSensor:abc123",
          "installationInfo": {
            "mountType": "ceiling"
          }
@@ -730,8 +738,8 @@ Table of Contents
 
    Figure 5 shows a potential SDF construction message that initializes
    a device, setting its manufacturer and firmwareVersion as context
-   information.  The construction message also assigns a thingId as well
-   as an initial ipAddress that can be used with the interaction
+   information.  The construction message also assigns an identifier as
+   well as an initial ipAddress that can be used with the interaction
    affordances that may be present in the corresponding SDF model.
 
    {
@@ -747,8 +755,8 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
+       "identifier": "envSensor:unit42",
        "sdfContext": {
-         "thingId": "envSensor:unit42",
          "ipAddress": "192.168.1.5",
          "deviceIdentity": {
            "manufacturer": "HealthTech Inc.",
@@ -785,8 +793,8 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
+       "identifier": "envSensor:unit42",
        "sdfContext": {
-         "thingId": "envSensor:unit42",
          "deviceIdentity": {
            "manufacturer": "HealthTech Inc.",
            "firmwareVersion": "1.4.3"
@@ -1079,12 +1087,6 @@ Appendix A.  Example SDF Model
      "sdfObject": {
        "envSensor": {
          "sdfContext": {
-           "timestamp": {
-             "type": "string"
-           },
-           "thingId": {
-             "type": "string"
-           },
            "deviceIdentity": {
              "manufacturer": {
                "type": "string"

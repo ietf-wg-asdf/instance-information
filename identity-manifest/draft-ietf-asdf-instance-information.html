@@ -25,7 +25,7 @@ Split into four "archetypes", instance-related messages are always governed by S
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
     platformdirs 4.5.1
@@ -1051,11 +1051,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDF Instance Information</td>
-<td class="right">December 2025</td>
+<td class="right">January 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bormann &amp; Romann</td>
-<td class="center">Expires 3 July 2026</td>
+<td class="center">Expires 8 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1068,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-asdf-instance-information-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-30" class="published">30 December 2025</time>
+<time datetime="2026-01-04" class="published">4 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-03">3 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-08">8 July 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1129,7 @@ Split into four "archetypes", instance-related messages are always governed by S
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1138,7 +1138,7 @@ Split into four "archetypes", instance-related messages are always governed by S
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1502,15 +1502,6 @@ a next state).
 Several media types can be defined for deltas/patches; JSON merge-patch <span>[<a href="#RFC7396" class="cite xref">RFC7396</a>]</span> is already in use in SDF (for <code>sdfRef</code>) and therefore is a likely candidate.
 (Assume that some of the models will be using
 <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">Conflict-free replicated data types (CRDTs)</a> to facilitate patches.)<a href="#section-2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.1-5">To identify the reference state for a delta/patch, we need<a href="#section-2.1-5" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2.1-6.1">
-            <p id="section-2.1-6.1.1">device identity (thingId?)<a href="#section-2.1-6.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-2.1-6.2">
-            <p id="section-2.1-6.2.1">state info (timestamp? state/generation identifier?)<a href="#section-2.1-6.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
 </section>
 </div>
 <div id="context-information">
@@ -1702,9 +1693,18 @@ Furthermore, via the <code>patchMethod</code> field, a patch algorithm different
         </h3>
 <p id="section-3.4-1">In the instance block, state information for properties, actions, and events as well as context information can be included.
 Depending on the archetype, this information will either be used to report a Thing's current state, to report state <em>changes</em>, or to update state via a patch or reconfiguration.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the instance-related message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
-Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">In addition to the <code>messageId</code> and <code>previousMessageId</code> from the <code>info</code> block, we are able to refer to<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.4-3.1">
+            <p id="section-3.4-3.1.1">the device identity (via the <code>identifier</code> qualitity) and<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.4-3.2">
+            <p id="section-3.4-3.2.1">the point in time when the information regarding the device state has been captured (via the <code>timestamp</code> quality).<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.4-4">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the instance-related message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
+Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 <span id="name-instance-block-2"></span><div id="ibsec">
 <table class="center" id="table-5">
           <caption>
@@ -1719,6 +1719,16 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">(Optional) identifier of the instance (e.g., a UUID)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">timestamp</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Indicates the point in time this instance-related message refers to</td>
+            </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfThing</td>
               <td class="text-left" rowspan="1" colspan="1">map</td>
@@ -1792,9 +1802,9 @@ Security-related aspects, e.g. regarding authentication and authorization, <span
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
+    "identifier": "envSensor:abc123",
+    "timestamp": "2025-07-01T12:00:00Z",
     "sdfContext": {
-      "timestamp": "2025-07-01T12:00:00Z",
-      "thingId": "envSensor:abc123",
       "installationInfo": {
         "floor": 3,
         "mountType": "ceiling",
@@ -1832,9 +1842,9 @@ the associated schema.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
+    "identifier": "envSensor:abc123",
+    "timestamp": "2025-07-01T12:00:00Z",
     "sdfContext": {
-      "timestamp": "2025-07-01T12:00:00Z",
-      "thingId": "envSensor:abc123",
       "installationInfo": {
         "mountType": "ceiling"
       }
@@ -1953,7 +1963,7 @@ its processing might also generate construction output (e.g., a public key or an
 In practice, these constructors are going to be modeled as an <code>sdfAction</code>, although the way the <code>sdfAction</code> is going to be used exactly is not entirely clear yet.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4"><span class="cref" id="note-destructor">Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.</span><a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 5</a> shows a potential SDF construction message that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.
-The construction message also assigns a <code>thingId</code> as well as an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+The construction message also assigns an <code>identifier</code> as well as an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
 <figure id="figure-5">
           <div class="lang-sdf sourcecode" id="section-4.2-6.1">
@@ -1970,8 +1980,8 @@ The construction message also assigns a <code>thingId</code> as well as an initi
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
+    "identifier": "envSensor:unit42",
     "sdfContext": {
-      "thingId": "envSensor:unit42",
       "ipAddress": "192.168.1.5",
       "deviceIdentity": {
         "manufacturer": "HealthTech Inc.",
@@ -2006,8 +2016,8 @@ All definitions included in <code>sdfRequired</code> <span class="bcp14">MUST</s
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
+    "identifier": "envSensor:unit42",
     "sdfContext": {
-      "thingId": "envSensor:unit42",
       "deviceIdentity": {
         "manufacturer": "HealthTech Inc.",
         "firmwareVersion": "1.4.3"
@@ -2311,12 +2321,6 @@ messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a>
   "sdfObject": {
     "envSensor": {
       "sdfContext": {
-        "timestamp": {
-          "type": "string"
-        },
-        "thingId": {
-          "type": "string"
-        },
         "deviceIdentity": {
           "manufacturer": {
             "type": "string"
