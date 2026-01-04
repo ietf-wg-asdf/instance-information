@@ -329,18 +329,18 @@ The data model of instance-related messages makes use of the structural features
 The information block contains the same qualities as an SDF model and, additionally, a mandatory `messageId` to uniquely identify the message.
 Furthermore, Delta messages can utilize the `previousMessageId` in order to link two messages and indicate the state change.
 
-| Quality            | Type             | Description                                                        |
-|--------------------|------------------|--------------------------------------------------------------------|
-| title              | string           | A short summary to be displayed in search results, etc.            |
-| description        | string           | Long-form text description (no constraints)                        |
-| version            | string           | The incremental version of the definition                          |
-| modified           | string           | Time of the latest modification                                    |
-| copyright          | string           | Link to text or embedded text containing a copyright notice        |
-| license            | string           | Link to text or embedded text containing license terms             |
-| messageId          | string           | Unique identifier of this instance-related message                 |
+| Quality            | Type             | Description                                                                |
+|--------------------|------------------|----------------------------------------------------------------------------|
+| title              | string           | A short summary to be displayed in search results, etc.                    |
+| description        | string           | Long-form text description (no constraints)                                |
+| version            | string           | The incremental version of the definition                                  |
+| modified           | string           | Time of the latest modification                                            |
+| copyright          | string           | Link to text or embedded text containing a copyright notice                |
+| license            | string           | Link to text or embedded text containing license terms                     |
+| messageId          | string           | Unique identifier of this instance-related message                         |
 | previousMessageId  | string           | Identifier used to connect this instance-related message to a previous one |
-| features           | array of strings | List of extension features used                                    |
-| $comment           | string           | Source code comments only, no semantics                            |
+| features           | array of strings | List of extension features used                                            |
+| $comment           | string           | Source code comments only, no semantics                                    |
 {: #infoblockqual title="Qualities of the Information Block"}
 
 ## Namespaces Block
@@ -364,7 +364,7 @@ Furthermore, via the `patchMethod` field, a patch algorithm different from JSON 
 |------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | model            | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Has to be based on a namespace identifier from the `namespaces` map. |
 | patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                             |
-| $comment         | string           | Source code comments only, no semantics                                                                                                              |
+| $comment         | string | Source code comments only, no semantics                                                                                                                        |
 {: #iobsec title="Instance-of Block"}
 
 ## Instance Block
