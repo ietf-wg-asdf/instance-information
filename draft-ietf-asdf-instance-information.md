@@ -300,11 +300,6 @@ Several media types can be defined for deltas/patches; JSON merge-patch {{-merge
 
 [CRDTs]: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
 
-To identify the reference state for a delta/patch, we need
-
-* device identity (thingId?)
-* state info (timestamp? state/generation identifier?)
-
 ## Context Information
 
 Messages always have context, typically describing the "me" and the
@@ -377,6 +372,11 @@ Furthermore, via the `patchMethod` field, a patch algorithm different from JSON 
 In the instance block, state information for properties, actions, and events as well as context information can be included.
 Depending on the archetype, this information will either be used to report a Thing's current state, to report state *changes*, or to update state via a patch or reconfiguration.
 
+In addition to the `messageId` and `previousMessageId` from the `info` block, we are able to refer to
+
+* the device identity (via the `identifier` qualitity) and
+* the point in time when the information regarding the device state has been captured (via the `timestamp` quality).
+
 Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
 
 The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the instance-related message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
@@ -384,14 +384,16 @@ Note that we also have to replicate a nested structure via `sdfThing` and/or `sd
 
 <!-- TODO: The descriptions need some refinement here. Also: Maybe we need to specify the shape of the qualities in addional sections -->
 
-| Quality          | Type   | Description                                                     |
-|------------------|--------|-----------------------------------------------------------------|
-| sdfThing         | map    | Values for the thing entries in the referenced SDF definition   |
-| sdfObject        | map    | Values for the object entries in the referenced SDF definition  |
-| sdfContext       | map    | Values for the context entries in the referenced SDF definition |
-| sdfProperty      | map    | Values for the properties in the referenced SDF definition      |
-| sdfAction        | map    | Values for the actions in the referenced SDF definition         |
-| sdfEvent         | map    | Values for the events in the referenced SDF definition          |
+| Quality          | Type   | Description                                                         |
+|------------------|--------|-------------------------------------------------------------------- |
+| identifier       | string | (Optional) identifier of the instance (e.g., a UUID)                |
+| timestamp        | string | Indicates the point in time this instance-related message refers to |
+| sdfThing         | map    | Values for the thing entries in the referenced SDF definition       |
+| sdfObject        | map    | Values for the object entries in the referenced SDF definition      |
+| sdfContext       | map    | Values for the context entries in the referenced SDF definition     |
+| sdfProperty      | map    | Values for the properties in the referenced SDF definition          |
+| sdfAction        | map    | Values for the actions in the referenced SDF definition             |
+| sdfEvent         | map    | Values for the events in the referenced SDF definition              |
 {: #ibsec title="Instance Block"}
 
 # Message Archetypes
@@ -424,9 +426,9 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
+  identifier: envSensor:abc123
+  timestamp: '2025-07-01T12:00:00Z'
   sdfContext:
-    timestamp: '2025-07-01T12:00:00Z'
-    thingId: envSensor:abc123
     installationInfo:
       floor: 3
       mountType: ceiling
@@ -457,9 +459,9 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
+  identifier: envSensor:abc123
+  timestamp: '2025-07-01T12:00:00Z'
   sdfContext:
-    timestamp: '2025-07-01T12:00:00Z'
-    thingId: envSensor:abc123
     installationInfo:
       mountType: ceiling
   sdfProperty:
@@ -542,7 +544,7 @@ In practice, these constructors are going to be modeled as an `sdfAction`, altho
 [^note-destructor]: Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.
 
 {{code-sdf-construction-message}} shows a potential SDF construction message that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
-The construction message also assigns a `thingId` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
+The construction message also assigns an `identifier` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
 
 ~~~ sdf
 info:
@@ -554,8 +556,8 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
+  identifier: envSensor:unit42
   sdfContext:
-    thingId: envSensor:unit42
     ipAddress: 192.168.1.5
     deviceIdentity:
       manufacturer: HealthTech Inc.
@@ -581,8 +583,8 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
+  identifier: envSensor:unit42
   sdfContext:
-    thingId: envSensor:unit42
     deviceIdentity:
       manufacturer: HealthTech Inc.
       firmwareVersion: 1.4.3
@@ -719,10 +721,6 @@ defaultNamespace: models
 sdfObject:
   envSensor:
     sdfContext:
-      timestamp:
-        type: string
-      thingId:
-        type: string
       deviceIdentity:
         manufacturer:
           type: string
