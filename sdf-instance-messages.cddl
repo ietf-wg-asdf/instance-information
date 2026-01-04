@@ -47,7 +47,7 @@ commonqualities = (
 )
 
 ; For describing the state of instances at a given point in time
-; 
+;
 ; An sdfInstance can refer to either an sdfThing or an sdfObject.
 ; Structurally, it is mostly equivalent to that of an sdfThing
 ; with the additiona of an identifier and a timestamp quality.
@@ -59,7 +59,7 @@ sdf-instance = (
 )
 objectqualities = {
  commonqualities
- 
+
  cpaedataqualities
 }
 
@@ -69,7 +69,7 @@ thingqualities = {
  sdfObject: named<objectqualities>
 
  commonqualities
- 
+
  cpaedataqualities
 }
 
@@ -80,10 +80,10 @@ cpaedataqualities = (
  ? sdfProperty: named<allowed-types>
 
  ; Models the current state of the instance's action affordances
- ;  
+ ;
  ; DISCUSS: How should the state of actions be modeled?
  ? sdfAction: named<any>
- 
+
  ; Models an history for every event affordance
  ? sdfEvent: named<eventhistory>
 )
