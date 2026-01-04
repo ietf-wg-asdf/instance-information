@@ -1176,9 +1176,14 @@ Appendix B.  Formal Syntax of Instance-related Messages
    ; For describing the state of instances at a given point in time
    ;
    ; An sdfInstance can refer to either an sdfThing or an sdfObject.
-   ; Structurally, it is equivalent to that of an sdfThing.
-   sdf-instance = thingqualities
+   ; Structurally, it is mostly equivalent to that of an sdfThing
+   ; with the additiona of an identifier and a timestamp quality.
+   sdf-instance = (
+       ? identifier: text
+       ? timestamp: modified-date-time
 
+       thingqualities
+   )
    objectqualities = {
     commonqualities
 
