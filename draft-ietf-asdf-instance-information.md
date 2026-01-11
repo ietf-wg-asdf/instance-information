@@ -703,7 +703,46 @@ title="Example of a snapshot message that provides the IP address needed to perf
 
 ## Modelling the State of Interaction Affordances
 
-TODO
+Besides context information, Snapshot and (in a relative fashion) Delta Messages can report the current state associated with interaction affordances.
+For `sdfProperty` definitions, this is very similar to context information and very straightforward, as previously seen in in {{code-sdf-delta-message}}.
+
+Actions and events, however, are handled differently: In the case of actions, the state of one or more actions is reported, which might already be in a completed or error state, or may also still be running.
+For events, a history is reported that includes the returned values.
+The exact of number of action and event reports is implementation-dependent and may vary between deployments.
+
+{{code-snapshot-with-actions-and-events}} shows an example of a Snapshot Message for a lightswitch which reports the results of two `toggle` actions, one of which failed.
+The successfully completed action caused the emission of a `toggleEvent` with the same `timestamp`.
+As the lightswitch was turned on, the event was emitted with a value of `true`.
+
+~~~ sdf
+info:
+  title: Example SDF Snapshot Message with an Action and an Event History.
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a85
+namespace:
+  cap: https://example.com/capability/cap
+  models: https://example.com/models
+defaultNamespace: cap
+sdfInstanceOf:
+  model: models:/sdfObject/lightSwitch
+sdfInstance:
+  sdfAction:
+    toggle:
+      - timestamp: 2026-01-11T22:39:35
+        status: complete
+        inputValue: null
+        outputValue: null
+      - timestamp: 2026-01-11T22:34:35
+        status: error
+        inputValue: null
+        outputValue: Toggle failed.
+        "$comment": This action completed with an error, which is why an error message was returned.
+  sdfEvent:
+    toggleEvent:
+      - timestamp: 2026-01-11T22:39:35
+        outputValue: true
+~~~
+{:sdf #code-snapshot-with-actions-and-events
+title="Example of an SDF Snapshot Messages that reports an action and an event history."}
 
 # Discussion
 
