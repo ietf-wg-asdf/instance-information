@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 8 July 2026                                  Universität Bremen
-                                                          4 January 2026
+Expires: 15 July 2026                                 Universität Bremen
+                                                         11 January 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 July 2026.
+   This Internet-Draft will expire on 15 July 2026.
 
 Copyright Notice
 
@@ -89,17 +89,19 @@ Table of Contents
      3.4.  Instance Block
    4.  Message Archetypes
      4.1.  Snapshot Messages
-       4.1.1.  Protocol Binding Information
      4.2.  Construction Messages
-       4.2.1.  Modelling Construction Parameters
      4.3.  Delta Messages
      4.4.  Patch Messages
-   5.  Discussion
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   5.  Application Scenarios
+     5.1.  Construction
+       5.1.1.  Protocol Binding Information
+     5.2.  Modelling the State of Interaction Affordances
+   6.  Discussion
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Appendix A.  Example SDF Model
    Appendix B.  Formal Syntax of Instance-related Messages
    List of Figures
@@ -617,7 +619,265 @@ Table of Contents
 
                       Figure 2: SDF proofshot example.
 
-4.1.1.  Protocol Binding Information
+4.2.  Construction Messages
+
+   Construction messages are structurally equivalent to snapshot
+   messages but may only contain context information.  Furthermore, the
+   recipient of a construction message is supposed to initiate a
+   configuration or comissioning process upon recption.  Construction
+   messages MUST be indicated by the media type application/sfd-
+   construction+json if possible.
+
+   A construction message for a temperature sensor might assign an
+   identity and/or complement it by temporary identity information
+   (e.g., an IP address); its processing might also generate
+   construction output (e.g., a public key or an IP address if those are
+   generated on device) which can be described via instance-related
+   messages such as snapshot messages.
+
+   The creation of construction messages is linked to the invocation of
+   a constructor that starts the actual construction process.  In
+   practice, these constructors are going to be modeled as an sdfAction,
+   although the way the sdfAction is going to be used exactly is not
+   entirely clear yet.
+
+
+   // Note that it is not quite clear what a destructor would be for a
+   // physical instance -- apart from a scrap metal press, but according
+   // to RFC 8576 we would want to move a system to a re-usable initial
+   // state, which is pretty much a constructor.
+
+   Figure 3 shows a potential SDF construction message that initializes
+   a device, setting its manufacturer and firmwareVersion as context
+   information.  The construction message also assigns an identifier,
+   the unit of reported temperature values, and an initial ipAddress
+   that can be used with the interaction affordances that may be present
+   in the corresponding SDF model.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "identifier": "envSensor:unit42",
+       "sdfContext": {
+         "ipAddress": "192.168.1.5",
+         "unit": "Cel",
+         "deviceIdentity": {
+           "manufacturer": "HealthTech Inc.",
+           "firmwareVersion": "1.4.3"
+         }
+       }
+     }
+   }
+
+             Figure 3: Example for an SDF construction message
+
+   A special type of construction message that only contains identity-
+   related information may be called an _Identity Manifest_. Figure 4
+   shows an example of an identity manifest that is structurally
+   identical to the construction message from Figure 3, with the non-
+   identity-related information left out.
+
+   Via sdfRequired, an SDF model can indicate which context information
+   must be present and therefore initialized within an instance.  All
+   definitions included in sdfRequired MUST also be present in a
+   construction message, while other sdfContext definitions could be
+   left out.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "identifier": "envSensor:unit42",
+       "sdfContext": {
+         "deviceIdentity": {
+           "manufacturer": "HealthTech Inc.",
+           "firmwareVersion": "1.4.3"
+         }
+       }
+     }
+   }
+
+               Figure 4: Example of an SDF identity manifest
+
+4.3.  Delta Messages
+
+   Delta messages describe updates to a Thing's state relative to a
+   previous message.  For this purpose, a previousMessageId MUST be
+   present in the info block.  When transmitting delta messages, the
+   media type application/sdf-delta+json MUST be used if possible.
+
+   By default, the values contained in the message are applied to the
+   preceding message(s) via the JSON Merge Patch algorithm.  Via the
+   patchMethod quality, different patch algorithms MAY be indicated.
+
+   Figure 5 shows an example Delta message that reports state changes
+   compared to the ones reported in the previous message (identified via
+   its previousMessageId).  In this example, only the temperature that
+   has been measured by the sensor has changed, which is why it is the
+   only piece of information that is included.
+
+   Delta messages could be used in the Series Transfer Pattern [STP],
+   which may be one way to model a telemetry stream from a device.
+
+   {
+     "info": {
+       "title": "Example SDF delta message",
+       "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap",
+       "models": "https://example.com/models"
+     },
+     "defaultNamespace": "cap",
+     "sdfInstanceOf": {
+       "model": "models:/sdfObject/envSensor"
+     },
+     "sdfInstance": {
+       "sdfProperty": {
+         "temperature": 24
+       }
+     }
+   }
+
+      Figure 5: Example of an SDF instance-related message that serves
+                                as a delta.
+
+4.4.  Patch Messages
+
+   Patch messages are structurally equivalent to delta messages, but
+   once again are only allowed to contain context information.  They
+   utilize a patch _mechanism_ (which may be explicitly indicated via
+   the patchMethod quality) to _alter_ the state of a Thing instead of
+   _reporting_ state changes.  Since patch messages are not referring to
+   a preceding message, a previosMessageId MUST NOT be present in the
+   information block.  When transmitting state patches, the media type
+   application/sdf-patch+json MUST be used if possible.
+
+   An example Patch Message is shown in Figure 6, where a change of the
+   device's mountType is signalled.
+
+   {
+     "info": {
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+     },
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfInstanceOf": {
+       "model": "sensors:#/sdfObject/envSensor",
+       "patchMethod": "merge-patch"
+     },
+     "sdfInstance": {
+       "sdfContext": {
+         "installationInfo": {
+           "mountType": "wall"
+         }
+       }
+     }
+   }
+
+      Figure 6: Example of an SDF context patch message that uses the
+                  common instance-related message format.
+
+   Practical uses for patch message include digital twins
+   [I-D.lee-asdf-digital-twin], where changes to physical attributes
+   (such as the location) need to be reflected in the digital
+   representation of a Thing.
+
+5.  Application Scenarios
+
+   The instance-related message format and the four architectures are
+   usable in a number of use cases, some of which we are going to
+   specify in the following.  Other specifications may define additional
+   use cases instance-related messages can be used for.
+
+5.1.  Construction
+
+   In SDF models, we can speicify a Thing's configurable parameters via
+   sdfContext definitions for which Construction Messages can provide
+   concrete values.  Figure 7 shows an example for such an SDF model.
+   The parameters settable during construction (in this case: the
+   temperature property's unit) are modeled as sdfContext definitions,
+   to which the entries of the sdfParameters map may point to using JSON
+   pointers.
+
+   {
+     "namespace": {
+       "models": "https://example.com/models",
+       "sensors": "https://example.com/sensor"
+     },
+     "defaultNamespace": "models",
+     "sdfObject": {
+       "sensor": {
+         "sdfRequired": [
+           "ipAddress",
+           "deviceIdentity"
+         ],
+         "sdfContext": {
+           "ipAddress": {
+             "type": "string"
+           },
+           "unit": {
+             "type": "string"
+           },
+           "deviceIdentity": {
+             "type": "object",
+             "properties": {
+               "manufacturer": {
+                 "type": "string"
+               },
+               "firmwareVersion": {
+                 "type": "string"
+               }
+             }
+           }
+         },
+         "sdfProperty": {
+           "temperature": {
+             "type": "number",
+             "sdfParameters": {
+               "unit": "#/sdfObject/sensor/sdfContext/unit"
+             },
+             "sdfRequired": "#/sdfObject/sensor/sdfContext/unit"
+           }
+         }
+       }
+     }
+   }
+
+             Figure 7: Example for SDF model with constructors
+
+   Based on the SDF model above, a Construction Message such as the one
+   shown in Figure 3 can trigger a construction process.  As indicated
+   via sdfRequired, this process must include the initialization of an
+   IP address as well as the device's identity definitions.  In the
+   example model, initializing the unit context definition is only
+   required if the temperature property is present, which is expressed
+   by the JSON pointer within the property's sdfRequired definition.
+
+5.1.1.  Protocol Binding Information
 
    When using the sdfProtocolMap concept introduced in
    [I-D.ietf-asdf-sdf-protocol-mapping], some protocols may need context
@@ -628,11 +888,11 @@ Table of Contents
 
    For example, all instances of a smart light may use similar CoAP
    resources, with the only difference being the concrete IP address
-   they are using.  Therefore, we can utilize context information that
+   assigned to them.  Therefore, we can utilize context information that
    varies between instances to complement the model information provided
    via an sdfProtocolMap.
 
-   Figure 3 illustrates the potential relationship between the two
+   Figure 8 illustrates the potential relationship between the two
    concepts in an SDF model.  Here, a (hypothetical) CoAP protocol
    mapping specification defines an interface for parameters such as an
    IP address.  Via JSON pointers, the sdfParameters within the
@@ -677,13 +937,13 @@ Table of Contents
      }
    }
 
-     Figure 3: Example of an SDF model where a CoAP-based protocol map
+     Figure 8: Example of an SDF model where a CoAP-based protocol map
       points to the definition of relevant context information: an IP
                                   address.
 
-   Figure 4 shows how a snapshot message can provide the necessary IP
-   address that is needed to actually retrieve the temperature value
-   from the sensor described by the SDF model above.
+   Figure 9 shows how a Snapshot Message can provide the necessary IP
+   address that is needed for retrieving the temperature value from the
+   sensor described by the SDF model above.
 
    {
      "info": {
@@ -704,235 +964,15 @@ Table of Contents
      }
    }
 
-        Figure 4: Example of a snapshot message that provides the IP
+        Figure 9: Example of a snapshot message that provides the IP
         address needed to perform a CoAP-based interaction with the
                       sensor from the previous figure.
 
-4.2.  Construction Messages
+5.2.  Modelling the State of Interaction Affordances
 
-   Construction messages are structurally equivalent to snapshot
-   messages but may only contain context information.  Furthermore, the
-   recipient of a construction message is supposed to initiate a
-   configuration or comissioning process upon recption.  Construction
-   messages MUST be indicated by the media type application/sfd-
-   construction+json if possible.
+   TODO
 
-   A construction message for a temperature sensor might assign an
-   identity and/or complement it by temporary identity information
-   (e.g., an IP address); its processing might also generate
-   construction output (e.g., a public key or an IP address if those are
-   generated on device) which can be described via instance-related
-   messages such as snapshot messages.
-
-   The creation of construction messages is linked to the invocation of
-   a constructor that starts the actual construction process.  In
-   practice, these constructors are going to be modeled as an sdfAction,
-   although the way the sdfAction is going to be used exactly is not
-   entirely clear yet.
-
-
-   // Note that it is not quite clear what a destructor would be for a
-   // physical instance -- apart from a scrap metal press, but according
-   // to RFC 8576 we would want to move a system to a re-usable initial
-   // state, which is pretty much a constructor.
-
-   Figure 5 shows a potential SDF construction message that initializes
-   a device, setting its manufacturer and firmwareVersion as context
-   information.  The construction message also assigns an identifier as
-   well as an initial ipAddress that can be used with the interaction
-   affordances that may be present in the corresponding SDF model.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "identifier": "envSensor:unit42",
-       "sdfContext": {
-         "ipAddress": "192.168.1.5",
-         "deviceIdentity": {
-           "manufacturer": "HealthTech Inc.",
-           "firmwareVersion": "1.4.3"
-         }
-       }
-     }
-   }
-
-             Figure 5: Example for an SDF construction message
-
-   A special type of construction message that only contains identity-
-   related information may be called an _Identity Manifest_. Figure 6
-   shows an example of an identity manifest that is structurally
-   identical to the construction message from Figure 5, with the non-
-   identity-related information left out.
-
-   Via sdfRequired, an SDF model can indicate which context information
-   must be present and therefore initialized within an instance.  All
-   definitions included in sdfRequired MUST also be present in a
-   construction message, while other sdfContext definitions could be
-   left out.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "identifier": "envSensor:unit42",
-       "sdfContext": {
-         "deviceIdentity": {
-           "manufacturer": "HealthTech Inc.",
-           "firmwareVersion": "1.4.3"
-         }
-       }
-     }
-   }
-
-               Figure 6: Example of an SDF identity manifest
-
-4.2.1.  Modelling Construction Parameters
-
-   In SDF models, we can speicify a Thing's configurable parameters via
-   sdfContext definitions for which construction messages can provide
-   concrete values.  Figure 7 shows an example for such an SDF model.
-   Here, the parameters settable during construction are modeled as
-   sdfContext definitions, to which the entries within sdfParameters may
-   point to using JSON pointers.
-
-   {
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
-     },
-     "defaultNamespace": "models",
-     "sdfObject": {
-       "sensor": {
-         "sdfContext": {
-           "ipAddress": {
-             "type": "string"
-           },
-           "unit": {
-             "type": "string"
-           }
-         },
-         "sdfProperty": {
-           "temperature": {
-             "type": "number",
-             "sdfParameters": {
-               "unit": "#/sdfObject/sensor/sdfContext/unit"
-             }
-           }
-         }
-       }
-     }
-   }
-
-             Figure 7: Example for SDF model with constructors
-
-4.3.  Delta Messages
-
-   Delta messages describe updates to a Thing's state relative to a
-   previous message.  For this purpose, a previousMessageId MUST be
-   present in the info block.  When transmitting delta messages, the
-   media type application/sdf-delta+json MUST be used if possible.
-
-   By default, the values contained in the message are applied to the
-   preceding message(s) via the JSON Merge Patch algorithm.  Via the
-   patchMethod quality, different patch algorithms MAY be indicated.
-
-   Figure 8 shows an example Delta message that reports state changes
-   compared to the ones reported in the previous message (identified via
-   its previousMessageId).  In this example, only the temperature that
-   has been measured by the sensor has changed, which is why it is the
-   only piece of information that is included.
-
-   Delta messages could be used in the Series Transfer Pattern [STP],
-   which may be one way to model a telemetry stream from a device.
-
-   {
-     "info": {
-       "title": "Example SDF delta message",
-       "previousMessageId": "026c1f58-7bb9-4927-81cf-1ca0c25a857b",
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "cap": "https://example.com/capability/cap",
-       "models": "https://example.com/models"
-     },
-     "defaultNamespace": "cap",
-     "sdfInstanceOf": {
-       "model": "models:/sdfObject/envSensor"
-     },
-     "sdfInstance": {
-       "sdfProperty": {
-         "temperature": 24
-       }
-     }
-   }
-
-      Figure 8: Example of an SDF instance-related message that serves
-                                as a delta.
-
-4.4.  Patch Messages
-
-   Patch messages are structurally equivalent to delta messages, but
-   once again are only allowed to contain context information.  They
-   utilize a patch _mechanism_ (which may be explicitly indicated via
-   the patchMethod quality) to _alter_ the state of a Thing instead of
-   _reporting_ state changes.  Since patch messages are not referring to
-   a preceding message, a previosMessageId MUST NOT be present in the
-   information block.  When transmitting state patches, the media type
-   application/sdf-patch+json MUST be used if possible.
-
-   An example Patch Message is shown in Figure 9, where a change of the
-   device's mountType is signalled.
-
-   {
-     "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
-     },
-     "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
-     },
-     "defaultNamespace": "models",
-     "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor",
-       "patchMethod": "merge-patch"
-     },
-     "sdfInstance": {
-       "sdfContext": {
-         "installationInfo": {
-           "mountType": "wall"
-         }
-       }
-     }
-   }
-
-      Figure 9: Example of an SDF context patch message that uses the
-                  common instance-related message format.
-
-   Practical uses for patch message include digital twins
-   [I-D.lee-asdf-digital-twin], where changes to physical attributes
-   (such as the location) need to be reflected in the digital
-   representation of a Thing.
-
-5.  Discussion
+6.  Discussion
 
    (TODO)
 
@@ -946,7 +986,7 @@ Table of Contents
    Discuss YANG config=true approach with regard to construction
    messages.
 
-6.  Security Considerations
+7.  Security Considerations
 
    *  Pieces of instance-related information might only be available in
       certain scopes, e.g. certain security-related configuration
@@ -954,13 +994,13 @@ Table of Contents
 
    (TODO)
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    TODO: Add media type registrations
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [BCP14]    Best Current Practice 14,
               <https://www.rfc-editor.org/info/bcp14>.
@@ -1004,7 +1044,7 @@ Table of Contents
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/info/rfc9110>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [I-D.amsuess-t2trg-raytime]
               Amsüss, C., "Raytime: Validating token expiry on an
@@ -1253,18 +1293,18 @@ List of Figures
 
    Figure 1:  Example of an SDF context snapshot.
    Figure 2:  SDF proofshot example.
-   Figure 3:  Example of an SDF model where a CoAP-based protocol map
+   Figure 8:  Example of an SDF model where a CoAP-based protocol map
               points to the definition of relevant context information:
               an IP address.
-   Figure 4:  Example of a snapshot message that provides the IP address
+   Figure 9:  Example of a snapshot message that provides the IP address
               needed to perform a CoAP-based interaction with the sensor
               from the previous figure.
-   Figure 5:  Example for an SDF construction message
-   Figure 6:  Example of an SDF identity manifest
+   Figure 3:  Example for an SDF construction message
+   Figure 4:  Example of an SDF identity manifest
    Figure 7:  Example for SDF model with constructors
-   Figure 8:  Example of an SDF instance-related message that serves as
+   Figure 5:  Example of an SDF instance-related message that serves as
               a delta.
-   Figure 9:  Example of an SDF context patch message that uses the
+   Figure 6:  Example of an SDF context patch message that uses the
               common instance-related message format.
    Figure 10:  SDF Model that serves as a reference point for the
               instance-related messages in this draft
