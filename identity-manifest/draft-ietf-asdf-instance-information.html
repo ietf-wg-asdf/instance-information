@@ -1216,14 +1216,12 @@ Split into four "archetypes", instance-related messages are always governed by S
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-construction" class="internal xref">Construction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-protocol-binding-informatio" class="internal xref">Protocol Binding Information</a></p>
-</li>
-                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-modelling-the-state-of-inte" class="internal xref">Modelling the State of Interaction Affordances</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-protocol-binding-informatio" class="internal xref">Protocol Binding Information</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-modelling-the-state-of-inte" class="internal xref">Modelling the State of Interaction Affordances</a></p>
 </li>
             </ul>
 </li>
@@ -2112,21 +2110,23 @@ The parameters settable during construction (in this case: the <code>temperature
 <p id="section-5.1-3">Based on the SDF model above, a Construction Message such as the one shown in <a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> can trigger a construction process.
 As indicated via <code>sdfRequired</code>, this process must include the initialization of an IP address as well as the device's identity definitions.
 In the example model, initializing the <code>unit</code> context definition is only required if the <code>temperature</code> property is present, which is expressed by the JSON pointer within the property's <code>sdfRequired</code> definition.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
 <div id="protocol-binding-information">
-<section id="section-5.1.1">
-          <h4 id="name-protocol-binding-informatio">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-protocol-binding-informatio" class="section-name selfRef">Protocol Binding Information</a>
-          </h4>
-<p id="section-5.1.1-1">When using the <code>sdfProtocolMap</code> concept introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span>, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
-This corresponds with the fact that the parameters related to application-layer protocols are often <em>class-level</em> information and therefore not necessarily instance-specific.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">For example, all instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address assigned to them.
-Therefore, we can utilize context information that varies between instances to complement the model information provided via an <code>sdfProtocolMap</code>.<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-3"><a href="#code-sdf-protocol-map-plus-context" class="auto internal xref">Figure 8</a> illustrates the potential relationship between the two concepts in an SDF model.
+<section id="section-5.2">
+        <h3 id="name-protocol-binding-informatio">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-protocol-binding-informatio" class="section-name selfRef">Protocol Binding Information</a>
+        </h3>
+<p id="section-5.2-1">When using the <code>sdfProtocolMap</code> concept introduced in <span>[<a href="#I-D.ietf-asdf-sdf-protocol-mapping" class="cite xref">I-D.ietf-asdf-sdf-protocol-mapping</a>]</span>, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
+This corresponds with the fact that the parameters related to application-layer protocols are often <em>class-level</em> information and therefore not necessarily instance-specific.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">For example, all instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address assigned to them.
+Therefore, we can utilize context information that varies between instances to complement the model information provided via an <code>sdfProtocolMap</code>.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3"><a href="#code-sdf-protocol-map-plus-context" class="auto internal xref">Figure 8</a> illustrates the potential relationship between the two concepts in an SDF model.
 Here, a (hypothetical) CoAP protocol mapping specification defines an interface for parameters such as an IP address.
-Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMap</code> are linked to compatible <code>sdfContext</code> entries that may further restrict the set of allowed values via their schema definitions.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMap</code> are linked to compatible <code>sdfContext</code> entries that may further restrict the set of allowed values via their schema definitions.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 <span id="name-example-of-an-sdf-model-whe"></span><div id="code-sdf-protocol-map-plus-context">
 <figure id="figure-8">
-            <div class="lang-sdf sourcecode" id="section-5.1.1-4.1">
+          <div class="lang-sdf sourcecode" id="section-5.2-4.1">
 <pre>=============== NOTE: '\' line wrapping per RFC 8792 ================
 
 {
@@ -2167,12 +2167,12 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
 <a href="#name-example-of-an-sdf-model-whe" class="selfRef">Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address.</a>
-            </figcaption></figure>
+          </figcaption></figure>
 </div>
-<p id="section-5.1.1-5"><a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 9</a> shows how a Snapshot Message can provide the necessary IP address that is needed for retrieving the temperature value from the sensor described by the SDF model above.<a href="#section-5.1.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-5"><a href="#code-sdf-ipaddress-context" class="auto internal xref">Figure 9</a> shows how a Snapshot Message can provide the necessary IP address that is needed for retrieving the temperature value from the sensor described by the SDF model above.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-of-a-snapshot-messa"></span><div id="code-sdf-ipaddress-context">
 <figure id="figure-9">
-            <div class="lang-sdf sourcecode" id="section-5.1.1-6.1">
+          <div class="lang-sdf sourcecode" id="section-5.2-6.1">
 <pre>{
   "info": {
     "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a47"
@@ -2195,18 +2195,16 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
 </div>
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
 <a href="#name-example-of-a-snapshot-messa" class="selfRef">Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.</a>
-            </figcaption></figure>
-</div>
-</section>
+          </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="modelling-the-state-of-interaction-affordances">
-<section id="section-5.2">
+<section id="section-5.3">
         <h3 id="name-modelling-the-state-of-inte">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-modelling-the-state-of-inte" class="section-name selfRef">Modelling the State of Interaction Affordances</a>
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-modelling-the-state-of-inte" class="section-name selfRef">Modelling the State of Interaction Affordances</a>
         </h3>
-<p id="section-5.2-1">TODO<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">TODO<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

@@ -94,8 +94,8 @@ Table of Contents
      4.4.  Patch Messages
    5.  Application Scenarios
      5.1.  Construction
-       5.1.1.  Protocol Binding Information
-     5.2.  Modelling the State of Interaction Affordances
+     5.2.  Protocol Binding Information
+     5.3.  Modelling the State of Interaction Affordances
    6.  Discussion
    7.  Security Considerations
    8.  IANA Considerations
@@ -877,7 +877,7 @@ Table of Contents
    required if the temperature property is present, which is expressed
    by the JSON pointer within the property's sdfRequired definition.
 
-5.1.1.  Protocol Binding Information
+5.2.  Protocol Binding Information
 
    When using the sdfProtocolMap concept introduced in
    [I-D.ietf-asdf-sdf-protocol-mapping], some protocols may need context
@@ -968,7 +968,7 @@ Table of Contents
         address needed to perform a CoAP-based interaction with the
                       sensor from the previous figure.
 
-5.2.  Modelling the State of Interaction Affordances
+5.3.  Modelling the State of Interaction Affordances
 
    TODO
 
