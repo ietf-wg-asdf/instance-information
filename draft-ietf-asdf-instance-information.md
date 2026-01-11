@@ -471,61 +471,6 @@ sdfInstance:
 {:sdf #code-off-device-instance post="fold"
 title="SDF proofshot example."}
 
-### Protocol Binding Information
-
-When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
-This corresponds with the fact that the parameters related to application-layer protocols are often _class-level_ information and therefore not necessarily instance-specific.
-
-For example, all instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address they are using.
-Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
-
-{{code-sdf-protocol-map-plus-context}} illustrates the potential relationship between the two concepts in an SDF model.
-Here, a (hypothetical) CoAP protocol mapping specification defines an interface for parameters such as an IP address.
-Via JSON pointers, the `sdfParameters` within the `sdfProtocolMap` are linked to compatible `sdfContext` entries that may further restrict the set of allowed values via their schema definitions.
-
-~~~ sdf
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfObject:
-  sensor:
-    sdfContext:
-      ipAddress:
-        type: string
-    sdfProperty:
-      temperature:
-        type: number
-        sdfProtocolMap:
-          coap:
-            sdfParameters:
-              ipAddress: "#/sdfObject/sensor/sdfContext/ipAddress"
-            read:
-              method: GET
-              href: "/temperature"
-              contentType: 60
-~~~
-{:sdf #code-sdf-protocol-map-plus-context
-title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
-
-{{code-sdf-ipaddress-context}} shows how a snapshot message can provide the necessary IP address that is needed to actually retrieve the temperature value from the sensor described by the SDF model above.
-
-~~~ sdf
-info:
-  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a47
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfInstanceOf:
-  model: sensors:#/sdfObject/sensor
-sdfInstance:
-  sdfContext:
-    ipAddress: 192.168.1.5
-~~~
-{:sdf #code-sdf-ipaddress-context
-title="Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
-
 ## Construction Messages
 
 Construction messages are structurally equivalent to snapshot messages but may only contain context information.
@@ -544,7 +489,7 @@ In practice, these constructors are going to be modeled as an `sdfAction`, altho
 [^note-destructor]: Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.
 
 {{code-sdf-construction-message}} shows a potential SDF construction message that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
-The construction message also assigns an `identifier` as well as an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
+The construction message also assigns an `identifier`, the `unit` of reported temperature values, and an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
 
 ~~~ sdf
 info:
@@ -559,6 +504,7 @@ sdfInstance:
   identifier: envSensor:unit42
   sdfContext:
     ipAddress: 192.168.1.5
+    unit: Cel
     deviceIdentity:
       manufacturer: HealthTech Inc.
       firmwareVersion: 1.4.3
@@ -591,33 +537,6 @@ sdfInstance:
 ~~~
 {:sdf #code-sdf-identity-manifest
 title="Example of an SDF identity manifest"}
-
-### Modelling Construction Parameters
-
-In SDF models, we can speicify a Thing's configurable parameters via `sdfContext` definitions for which construction messages can provide concrete values.
-{{code-sdf-construction-sdf-context}} shows an example for such an SDF model.
-Here, the parameters settable during construction are modeled as `sdfContext` definitions, to which the entries within `sdfParameters` may point to using JSON pointers.
-
-~~~ sdf
-namespace:
-  models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
-sdfObject:
-  sensor:
-    sdfContext:
-      ipAddress:
-        type: string
-      unit:
-        type: string
-    sdfProperty:
-      temperature:
-        type: number
-        sdfParameters:
-          unit: "#/sdfObject/sensor/sdfContext/unit"
-~~~
-{:sdf #code-sdf-construction-sdf-context
-title="Example for SDF model with constructors"}
 
 ## Delta Messages
 
@@ -679,6 +598,112 @@ sdfInstance:
 title="Example of an SDF context patch message that uses the common instance-related message format."}
 
 Practical uses for patch message include digital twins {{-digital-twin}}, where changes to physical attributes (such as the location) need to be reflected in the digital representation of a Thing.
+
+# Application Scenarios
+
+The instance-related message format and the four architectures are usable in a number of use cases, some of which we are going to specify in the following.
+Other specifications may define additional use cases instance-related messages can be used for.
+
+## Construction
+
+In SDF models, we can speicify a Thing's configurable parameters via `sdfContext` definitions for which Construction Messages can provide concrete values.
+{{code-sdf-construction-sdf-context}} shows an example for such an SDF model.
+The parameters settable during construction (in this case: the `temperature` property's `unit`) are modeled as `sdfContext` definitions, to which the entries of the `sdfParameters` map may point to using JSON pointers.
+
+~~~ sdf
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfObject:
+  sensor:
+    sdfRequired:
+      - ipAddress
+      - deviceIdentity
+    sdfContext:
+      ipAddress:
+        type: string
+      unit:
+        type: string
+      deviceIdentity:
+        type: object
+        properties:
+          manufacturer:
+            type: string
+          firmwareVersion:
+            type: string
+    sdfProperty:
+      temperature:
+        type: number
+        sdfParameters:
+          unit: "#/sdfObject/sensor/sdfContext/unit"
+        sdfRequired: "#/sdfObject/sensor/sdfContext/unit"
+~~~
+{:sdf #code-sdf-construction-sdf-context
+title="Example for SDF model with constructors"}
+
+Based on the SDF model above, a Construction Message such as the one shown in {{code-sdf-construction-message}} can trigger a construction process.
+As indicated via `sdfRequired`, this process must include the initialization of an IP address as well as the device's identity definitions.
+In the example model, initializing the `unit` context definition is only required if the `temperature` property is present, which is expressed by the JSON pointer within the property's `sdfRequired` definition.
+
+## Protocol Binding Information
+
+When using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, some protocols may need context information such as a hostname or an IP address to actually be usable for interactions.
+This corresponds with the fact that the parameters related to application-layer protocols are often _class-level_ information and therefore not necessarily instance-specific.
+
+For example, all instances of a smart light may use similar CoAP resources, with the only difference being the concrete IP address assigned to them.
+Therefore, we can utilize context information that varies between instances to complement the model information provided via an `sdfProtocolMap`.
+
+{{code-sdf-protocol-map-plus-context}} illustrates the potential relationship between the two concepts in an SDF model.
+Here, a (hypothetical) CoAP protocol mapping specification defines an interface for parameters such as an IP address.
+Via JSON pointers, the `sdfParameters` within the `sdfProtocolMap` are linked to compatible `sdfContext` entries that may further restrict the set of allowed values via their schema definitions.
+
+~~~ sdf
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfObject:
+  sensor:
+    sdfContext:
+      ipAddress:
+        type: string
+    sdfProperty:
+      temperature:
+        type: number
+        sdfProtocolMap:
+          coap:
+            sdfParameters:
+              ipAddress: "#/sdfObject/sensor/sdfContext/ipAddress"
+            read:
+              method: GET
+              href: "/temperature"
+              contentType: 60
+~~~
+{:sdf #code-sdf-protocol-map-plus-context
+title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
+
+{{code-sdf-ipaddress-context}} shows how a Snapshot Message can provide the necessary IP address that is needed for retrieving the temperature value from the sensor described by the SDF model above.
+
+~~~ sdf
+info:
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a47
+namespace:
+  models: https://example.com/models
+  sensors: https://example.com/sensor
+defaultNamespace: models
+sdfInstanceOf:
+  model: sensors:#/sdfObject/sensor
+sdfInstance:
+  sdfContext:
+    ipAddress: 192.168.1.5
+~~~
+{:sdf #code-sdf-ipaddress-context
+title="Example of a snapshot message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure."}
+
+## Modelling the State of Interaction Affordances
+
+TODO
 
 # Discussion
 
