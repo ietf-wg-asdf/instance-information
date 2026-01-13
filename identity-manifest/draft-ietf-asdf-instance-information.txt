@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 15 July 2026                                 Universität Bremen
-                                                         11 January 2026
+Expires: 17 July 2026                                 Universität Bremen
+                                                         13 January 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 July 2026.
+   This Internet-Draft will expire on 17 July 2026.
 
 Copyright Notice
 
@@ -1035,6 +1035,11 @@ Table of Contents
 
    Discuss YANG config=true approach with regard to construction
    messages.
+
+   Discuss expressing a device's "purpose of life" via context
+   information
+
+   Discuss using context information to indicate provence
 
 7.  Security Considerations
 
