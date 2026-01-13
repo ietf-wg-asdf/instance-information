@@ -756,6 +756,10 @@ Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime
 
 Discuss YANG config=true approach with regard to construction messages.
 
+Discuss expressing a device's "purpose of life" via context information
+
+Discuss using context information to indicate provence
+
 # Security Considerations
 
 - Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters
