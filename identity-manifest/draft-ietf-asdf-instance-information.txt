@@ -25,7 +25,8 @@ Abstract
 
    // This revision applies a major restructuring to the document,
    // reduces redundancy, and clarifies some of the concepts that are
-   // used throughout the document.
+   // used throughout the document.  It also expands upon three
+   // experimental application scenarios for instance-related messages.
 
 About This Document
 
