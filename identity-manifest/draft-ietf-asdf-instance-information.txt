@@ -399,6 +399,10 @@ Table of Contents
      |                   |         | instance-related message to a   |
      |                   |         | previous one                    |
      +-------------------+---------+---------------------------------+
+     | timestamp         | string  | Indicates the point in time     |
+     |                   |         | this instance-related message   |
+     |                   |         | refers to                       |
+     +-------------------+---------+---------------------------------+
      | features          | array   | List of extension features used |
      |                   | of      |                                 |
      |                   | strings |                                 |
@@ -468,10 +472,11 @@ Table of Contents
    In addition to the messageId and previousMessageId from the info
    block, we are able to refer to
 
-   *  the device identity (via the identifier qualitity) and
-
    *  the point in time when the information regarding the device state
-      has been captured (via the timestamp quality).
+      has been captured (via the timestamp quality) and
+
+   *  the device identity (via the thingId qualitity in the sdfInstance
+      block).
 
    Since we are using the sdfInstance keyword as an entry point at the
    location pointed to via the model specfied in sdfInstanceOf, the
@@ -486,33 +491,30 @@ Table of Contents
    have to replicate a nested structure via sdfThing and/or sdfObject if
    present in the referenced SDF model.
 
-       +=============+========+====================================+
-       | Quality     | Type   | Description                        |
-       +=============+========+====================================+
-       | identifier  | string | (Optional) identifier of the       |
-       |             |        | instance (e.g., a UUID)            |
-       +-------------+--------+------------------------------------+
-       | timestamp   | string | Indicates the point in time this   |
-       |             |        | instance-related message refers to |
-       +-------------+--------+------------------------------------+
-       | sdfThing    | map    | Values for the thing entries in    |
-       |             |        | the referenced SDF definition      |
-       +-------------+--------+------------------------------------+
-       | sdfObject   | map    | Values for the object entries in   |
-       |             |        | the referenced SDF definition      |
-       +-------------+--------+------------------------------------+
-       | sdfContext  | map    | Values for the context entries in  |
-       |             |        | the referenced SDF definition      |
-       +-------------+--------+------------------------------------+
-       | sdfProperty | map    | Values for the properties in the   |
-       |             |        | referenced SDF definition          |
-       +-------------+--------+------------------------------------+
-       | sdfAction   | map    | Values for the actions in the      |
-       |             |        | referenced SDF definition          |
-       +-------------+--------+------------------------------------+
-       | sdfEvent    | map    | Values for the events in the       |
-       |             |        | referenced SDF definition          |
-       +-------------+--------+------------------------------------+
+        +=============+========+==================================+
+        | Quality     | Type   | Description                      |
+        +=============+========+==================================+
+        | thingId     | string | (Optional) identifier of the     |
+        |             |        | instance (e.g., a UUID)          |
+        +-------------+--------+----------------------------------+
+        | sdfThing    | map    | Values for the thing entries in  |
+        |             |        | the referenced SDF definition    |
+        +-------------+--------+----------------------------------+
+        | sdfObject   | map    | Values for the object entries in |
+        |             |        | the referenced SDF definition    |
+        +-------------+--------+----------------------------------+
+        | sdfContext  | map    | Values for the context entries   |
+        |             |        | in the referenced SDF definition |
+        +-------------+--------+----------------------------------+
+        | sdfProperty | map    | Values for the properties in the |
+        |             |        | referenced SDF definition        |
+        +-------------+--------+----------------------------------+
+        | sdfAction   | map    | Values for the actions in the    |
+        |             |        | referenced SDF definition        |
+        +-------------+--------+----------------------------------+
+        | sdfEvent    | map    | Values for the events in the     |
+        |             |        | referenced SDF definition        |
+        +-------------+--------+----------------------------------+
 
                           Table 5: Instance Block
 
@@ -551,7 +553,8 @@ Table of Contents
 
    {
      "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+       "timestamp": "2025-07-01T12:00:00Z"
      },
      "namespace": {
        "models": "https://example.com/models",
@@ -562,8 +565,7 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
-       "identifier": "envSensor:abc123",
-       "timestamp": "2025-07-01T12:00:00Z",
+       "thingId": "envSensor:abc123",
        "sdfContext": {
          "installationInfo": {
            "floor": 3,
@@ -593,7 +595,8 @@ Table of Contents
 
    {
      "info": {
-       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+       "timestamp": "2025-07-01T12:00:00Z"
      },
      "namespace": {
        "models": "https://example.com/models",
@@ -604,8 +607,7 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
-       "identifier": "envSensor:abc123",
-       "timestamp": "2025-07-01T12:00:00Z",
+       "thingId": "envSensor:abc123",
        "sdfContext": {
          "installationInfo": {
            "mountType": "ceiling"
@@ -649,10 +651,10 @@ Table of Contents
 
    Figure 3 shows a potential SDF construction message that initializes
    a device, setting its manufacturer and firmwareVersion as context
-   information.  The construction message also assigns an identifier,
-   the unit of reported temperature values, and an initial ipAddress
-   that can be used with the interaction affordances that may be present
-   in the corresponding SDF model.
+   information.  The construction message also assigns a thingId, the
+   unit of reported temperature values, and an initial ipAddress that
+   can be used with the interaction affordances that may be present in
+   the corresponding SDF model.
 
    {
      "info": {
@@ -667,7 +669,7 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
-       "identifier": "envSensor:unit42",
+       "thingId": "envSensor:unit42",
        "sdfContext": {
          "ipAddress": "192.168.1.5",
          "unit": "Cel",
@@ -706,7 +708,7 @@ Table of Contents
        "model": "sensors:#/sdfObject/envSensor"
      },
      "sdfInstance": {
-       "identifier": "envSensor:unit42",
+       "thingId": "envSensor:unit42",
        "sdfContext": {
          "deviceIdentity": {
            "manufacturer": "HealthTech Inc.",
@@ -1260,6 +1262,7 @@ Appendix B.  Formal Syntax of Instance-related Messages
     ; actually changed, turning it into a "Delta" or a "Patch",
     ; depending on the purpose of the message.
     ? previousMessageId: text
+    ? timestamp: modified-date-time
     ? modified: modified-date-time
     ? features: [
                 ]
@@ -1288,10 +1291,9 @@ Appendix B.  Formal Syntax of Instance-related Messages
    ;
    ; An sdfInstance can refer to either an sdfThing or an sdfObject.
    ; Structurally, it is mostly equivalent to that of an sdfThing
-   ; with the additiona of an identifier and a timestamp quality.
+   ; with the additiona of a thingId quality.
    sdf-instance = (
-       ? identifier: text
-       ? timestamp: modified-date-time
+       ? thingId: text
 
        thingqualities
    )

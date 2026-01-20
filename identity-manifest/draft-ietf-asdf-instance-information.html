@@ -1598,6 +1598,11 @@ Furthermore, Delta messages can utilize the <code>previousMessageId</code> in or
               <td class="text-left" rowspan="1" colspan="1">Identifier used to connect this instance-related message to a previous one</td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">timestamp</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">Indicates the point in time this instance-related message refers to</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">features</td>
               <td class="text-left" rowspan="1" colspan="1">array of strings</td>
               <td class="text-left" rowspan="1" colspan="1">List of extension features used</td>
@@ -1700,10 +1705,10 @@ Depending on the archetype, this information will either be used to report a Thi
 <p id="section-3.4-2">In addition to the <code>messageId</code> and <code>previousMessageId</code> from the <code>info</code> block, we are able to refer to<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4-3.1">
-            <p id="section-3.4-3.1.1">the device identity (via the <code>identifier</code> qualitity) and<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.1.1">the point in time when the information regarding the device state has been captured (via the <code>timestamp</code> quality) and<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.4-3.2">
-            <p id="section-3.4-3.2.1">the point in time when the information regarding the device state has been captured (via the <code>timestamp</code> quality).<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.2.1">the device identity (via the <code>thingId</code> qualitity in the <code>sdfInstance</code> block).<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.4-4">Since we are using the <code>sdfInstance</code> keyword as an entry point at the location pointed to via the <code>model</code> specfied in <code>sdfInstanceOf</code>, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
@@ -1724,14 +1729,9 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">identifier</td>
+              <td class="text-left" rowspan="1" colspan="1">thingId</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">(Optional) identifier of the instance (e.g., a UUID)</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">timestamp</td>
-              <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">Indicates the point in time this instance-related message refers to</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfThing</td>
@@ -1795,7 +1795,8 @@ Security-related aspects, e.g. regarding authentication and authorization, <span
           <div class="lang-sdf sourcecode" id="section-4.1-5.1">
 <pre>{
   "info": {
-    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+    "timestamp": "2025-07-01T12:00:00Z"
   },
   "namespace": {
     "models": "https://example.com/models",
@@ -1806,8 +1807,7 @@ Security-related aspects, e.g. regarding authentication and authorization, <span
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
-    "identifier": "envSensor:abc123",
-    "timestamp": "2025-07-01T12:00:00Z",
+    "thingId": "envSensor:abc123",
     "sdfContext": {
       "installationInfo": {
         "floor": 3,
@@ -1835,7 +1835,8 @@ the associated schema.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
           <div class="lang-sdf sourcecode" id="section-4.1-9.1">
 <pre>{
   "info": {
-    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
+    "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42",
+    "timestamp": "2025-07-01T12:00:00Z"
   },
   "namespace": {
     "models": "https://example.com/models",
@@ -1846,8 +1847,7 @@ the associated schema.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
-    "identifier": "envSensor:abc123",
-    "timestamp": "2025-07-01T12:00:00Z",
+    "thingId": "envSensor:abc123",
     "sdfContext": {
       "installationInfo": {
         "mountType": "ceiling"
@@ -1880,7 +1880,7 @@ its processing might also generate construction output (e.g., a public key or an
 In practice, these constructors are going to be modeled as an <code>sdfAction</code>, although the way the <code>sdfAction</code> is going to be used exactly is not entirely clear yet.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.2-4"><span class="cref" id="note-destructor">Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.</span><a href="#section-4.2-4" class="pilcrow">¶</a></p>
 <p id="section-4.2-5"><a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> shows a potential SDF construction message that initializes a device, setting its <code>manufacturer</code> and <code>firmwareVersion</code> as context information.
-The construction message also assigns an <code>identifier</code>, the <code>unit</code> of reported temperature values, and an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+The construction message also assigns a <code>thingId</code>, the <code>unit</code> of reported temperature values, and an initial <code>ipAddress</code> that can be used with the interaction affordances that may be present in the corresponding SDF model.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-an-sdf-construc"></span><div id="code-sdf-construction-message">
 <figure id="figure-3">
           <div class="lang-sdf sourcecode" id="section-4.2-6.1">
@@ -1897,7 +1897,7 @@ The construction message also assigns an <code>identifier</code>, the <code>unit
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
-    "identifier": "envSensor:unit42",
+    "thingId": "envSensor:unit42",
     "sdfContext": {
       "ipAddress": "192.168.1.5",
       "unit": "Cel",
@@ -1934,7 +1934,7 @@ All definitions included in <code>sdfRequired</code> <span class="bcp14">MUST</s
     "model": "sensors:#/sdfObject/envSensor"
   },
   "sdfInstance": {
-    "identifier": "envSensor:unit42",
+    "thingId": "envSensor:unit42",
     "sdfContext": {
       "deviceIdentity": {
         "manufacturer": "HealthTech Inc.",
@@ -2496,6 +2496,7 @@ sdfinfo = {
  ; actually changed, turning it into a "Delta" or a "Patch",
  ; depending on the purpose of the message.
  ? previousMessageId: text
+ ? timestamp: modified-date-time
  ? modified: modified-date-time
  ? features: [
              ]
@@ -2524,10 +2525,9 @@ commonqualities = (
 ;
 ; An sdfInstance can refer to either an sdfThing or an sdfObject.
 ; Structurally, it is mostly equivalent to that of an sdfThing
-; with the additiona of an identifier and a timestamp quality.
+; with the additiona of a thingId quality.
 sdf-instance = (
-    ? identifier: text
-    ? timestamp: modified-date-time
+    ? thingId: text
 
     thingqualities
 )
