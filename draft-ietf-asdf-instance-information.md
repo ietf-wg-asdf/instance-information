@@ -727,19 +727,19 @@ sdfInstanceOf:
 sdfInstance:
   sdfAction:
     toggle:
-      - timestamp: 2026-01-11T22:39:35
-        status: complete
-        inputValue: null
-        outputValue: null
-      - timestamp: 2026-01-11T22:34:35
-        status: error
-        inputValue: null
-        outputValue: Toggle failed.
-        "$comment": This action completed with an error, which is why an error message was returned.
+    - timestamp: "2026-01-11T22:39:35.000Z"
+      status: complete
+      inputValue:
+      outputValue:
+    - timestamp: "2026-01-11T22:34:35.000Z"
+      status: error
+      inputValue:
+      outputValue: Toggle failed.
+      "$comment": This action completed with an error, which is why an error message was returned.
   sdfEvent:
     toggleEvent:
-      - timestamp: 2026-01-11T22:39:35
-        outputValue: true
+    - timestamp: "2026-01-11T22:39:35.000Z"
+      outputValue: true
 ~~~
 {:sdf #code-snapshot-with-actions-and-events
 title="Example of an SDF Snapshot Messages that reports an action and an event history."}
