@@ -545,12 +545,12 @@ Table of Contents
    report for a requesting party.
 
    In practical use, we can at least differentiate two use cases for
-   snapshot messages.
+   snapshot messages.  The corresponding message variants are
+   (colloquially) referred to as "Context Snapshots" and "Proofshots".
 
-   First, we have _context_ snapshots, which only contain context
-   information related to a Thing (indicated via the sdfContext
-   quality).  Figure 1 gives an example for this kind of instance-
-   related message.
+   Context Snapshots _only_ contain context information related to a
+   Thing (indicated via the sdfContext quality).  Figure 1 gives an
+   example for this kind of instance-related message.
 
    {
      "info": {
@@ -579,9 +579,9 @@ Table of Contents
 
                Figure 1: Example of an SDF context snapshot.
 
-   Second, we have _proofshot_ messages which are supersets of context
-   snapshots that may also include state information associated with a
-   Thing's interaction affordances (properties, actions, and events).
+   Proofshot Messages are supersets of context snapshots that may also
+   include state information associated with a Thing's _interaction
+   affordances_(properties, actions, and events).
 
 
    // Note that while the format for describing the state of properties
