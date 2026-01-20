@@ -61,7 +61,7 @@ informative:
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
-  I-D.lee-asdf-digital-twin: digital-twin
+  I-D.ietf-asdf-digital-twin: digital-twin
   LAYERS:
     target: https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-for-Layers
     title: Terminology for Layers
