@@ -5,8 +5,8 @@
 ASDF                                                          C. Bormann
 Internet-Draft                                    Universität Bremen TZI
 Intended status: Standards Track                               J. Romann
-Expires: 17 July 2026                                 Universität Bremen
-                                                         13 January 2026
+Expires: 24 July 2026                                 Universität Bremen
+                                                         20 January 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 July 2026.
+   This Internet-Draft will expire on 24 July 2026.
 
 Copyright Notice
 
@@ -991,33 +991,49 @@ Table of Contents
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
-   info:
-     title: Example SDF Snapshot Message with an Action and an Event \
-                                                                History.
-     messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a85
-   namespace:
-     cap: https://example.com/capability/cap
-     models: https://example.com/models
-   defaultNamespace: cap
-   sdfInstanceOf:
-     model: models:/sdfObject/lightSwitch
-   sdfInstance:
-     sdfAction:
-       toggle:
-         - timestamp: 2026-01-11T22:39:35
-           status: complete
-           inputValue: null
-           outputValue: null
-         - timestamp: 2026-01-11T22:34:35
-           status: error
-           inputValue: null
-           outputValue: Toggle failed.
-           "$comment": This action completed with an error, which is \
-                                      why an error message was returned.
-     sdfEvent:
-       toggleEvent:
-         - timestamp: 2026-01-11T22:39:35
-           outputValue: true
+   {
+     "info": {
+       "title": "Example SDF Snapshot Message with an Action and an \
+                                                        Event History.",
+       "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a85"
+     },
+     "namespace": {
+       "cap": "https://example.com/capability/cap",
+       "models": "https://example.com/models"
+     },
+     "defaultNamespace": "cap",
+     "sdfInstanceOf": {
+       "model": "models:/sdfObject/lightSwitch"
+     },
+     "sdfInstance": {
+       "sdfAction": {
+         "toggle": [
+           {
+             "timestamp": "2026-01-11T22:39:35.000Z",
+             "status": "complete",
+             "inputValue": null,
+             "outputValue": null
+           },
+           {
+             "timestamp": "2026-01-11T22:34:35.000Z",
+             "status": "error",
+             "inputValue": null,
+             "outputValue": "Toggle failed.",
+             "$comment": "This action completed with an error, which \
+                                  is why an error message was returned."
+           }
+         ]
+       },
+       "sdfEvent": {
+         "toggleEvent": [
+           {
+             "timestamp": "2026-01-11T22:39:35.000Z",
+             "outputValue": true
+           }
+         ]
+       }
+     }
+   }
 
        Figure 10: Example of an SDF Snapshot Messages that reports an
                         action and an event history.
@@ -1118,9 +1134,9 @@ Table of Contents
    [I-D.ietf-asdf-sdf-protocol-mapping]
               Mohan, R., Brinckman, B., and L. Corneo, "Protocol Mapping
               for SDF", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-protocol-mapping-02, 2 December 2025,
+              asdf-sdf-protocol-mapping-03, 20 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-protocol-mapping-02>.
+              sdf-protocol-mapping-03>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
