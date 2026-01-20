@@ -22,6 +22,7 @@ sdfinfo = {
  ; actually changed, turning it into a "Delta" or a "Patch",
  ; depending on the purpose of the message.
  ? previousMessageId: text
+ ? timestamp: modified-date-time
  ? modified: modified-date-time
  ? features: [
              ]
@@ -50,10 +51,9 @@ commonqualities = (
 ;
 ; An sdfInstance can refer to either an sdfThing or an sdfObject.
 ; Structurally, it is mostly equivalent to that of an sdfThing
-; with the additiona of an identifier and a timestamp quality.
+; with the additiona of a thingId quality.
 sdf-instance = (
-    ? identifier: text
-    ? timestamp: modified-date-time
+    ? thingId: text
 
     thingqualities
 )

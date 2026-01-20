@@ -339,6 +339,7 @@ Furthermore, Delta messages can utilize the `previousMessageId` in order to link
 | license            | string           | Link to text or embedded text containing license terms                     |
 | messageId          | string           | Unique identifier of this instance-related message                         |
 | previousMessageId  | string           | Identifier used to connect this instance-related message to a previous one |
+| timestamp          | string           | Indicates the point in time this instance-related message refers to        |
 | features           | array of strings | List of extension features used                                            |
 | $comment           | string           | Source code comments only, no semantics                                    |
 {: #infoblockqual title="Qualities of the Information Block"}
@@ -374,8 +375,8 @@ Depending on the archetype, this information will either be used to report a Thi
 
 In addition to the `messageId` and `previousMessageId` from the `info` block, we are able to refer to
 
-* the device identity (via the `identifier` qualitity) and
-* the point in time when the information regarding the device state has been captured (via the `timestamp` quality).
+* the point in time when the information regarding the device state has been captured (via the `timestamp` quality) and
+* the device identity (via the `thingId` qualitity in the `sdfInstance` block).
 
 Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the instance-related message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
 
@@ -386,8 +387,7 @@ Note that we also have to replicate a nested structure via `sdfThing` and/or `sd
 
 | Quality          | Type   | Description                                                         |
 |------------------|--------|-------------------------------------------------------------------- |
-| identifier       | string | (Optional) identifier of the instance (e.g., a UUID)                |
-| timestamp        | string | Indicates the point in time this instance-related message refers to |
+| thingId          | string | (Optional) identifier of the instance (e.g., a UUID)                |
 | sdfThing         | map    | Values for the thing entries in the referenced SDF definition       |
 | sdfObject        | map    | Values for the object entries in the referenced SDF definition      |
 | sdfContext       | map    | Values for the context entries in the referenced SDF definition     |
@@ -419,6 +419,7 @@ First, we have *context* snapshots, which only contain context information relat
 ~~~ sdf
 info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+  timestamp: '2025-07-01T12:00:00Z'
 namespace:
   models: https://example.com/models
   sensors: https://example.com/sensors
@@ -426,8 +427,7 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
-  identifier: envSensor:abc123
-  timestamp: '2025-07-01T12:00:00Z'
+  thingId: envSensor:abc123
   sdfContext:
     installationInfo:
       floor: 3
@@ -452,6 +452,7 @@ the associated schema.
 ~~~ sdf
 info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
+  timestamp: '2025-07-01T12:00:00Z'
 namespace:
   models: https://example.com/models
   sensors: https://example.com/sensor
@@ -459,8 +460,7 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
-  identifier: envSensor:abc123
-  timestamp: '2025-07-01T12:00:00Z'
+  thingId: envSensor:abc123
   sdfContext:
     installationInfo:
       mountType: ceiling
@@ -489,7 +489,7 @@ In practice, these constructors are going to be modeled as an `sdfAction`, altho
 [^note-destructor]: Note that it is not quite clear what a destructor would be for a physical instance -- apart from a scrap metal press, but according to RFC 8576 we would want to move a system to a re-usable initial state, which is pretty much a constructor.
 
 {{code-sdf-construction-message}} shows a potential SDF construction message that initializes a device, setting its `manufacturer` and `firmwareVersion` as context information.
-The construction message also assigns an `identifier`, the `unit` of reported temperature values, and an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
+The construction message also assigns a `thingId`, the `unit` of reported temperature values, and an initial `ipAddress` that can be used with the interaction affordances that may be present in the corresponding SDF model.
 
 ~~~ sdf
 info:
@@ -501,7 +501,7 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
-  identifier: envSensor:unit42
+  thingId: envSensor:unit42
   sdfContext:
     ipAddress: 192.168.1.5
     unit: Cel
@@ -529,7 +529,7 @@ defaultNamespace: models
 sdfInstanceOf:
   model: sensors:#/sdfObject/envSensor
 sdfInstance:
-  identifier: envSensor:unit42
+  thingId: envSensor:unit42
   sdfContext:
     deviceIdentity:
       manufacturer: HealthTech Inc.
