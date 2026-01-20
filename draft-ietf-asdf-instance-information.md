@@ -219,7 +219,6 @@ Taking into account previous revisions of this document as well as {{-non-afford
 
 Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
-<!-- TODO: Discuss whether it is okay to use "snapshot" as an umbrella term for context snapshots and proofshots... -->
 1. *Snapshot* messages that may contain contain both affordance-related and context information, including information about a Thing's identity,
 2. *Construction* messages that trigger a Thing's initial configuration process or its commissioning,
 3. *Delta* messages that indicate changes that have occurred since a reference state report, and
@@ -412,8 +411,9 @@ Snapshot messages MAY only contain values for a *subset* of all possible afforda
 Security-related aspects, e.g. regarding authentication and authorization, MUST be taken into account when issueing a state report for a requesting party.
 
 In practical use, we can at least differentiate two use cases for snapshot messages.
+The corresponding message variants are (colloquially) referred to as "Context Snapshots" and "Proofshots".
 
-First, we have *context* snapshots, which only contain context information related to a Thing (indicated via the `sdfContext` quality).
+Context Snapshots *only* contain context information related to a Thing (indicated via the `sdfContext` quality).
 {{example-context}} gives an example for this kind of instance-related message.
 
 ~~~ sdf
@@ -437,7 +437,7 @@ sdfInstance:
 {:sdf #example-context
 title="Example of an SDF context snapshot."}
 
-Second, we have *proofshot* messages which are supersets of context snapshots that may also include state information associated with a Thing's interaction affordances (properties, actions, and events).
+Proofshot Messages are supersets of context snapshots that may also include state information associated with a Thing's *interaction affordances*(properties, actions, and events).
 
 [^other-affordances]
 
