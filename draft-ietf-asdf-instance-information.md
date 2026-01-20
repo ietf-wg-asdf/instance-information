@@ -80,7 +80,7 @@ Split into four "archetypes", instance-related messages are always governed by S
 
 [^status]
 
-[^status]: This revision applies a major restructuring to the document, reduces redundancy, and clarifies some of the concepts that are used throughout the document.
+[^status]: This revision applies a major restructuring to the document, reduces redundancy, and clarifies some of the concepts that are used throughout the document. It also expands upon three experimental application scenarios for instance-related messages.
 
 --- middle
 
