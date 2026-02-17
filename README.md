@@ -9,7 +9,6 @@ This is the working area for the IETF [ASDF Working Group](https://datatracker.i
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-asdf-instance-information)
 * [Compare Editor's Copy to Working Group Draft](https://ietf-wg-asdf.github.io/instance-information/#go.draft-ietf-asdf-instance-information.diff)
 
-[Access to all branches](https://ietf-wg-asdf.github.io/instance-information/)
 
 ## Contributing
 
