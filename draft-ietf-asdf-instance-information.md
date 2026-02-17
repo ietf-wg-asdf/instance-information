@@ -637,7 +637,8 @@ sdfObject:
         type: number
         sdfParameters:
           unit: "#/sdfObject/sensor/sdfContext/unit"
-        sdfRequired: "#/sdfObject/sensor/sdfContext/unit"
+        sdfRequired:
+          - "#/sdfObject/sensor/sdfContext/unit"
 ~~~
 {:sdf #code-sdf-construction-sdf-context
 title="Example for SDF model with constructors"}
