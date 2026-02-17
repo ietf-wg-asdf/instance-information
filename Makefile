@@ -17,8 +17,12 @@ endif
 sourcecode: draft-ietf-asdf-instance-information.xml
 	kramdown-rfc-extract-sourcecode -tfiles $^
 
-sdfcheck: sourcecode
-	for file in sourcecode/sdf/*.sdf; do echo $$file; cddl sdf-feature.cddl vp $$file; done
+sdfcheck-files: sourcecode Makefile
+	mkdir -p sdf-files/sourcecode/sdf
+	for file in sourcecode/sdf/*.sdf; do echo $$file; if jq . < $$file >/dev/null 2>/dev/null; then cat $$file; else (echo "{"; cat $$file; echo "}"); fi > sdf-files/$$file-fixed; done
+
+sdfcheck: sdfcheck-files
+	for file in sdf-files/sourcecode/sdf/*.sdf-fixed; do echo; echo $$file; cddl formal-syntax-of-sdf.cddl v $$file; done
 
 lists.md: draft-ietf-asdf-instance-information.xml
 	kramdown-rfc-extract-figures-tables -trfc $< >$@.new

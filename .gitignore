@@ -1,4 +1,4 @@
-*~
+>*~
 /*-[0-9][0-9].xml
 archive.json
 draft-ietf-asdf-instance-information.xml
@@ -22,3 +22,5 @@ report.xml
 /versioned/
 /.vscode/
 !requirements.txt
+/sdf-files
+/sourcecode*
