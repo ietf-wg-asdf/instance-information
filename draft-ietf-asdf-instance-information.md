@@ -38,7 +38,7 @@ author:
   country: Germany
 
 normative:
-  I-D.ietf-asdf-sdf: sdf
+  RFC9880: sdf
   RFC8288: link
   STD97: http
   I-D.ietf-asdf-sdf-nonaffordance: non-affordance
