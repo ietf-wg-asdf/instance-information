@@ -16,11 +16,11 @@ Abstract
 
    This document specifies instance-related messages to be used in
    conjunction with the Semantic Definition Format (SDF) for Data and
-   Interactions of Things (draft-ietf-asdf-sdf).  Split into four
-   "archetypes", instance-related messages are always governed by SDF
-   models, strictly separating instance and class information. _Context_
-   information plays a crucial role both for lifecycle management and
-   actual device interaction.
+   Interactions of Things (RFC 9880).  Split into four "archetypes",
+   instance-related messages are always governed by SDF models, strictly
+   separating instance and class information. _Context_ information
+   plays a crucial role both for lifecycle management and actual device
+   interaction.
 
 
    // This revision applies a major restructuring, reduces redundancy
@@ -113,8 +113,8 @@ Table of Contents
 1.  Introduction
 
    The Semantic Definition Format for Data and Interactions of Things
-   (SDF, [I-D.ietf-asdf-sdf]) is a format for domain experts to use in
-   the creation and maintenance of data and interaction models in the
+   (SDF, [RFC9880]) is a format for domain experts to use in the
+   creation and maintenance of data and interaction models in the
    Internet of Things.
 
    SDF is an Interaction Modeling format, enabling a modeler to describe
@@ -152,8 +152,7 @@ Table of Contents
 
 1.1.  Conventions and Definitions
 
-   The definitions of [RFC6690], [RFC8288], and [I-D.ietf-asdf-sdf]
-   apply.
+   The definitions of [RFC6690], [RFC8288], and [RFC9880] apply.
 
    Terminology may need to be imported from [LAYERS].
 
@@ -1089,14 +1088,6 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
-   [I-D.ietf-asdf-sdf]
-              Koster, M., Bormann, C., and A. Keränen, "Semantic
-              Definition Format (SDF) for Data and Interactions of
-              Things", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-25, 13 October 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-25>.
-
    [I-D.ietf-asdf-sdf-nonaffordance]
               Hong, J. and H. Lee, "Semantic Definition Format (SDF)
               Extension for Non-Affordance Information", Work in
@@ -1108,6 +1099,11 @@ Table of Contents
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
               <https://www.rfc-editor.org/rfc/rfc8288>.
+
+   [RFC9880]  Koster, M., Ed., Bormann, C., Ed., and A. Keränen,
+              "Semantic Definition Format (SDF) for Data and
+              Interactions of Things", RFC 9880, DOI 10.17487/RFC9880,
+              January 2026, <https://www.rfc-editor.org/rfc/rfc9880>.
 
    [STD97]    Internet Standard 97,
               <https://www.rfc-editor.org/info/std97>.
