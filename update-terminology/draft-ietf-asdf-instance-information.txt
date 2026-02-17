@@ -161,8 +161,6 @@ Table of Contents
       understood to analogously apply to other interaction styles than
       Representational State Transfer [REST] as well.
 
-   test
-
    Message:  A Representation that is exchanged in, or is the subject
       of, an Interaction.  Messages are "data in flight", not instance
       "data at rest" (the latter are called "Instance" and are modeled
@@ -226,7 +224,7 @@ Table of Contents
 
    Delta:  Delta messages are syntactically similar to Snapshots, but
       may be used to only report information that has _changed_ compared
-      to a given reference Snapshot.
+      to a given reference Snapshot or Delta message.
 
    Construction:  Construction messages enable the creation of a digital
       Instance, e.g., initialization/commissioning of a device or

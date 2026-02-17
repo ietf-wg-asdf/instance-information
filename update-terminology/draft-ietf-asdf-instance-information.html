@@ -1316,37 +1316,32 @@ analogously apply to other interaction styles than Representational
 State Transfer <span>[<a href="#REST" class="cite xref">REST</a>]</span> as well.<a href="#section-1.1-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.3">test</dt>
+<dt id="section-1.1-3.3">Message:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.4">
-            <p id="section-1.1-3.4.1"></p><a href="#section-1.1-3.4" class="pilcrow">¶</a>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.1-3.5">Message:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.6">
-            <p id="section-1.1-3.6.1">A Representation that is exchanged in, or is the subject of, an
+            <p id="section-1.1-3.4.1">A Representation that is exchanged in, or is the subject of, an
 Interaction.
 Messages are "data in flight", not instance "data at rest" (the
 latter are called "Instance" and are modeled by the interaction
-model).<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.6.2">Depending on the specific message, an abstract data model for the
+model).<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.2">Depending on the specific message, an abstract data model for the
 message may be provided by the <code>sdfData</code> definitions (or of
 declarations that look like these, such as <code>sdfProperty</code>) of an SDF
-model.<a href="#section-1.1-3.6.2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.6.3">Deriving an ecosystem specific representation of a message may be
+model.<a href="#section-1.1-3.4.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.4.3">Deriving an ecosystem specific representation of a message may be
 aided by <em>mapping files</em> <span>[<a href="#I-D.bormann-asdf-sdf-mapping" class="cite xref">I-D.bormann-asdf-sdf-mapping</a>]</span> that apply to the SDF model
-providing the abstract data model.<a href="#section-1.1-3.6.3" class="pilcrow">¶</a></p>
+providing the abstract data model.<a href="#section-1.1-3.4.3" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.7">Instantiation:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.8">
-            <p id="section-1.1-3.8.1">Instantiation is a process that takes a Model, some Context
+<dt id="section-1.1-3.5">Instantiation:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.6">
+            <p id="section-1.1-3.6.1">Instantiation is a process that takes a Model, some Context
 Information, and possibly information from a Device and creates an
-Instance.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
+Instance.<a href="#section-1.1-3.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.9">Instance:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.10">
-            <p id="section-1.1-3.10.1">Anything that can be interacted with based on the SDF model.
+<dt id="section-1.1-3.7">Instance:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.8">
+            <p id="section-1.1-3.8.1">Anything that can be interacted with based on the SDF model.
 E.g., the Thing itself (device), a Digital Twin, an Asset Management
 system...
 Instances are modeled as "data at rest", not "data in flight" (the
@@ -1355,68 +1350,68 @@ Instances that relate to a single Thing are bound together by some
 form of identity.
 Instances become useful if they are "situated", i.e., with a
 physical or digital "address" that they can be found at and made the
-subject of an interaction.<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
+subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.11">Instance-related Message:</dt>
+<dt id="section-1.1-3.9">Instance-related Message:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.10">
+            <p id="section-1.1-3.10.1">A message that describes the state or a state change of a specific instance.
+(TBC -- also: do we need this additional term?)<a href="#section-1.1-3.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.11">Message Archetype:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.12">
-            <p id="section-1.1-3.12.1">A message that describes the state or a state change of a specific instance.
-(TBC -- also: do we need this additional term?)<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-<dt id="section-1.1-3.13">Message Archetype:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.14">
-            <p id="section-1.1-3.14.1">In the context of instance-related messages:
+            <p id="section-1.1-3.12.1">In the context of instance-related messages:
 A message with specific content and effect, covering a wider set of different use cases.
 In this document, we are observing a total of four instance-related message archetypes:
-Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
+Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.15">Snapshot:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.16">
-            <p id="section-1.1-3.16.1">A message that attempts to describe the state of an Instance at a
+<dt id="section-1.1-3.13">Snapshot:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.14">
+            <p id="section-1.1-3.14.1">A message that attempts to describe the state of an Instance at a
 particular moment (which may be part of the context).
 This state information may either be related to interaction affordances
-or to the Thing's context.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.16.2">When a Snapshot message contains affordance-related information,
+or to the Thing's context.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.2">When a Snapshot message contains affordance-related information,
 it may be considered a "proofshot" -- they are "proofs" in the
 photographic sense, i.e., they may not be of perfect quality, as
-incurrencies could occur while capturing the affordance state.<a href="#section-1.1-3.16.2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.16.3">Conversely, Snapshot messages that (only) contain context information
-may be referred to as "Context Snapshots".<a href="#section-1.1-3.16.3" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.16.4">Not all state that is characteristic of an Instance may be included
+incurrencies could occur while capturing the affordance state.<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.3">Conversely, Snapshot messages that (only) contain context information
+may be referred to as "Context Snapshots".<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.4">Not all state that is characteristic of an Instance may be included
 in a Snapshot (e.g., information about an active action that is not
 embedded in an action resource).
 Snapshots may depend on additional context (such as the identity of
-the Instance and a Timestamp).<a href="#section-1.1-3.16.4" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.16.5">An interaction affordance to obtain a Snapshot may not be provided
+the Instance and a Timestamp).<a href="#section-1.1-3.14.4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.5">An interaction affordance to obtain a Snapshot may not be provided
 by every Instance; instead, the affordance may be "baked into" the
-device and could be discoverable via a well-known URI.<a href="#section-1.1-3.16.5" class="pilcrow">¶</a></p>
+device and could be discoverable via a well-known URI.<a href="#section-1.1-3.14.5" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.17">Delta:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.18">
-            <p id="section-1.1-3.18.1">Delta messages are syntactically similar to Snapshots, but may be
+<dt id="section-1.1-3.15">Delta:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.16">
+            <p id="section-1.1-3.16.1">Delta messages are syntactically similar to Snapshots, but may be
 used to only report information that has <em>changed</em> compared to a
-given reference Snapshot.<a href="#section-1.1-3.18.1" class="pilcrow">¶</a></p>
+given reference Snapshot or Delta message.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.19">Construction:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.20">
-            <p id="section-1.1-3.20.1">Construction messages enable the creation of a digital Instance,
+<dt id="section-1.1-3.17">Construction:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.18">
+            <p id="section-1.1-3.18.1">Construction messages enable the creation of a digital Instance,
 e.g., initialization/commissioning of a device or creation of its
 digital twins.
 They are like Snapshots, in that they embody a state, however this
-state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.20.1" class="pilcrow">¶</a></p>
+state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.18.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.21">Patch:</dt>
-          <dd style="margin-left: 1.5em" id="section-1.1-3.22">
-            <p id="section-1.1-3.22.1">Patch messages update the otherwise immutable state of a device or its
+<dt id="section-1.1-3.19">Patch:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.20">
+            <p id="section-1.1-3.20.1">Patch messages update the otherwise immutable state of a device or its
 digital twin by triggering a reconfiguration or recommisioning.
 Similar to Delta messages, Patch messages are referring to an already
 existing state that is altered in accordance with the information
-contained within the message.<a href="#section-1.1-3.22.1" class="pilcrow">¶</a></p>
+contained within the message.<a href="#section-1.1-3.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
