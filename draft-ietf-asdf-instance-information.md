@@ -38,7 +38,7 @@ author:
   country: Germany
 
 normative:
-  I-D.ietf-asdf-sdf: sdf
+  RFC9880: sdf
   RFC8288: link
   STD97: http
   I-D.ietf-asdf-sdf-nonaffordance: non-affordance
@@ -74,7 +74,7 @@ informative:
 
 --- abstract
 
-This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (draft-ietf-asdf-sdf).
+This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (RFC 9880).
 Split into four "archetypes", instance-related messages are always governed by SDF models, strictly separating instance and class information.
 *Context* information plays a crucial role both for lifecycle management and actual device interaction.
 
