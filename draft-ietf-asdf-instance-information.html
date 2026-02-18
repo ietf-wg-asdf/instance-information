@@ -5,13 +5,13 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Instance Information for SDF</title>
-<meta content="Carsten Bormann" name="author">
 <meta content="Jan Romann" name="author">
+<meta content="Carsten Bormann" name="author">
 <meta content='
        This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (RFC 9880).
 Split into four "archetypes", instance-related messages are always governed by SDF models, strictly separating instance and class information.
  Context  information plays a crucial role both for lifecycle management and actual device interaction. 
-       This revision applies a major restructuring, reduces redundancy and clarifies some of the concepts that are used throughout the document. It also expands upon three experimental application scenarios for instance-related messages. 
+       This revision updates the base SDF reference to the recently published RFC 9880, improves the terminology section, and applies a bug fix to an example. 
     ' name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="IoT" name="keyword">
@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">February 2026</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Bormann &amp; Romann</td>
+<td class="left">Romann &amp; Bormann</td>
 <td class="center">Expires 22 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
-      <div class="author-name">C. Bormann</div>
-<div class="org">Universität Bremen TZI</div>
-</div>
-<div class="author">
       <div class="author-name">J. Romann</div>
 <div class="org">Universität Bremen</div>
+</div>
+<div class="author">
+      <div class="author-name">C. Bormann</div>
+<div class="org">Universität Bremen TZI</div>
 </div>
 </dd>
 </dl>
@@ -1095,7 +1095,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-abstract-1">This document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (RFC 9880).
 Split into four "archetypes", instance-related messages are always governed by SDF models, strictly separating instance and class information.
 <em>Context</em> information plays a crucial role both for lifecycle management and actual device interaction.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2"><span class="cref" id="status">This revision applies a major restructuring, reduces redundancy and clarifies some of the concepts that are used throughout the document. It also expands upon three experimental application scenarios for instance-related messages.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2"><span class="cref" id="status">This revision updates the base SDF reference to the recently published RFC 9880, improves the terminology section, and applies a bug fix to an example.</span><a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -2748,6 +2748,15 @@ rfc3339z = '
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jan Romann</span></div>
+<div dir="auto" class="left"><span class="org">Universität Bremen</span></div>
+<div dir="auto" class="left"><span class="country-name">Germany</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jan.romann@uni-bremen.de" class="email">jan.romann@uni-bremen.de</a>
+</div>
+</address>
+<address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Carsten Bormann</span></div>
 <div dir="auto" class="left"><span class="org">Universität Bremen TZI</span></div>
 <div dir="auto" class="left"><span class="street-address">Postfach 330440</span></div>
@@ -2762,15 +2771,6 @@ rfc3339z = '
 <div class="email">
 <span>Email:</span>
 <a href="mailto:cabo@tzi.org" class="email">cabo@tzi.org</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Jan Romann</span></div>
-<div dir="auto" class="left"><span class="org">Universität Bremen</span></div>
-<div dir="auto" class="left"><span class="country-name">Germany</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:jan.romann@uni-bremen.de" class="email">jan.romann@uni-bremen.de</a>
 </div>
 </address>
 </section>

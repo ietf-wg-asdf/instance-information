@@ -2,10 +2,10 @@
 
 
 
-ASDF                                                          C. Bormann
-Internet-Draft                                    Universität Bremen TZI
-Intended status: Standards Track                               J. Romann
-Expires: 22 August 2026                               Universität Bremen
+ASDF                                                           J. Romann
+Internet-Draft                                        Universität Bremen
+Intended status: Standards Track                              C. Bormann
+Expires: 22 August 2026                           Universität Bremen TZI
                                                         18 February 2026
 
 
@@ -23,10 +23,9 @@ Abstract
    interaction.
 
 
-   // This revision applies a major restructuring, reduces redundancy
-   // and clarifies some of the concepts that are used throughout the
-   // document.  It also expands upon three experimental application
-   // scenarios for instance-related messages.
+   // This revision updates the base SDF reference to the recently
+   // published RFC 9880, improves the terminology section, and applies
+   // a bug fix to an example.
 
 About This Document
 
@@ -1412,6 +1411,12 @@ Acknowledgments
 
 Authors' Addresses
 
+   Jan Romann
+   Universität Bremen
+   Germany
+   Email: jan.romann@uni-bremen.de
+
+
    Carsten Bormann
    Universität Bremen TZI
    Postfach 330440
@@ -1419,9 +1424,3 @@ Authors' Addresses
    Germany
    Phone: +49-421-218-63921
    Email: cabo@tzi.org
-
-
-   Jan Romann
-   Universität Bremen
-   Germany
-   Email: jan.romann@uni-bremen.de
