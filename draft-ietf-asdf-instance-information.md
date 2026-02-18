@@ -173,36 +173,50 @@ Message Archetype:
 : In the context of instance-related messages:
   A message with specific content and effect, covering a wider set of different use cases.
   In this document, we are observing a total of four instance-related message archetypes:
-  <!-- TODO: Do these also need their own terminology entries? -->
   Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.
 
-Proofshot:
+Snapshot:
 : A message that attempts to describe the state of an Instance at a
   particular moment (which may be part of the context).
-  We are not saying that the Proofshot *is* the instance because there
-  may be different ways to make one from an Instance (or to consume
-  one in updating the state of the Instance), and because the
-  proofshot, being a message, is not situated.
+  This state information may either be related to interaction affordances
+  or to the Thing's context.
 
-  Proofshots are snapshots, and they are "proofs" in the photographic
-  sense, i.e., they may not be of perfect quality.
+  When a Snapshot message contains affordance-related information,
+  it may be considered a "proofshot" -- they are "proofs" in the
+  photographic sense, i.e., they may not be of perfect quality, as
+  inaccuracies could occur while capturing the affordance state.
+
+  Conversely, Snapshot messages that (only) contain context information
+  may be referred to as "Context Snapshots".
+
   Not all state that is characteristic of an Instance may be included
-  in a Proofshot (e.g., information about an active action that is not
+  in a Snapshot (e.g., information about an active action that is not
   embedded in an action resource).
-  Proofshots may depend on additional context (such as the identity of
+  Snapshots may depend on additional context (such as the identity of
   the Instance and a Timestamp).
 
-  An interaction affordance to obtain a Proofshot may not be provided
-  by every Instance.
-  An Instance may provide separate Construction affordances instead of
-  simply setting a Proofshot.
+  An interaction affordance to obtain a Snapshot may not be provided
+  by every Instance; instead, the affordance may be "baked into" the
+  device and could be discoverable via a well-known URI.
+
+Delta:
+: Delta messages are syntactically similar to Snapshots, but may be
+  used to only report information that has _changed_ compared to a
+  given reference Snapshot or Delta message.
 
 Construction:
 : Construction messages enable the creation of a digital Instance,
   e.g., initialization/commissioning of a device or creation of its
   digital twins.
-  They are like proofshots, in that they embody a state, however this
+  They are like Snapshots, in that they embody a state, however this
   state needs to be precise so the construction can actually happen.
+
+Patch:
+: Patch messages update the otherwise immutable state of a device or its
+  digital twin by triggering a reconfiguration or recommisioning.
+  Similar to Delta messages, Patch messages are referring to an already
+  existing state that is altered in accordance with the information
+  contained within the message.
 
 {::boilerplate bcp14-tagged-bcp14}
 
