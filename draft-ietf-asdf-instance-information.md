@@ -80,7 +80,7 @@ Split into four "archetypes", instance-related messages are always governed by S
 
 [^status]
 
-[^status]: This revision applies a major restructuring, reduces redundancy and clarifies some of the concepts that are used throughout the document. It also expands upon three experimental application scenarios for instance-related messages.
+[^status]: This revision updates the base SDF reference to the recently published RFC 9880, improves the terminology section, and applies a bug fix to an example.
 
 --- middle
 
