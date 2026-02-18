@@ -184,7 +184,7 @@ Snapshot:
   When a Snapshot message contains affordance-related information,
   it may be considered a "proofshot" -- they are "proofs" in the
   photographic sense, i.e., they may not be of perfect quality, as
-  incurrencies could occur while capturing the affordance state.
+  inaccuracies could occur while capturing the affordance state.
 
   Conversely, Snapshot messages that (only) contain context information
   may be referred to as "Context Snapshots".
