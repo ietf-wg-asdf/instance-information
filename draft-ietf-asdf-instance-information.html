@@ -1364,38 +1364,54 @@ subject of an interaction.<a href="#section-1.1-3.8.1" class="pilcrow">¶</a></p
             <p id="section-1.1-3.12.1">In the context of instance-related messages:
 A message with specific content and effect, covering a wider set of different use cases.
 In this document, we are observing a total of four instance-related message archetypes:
-
 Snapshot Messages, Construction Messages, Delta Messages, and Patch Messages.<a href="#section-1.1-3.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.13">Proofshot:</dt>
+<dt id="section-1.1-3.13">Snapshot:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.14">
             <p id="section-1.1-3.14.1">A message that attempts to describe the state of an Instance at a
 particular moment (which may be part of the context).
-We are not saying that the Proofshot <em>is</em> the instance because there
-may be different ways to make one from an Instance (or to consume
-one in updating the state of the Instance), and because the
-proofshot, being a message, is not situated.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.2">Proofshots are snapshots, and they are "proofs" in the photographic
-sense, i.e., they may not be of perfect quality.
-Not all state that is characteristic of an Instance may be included
-in a Proofshot (e.g., information about an active action that is not
+This state information may either be related to interaction affordances
+or to the Thing's context.<a href="#section-1.1-3.14.1" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.2">When a Snapshot message contains affordance-related information,
+it may be considered a "proofshot" -- they are "proofs" in the
+photographic sense, i.e., they may not be of perfect quality, as
+inaccuracies could occur while capturing the affordance state.<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.3">Conversely, Snapshot messages that (only) contain context information
+may be referred to as "Context Snapshots".<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.4">Not all state that is characteristic of an Instance may be included
+in a Snapshot (e.g., information about an active action that is not
 embedded in an action resource).
-Proofshots may depend on additional context (such as the identity of
-the Instance and a Timestamp).<a href="#section-1.1-3.14.2" class="pilcrow">¶</a></p>
-<p id="section-1.1-3.14.3">An interaction affordance to obtain a Proofshot may not be provided
-by every Instance.
-An Instance may provide separate Construction affordances instead of
-simply setting a Proofshot.<a href="#section-1.1-3.14.3" class="pilcrow">¶</a></p>
+Snapshots may depend on additional context (such as the identity of
+the Instance and a Timestamp).<a href="#section-1.1-3.14.4" class="pilcrow">¶</a></p>
+<p id="section-1.1-3.14.5">An interaction affordance to obtain a Snapshot may not be provided
+by every Instance; instead, the affordance may be "baked into" the
+device and could be discoverable via a well-known URI.<a href="#section-1.1-3.14.5" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-1.1-3.15">Construction:</dt>
+<dt id="section-1.1-3.15">Delta:</dt>
           <dd style="margin-left: 1.5em" id="section-1.1-3.16">
-            <p id="section-1.1-3.16.1">Construction messages enable the creation of a digital Instance,
+            <p id="section-1.1-3.16.1">Delta messages are syntactically similar to Snapshots, but may be
+used to only report information that has <em>changed</em> compared to a
+given reference Snapshot or Delta message.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.17">Construction:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.18">
+            <p id="section-1.1-3.18.1">Construction messages enable the creation of a digital Instance,
 e.g., initialization/commissioning of a device or creation of its
 digital twins.
-They are like proofshots, in that they embody a state, however this
-state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.16.1" class="pilcrow">¶</a></p>
+They are like Snapshots, in that they embody a state, however this
+state needs to be precise so the construction can actually happen.<a href="#section-1.1-3.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-1.1-3.19">Patch:</dt>
+          <dd style="margin-left: 1.5em" id="section-1.1-3.20">
+            <p id="section-1.1-3.20.1">Patch messages update the otherwise immutable state of a device or its
+digital twin by triggering a reconfiguration or recommisioning.
+Similar to Delta messages, Patch messages are referring to an already
+existing state that is altered in accordance with the information
+contained within the message.<a href="#section-1.1-3.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2374,7 +2390,7 @@ As the lightswitch was turned on, the event was emitted with a value of <code>tr
 <dd class="break"></dd>
 <dt id="I-D.ietf-asdf-sdf-protocol-mapping">[I-D.ietf-asdf-sdf-protocol-mapping]</dt>
         <dd>
-<span class="refAuthor">Mohan, R.</span>, <span class="refAuthor">Brinckman, B.</span>, and <span class="refAuthor">L. Corneo</span>, <span class="refTitle">"Protocol Mapping for SDF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-protocol-mapping-03</span>, <time datetime="2026-01-20" class="refDate">20 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-03">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Mohan, R.</span>, <span class="refAuthor">Brinckman, B.</span>, and <span class="refAuthor">L. Corneo</span>, <span class="refTitle">"Protocol Mapping for SDF"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-asdf-sdf-protocol-mapping-04</span>, <time datetime="2026-02-18" class="refDate">18 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-04">https://datatracker.ietf.org/doc/html/draft-ietf-asdf-sdf-protocol-mapping-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
         <dd>
