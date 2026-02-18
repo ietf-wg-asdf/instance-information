@@ -24,6 +24,10 @@ venue:
   github: "ietf-wg-asdf/instance-information"
 
 author:
+- name: Jan Romann
+  org: Universität Bremen
+  email: jan.romann@uni-bremen.de
+  country: Germany
 - name: Carsten Bormann
   org: Universität Bremen TZI
   street: Postfach 330440
@@ -32,10 +36,6 @@ author:
   country: Germany
   phone: +49-421-218-63921
   email: cabo@tzi.org
-- name: Jan Romann
-  org: Universität Bremen
-  email: jan.romann@uni-bremen.de
-  country: Germany
 
 normative:
   RFC9880: sdf
