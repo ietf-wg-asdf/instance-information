@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-28T01:49:42.344454+00:00",
+  "timestamp": "2026-02-19T01:21:08.959159+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -87,15 +87,15 @@
       "id": "I_kwDOOUh3t87CVz5Z",
       "title": "Consider describing `offDevice` information with `sdfContext` quality",
       "url": "https://github.com/ietf-wg-asdf/instance-information/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "For a potential alignment with the ETRI-Draft on `sdfNonAffordance`-Information, we should consider using a keyword such as `sdfContext` instead, that was one of the potential proposals made by @jungha-hong during the ASDF meeting at IETF 123. In a PR, we should update the examples with the potential new keyword in order to investigate how well it can cover our use cases and requirements.",
       "createdAt": "2025-07-24T16:31:13Z",
-      "updatedAt": "2025-07-24T16:31:13Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-21T14:22:31Z",
+      "closedAt": "2025-11-21T14:22:31Z",
       "comments": []
     },
     {
@@ -121,6 +121,156 @@
           "updatedAt": "2025-08-26T16:17:50Z"
         }
       ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOOUh3t87bCv-V",
+      "title": "Refine the usage of the terms abstract/conceptual/neutral",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/23",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Via PR #22 we are now using three terms when referring to the common instance-related message format, its role within the SDF ecosystem, and its relationship with SDF models. As a follow-up to #22, we should revisit the three terms and refine their usage within the document.\n\n> one more word: abstract/conceptual/neutral. \n> Maybe we can actually describe the a/c/n format in these terms.\n\n_Originally posted by @cabo in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2553864092_\n\n> are/can be\n> abstract vs. conceptual\n\n_Originally posted by @cabo in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2553863164",
+      "createdAt": "2025-11-28T13:25:44Z",
+      "updatedAt": "2025-11-28T13:28:52Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOOUh3t87bCxMV",
+      "title": "Disentangle \"abstract\" and ecosystem-specific identifiers",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/24",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Hmm (marker for food for thought):\r\n> This says what specifically it is (an identifier for the Thing) and how it is represented in that specific ecosystem (as scimObjectId).\r\n> Do we want to disentangle this at some point?\r\n> Right now, a different ecosystem cannot detect that scimObjectId actually is an identifier for the Thing and from which ecosystem that is comint.\r\n\r\n_Originally posted by @cabo in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2553873891_\r\n            ",
+      "createdAt": "2025-11-28T13:27:32Z",
+      "updatedAt": "2025-11-28T13:27:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOOUh3t87bC2VQ",
+      "title": "Improve the names of the newly introduced concepts",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/25",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the thread under https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2558614735, we have been discussing different names for the four \"archetypes\" we now have in the document. Going forward, we need to evaluate whether there are better names than\n\n- State Report\n- State Report Update\n- State Patch and \n- Construction Message.\n\nBelow, you can find the discussion @cabo and I had related to this topic:\n\n> Maybe we could shorten the archetype names to \"report\", \"delta\", and, \"patch\". I haven't found a single-word synonym for \"construction message\" yet, though.\n\n_Posted by @JKRhb in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2557945761_\n\n> Hmm. Maybe \"Configuration\" could work as a replacement?\n\n_Posted by @JKRhb in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2557949754_\n\n> \"report\" and \"delta/patch\" are about what the message is, structurally.\n> \"configuration/construction message\" are about what the message is intended to do, just as \"delta\" vs. \"patch\" are.\n> The (structurally) same message could be reported as a delta and then sent on as a patch.\n\n_Posted by @cabo in https://github.com/ietf-wg-asdf/instance-information/pull/22#discussion_r2558614735",
+      "createdAt": "2025-11-28T13:34:38Z",
+      "updatedAt": "2025-11-28T13:34:38Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOOUh3t87b4L40",
+      "title": "Associate identity manifest with the construction message arche type",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/28",
+      "state": "CLOSED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We are currently associating the identity manifest with the new status report archetype. This is actually incorrect as pointed out by @jungha-hong and should be fixed so that it is associated with the construction message archetype instead.",
+      "createdAt": "2025-12-03T07:48:42Z",
+      "updatedAt": "2026-01-20T23:49:49Z",
+      "closedAt": "2026-01-20T23:49:49Z",
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOOUh3t87cxXMs",
+      "title": "Indicating construction parameters for affordances (via `sdfContext`?)",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/30",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the current revision of the draft, the way construction is supposed to be handled from an SDF perspective is still a blank spot that needs to be addressed going forward. One challenge in particular is the question of how we could integrate information relevant for the construction process into our now unified message format.\n\nI think one way of handling this would be deviating a bit from the idea of using the exact same structure for the status report and construction message archetypes. Instead, we could let the affordance entries in a construction message provide arguments for the constructor parameters defined in a model, would could lead to instance-related messages like the following:\n\n```yaml\ninfo:\n  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42\nnamespace:\n  models: https://example.com/models\n  sensors: https://example.com/sensor\ndefaultNamespace: models\nsdfInstanceOf:\n  model: sensors:#/sdfObject/sensor\nsdfInstance:\n  sdfContext:\n    ipAddress: 192.168.1.5\n  sdfProperty:\n    temperature:\n      \"$comment\": This constructor argument sets the reported unit to Celsius\n      unit: Cel\n```\n\nIn this case, we could let an SDF model define that the temperature unit is be settable via a constructor parameter. In a state patch message, we could then refer to the same set of parameters to apply an update to the device and, for example, set the reported unit to Fahrenheit.\n\nHowever, I am wondering whether this mechanism would actually go against our principle of separating class-level from instance-related information, since applying the unit to the `sdfProperty` definition would effectively create a derivation of the base model. This would effectively hand over control from the base model to the newly created one, which does not feel exactly right to me.\n\nI am therefore asking myself whether we should treat configurable parameters as context information instead, by establishing a relationship between `sdfProperty` and `sdfContext` via something like the `contextMap` we already have in the draft. Then we could set the `unit` that is applicable to the `sdfProperty` `temperature` like so:\n\n```yaml\ninfo:\n  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42\nnamespace:\n  models: https://example.com/models\n  sensors: https://example.com/sensor\ndefaultNamespace: models\nsdfInstanceOf:\n  model: sensors:#/sdfObject/sensor\nsdfInstance:\n  sdfContext:\n    ipAddress: 192.168.1.5\n    temperatureUnit: Cel\n```\n\nThe linking in the SDF model on the other hand could look like this:\n\n```yaml\nnamespace:\n  models: https://example.com/models\n  sensors: https://example.com/sensor\ndefaultNamespace: models\nsdfObject:\n  sensor:\n    sdfContext:\n      ipAddress:\n        type: string\n      unit:\n        type: string\n    sdfProperty:\n      temperature:\n        type: number\n        contextMap:\n          unit: \"#/sdfObject/sensor/sdfContext/unit\"\n```\n\nThis approach would have the advantage of having one model that fully controls all configurable parameters. In my opinion, it would also further justify having a separate `sdfContext` keyword, as only this information would be settable in a construction or state patch message.",
+      "createdAt": "2025-12-07T20:22:34Z",
+      "updatedAt": "2025-12-09T17:22:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the meantime, I also had to think about once again whether it would make sense to add another layer to instance-related messages and report actual values under a `value` quality. This would enable us to put construction parameters (in this example: `unit`) under the named qualities. Similarly, we could also include information such as timestamps.\n\n```yaml\ninfo:\n  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42\nnamespace:\n  models: https://example.com/models\n  sensors: https://example.com/sensor\ndefaultNamespace: models\nsdfInstanceOf:\n  model: sensors:#/sdfObject/sensor\nsdfInstance:\n  sdfContext:\n    ipAddress:\n      value: 192.168.1.5\n  sdfProperty:\n    temperature:\n      unit: Cel\n```\n\nHowever, when it comes to construction parameters, this has the disadvantage of not providing the clear separation of instance-related and model-level information.\n",
+          "createdAt": "2025-12-09T16:04:13Z",
+          "updatedAt": "2025-12-09T16:04:13Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "TODO: Look at the approach chosen by Thing Models to define \"variables\"/\"value slots\" and what the mechanism for assigning values to them looks like\n\nNeed to look into how the various ways such a message can interact with entities such as digital twins, asset management systems etc. Different applications may be interested in different kinds of messages (or rather: *information sets* or *snippets*). (Also note the problem of access control that arises here.)\n\nAlso need to look at the actual problems/use cases we are trying to solve and come up with more examples.\n\nThe \"purpose in life\" aspect that came up during IETF 124 would also be covered by context information. Solving this problem would also bring us close to what we are actually trying to achieve here. There are different kinds of purpose in life information, a temperature sensor, for example, might not really care what it is actually being used for, to make use of the information the sensor collects other devices need to know in which room the sensor measures temperature.\n\nThe message (format) itself might be orthogonal to the actual usage of the messages (and questions like access control). This could also be relevant for understanding the relationship with NIPC, which is using SCIM in a similar way. Perhaps we can learn a lot here for construction messages as well.\n\nState patches are stateful (by design) which implies the use of a protocol, but they may still be abstract enough to understand which changes are applied to the information at hand.\n\nProvenance might be added later to messages. Note that there are different levels of quality(?)/\"longevity\" of context information \u2013 pieces of context information might be used as \"variables\", but others might not.",
+          "createdAt": "2025-12-09T16:39:34Z",
+          "updatedAt": "2025-12-09T17:11:06Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "TODO: Draw inspiration (but not too much) from YANG for and naming and using variables: schema nodes and data nodes \n\nUse examples to investigate whether we can map their _intent_ into our conceptual world.",
+          "createdAt": "2025-12-09T17:20:55Z",
+          "updatedAt": "2025-12-09T17:22:25Z"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOOUh3t87ko4zw",
+      "title": "Revisit the `thingId` and `timestamp` qualities",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/32",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Going forward, we need to deal with metadata such as the `thingId` and state-related qualities such as the `timestamp` more thoroughly. This includes the following aspects moved here from PR #29:\r\n\r\n- Consider creating a separate metadata group\r\n- Deal with the term \"instance\" and enable different types of instances to cooperate/integrate into one Thing\r\n\r\n_Originally posted by @JKRhb in https://github.com/ietf-wg-asdf/instance-information/pull/29#discussion_r2709123463_\r\n            ",
+      "createdAt": "2026-01-20T23:42:29Z",
+      "updatedAt": "2026-01-20T23:42:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOOUh3t87ko5LT",
+      "title": "Revisit Litmus Test",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/33",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I had to think about the \"litmus test\" again with regard to the identity manifest, and was wondering whether construction messages could act as a means to initialize properties that are read-only. I think this might be a better way to handle identity information, as that kind of information can probably be retrieved via application-layer protocols in many cases and is therefore not really part of the context. Similarly, patch messages could be a way to change the value of properties that are otherwise non-writable during reconfiguration.\r\n\r\nI think the situation with actions and events is probably different, although we could think about whether there are situations where you want to initialize a device with an action state, or an action or event history.\r\n\r\n_Originally posted by @JKRhb in https://github.com/ietf-wg-asdf/instance-information/pull/29#discussion_r2688522285_\r\n            ",
+      "createdAt": "2026-01-20T23:43:10Z",
+      "updatedAt": "2026-01-20T23:43:10Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOOUh3t87sCb2_",
+      "title": "Distinguish between \"will to change\" and the \"embodiment as a message\" in the terminology section",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/issues/37",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The terminology section needs to be updated to go beyond what we currently outline with regard to instance-related messages.",
+      "createdAt": "2026-02-18T22:26:42Z",
+      "updatedAt": "2026-02-18T22:26:42Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -508,7 +658,7 @@
       "labels": [],
       "body": "As discussed yesterday, this PR provides an initial example for an alternative constructor approach where `sdfAction`s are reused instead of introducing a new keyword.\r\n\r\nThere are still a number of aspects that require discussion here, but the PR should be a first step toward making a more informed discussion.",
       "createdAt": "2025-07-15T08:15:57Z",
-      "updatedAt": "2025-07-20T12:08:41Z",
+      "updatedAt": "2025-11-04T19:53:19Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "19fe889dd0a27d3f310af1e58b0cdd782cfb3dc7",
@@ -597,7 +747,7 @@
       "labels": [],
       "body": "This PR takes over the code for validating the SDF models within the draft from the SDF Mapping repository.",
       "createdAt": "2025-07-19T18:46:05Z",
-      "updatedAt": "2025-07-20T10:38:50Z",
+      "updatedAt": "2025-11-04T19:53:22Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "6f14634c7c1ad6819411243661dbd43ac52e5a78",
@@ -625,7 +775,7 @@
       "labels": [],
       "body": "Looking at the diff of the two latest draft versions, I noticed a couple of small mistakes which I wanted to fix with this PR. I also added a \"DISCUSS\" comment to the example for the proofshot delta constructor, which might not be that suitable as an example after all.",
       "createdAt": "2025-07-20T12:42:22Z",
-      "updatedAt": "2025-07-21T12:27:19Z",
+      "updatedAt": "2025-11-04T19:53:20Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "17b6b9906b036cdc5b84c0555663849f8bf005da",
@@ -646,24 +796,26 @@
       "id": "PR_kwDOOUh3t86gfaDu",
       "title": "Model context and offDevice information via sdfContext",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR contains a proposal for replacing and unifying the previous usages of `offDevice` and `$context` via an `sdfContext` quality (which is a potential replacement for the `sdfNonAffordance` quality introduced by @jungha-hong et al.).\r\n\r\nReading through the updated examples, I think this resolves some of the open questions in the draft document quite well and contributes to a cleaner separation of model and instance information.\r\n\r\nWhen merged, this PR resolves #17.",
       "createdAt": "2025-07-24T16:48:44Z",
-      "updatedAt": "2025-08-20T06:53:21Z",
+      "updatedAt": "2025-11-21T14:22:34Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
-      "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
+      "baseRefOid": "25da25d8efb04f61c2675bcd863014ecf04c4b84",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "sdfContext",
-      "headRefOid": "7ef75e1a91dd02895673a2955602befb3d561084",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3a11eb6bfff6c0a772f81ee2fd8c01b4b01b5bc9",
+      "closedAt": "2025-11-21T14:22:30Z",
+      "mergedAt": "2025-11-21T14:22:30Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "a776e98a731ac52c6f12a8122e8bea850866ee07"
+      },
       "comments": [
         {
           "author": "JKRhb",
@@ -693,6 +845,106 @@
               "updatedAt": "2025-08-20T06:36:55Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Mo1Hi",
+          "commit": {
+            "abbreviatedOid": "3a11eb6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-07T11:33:42Z",
+          "updatedAt": "2025-11-07T11:33:48Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Thinking about the protocol map a bit more, I had the impression that it might actually be a good reference point for the Litmus test. Taking the IP address as an example, we could ask ourselves:\n\n- Could the information be retrieved via a protocol from the protocol map?\n- Is the information the basis for using the protocol map in the first place?\n\nI guess with something like identity information, there is a gray area where you could model the information both as context information or a property.",
+              "createdAt": "2025-11-07T11:33:42Z",
+              "updatedAt": "2025-11-07T11:34:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87MpA28",
+          "commit": {
+            "abbreviatedOid": "3a11eb6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-07T11:41:05Z",
+          "updatedAt": "2025-11-07T11:41:05Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Another aspect might actually be related to digital twin modelling, where you have information that needs to be provided to have an accurate virtual representation of a physical. So with the mount location for example, that is something that can only be changed by moving the device in the real world. So it may be obvious in the real world that a device is mounted to the wall, but to get an accurate virtual representation, this context has to be modelled explicitly.\n\nMaybe this could be a second dimension of the Litmus test.",
+              "createdAt": "2025-11-07T11:41:05Z",
+              "updatedAt": "2025-11-07T11:41:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87MqPkJ",
+          "commit": {
+            "abbreviatedOid": "3a11eb6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-07T12:31:04Z",
+          "updatedAt": "2025-11-07T12:31:04Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Another thought: Maybe we can differentiate between \"internal\" context information (provided by the Thing itself to be able to perform interactions) and \"external\" context information (provided by an external entity to capture the Thing's embodiment in the real world).",
+              "createdAt": "2025-11-07T12:31:04Z",
+              "updatedAt": "2025-11-07T12:31:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Mq2uJ",
+          "commit": {
+            "abbreviatedOid": "3a11eb6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-07T13:02:11Z",
+          "updatedAt": "2025-11-07T13:02:11Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Then again, external context data will probably also include information from something like an asset management system or a SCIM database, so its use will probably still go beyond digital twins in the narrower sense.",
+              "createdAt": "2025-11-07T13:02:11Z",
+              "updatedAt": "2025-11-07T13:02:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87MsHjI",
+          "commit": {
+            "abbreviatedOid": "3a11eb6"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-07T14:00:14Z",
+          "updatedAt": "2025-11-07T14:00:14Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "> \"external\" context information (provided by an external entity to capture the Thing's embodiment in the real world).\r\n\r\nThis got me thinking that something like the dimensions of a thing or other information regarding its \"casing\" could also be interesting examples for context information to be modeled via `sdfContext`.",
+              "createdAt": "2025-11-07T14:00:14Z",
+              "updatedAt": "2025-11-07T14:00:14Z"
+            }
+          ]
         }
       ]
     },
@@ -701,25 +953,40 @@
       "id": "PR_kwDOOUh3t86glwzW",
       "title": "Experiment with `sdfRelation` for specifying constructors and parameter targets",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This morning, I had the idea that `sdfRelation` might be a good way of linking constructors and their parameters to their designated targets without introducing new targets. This solution would also resolve the question of how to identify a constructor. The question of how to indicate a constructor _preference_ is still open, though.\r\n\r\nThis PR depends on #18 and should be merged afterward in order to decrease the diff size.",
       "createdAt": "2025-07-25T08:26:25Z",
-      "updatedAt": "2025-08-10T14:07:12Z",
+      "updatedAt": "2025-11-22T10:44:33Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
-      "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
+      "baseRefOid": "25da25d8efb04f61c2675bcd863014ecf04c4b84",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "constructor-relation",
-      "headRefOid": "ea898fe2054f7f897eec673eab532d927aeaa43d",
-      "closedAt": null,
+      "headRefOid": "c57868432b4ee93001bcc9746d2b0064b0493b67",
+      "closedAt": "2025-11-21T14:22:46Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After working on #18, I am currently not sure whether this PR might have become obsolete by now. Therefore, I will mark this one as a draft for now that we could revisit after #18 has been merged.",
+          "createdAt": "2025-11-06T22:22:30Z",
+          "updatedAt": "2025-11-06T22:23:25Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed with @cabo yesterday, the approach described in this PR has probably become obsolete in the meantime, which is why I closed it.",
+          "createdAt": "2025-11-22T10:44:33Z",
+          "updatedAt": "2025-11-22T10:44:33Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOOUh3t862X1I1",
@@ -740,6 +1007,978 @@
               "updatedAt": "2025-07-27T22:17:54Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOOUh3t86xftTQ",
+      "title": "Add `...` to end the YAML header",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/21",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In my local editor, I get a strange ... syntax highlighting of the Markdown document, since my editor is not noticing that the YAML header has actually ended:\r\n\r\n<img width=\"724\" height=\"303\" alt=\"grafik\" src=\"https://github.com/user-attachments/assets/58dac3c3-5bec-48d2-99a0-d2e579714969\" />\r\n\r\nThis PR proposes to explicitly end the YAML header with an additional `...`, resolving the editor confusion (apparently without breaking the document).\r\n",
+      "createdAt": "2025-11-04T20:06:41Z",
+      "updatedAt": "2025-11-05T14:13:43Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "e533a8dc0da3f0733d228fdae5a805319aa17447",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "end-yaml-header",
+      "headRefOid": "09993ee6fab31c2e82059e27621b927ad079ea1c",
+      "closedAt": "2025-11-05T14:13:42Z",
+      "mergedAt": "2025-11-05T14:13:42Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "25da25d8efb04f61c2675bcd863014ecf04c4b84"
+      },
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@cabo As the changes are pretty straightforward, I would go ahead and merge this one.",
+          "createdAt": "2025-11-05T14:13:38Z",
+          "updatedAt": "2025-11-05T14:13:38Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOOUh3t860_uxh",
+      "title": "Incorporate results from and since IETF 124 into the document",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/22",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR further incorporates the results from IETF 124 and the OneDM meetings that happened in the meantime into the document. The PR is currently still WIP \u2013 I will add more content later to establish a basis for further discussion.",
+      "createdAt": "2025-11-22T17:54:09Z",
+      "updatedAt": "2025-11-28T13:37:39Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "a776e98a731ac52c6f12a8122e8bea850866ee07",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "updates-after-ietf124",
+      "headRefOid": "750ee7a336b22b2e1d7bd3cb495a561fd0ae4b9d",
+      "closedAt": "2025-11-28T13:37:39Z",
+      "mergedAt": "2025-11-28T13:37:39Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "da0862cdebbd60ae0e82d0a971cb879085326738"
+      },
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed with @cabo, we are going to merge this PR to be able to create a new snapshot (no pun intended) for the interim meeting next week. I've created the issues #23, #24, and #25 to capture the remaining unresolved comment threads, on which we can follow up in separate PRs.",
+          "createdAt": "2025-11-28T13:37:05Z",
+          "updatedAt": "2025-11-28T13:37:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87Qdwq5",
+          "commit": {
+            "abbreviatedOid": "94b2baf"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "Some initial comments (from typos to long-term background deliberations)",
+          "createdAt": "2025-11-23T07:58:28Z",
+          "updatedAt": "2025-11-23T08:26:48Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "If there is a concrete (JSON-based) representation, should we distinguish this from the \"abstract\" representation?",
+              "createdAt": "2025-11-23T07:58:29Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n: A message that describes the state or a state change of a specific instance.\r\n```\r\n\r\nA bit more \"specific\", maybe",
+              "createdAt": "2025-11-23T07:59:48Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "maybe\r\n\r\n```suggestion\r\nThe instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.\r\n```",
+              "createdAt": "2025-11-23T08:00:51Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "```suggestion\r\n4. *Patch messages* that indicate state changes to *cause* a Thing's state to change\r\n```",
+              "createdAt": "2025-11-23T08:03:14Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "Maybe we should collect all subset/variant proofshots under that headline\r\n",
+              "createdAt": "2025-11-23T08:04:14Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "Aren't the direct reports more different from the delta/patch messages, so we should distinguish direct vs. delta and then cause/effect within delta (and/or within direct reports!).",
+              "createdAt": "2025-11-23T08:05:45Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 48,
+              "body": "Some of it, yes.  The media type for a direct report will be different from that for a patch/delta, which could be the same media type or (more subtly) different again.",
+              "createdAt": "2025-11-23T08:06:57Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "This may be the point to point out that this syntax describes an abstract structure (syntax) as well as a concrete syntax that may actually be used in interchange.",
+              "createdAt": "2025-11-23T08:08:24Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "Should we make more use of \"archetype\" (introduce the term earlier)?",
+              "createdAt": "2025-11-23T08:08:51Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 57,
+              "body": "I think for now capturing this is more important than nicely integrating it, so we may not want to tend to this TODO right away",
+              "createdAt": "2025-11-23T08:11:09Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 64,
+              "body": "```suggestion\r\ninformation, either in general or in a specific form such as a context snapshot etc.).\r\n```",
+              "createdAt": "2025-11-23T08:11:41Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 68,
+              "body": "maybe move up \"(class-level information)\" to after *model*",
+              "createdAt": "2025-11-23T08:12:56Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 78,
+              "body": "are/can be\r\nabstract vs. conceptual\r\n",
+              "createdAt": "2025-11-23T08:13:45Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 80,
+              "body": "one more word: abstract/conceptual/neutral. \r\nMaybe we can actually describe the a/c/n format in these terms.",
+              "createdAt": "2025-11-23T08:14:53Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 121,
+              "body": "We might mention that this sentence is not about the essence (information model) of instance-related messages; we are now into designing the actual format (data model).",
+              "createdAt": "2025-11-23T08:17:33Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 123,
+              "body": "We sure want to keep it; we need to fully grasp its consequences in due time first...",
+              "createdAt": "2025-11-23T08:18:35Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 160,
+              "body": "```suggestion\r\nDistinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.\r\n```",
+              "createdAt": "2025-11-23T08:19:43Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 174,
+              "body": "For deltas/patches, should there be a media type (content type) somewhere?",
+              "createdAt": "2025-11-23T08:20:56Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 232,
+              "body": "Hmm (marker for food for thought):\r\nThis says what specifically it is (an identifier for the Thing) and how it is represented in that specific ecosystem (as scimObjectId).\r\nDo we want to disentangle this at some point?\r\nRight now, a different ecosystem cannot detect that scimObjectId actually is an identifier for the Thing and from which ecosystem that is comint.",
+              "createdAt": "2025-11-23T08:24:16Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            },
+            {
+              "originalPosition": 261,
+              "body": "Should this information be captured somewhere?\r\nRight now it seems to be lost.\r\nI do think it is quite important.",
+              "createdAt": "2025-11-23T08:26:02Z",
+              "updatedAt": "2025-11-23T08:26:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Qd6pT",
+          "commit": {
+            "abbreviatedOid": "e3c9bbf"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:02:34Z",
+          "updatedAt": "2025-11-23T09:02:35Z",
+          "comments": [
+            {
+              "originalPosition": 68,
+              "body": "Good point! Upated via e3c9bbfe7bff1d6733d2e855ac6c599a5cc3e205",
+              "createdAt": "2025-11-23T09:02:34Z",
+              "updatedAt": "2025-11-23T09:02:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Qd7Pg",
+          "commit": {
+            "abbreviatedOid": "e3c9bbf"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:05:50Z",
+          "updatedAt": "2025-11-23T09:05:50Z",
+          "comments": [
+            {
+              "originalPosition": 121,
+              "body": "Good point, would the following work as a clarification?\n\n```suggestion\nThe data model of instance-related messages makes use of the structural features of SDF models (e.g., when it comes metadata and namespace information), but is also different in crucial aspects.\n```",
+              "createdAt": "2025-11-23T09:05:50Z",
+              "updatedAt": "2025-11-23T10:28:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Qd707",
+          "commit": {
+            "abbreviatedOid": "e3c9bbf"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:08:21Z",
+          "updatedAt": "2025-11-23T09:08:21Z",
+          "comments": [
+            {
+              "originalPosition": 174,
+              "body": "Oh, definitely, that is a good point :) I suppose we need to discuss how many new media types we actually need (three?) to reliably distinguish the different message/archetypes.",
+              "createdAt": "2025-11-23T09:08:21Z",
+              "updatedAt": "2025-11-23T09:08:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Qd9B-",
+          "commit": {
+            "abbreviatedOid": "e3c9bbf"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:13:30Z",
+          "updatedAt": "2025-11-23T09:13:30Z",
+          "comments": [
+            {
+              "originalPosition": 232,
+              "body": "Hmm, yeah, that is an interesting aspect \u2013 should we address that at the model level, maybe even via mapping files?",
+              "createdAt": "2025-11-23T09:13:30Z",
+              "updatedAt": "2025-11-23T09:13:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Qd_-g",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:20:38Z",
+          "updatedAt": "2025-11-23T09:20:38Z",
+          "comments": [
+            {
+              "originalPosition": 261,
+              "body": "Thank you, I tried to recapture it via 1cf3f68549a2da59019b33445c2d4c5774dbfbf1",
+              "createdAt": "2025-11-23T09:20:38Z",
+              "updatedAt": "2025-11-23T09:20:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeDVf",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:24:49Z",
+          "updatedAt": "2025-11-23T09:24:49Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "Thank you, I tried to amend the paragraph as follows based on your comment, let me know if you see room for improvement here:\n\n```suggestion\n{{{#syntax}}} specifies the formal syntax of instance-related messages all normative statements as well as the examples in this document will adhere to.\nThis syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.\n```",
+              "createdAt": "2025-11-23T09:24:49Z",
+              "updatedAt": "2025-11-23T10:24:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeFXD",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:28:05Z",
+          "updatedAt": "2025-11-23T09:28:05Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "Would the following be an improvement of the sentence here:\n\n```suggestion\nThe uniform message format serves as the basis for all three message types, which are distinguished via their media types as well as small syntactical differences.\n```",
+              "createdAt": "2025-11-23T09:28:05Z",
+              "updatedAt": "2025-11-23T09:28:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeGTB",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:29:50Z",
+          "updatedAt": "2025-11-23T09:29:50Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Yeah, that is a good point actually! So maybe we need to add in another level of \"branching out\" the message types.",
+              "createdAt": "2025-11-23T09:29:50Z",
+              "updatedAt": "2025-11-23T09:29:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeHMf",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:31:37Z",
+          "updatedAt": "2025-11-23T09:31:37Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "You mean identity manifest?",
+              "createdAt": "2025-11-23T09:31:37Z",
+              "updatedAt": "2025-11-23T09:31:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeH2b",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:33:54Z",
+          "updatedAt": "2025-11-23T09:33:54Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "I guess that would make sense \u2013 the suggestion unfortunately cannot be applied here directly, but it would look like this then, right?\n\n```suggestion\nboth Abstract (eco-system independent) as well as concrete (JSON-based) Representation formats ...\n```",
+              "createdAt": "2025-11-23T09:33:54Z",
+              "updatedAt": "2025-11-23T09:33:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeNgN",
+          "commit": {
+            "abbreviatedOid": "1cf3f68"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T09:50:23Z",
+          "updatedAt": "2025-11-23T09:50:23Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Two perspectives/requirements of the same abstract representation:\n- _conceptual_ for the \"model\" of the messages\n- _neutral_ (and concrete) for the actual interchange, ecosystem-independent but \"real\" (\"red star\")",
+              "createdAt": "2025-11-23T09:50:23Z",
+              "updatedAt": "2025-11-23T09:50:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QeXQA",
+          "commit": {
+            "abbreviatedOid": "594fb7b"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T10:09:02Z",
+          "updatedAt": "2025-11-23T10:09:02Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Resolved via 594fb7b98e1d7cddd3f821644f79e62e637d446c.",
+              "createdAt": "2025-11-23T10:09:02Z",
+              "updatedAt": "2025-11-23T10:09:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QebgU",
+          "commit": {
+            "abbreviatedOid": "594fb7b"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-23T10:20:17Z",
+          "updatedAt": "2025-11-23T10:20:17Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "- Two dimensions: Content and intended effect\n- TODO: Add Table/matrix for categorization",
+              "createdAt": "2025-11-23T10:20:17Z",
+              "updatedAt": "2025-11-23T10:22:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QxDoR",
+          "commit": {
+            "abbreviatedOid": "d547d04"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-24T22:44:46Z",
+          "updatedAt": "2025-11-24T22:44:46Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "Maybe we could shorten the archetype names to \"report\", \"delta\", and, \"patch\". I haven't found a single-word synonym for \"construction message\" yet, though.",
+              "createdAt": "2025-11-24T22:44:46Z",
+              "updatedAt": "2025-11-24T22:44:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87QxErx",
+          "commit": {
+            "abbreviatedOid": "d547d04"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-24T22:46:05Z",
+          "updatedAt": "2025-11-24T22:46:05Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "Hmm. Maybe \"Configuration\" could work as a replacement?",
+              "createdAt": "2025-11-24T22:46:05Z",
+              "updatedAt": "2025-11-24T22:46:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87Q0M1a",
+          "commit": {
+            "abbreviatedOid": "d547d04"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-25T05:41:58Z",
+          "updatedAt": "2025-11-25T05:41:58Z",
+          "comments": [
+            {
+              "originalPosition": 83,
+              "body": "\"report\" and \"delta/patch\" are about what the message is, structurally.\r\n\"configuration/construction message\" are about what the message is intended to do, just as \"delta\" vs. \"patch\" are.\r\nThe (structurally) same message could be reported as a delta and then sent on as a patch.",
+              "createdAt": "2025-11-25T05:41:58Z",
+              "updatedAt": "2025-11-25T05:41:58Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOOUh3t862DAP-",
+      "title": "Apply editorial improvements",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/26",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR applies a couple of editorial fixes to small issues I noticed when rereading the document.",
+      "createdAt": "2025-11-28T14:29:21Z",
+      "updatedAt": "2025-12-01T16:48:46Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "5509204e06d50bae357612867ddd235eca13911e",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "editorial-changes",
+      "headRefOid": "1110914e99a44fc30d4faaeca219bb0cc2b4f749",
+      "closedAt": "2025-12-01T16:48:46Z",
+      "mergedAt": "2025-12-01T16:48:46Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "fdceb1f8cbd2dd1fb585b8bd68e05905c26bd041"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87SKq0L",
+          "commit": {
+            "abbreviatedOid": "76ab0b7"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-01T16:46:59Z",
+          "updatedAt": "2025-12-01T16:46:59Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\n1. the intended effect of a message, which can either be a report or an update of a Thing's state, and\n```",
+              "createdAt": "2025-12-01T16:46:59Z",
+              "updatedAt": "2025-12-01T16:47:11Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOOUh3t862aOzQ",
+      "title": "Add experimental section on linking sdfProtocolMap and sdfContext",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/27",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR incorporates an experimental approach from the Hedgedoc that summarized the SDF-related results of IETF 124. There is probably still some refinement needed (especially in future versions of this document), but for now it will probably serve as a good basis for further discussion.",
+      "createdAt": "2025-12-01T17:55:43Z",
+      "updatedAt": "2025-12-02T00:35:49Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "fdceb1f8cbd2dd1fb585b8bd68e05905c26bd041",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "sdfProtocolMap-json-pointer",
+      "headRefOid": "f27066bcafd6fd259c69a246be62bd1bd9046907",
+      "closedAt": "2025-12-02T00:35:48Z",
+      "mergedAt": "2025-12-02T00:35:48Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "0c3e75a1a703a162e2318e46c257d5a7d7828c9f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87SL44z",
+          "commit": {
+            "abbreviatedOid": "a065c91"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-01T17:59:49Z",
+          "updatedAt": "2025-12-01T17:59:50Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "```suggestion\ntitle=\"Example of a status report message that provides the IP address needed to perform a CoAP-based interaction with the sensor from the previous figure.\"}\n```",
+              "createdAt": "2025-12-01T17:59:49Z",
+              "updatedAt": "2025-12-01T17:59:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87SPj1-",
+          "commit": {
+            "abbreviatedOid": "13ec50b"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-01T22:20:13Z",
+          "updatedAt": "2025-12-01T22:20:14Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\nWhen using the `sdfProtocolMap` concept introduced in {{-protocol-map}}, sine protocols might need context information such as a hostname or an IP address to actually enable interactions.\n```",
+              "createdAt": "2025-12-01T22:20:13Z",
+              "updatedAt": "2025-12-01T22:20:14Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOOUh3t863Lxo6",
+      "title": "Rework and refine document structure",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/29",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Resolves #28 (eventually).",
+      "createdAt": "2025-12-04T22:18:25Z",
+      "updatedAt": "2026-01-20T23:49:51Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "acc226363c6298a9857d14f6a696bc6964bedbf1",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "identity-manifest",
+      "headRefOid": "d43dee2988bbc1438c9b517ed5a83673fc376cda",
+      "closedAt": "2026-01-20T23:49:48Z",
+      "mergedAt": "2026-01-20T23:49:48Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "3820b245c653502ae2ed18e612b6c9a3a3a54caf"
+      },
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@cabo This PR now evolved into a more comprehensive update to the document. I tried to reduce the redundancy a bit by integrating the concrete examples from the non-affordance draft and earlier versions of our draft into the four \"archetypes\", renaming them in the process. I hope that the updates point into the right direction, maybe we can also discuss them more comprehensively during the upcoming OneDM meeting.",
+          "createdAt": "2025-12-30T15:32:03Z",
+          "updatedAt": "2025-12-30T15:32:03Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@cabo I think this PR may now be ready for an initial review (also see [here](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-asdf.github.io/instance-information/draft-ietf-asdf-instance-information.txt&url_2=https://ietf-wg-asdf.github.io/instance-information/identity-manifest/draft-ietf-asdf-instance-information.txt) for the rendered diff). The modelling of action and event histories still needs some discussion, which is why have not updated the CDDL in that regard, but overall I think the document *should* be a bit more mature now.",
+          "createdAt": "2026-01-11T22:54:53Z",
+          "updatedAt": "2026-01-11T22:54:53Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think with the latest changes, this PR can now be merged. There are probably still some aspects that need to be improved in the current state of the PR, but I suppose we can simply follow up with another revision after today's interim.",
+          "createdAt": "2026-01-20T23:49:44Z",
+          "updatedAt": "2026-01-20T23:49:44Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87aDolQ",
+          "commit": {
+            "abbreviatedOid": "b8eea51"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-14T00:19:03Z",
+          "updatedAt": "2026-01-14T00:19:03Z",
+          "comments": [
+            {
+              "originalPosition": 355,
+              "body": "I had to think about the \"litmus test\" again with regard to the identity manifest, and was wondering whether construction messages could act as a means to initialize properties that are read-only. I think this might be a better way to handle identity information, as that kind of information can probably be retrieved via application-layer protocols in many cases and is therefore not really part of the context. Similarly, patch messages could be a way to change the value of properties that are otherwise non-writable during reconfiguration.\n\nI think the situation with actions and events is probably different, although we could think about whether there are situations where you want to initialize a device with an action state, or an action or event history. ",
+              "createdAt": "2026-01-14T00:19:03Z",
+              "updatedAt": "2026-01-14T00:19:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87bh6yW",
+          "commit": {
+            "abbreviatedOid": "b8eea51"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-20T16:25:36Z",
+          "updatedAt": "2026-01-20T16:25:36Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Move `timestamp` to the `info` block (and rename it?)",
+              "createdAt": "2026-01-20T16:25:36Z",
+              "updatedAt": "2026-01-20T16:26:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87bh8uT",
+          "commit": {
+            "abbreviatedOid": "b8eea51"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-20T16:27:03Z",
+          "updatedAt": "2026-01-20T16:27:04Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "- Rename back to `thingId` \n- Consider creating a separate metadata group\n- Deal with the term \"instance\" and enable different types of instances to cooperate/integrate into one Thing ",
+              "createdAt": "2026-01-20T16:27:04Z",
+              "updatedAt": "2026-01-20T16:38:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87biNlF",
+          "commit": {
+            "abbreviatedOid": "b8eea51"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-20T16:42:25Z",
+          "updatedAt": "2026-01-20T16:42:25Z",
+          "comments": [
+            {
+              "originalPosition": 284,
+              "body": "Add a note that the terms \"context snapshot\" and \"proofshot\" are used colloquially here (for now).",
+              "createdAt": "2026-01-20T16:42:25Z",
+              "updatedAt": "2026-01-20T16:42:25Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOOUh3t866ON9c",
+      "title": "Reflect WG adoption in source files",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/31",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Since the adoption call for this draft within the ASDF WG has ended with no objections, this PR prepares the document to be reposted as a WG document.\r\n\r\nNote that although the chairs have stated that the deadline has passed without objection, the draft has not been officially adopted yet. So merging and reposting to the DT should wait until an official announcement has been made (CC @mcr).",
+      "createdAt": "2025-12-22T21:41:24Z",
+      "updatedAt": "2025-12-23T21:48:56Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "0c3e75a1a703a162e2318e46c257d5a7d7828c9f",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "wg-adoption",
+      "headRefOid": "9c2d207717d1baeaf12c9bbb99b476f11ff542e3",
+      "closedAt": "2025-12-23T21:48:01Z",
+      "mergedAt": "2025-12-23T21:48:01Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "8c5367661656d2cd74984dff78f161379df2f519"
+      },
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I took the freedom of merging this PR after receiving another confirmation by the WG chairs.",
+          "createdAt": "2025-12-23T21:48:54Z",
+          "updatedAt": "2025-12-23T21:48:54Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOOUh3t87EY0Gx",
+      "title": "Include message \"archetypes\" in terminology section",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/34",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR updates the terminology section by including the missing message \"archetypes\" and rewriting the existing \"Proofshot\" entry to fit the latest changes to the draft.\r\n\r\nThere might be room for improvement, so I am looking forward to your feedback!",
+      "createdAt": "2026-02-17T15:24:21Z",
+      "updatedAt": "2026-02-18T22:13:33Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "b68be920cf656bfc80e4ea4ee3ec5dabd45358a4",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "update-terminology",
+      "headRefOid": "5efdc4e23ce2a336c2ada4780ea88e255a1cf378",
+      "closedAt": "2026-02-18T22:13:33Z",
+      "mergedAt": "2026-02-18T22:13:33Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "1e79bdce86e93b135f98516fa654f1643dba0eb3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87j1Fui",
+          "commit": {
+            "abbreviatedOid": "765e3db"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-18T21:32:41Z",
+          "updatedAt": "2026-02-18T21:33:58Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "incurrencies?\n",
+              "createdAt": "2026-02-18T21:32:41Z",
+              "updatedAt": "2026-02-18T21:33:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87j1I8l",
+          "commit": {
+            "abbreviatedOid": "765e3db"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-18T21:36:26Z",
+          "updatedAt": "2026-02-18T21:36:27Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Ahem, I think I wanted to write \u201cinaccuracies\u201d here \ud83d\ude05 \n\n\n```suggestion\n  inaccuracies could occur while capturing the affordance state.\n```",
+              "createdAt": "2026-02-18T21:36:27Z",
+              "updatedAt": "2026-02-18T21:36:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOOUh3t87EZACm",
+      "title": "Use RFC 9880 instead of the I.D. for SDF Base",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/35",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR updates the SDF reference after the recent publishing of RFC 9880 ( :tada: ).",
+      "createdAt": "2026-02-17T15:35:11Z",
+      "updatedAt": "2026-02-17T17:10:29Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "b68be920cf656bfc80e4ea4ee3ec5dabd45358a4",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "add-rfc",
+      "headRefOid": "993f42e6ebb1269570308131ff453053aca4f62e",
+      "closedAt": "2026-02-17T17:10:26Z",
+      "mergedAt": "2026-02-17T17:10:25Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "413e2b7d712be229f857d8b0c210652edfa13d71"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87jYN3a",
+          "commit": {
+            "abbreviatedOid": "2b52c01"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "With comment...",
+          "createdAt": "2026-02-17T15:49:17Z",
+          "updatedAt": "2026-02-17T15:50:08Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Need to change here, too:\n\n\n```suggestion\nThis document specifies instance-related messages to be used in conjunction with the Semantic Definition Format (SDF) for Data and Interactions of Things (RFC 9880).\n```",
+              "createdAt": "2026-02-17T15:49:17Z",
+              "updatedAt": "2026-02-17T15:50:08Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOOUh3t87EemBS",
+      "title": "Turn `sdfRequired` into an array",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/36",
+      "state": "MERGED",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As pointed out by `sdfcheck` (thanks, @cabo!), the `sdfRequired` is currently used incorrectly in the draft (as it is only a simple string at the moment). The error resulted from a slight misinterpretation of the SDF base specification by me.\r\n\r\nThis PR turns wraps the value in an array, which resolves the problem.",
+      "createdAt": "2026-02-17T23:12:25Z",
+      "updatedAt": "2026-02-18T08:42:58Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "a7f8e54aa7afb4187dcb5757080280803a5f07bc",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "fix-sdf-required",
+      "headRefOid": "e3cf94819924cfcd3702fda1ea206fa55f5f66b3",
+      "closedAt": "2026-02-18T08:42:50Z",
+      "mergedAt": "2026-02-18T08:42:50Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "7dbb96f2e6699d297c0e8238c10990d6f793c325"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87jl0on",
+          "commit": {
+            "abbreviatedOid": "e3cf948"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2026-02-18T08:06:50Z",
+          "updatedAt": "2026-02-18T08:06:50Z",
+          "comments": []
         }
       ]
     }
