@@ -57,7 +57,7 @@ informative:
   RFC7396: merge-patch
   # I-D.laari-asdf-relations: sdfrel
   # I-D.bormann-asdf-sdftype-link: sdflink
-  I-D.bormann-asdf-sdf-mapping: mapping
+  I-D.ietf-asdf-sdf-mapping: supplements
   # RFC9423: attr
   I-D.ietf-iotops-7228bis: terms
   I-D.amsuess-t2trg-raytime: raytime
@@ -145,7 +145,7 @@ Message:
   model.
 
   Deriving an ecosystem specific representation of a message may be
-  aided by *mapping files* {{-mapping}} that apply to the SDF model
+  aided by _Supplements_ {{-supplements}} that apply to the SDF model
   providing the abstract data model.
 
 Instantiation:
