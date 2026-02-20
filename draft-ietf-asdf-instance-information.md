@@ -218,7 +218,7 @@ Patch:
 # Instance Information and SDF
 
 The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
-Instead, the instantiation produces an instance-related *message*, which adheres to a uniform message format and is always controlled by the corresponding SDF model.
+Instead, the instantiation produces an instance-related *message*, which adheres to a common message format and is always controlled by the corresponding SDF model.
 Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.
 
 Taking into account previous revisions of this document as well as {{-non-affordance}}, we identified two main dimensions for covering the potential use cases for SDF messages:
@@ -265,7 +265,7 @@ Based on these considerations (as illustrated by the systematization in {{instan
 </table>
 {: #instance-message-dimensions title="Systematization of messages along the dimensions \"Content\" and \"(Intended) Effect\"."}
 
-The uniform message format can be used for all four message archetypes.
+The common message format can be used for all four message archetypes.
 {{syntax}} specifies the formal syntax of SDF messages that all normative statements as well as the examples in this document will adhere to.
 This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.
 
