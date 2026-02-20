@@ -241,7 +241,7 @@ Table of Contents
    The instantiation of an SDF model does not directly express an
    instance, which is, for example, a physical device or a digital twin.
    Instead, the instantiation produces an instance-related _message_,
-   which adheres to a uniform message format and is always controlled by
+   which adheres to a common message format and is always controlled by
    the corresponding SDF model.  Depending on the recipient and its
    purpose, a message can be interpreted as a report regarding the state
    of a Thing or the instruction to change it when consumed by the
@@ -288,7 +288,7 @@ Table of Contents
                Table 1: Systematization of messages along the
                dimensions "Content" and "(Intended) Effect".
 
-   The uniform message format can be used for all four message
+   The common message format can be used for all four message
    archetypes.  Appendix B specifies the formal syntax of SDF messages
    that all normative statements as well as the examples in this
    document will adhere to.  This syntax can serve to describe both the
