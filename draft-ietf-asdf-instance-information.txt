@@ -5,8 +5,8 @@
 ASDF                                                           J. Romann
 Internet-Draft                                        Universität Bremen
 Intended status: Standards Track                              C. Bormann
-Expires: 22 August 2026                           Universität Bremen TZI
-                                                        18 February 2026
+Expires: 26 August 2026                           Universität Bremen TZI
+                                                        22 February 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2026.
+   This Internet-Draft will expire on 26 August 2026.
 
 Copyright Notice
 
@@ -170,8 +170,8 @@ Table of Contents
       model.
 
       Deriving an ecosystem specific representation of a message may be
-      aided by _mapping files_ [I-D.bormann-asdf-sdf-mapping] that apply
-      to the SDF model providing the abstract data model.
+      aided by _Supplements_ [I-D.ietf-asdf-sdf-mapping] that apply to
+      the SDF model providing the abstract data model.
 
    Instantiation:  Instantiation is a process that takes a Model, some
       Context Information, and possibly information from a Device and
@@ -1138,19 +1138,19 @@ Table of Contents
               2024, <https://datatracker.ietf.org/doc/html/draft-
               amsuess-t2trg-raytime-03>.
 
-   [I-D.bormann-asdf-sdf-mapping]
-              Bormann, C. and J. Romann, "Semantic Definition Format
-              (SDF): Mapping files", Work in Progress, Internet-Draft,
-              draft-bormann-asdf-sdf-mapping-07, 20 July 2025,
-              <https://datatracker.ietf.org/doc/html/draft-bormann-asdf-
-              sdf-mapping-07>.
-
    [I-D.ietf-asdf-digital-twin]
               Lee, H. and J. Hong, "Semantic Definition Format (SDF)
               modeling for Digital Twin", Work in Progress, Internet-
               Draft, draft-ietf-asdf-digital-twin-03, 20 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
               digital-twin-03>.
+
+   [I-D.ietf-asdf-sdf-mapping]
+              Bormann, C. and J. Romann, "Semantic Definition Format
+              (SDF): Supplements", Work in Progress, Internet-Draft,
+              draft-ietf-asdf-sdf-mapping-01, 18 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
+              sdf-mapping-01>.
 
    [I-D.ietf-asdf-sdf-protocol-mapping]
               Mohan, R., Brinckman, B., and L. Corneo, "Protocol Mapping
