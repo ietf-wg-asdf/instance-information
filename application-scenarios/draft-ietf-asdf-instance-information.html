@@ -2228,7 +2228,8 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
 For <code>sdfProperty</code> definitions, this is very straightforward, as previously seen in in <a href="#code-sdf-delta-message" class="auto internal xref">Figure 5</a>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Actions and events, however, need to be handled differently: In the case of actions, the state of one or more actions is reported, which might already be in a completed or error state, or may also still be running.
 For events, a history is reported that includes the returned values.
-The exact of number of action and event reports is implementation-dependent and may vary between deployments.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+The exact of number of action and event reports is implementation-dependent and may vary between deployments.
+Documents that add additional <code>sdfProtocolMap</code> definitions may also define protocol-specific ways to control the size of the histories returned.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3"><a href="#code-snapshot-with-actions-and-events" class="auto internal xref">Figure 10</a> shows an example of a Snapshot Message for a lightswitch which reports the results of two <code>toggle</code> actions, one of which failed.
 The successfully completed action caused the emission of a <code>toggleEvent</code> with the same <code>timestamp</code>.
 As the lightswitch was turned on, the event was emitted with a value of <code>true</code>.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
