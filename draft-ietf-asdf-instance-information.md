@@ -616,11 +616,15 @@ Other specifications may define additional use cases instance-related messages c
 
 ## Construction
 
-In SDF models, we can specify a Thing's configurable parameters via `sdfProperty` definitions for which Construction Messages can provide concrete values.
-{{code-sdf-construction-sdf-context}} shows an example for such an SDF model.
-In this example, the `unit` quality of the `temperature` property has to be considered a construction parameter, as a connection to the `unit` property is established via the `sdfParameters` map using a JSON Pointer.
+In SDF models, we can treat a Thing's `sdfProperty` definitions as construction parameters.
+Construction messages can serve as an ecosystem-independent way for initializing properties, epecially those that are specified as non-writable.
 
-If the `unit` is not initialized during construction, it falls back to the default `Cel` for degrees Celcius.
+{{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
+As the `unit` property has a default value (`Cel` for degrees Celcius), it does not have to be initialized during construction.
+However, for all of these properties, a reconfiguration during runtime is possible.
+
+In this example, the `deviceIdentity` would be retrievable like a "regular", but immutable property affordance.
+While the `ipAddress` might be used for interaction affordances (e.g., by other models that build upon this one), the `temperature` property is "importing" the value of the `unit` property via a new quality called `sdfParameters`, where pairs of quality names and JSON pointers are used to import values from `sdfProperty` definitions.
 
 ~~~ sdf
 namespace:
@@ -649,6 +653,7 @@ sdfObject:
           firmwareVersion:
             type: string
       temperature:
+        writable: false
         type: number
         sdfParameters:
           unit: "#/sdfObject/sensor/sdfProperty/unit"
@@ -656,9 +661,8 @@ sdfObject:
 {:sdf #code-sdf-construction-sdf-context
 title="Example for SDF model with constructors"}
 
-Based on the SDF model above, a Construction Message such as the one shown in {{code-sdf-construction-message}} can trigger a construction process.
+Based on the SDF model above, a Construction Message such as the one shown in {{code-sdf-construction-message}} can trigger the construction process.
 As indicated via `sdfRequired`, this process must include the initialization of an IP address as well as the device's identity definitions.
-Initializing the `unit` quality is only required if the `temperature` property is present, which is expressed by the JSON pointer within the property's `sdfRequired` definition.
 
 ## Protocol Binding Information
 
