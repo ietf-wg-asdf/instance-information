@@ -695,10 +695,11 @@ sdfObject:
           coap:
             sdfParameters:
               ipAddress: "#/sdfObject/sensor/sdfProperty/ipAddress"
-            read:
-              method: GET
-              href: "/temperature"
-              contentType: 60
+            sdfOperations:
+              read:
+                method: GET
+                href: "/temperature"
+                contentType: 60
 ~~~
 {:sdf #code-sdf-protocol-map-plus-context
 title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
