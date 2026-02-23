@@ -2169,10 +2169,12 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
                 "ipAddress": "#/sdfObject/sensor/sdfProperty/\
                                                            ipAddress"
               },
-              "read": {
-                "method": "GET",
-                "href": "/temperature",
-                "contentType": 60
+              "sdfOperations": {
+                "read": {
+                  "method": "GET",
+                  "href": "/temperature",
+                  "contentType": 60
+                }
               }
             }
           }
