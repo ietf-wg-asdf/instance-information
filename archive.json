@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-22T01:20:28.685136+00:00",
+  "timestamp": "2026-02-24T01:18:33.926909+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -1987,25 +1987,35 @@
       "id": "PR_kwDOOUh3t87FB1nd",
       "title": "Update SDF Supplements reference",
       "url": "https://github.com/ietf-wg-asdf/instance-information/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "JKRhb",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This PR updates the `sdf-mapping` reference so that it now points to the recently adopted WG version. It also aligns the used terminology by speaking of \"supplements\" instead of \"mapping files\".\r\n\r\n[Diff](https://author-tools.ietf.org/api/iddiff?url_1=https://ietf-wg-asdf.github.io/instance-information/draft-ietf-asdf-instance-information.txt&url_2=https://ietf-wg-asdf.github.io/instance-information/supplements/draft-ietf-asdf-instance-information.txt)",
       "createdAt": "2026-02-20T00:38:47Z",
-      "updatedAt": "2026-02-20T00:40:37Z",
+      "updatedAt": "2026-02-22T23:37:31Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "e9dfd36d89e4eaccf0dc3c7ef77bb556e8b9e53c",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "supplements",
       "headRefOid": "4ea7715a88968dd8325c84df935870b31f67f5cb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-02-22T23:37:26Z",
+      "mergedAt": "2026-02-22T23:37:26Z",
+      "mergedBy": "JKRhb",
+      "mergeCommit": {
+        "oid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386"
+      },
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As this PR is pretty straightforward, I will merge it right away.",
+          "createdAt": "2026-02-22T23:37:22Z",
+          "updatedAt": "2026-02-22T23:37:22Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -2020,19 +2030,80 @@
       "labels": [],
       "body": "This PR suggests a simplification of the terminology section and its usage by implicitly assuming that (SDF) messages will always be \u201cinstance-related\u201d, making the explicit mentioning of this adjective obsolete. Instead, the draft now rather speaks about \"SDF messages\".\r\n\r\nWe may need to assert that the new terminology is still consistent and covers all aspects \u2013 but I think this PR should be pointing into the right direction already.",
       "createdAt": "2026-02-20T01:04:49Z",
-      "updatedAt": "2026-02-20T01:06:30Z",
+      "updatedAt": "2026-02-22T23:45:40Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
-      "baseRefOid": "e9dfd36d89e4eaccf0dc3c7ef77bb556e8b9e53c",
+      "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "another-terminology-update",
-      "headRefOid": "2230d2764ae24f62f11641ae90bfc32d7c4bedd7",
+      "headRefOid": "beb29a2261371e27a3283f845149eb7e5c9d9157",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87kzd0K",
+          "commit": {
+            "abbreviatedOid": "beb29a2"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-22T23:42:44Z",
+          "updatedAt": "2026-02-22T23:42:44Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "I think we might be able to further simplify this sentence:\n\n```suggestion\nInstead, the instantiation produces an instance-related *message*, whose format is always controlled by the corresponding SDF model.\n```",
+              "createdAt": "2026-02-22T23:42:44Z",
+              "updatedAt": "2026-02-22T23:42:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87kzeJL",
+          "commit": {
+            "abbreviatedOid": "beb29a2"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-22T23:44:24Z",
+          "updatedAt": "2026-02-22T23:44:24Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Maybe we could just speak of \u201cmessages\u201d or \u201ctypes of messages\u201d instead of \u201cmessage archetypes\u201d here and throughout the document?",
+              "createdAt": "2026-02-22T23:44:24Z",
+              "updatedAt": "2026-02-22T23:44:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87kzeXv",
+          "commit": {
+            "abbreviatedOid": "beb29a2"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-22T23:45:40Z",
+          "updatedAt": "2026-02-22T23:45:40Z",
+          "comments": [
+            {
+              "originalPosition": 86,
+              "body": "... taking the previous comment into account, we then simply remove this sentence, I think.",
+              "createdAt": "2026-02-22T23:45:40Z",
+              "updatedAt": "2026-02-22T23:45:40Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 40,
@@ -2046,13 +2117,39 @@
       "labels": [],
       "body": "This PR experiments with replacing `sdfContext` with regular `sdfProperty` definitions, which are mostly non-writable.\r\n\r\nI am actually starting to be convinced that we may be able to get rid of the additional keyword, as there might actually be context information for certain affordances that could be settable via other affordances (e.g., changing the reported temperature unit at runtime). \r\n\r\nContext information that should only be settable at the time of commissioning or during reconfiguration could be set to `writable: false` to indicate that \u201cregular\u201d interactions are not allowed to change the respective property.\r\n\r\nIf we agree on the direction proposed in this PR, may not need a Litmus test after all and simply reuse what we already have. I think one important question to answer here is whether we need some additional keyword such as `offDevice` for indicating that a property contains context information or whether this attribute does not need to be explicitly specified (since there might not be a hard border between context and \"conventional\" information.",
       "createdAt": "2026-02-20T01:36:09Z",
-      "updatedAt": "2026-02-20T01:38:37Z",
+      "updatedAt": "2026-02-22T23:37:57Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
-      "baseRefOid": "e9dfd36d89e4eaccf0dc3c7ef77bb556e8b9e53c",
+      "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "litmus-test",
-      "headRefOid": "e3b0625869a16b93595a6ea6fca0f535f03d399d",
+      "headRefOid": "c9395b54389f0bffbe2acc281fdb8055db5cca72",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOOUh3t87FiBUm",
+      "title": "Improve application scenario descriptions",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/41",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Based on the previous work in #40, this PR improves the descriptions of the three application scenarios \u2013 especially the one regarding construction messages.\r\n\r\nIf we should decide against replacing `sdfContext` with `sdfProperty`, the changes from #40 need to be removed from this PR. However, the new text should also work with `sdfContext` after making a couple of adjustments.\r\n\r\nIf the proposal from #40 should be accepted and merged, this PR's branch should be rebased against `main` for a cleaner diff.",
+      "createdAt": "2026-02-23T01:38:27Z",
+      "updatedAt": "2026-02-23T01:39:48Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "application-scenarios",
+      "headRefOid": "70b9e25ee1550d4e00a789048dcff50ce5d1f155",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
