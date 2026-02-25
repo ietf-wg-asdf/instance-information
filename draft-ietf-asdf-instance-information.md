@@ -372,11 +372,13 @@ In constrast to models, including a `namespace` quality is mandatory as at least
 
 Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
 Via the `model` keyword, this quality defines the entry point the `sdfInstance` quality from the next section is referring to.
+The `version` quality optionally allows for specifying a version or version range of the model.
 Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
 
 | Quality          | Type   | Description                                                                                                                                                    |
 |------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | model            | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Has to be based on a namespace identifier from the `namespaces` map. |
+| version          | string | The version or a compatible version range of the model this message is referring to.                                                                           |
 | patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                             |
 | $comment         | string | Source code comments only, no semantics                                                                                                                        |
 {: #iobsec title="Instance-of Block"}
