@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T01:17:21.148326+00:00",
+  "timestamp": "2026-03-03T01:20:42.725313+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -2169,7 +2169,7 @@
       "labels": [],
       "body": "In order to connect instance-related messages and instantiation to the other dimension of model evolution \u2013 derivation \u2013 this PR adds an optional `version` quality to the `sdfInstanceOf` map. \r\n\r\nAdding this quality should also make it possible to refer a version _range_, e.g., indicating that backwards-compatible/patch releases should \u201cautomatically\u201d be taken into account.",
       "createdAt": "2026-02-25T10:24:16Z",
-      "updatedAt": "2026-02-25T10:24:17Z",
+      "updatedAt": "2026-03-02T17:27:18Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
@@ -2180,7 +2180,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I recently had the idea that we could use the namespacing concept for referencing certain versions of SDF models instead. For that, I created the first outline of an Internet-Draft that we could reference instead: https://github.com/JKRhb/sdf-semantic-references\r\n\r\nHowever, this of course needs some more discussion. I also haven't posted the I.D. to the datatracker yet in order to first obtain some feedback.",
+          "createdAt": "2026-03-02T17:27:18Z",
+          "updatedAt": "2026-03-02T17:27:18Z"
+        }
+      ],
       "reviews": []
     }
   ]
