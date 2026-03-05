@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T01:20:42.725313+00:00",
+  "timestamp": "2026-03-05T01:18:25.401659+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -2117,7 +2117,7 @@
       "labels": [],
       "body": "This PR experiments with replacing `sdfContext` with regular `sdfProperty` definitions, which are mostly non-writable.\r\n\r\nI am actually starting to be convinced that we may be able to get rid of the additional keyword, as there might actually be context information for certain affordances that could be settable via other affordances (e.g., changing the reported temperature unit at runtime). \r\n\r\nContext information that should only be settable at the time of commissioning or during reconfiguration could be set to `writable: false` to indicate that \u201cregular\u201d interactions are not allowed to change the respective property.\r\n\r\nIf we agree on the direction proposed in this PR, may not need a Litmus test after all and simply reuse what we already have. I think one important question to answer here is whether we need some additional keyword such as `offDevice` for indicating that a property contains context information or whether this attribute does not need to be explicitly specified (since there might not be a hard border between context and \"conventional\" information.",
       "createdAt": "2026-02-20T01:36:09Z",
-      "updatedAt": "2026-02-22T23:37:57Z",
+      "updatedAt": "2026-03-05T00:36:43Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
@@ -2128,7 +2128,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "### Notes from today's meeting\r\n\r\n- Global definitions for `sdfProtocolMap` for indirection\r\n- Example of an `sdfProtocolMap` with three different protocols (e.g., asset management system, SCIM database, ...)\r\n- How to cover affordances that are not accessible via protocol mappings?\r\n    - Use `readable: false` for this purpose?\r\n- Deal with affordances that only relate to \"data in flight\"",
+          "createdAt": "2026-03-04T16:30:51Z",
+          "updatedAt": "2026-03-05T00:36:43Z"
+        }
+      ],
       "reviews": []
     },
     {
