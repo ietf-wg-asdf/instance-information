@@ -69,6 +69,7 @@ informative:
     date: false
   STP: I-D.bormann-t2trg-stp
   RFC9039: device-id
+  RFC7950: yang
   I-D.ietf-asdf-sdf-protocol-mapping: protocol-map
 ...
 
@@ -230,6 +231,8 @@ Taking into account previous revisions of this document as well as {{-non-afford
 
 1. the intended effect of a message, which can either be a report or an update of a Thing's state, and
 2. the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
+
+The distinction of the intended effect into "update" or "state" is comparable to YANG's "config" statement ({{Section 7.21.1 of -yang}}), a flag value indicating whether a definition representation configuration or state data.
 
 Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
@@ -761,15 +764,17 @@ title="Example of an SDF Snapshot Messages that reports an action and an event h
 
 # Discussion
 
-(TODO)
+Instance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities.
+There are, however, a few aspects that need special consideration and have to be addressed by more fine-grained specifications in the future that will buid upon this one.
 
-Discuss Proofshots of a Thing (device) and of other components.
+Instance-related messages allow for the setting of timestamps that currently relate to the message as a whole.
+Since the values contained within an instance-related message might reflect state updates such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.
+In this sense, instance-related messages really are imperfect "proofshots" when it comes to the state of affordances, also considering that there might be concurrency problems if a device is updated while generating a Snapshot or Delta message.
 
-Discuss concurrency problems with getting and setting Proofshots.
+With IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information {{-raytime}} or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior {{Section 4.4 of -terms}}.
+In cases like these, timestamps might have to be omitted from instance-related messages or need to be estimated by a more reliable intermediary.
 
-Discuss Timestamps appropriate for Things ({{Section 4.4 of -terms}}, {{-raytime}}).
-
-Discuss YANG config=true approach with regard to construction messages.
+<!-- TODO: these are still open: -->
 
 Discuss expressing a device's "purpose of life" via context information
 
