@@ -815,7 +815,7 @@ Table of Contents
 
 5.  Application Scenarios
 
-   The instance-related message format and the four architectures are
+   The instance-related message format and the four archtetypes are
    usable in a number of use cases, some of which we are going to
    specify in the following.  Other specifications may define additional
    use cases instance-related messages can be used for.
