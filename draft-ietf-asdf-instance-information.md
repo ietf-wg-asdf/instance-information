@@ -611,7 +611,7 @@ Practical uses for patch message include digital twins {{-digital-twin}}, where 
 
 # Application Scenarios
 
-The instance-related message format and the four architectures are usable in a number of use cases, some of which we are going to specify in the following.
+The instance-related message format and the four archetypes are usable in a number of use cases, some of which we are going to specify in the following.
 Other specifications may define additional use cases instance-related messages can be used for.
 
 ## Construction
@@ -765,6 +765,102 @@ sdfInstance:
 ~~~
 {:sdf #code-snapshot-with-actions-and-events
 title="Example of an SDF Snapshot Messages that reports an action and an event history."}
+
+# Model and Message Conversion
+
+SDF messages increase the semantic capabilities of SDF, which means that it can cover more ecosystem-specific concepts when used as a conversion input or output.
+This allows us to better cover description formats that use instance-related information in their data models, but poses a challenge when the distinction from model-related information is not clearly drawn.
+
+{{code-wot-td-example}} shows an initial example from the Web of Things (WoT) ecosystem that uses a CoAP Protocol Binding in its property affordance `status`.
+Analyzing this model, we can quickly see that most of the information contained is actually model-related information that could apply to other lamps as well.
+This includes the schema information for the status, the security mode (or lack thereof) as well as the protocol binding information.
+Important exceptions are the hostname or (in this case) the IP address of the Thing, its `id` as well as its `title` that are specific to this device.
+
+~~~ yaml
+"@context":
+- https://www.w3.org/2022/wot/td/v1.1
+- cov: http://www.example.org/coap-binding#
+id: urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4
+title: CoAP Lamp No. 2
+description: A lamp example that uses CoAP.
+securityDefinitions:
+  nosec_sc:
+    scheme: nosec
+security:
+- nosec_sc
+properties:
+  status:
+    type: string
+    readOnly: true
+    forms:
+    - cov:method: GET
+      href: coap://[2001:DB8::1]/status
+      contentType: application/cbor
+      cov:contentFormat: 60
+      op:
+      - readproperty
+~~~
+{:sdf #code-wot-td-example check="json" pre="yaml2json"
+title="WoT TD example showcasing a mix of model and instance information."}
+
+{{code-sdf-model-for-wot-example}} illustrates how an SDF model can cover the model-related information from the WoT TD example.
+Note that this example contains a separate `ipAddress` property that is used for this piece of context information that serves as a paramter for resolved CoAP URL.
+
+~~~ sdf
+namespace:
+  lamps: https://example.com/lamps
+defaultNamespace: lamps
+sdfObject:
+  lamp:
+    title: CoAP Lamp
+    description: A lamp example that uses CoAP.
+    sdfProperty:
+      ipAddress:
+        type: string
+      status:
+        type: string
+        writable: false
+        observable: false
+        sdfProtocolMap:
+          coap:
+            sdfParameters:
+              ipAddress: "#/sdfObject/lamp/sdfProperty/ipAddress"
+            sdfOperations:
+              read:
+                method: GET
+                href: /status
+                contentFormat: 60
+~~~
+{:sdf #code-sdf-model-for-wot-example
+title="SDF model containing the model-related information from the previous WoT example."}
+
+{{code-sdf-message-for-wot-example}} in turn shows an SDF message that contains only the instance-related information from the WoT TD example.
+Besides the rather contextual `ipAddress`, this includes also the current value of the `status` property.
+The `id` that was part of the WoT TD has been mapped to the `thingId` quality under `sdfInstance`.
+The instance-specific `title` has no real equivalent in SDF messages yet, but it could be added to `sdfInstance` in future revisions.
+
+~~~ sdf
+info:
+  title: Example SDF Snapshot Message for CoAP Lamp No. 2.
+  messageId: 75532020-8f64-4daf-a241-fcb0b6dc4af3
+namespace:
+  lamps: https://example.com/lamps
+defaultNamespace: lamps
+sdfInstanceOf:
+  model: models:/sdfObject/lamp
+sdfInstance:
+  thingId: urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4
+  "$comment": Should we put the Thing's title here?
+  sdfProperty:
+    ipAddress: 2001:DB8::1
+  status: "on"
+~~~
+{:sdf #code-sdf-message-for-wot-example
+title="SDF message containing the instance-related information from the previous WoT example."}
+
+While these examples highlight the potential of instance-related messages for a clean separation of model and instance information, they also raise a number of questions, for example about the role of namespaces for SDF conversion results and the location where the resulting SDF models may be stored to potentially make them accessible to consumers.
+In practice, these questions may not be as relevant when converting from SDF to (in this case) WoT or when using SDF only as an internal translation medium for bridging between two ecosystems.
+However, these considerations emphasize the need for a set of standardized, reusable building blocks that can also be used for model and message conversion.
 
 # Discussion
 
