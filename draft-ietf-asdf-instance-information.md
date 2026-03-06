@@ -70,6 +70,7 @@ informative:
   STP: I-D.bormann-t2trg-stp
   RFC9039: device-id
   RFC7950: yang
+  RFC9200: ace
   I-D.ietf-asdf-sdf-protocol-mapping: protocol-map
 ...
 
@@ -782,10 +783,14 @@ Discuss using context information to indicate provence
 
 # Security Considerations
 
-- Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters
+The security considerations of {{-sdf}} apply to this document as well.
 
-(TODO)
+Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integraty.
+For this purpose, they may use the context and state information contained within a given message.
 
+Instance-related information may might only be available in certain scopes, e.g. when it comes to security-related configuration parameters.
+This information MUST NOT be exposed to unauthorized entities and therefore MUST be excluded from instance-related messages.
+Deployments MAY rely on an authorization framework such as ACE-OAuth {{-ace}} to limit the included information or access to messages as a whole to a certain scope.
 
 # IANA Considerations
 
