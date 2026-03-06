@@ -2313,12 +2313,12 @@ In cases like these, timestamps might have to be omitted from instance-related m
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<ul class="normal">
-<li class="normal" id="section-7-1.1">
-          <p id="section-7-1.1.1">Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters<a href="#section-7-1.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-7-2">(TODO)<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-1">The security considerations of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> apply to this document as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integraty.
+For this purpose, they may use the context and state information contained within a given message.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Instance-related information may might only be available in certain scopes, e.g. when it comes to security-related configuration parameters.
+This information <span class="bcp14">MUST NOT</span> be exposed to unauthorized entities and therefore <span class="bcp14">MUST</span> be excluded from instance-related messages.
+Deployments <span class="bcp14">MAY</span> rely on an authorization framework such as ACE-OAuth <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span> to limit the included information or access to messages as a whole to a certain scope.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2422,6 +2422,10 @@ In cases like these, timestamps might have to be omitted from instance-related m
 <dt id="RFC9039">[RFC9039]</dt>
         <dd>
 <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">Z. Shelby</span>, <span class="refTitle">"Uniform Resource Names for Device Identifiers"</span>, <span class="seriesInfo">RFC 9039</span>, <span class="seriesInfo">DOI 10.17487/RFC9039</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9039">https://www.rfc-editor.org/rfc/rfc9039</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9200">[RFC9200]</dt>
+        <dd>
+<span class="refAuthor">Seitz, L.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Authentication and Authorization for Constrained Environments Using the OAuth 2.0 Framework (ACE-OAuth)"</span>, <span class="seriesInfo">RFC 9200</span>, <span class="seriesInfo">DOI 10.17487/RFC9200</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9200">https://www.rfc-editor.org/rfc/rfc9200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STP">[STP]</dt>
       <dd>

@@ -1093,11 +1093,21 @@ Table of Contents
 
 7.  Security Considerations
 
-   *  Pieces of instance-related information might only be available in
-      certain scopes, e.g. certain security-related configuration
-      parameters
+   The security considerations of [RFC9880] apply to this document as
+   well.
 
-   (TODO)
+   Entities processing instance-related messages need to take measures
+   to ensure the provenance of instance-related messages, including
+   authenticity and integraty.  For this purpose, they may use the
+   context and state information contained within a given message.
+
+   Instance-related information may might only be available in certain
+   scopes, e.g. when it comes to security-related configuration
+   parameters.  This information MUST NOT be exposed to unauthorized
+   entities and therefore MUST be excluded from instance-related
+   messages.  Deployments MAY rely on an authorization framework such as
+   ACE-OAuth [RFC9200] to limit the included information or access to
+   messages as a whole to a certain scope.
 
 8.  IANA Considerations
 
@@ -1209,6 +1219,12 @@ Table of Contents
               Names for Device Identifiers", RFC 9039,
               DOI 10.17487/RFC9039, June 2021,
               <https://www.rfc-editor.org/rfc/rfc9039>.
+
+   [RFC9200]  Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
+              H. Tschofenig, "Authentication and Authorization for
+              Constrained Environments Using the OAuth 2.0 Framework
+              (ACE-OAuth)", RFC 9200, DOI 10.17487/RFC9200, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9200>.
 
    [STP]      Bormann, C. and K. Hartke, "The Series Transfer Pattern
               (STP)", Work in Progress, Internet-Draft, draft-bormann-
