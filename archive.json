@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T01:18:25.401659+00:00",
+  "timestamp": "2026-03-08T01:19:30.384194+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -2117,7 +2117,7 @@
       "labels": [],
       "body": "This PR experiments with replacing `sdfContext` with regular `sdfProperty` definitions, which are mostly non-writable.\r\n\r\nI am actually starting to be convinced that we may be able to get rid of the additional keyword, as there might actually be context information for certain affordances that could be settable via other affordances (e.g., changing the reported temperature unit at runtime). \r\n\r\nContext information that should only be settable at the time of commissioning or during reconfiguration could be set to `writable: false` to indicate that \u201cregular\u201d interactions are not allowed to change the respective property.\r\n\r\nIf we agree on the direction proposed in this PR, may not need a Litmus test after all and simply reuse what we already have. I think one important question to answer here is whether we need some additional keyword such as `offDevice` for indicating that a property contains context information or whether this attribute does not need to be explicitly specified (since there might not be a hard border between context and \"conventional\" information.",
       "createdAt": "2026-02-20T01:36:09Z",
-      "updatedAt": "2026-03-05T00:36:43Z",
+      "updatedAt": "2026-03-05T11:50:15Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
@@ -2132,9 +2132,16 @@
         {
           "author": "JKRhb",
           "authorAssociation": "COLLABORATOR",
-          "body": "### Notes from today's meeting\r\n\r\n- Global definitions for `sdfProtocolMap` for indirection\r\n- Example of an `sdfProtocolMap` with three different protocols (e.g., asset management system, SCIM database, ...)\r\n- How to cover affordances that are not accessible via protocol mappings?\r\n    - Use `readable: false` for this purpose?\r\n- Deal with affordances that only relate to \"data in flight\"",
+          "body": "### Notes from today's meeting\r\n\r\n- Global definitions for `sdfProtocolMap` for indirection\r\n    - See https://github.com/ietf-wg-asdf/sdf-protocol-mapping/issues/26\r\n- Example of an `sdfProtocolMap` with three different protocols (e.g., asset management system, SCIM database, ...)\r\n- How to cover affordances that are not accessible via protocol mappings?\r\n    - Use `readable: false` for this purpose?\r\n- Deal with affordances that only relate to \"data in flight\"",
           "createdAt": "2026-03-04T16:30:51Z",
-          "updatedAt": "2026-03-05T00:36:43Z"
+          "updatedAt": "2026-03-05T10:16:11Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the following, you see a first attempt regarding an `sdfProtocolMap` that features multiple protocols. I wasn't entirely sure whether the use of SCIM is correct here, so this approach still requires major revisions.\r\n\r\nIn particular, I was not sure, @cabo, whether you intended to use a SCIM protocol mapping for letting a \u201cConsumer\u201d access the \u201cexternal\u201d SCIM database. But I suppose we can take a closer look at this later.\r\n\r\n```yaml\r\nnamespace:\r\n  models: https://example.com/models\r\n  sensors: https://example.com/sensor\r\ndefaultNamespace: models\r\nsdfObject:\r\n  sensor:\r\n    sdfRequired:\r\n      - ipAddress\r\n    sdfProperty:\r\n      ipAddress:\r\n        writable: false\r\n        type: string\r\n      scimId:\r\n        writable: false\r\n        type: string\r\n      scimServerHostname:\r\n        writable: false\r\n        type: string\r\n      userInformation:\r\n        description: Returns information about this device.\r\n        type: object\r\n        sdfProtocolMap:\r\n          coap:\r\n            sdfParameters:\r\n              ipAddress: \"#/sdfObject/sensor/sdfProperty/ipAddress\"\r\n            sdfOperations:\r\n              read:\r\n                method: GET\r\n                href: \"/userInfo\"\r\n                contentType: 60\r\n          scim: # Or http?\r\n            sdfParameters:\r\n              hostname: \"#/sdfObject/sensor/sdfProperty/scimServerHostname\"\r\n            sdfOperations:\r\n              read:\r\n                method: GET\r\n                scheme: https\r\n                href: \"/v2/Users\"\r\n          assetManagementSystem:\r\n            sdfParameters:\r\n              ...\r\n            sdfOperations:\r\n              read:\r\n                 ...\r\n```",
+          "createdAt": "2026-03-05T11:50:01Z",
+          "updatedAt": "2026-03-05T11:50:15Z"
         }
       ],
       "reviews": []
@@ -2177,7 +2184,7 @@
       "labels": [],
       "body": "In order to connect instance-related messages and instantiation to the other dimension of model evolution \u2013 derivation \u2013 this PR adds an optional `version` quality to the `sdfInstanceOf` map. \r\n\r\nAdding this quality should also make it possible to refer a version _range_, e.g., indicating that backwards-compatible/patch releases should \u201cautomatically\u201d be taken into account.",
       "createdAt": "2026-02-25T10:24:16Z",
-      "updatedAt": "2026-03-02T17:27:18Z",
+      "updatedAt": "2026-03-05T10:22:52Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
@@ -2195,8 +2202,67 @@
           "body": "I recently had the idea that we could use the namespacing concept for referencing certain versions of SDF models instead. For that, I created the first outline of an Internet-Draft that we could reference instead: https://github.com/JKRhb/sdf-semantic-references\r\n\r\nHowever, this of course needs some more discussion. I also haven't posted the I.D. to the datatracker yet in order to first obtain some feedback.",
           "createdAt": "2026-03-02T17:27:18Z",
           "updatedAt": "2026-03-02T17:27:18Z"
+        },
+        {
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thinking about this topic a bit more, I had the impression now that adding a `version` quality and maybe also `minVersion`, `maxVersion` etc., to the `sdfInstanceOf` quality is in fact a better approach than adding the version to the namespace definitions.\r\n\r\nA similar approach could be taken for `sdfRef` or a new quality that specifically supports the version-related fields could be introduced instead.\r\n\r\nHowever, we probably would still need to map these fields to query parameters when dereferencing the namespaces, where the problem of multiple models that may populate the namespace persists. However, maybe this issue could be mitigated by introducing a separate query parameter that gives a hint regarding the model that is actually supposed to be retrieved?",
+          "createdAt": "2026-03-05T10:22:52Z",
+          "updatedAt": "2026-03-05T10:22:52Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOOUh3t87IeoVy",
+      "title": "Add a fourth application scenario regarding model and message conversion",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/43",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Revisiting the motivation for the creation of instance-related messages, I had to realize that we are currently missing an application scenario that deals with the conversion between ecosystems.\r\n\r\nThis PR adds some initial text for this scenario that deals with WoT TD, pointing out the conflation of model and instance information that is present here.",
+      "createdAt": "2026-03-06T11:41:03Z",
+      "updatedAt": "2026-03-06T11:59:44Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "application-scenarios",
+      "baseRefOid": "70b9e25ee1550d4e00a789048dcff50ce5d1f155",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "fourth-application-scenario",
+      "headRefOid": "ba7fafb6b7be931bea7a161616de133884d31dbc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 44,
+      "id": "PR_kwDOOUh3t87IhIBa",
+      "title": "Formulate discussion and security considerations sections",
+      "url": "https://github.com/ietf-wg-asdf/instance-information/pull/44",
+      "state": "OPEN",
+      "author": "JKRhb",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The discussion section so far only contained bullet points, so to speak. This PR proposes an update that turns most of them into prose.\r\n\r\nI wasn't entirely sure about to approach provenance and purpose of life yet, but maybe we can engage in a discussion in the context of this PR.",
+      "createdAt": "2026-03-06T14:27:08Z",
+      "updatedAt": "2026-03-06T14:51:59Z",
+      "baseRepository": "ietf-wg-asdf/instance-information",
+      "baseRefName": "main",
+      "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
+      "headRepository": "ietf-wg-asdf/instance-information",
+      "headRefName": "discussion",
+      "headRefOid": "a7fe915444411b29f2b34eb9a09c963a59670a4c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
