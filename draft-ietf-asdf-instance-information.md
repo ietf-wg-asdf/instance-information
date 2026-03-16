@@ -765,14 +765,14 @@ title="Example of an SDF Snapshot Messages that reports an action and an event h
 
 # Discussion
 
-Instance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities.
+Instance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the exercise of affordances to the ecosystem-specific mechanisms.
 There are, however, a few aspects that need special consideration and have to be addressed by more fine-grained specifications in the future that will buid upon this one.
 
-Instance-related messages allow for the setting of timestamps that currently relate to the message as a whole.
+Instance-related messages allow for noting down timestamps that currently relate to the message as a whole.
 Since the values contained within an instance-related message might reflect state updates such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.
 In this sense, instance-related messages really are imperfect "proofshots" when it comes to the state of affordances, also considering that there might be concurrency problems if a device is updated while generating a Snapshot or Delta message.
 
-With IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information {{-raytime}} or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior {{Section 4.4 of -terms}}.
+With IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information {{-raytime}} or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior ({{Section 4.4 of -terms}}).
 In cases like these, timestamps might have to be omitted from instance-related messages or need to be estimated by a more reliable intermediary.
 
 <!-- TODO: these are still open: -->
@@ -785,7 +785,7 @@ Discuss using context information to indicate provence
 
 The security considerations of {{-sdf}} apply to this document as well.
 
-Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integraty.
+Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integrity.
 For this purpose, they may use the context and state information contained within a given message.
 
 Instance-related information may might only be available in certain scopes, e.g. when it comes to security-related configuration parameters.
