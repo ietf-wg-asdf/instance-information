@@ -5,8 +5,8 @@
 ASDF                                                           J. Romann
 Internet-Draft                                        Universität Bremen
 Intended status: Standards Track                              C. Bormann
-Expires: 7 September 2026                         Universität Bremen TZI
-                                                            6 March 2026
+Expires: 17 September 2026                        Universität Bremen TZI
+                                                           16 March 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2026.
+   This Internet-Draft will expire on 17 September 2026.
 
 Copyright Notice
 
@@ -1064,11 +1064,12 @@ Table of Contents
 
    Instance-related messages close an important semantic gap of SDF,
    which so far was only capable of describing device classes and their
-   capabilities.  There are, however, a few aspects that need special
-   consideration and have to be addressed by more fine-grained
+   capabilities, leaving the exercise of affordances to the ecosystem-
+   specific mechanisms.  There are, however, a few aspects that need
+   special consideration and have to be addressed by more fine-grained
    specifications in the future that will buid upon this one.
 
-   Instance-related messages allow for the setting of timestamps that
+   Instance-related messages allow for noting down timestamps that
    currently relate to the message as a whole.  Since the values
    contained within an instance-related message might reflect state
    updates such as measurements that occurred before composing the
@@ -1082,7 +1083,7 @@ Table of Contents
    arise, as devices might have access to (credible) time information
    [I-D.amsuess-t2trg-raytime] or can only measure time unreliably due
    to resource constraints, accuracy problems, and/or their sleeping
-   behavior Section 4.4 of [I-D.ietf-iotops-7228bis].  In cases like
+   behavior (Section 4.4 of [I-D.ietf-iotops-7228bis]).  In cases like
    these, timestamps might have to be omitted from instance-related
    messages or need to be estimated by a more reliable intermediary.
 
@@ -1098,7 +1099,7 @@ Table of Contents
 
    Entities processing instance-related messages need to take measures
    to ensure the provenance of instance-related messages, including
-   authenticity and integraty.  For this purpose, they may use the
+   authenticity and integrity.  For this purpose, they may use the
    context and state information contained within a given message.
 
    Instance-related information may might only be available in certain
@@ -1189,9 +1190,9 @@ Table of Contents
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
-              Progress, Internet-Draft, draft-ietf-iotops-7228bis-04, 2
+              Progress, Internet-Draft, draft-ietf-iotops-7228bis-05, 14
               March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-iotops-7228bis-04>.
+              ietf-iotops-7228bis-05>.
 
    [LAYERS]   "Terminology for Layers", WISHI Wiki,
               <https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-
