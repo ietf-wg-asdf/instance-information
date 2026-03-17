@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T01:19:30.384194+00:00",
+  "timestamp": "2026-03-17T01:19:44.752246+00:00",
   "repo": "ietf-wg-asdf/instance-information",
   "labels": [
     {
@@ -2251,19 +2251,234 @@
       "labels": [],
       "body": "The discussion section so far only contained bullet points, so to speak. This PR proposes an update that turns most of them into prose.\r\n\r\nI wasn't entirely sure about to approach provenance and purpose of life yet, but maybe we can engage in a discussion in the context of this PR.",
       "createdAt": "2026-03-06T14:27:08Z",
-      "updatedAt": "2026-03-06T14:51:59Z",
+      "updatedAt": "2026-03-16T18:42:35Z",
       "baseRepository": "ietf-wg-asdf/instance-information",
       "baseRefName": "main",
       "baseRefOid": "0e6d091853c4bc12c7b8ae90b10b766c776ff386",
       "headRepository": "ietf-wg-asdf/instance-information",
       "headRefName": "discussion",
-      "headRefOid": "a7fe915444411b29f2b34eb9a09c963a59670a4c",
+      "headRefOid": "129ff813d5a87f22c99701115dedafdc3d504ea1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOOUh3t87rxeok",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "cabo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T17:47:48Z",
+          "updatedAt": "2026-03-16T17:57:34Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Editorial: since this is intended to parallel L233, it should be in the same sequence.\r\n\r\n\"Update\" may not be the best term, as it is also used for \"news update\" etc., which is a state update [sic].\r\nSee also below example...\r\n\r\nMaybe \"change\"?  \"modify\"?",
+              "createdAt": "2026-03-16T17:47:48Z",
+              "updatedAt": "2026-03-16T17:58:56Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": ", leaving the exercise of affordances to the ecosystem-specific mechanisms.",
+              "createdAt": "2026-03-16T17:48:59Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\nInstance-related messages allow for noting down timestamps that currently relate to the message as a whole.\n```\n(we are not setting time, are we?)",
+              "createdAt": "2026-03-16T17:50:44Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "\"state updates\" -- see above...",
+              "createdAt": "2026-03-16T17:51:33Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\nWith IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information {{-raytime}} or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior ({{Section 4.4 of -terms}}).\n```",
+              "createdAt": "2026-03-16T17:53:20Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "provenance?",
+              "createdAt": "2026-03-16T17:53:51Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\nEntities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integrity.\n```",
+              "createdAt": "2026-03-16T17:54:16Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "Quite nebulous.",
+              "createdAt": "2026-03-16T17:54:59Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "Security considerations should generally be deliberative, not normative, unless there is a reason to be different.  How do we provide selective disclosure of information?  should be briefly touch sd-cwt?",
+              "createdAt": "2026-03-16T17:56:25Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "That cries for an example...\nCan/should we do that?",
+              "createdAt": "2026-03-16T17:57:29Z",
+              "updatedAt": "2026-03-16T17:57:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87rx19U",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:05:29Z",
+          "updatedAt": "2026-03-16T18:05:29Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Thank you!\r\n\r\n```suggestion\r\nInstance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the exercise of affordances to the ecosystem-specific mechanisms.\r\n```",
+              "createdAt": "2026-03-16T18:05:29Z",
+              "updatedAt": "2026-03-16T18:05:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87rx-k0",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:12:22Z",
+          "updatedAt": "2026-03-16T18:12:22Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Good catch! It could be that I actually intended to say \u201c'report' or 'update'\u201d here. However, something like \u201cchange\u201d is probably less ambiguous here \u2013 we may need to adjust the terminology usage in other places as well, though.\r\n\r\n```suggestion\r\nThe distinction of the intended effect into \"report\" or \"change\" is comparable to YANG's \"config\" statement ({{Section 7.21.1 of -yang}}), a flag value indicating whether a definition represents configuration or state data.\r\n```",
+              "createdAt": "2026-03-16T18:12:22Z",
+              "updatedAt": "2026-03-16T18:12:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87rx_MO",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:12:48Z",
+          "updatedAt": "2026-03-16T18:12:48Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nSince the values contained within an instance-related message might reflect state changes such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.\r\n```",
+              "createdAt": "2026-03-16T18:12:48Z",
+              "updatedAt": "2026-03-16T18:12:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87ryIsU",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:20:26Z",
+          "updatedAt": "2026-03-16T18:20:27Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Ahem, yes, good catch :sweat_smile: \n\n```suggestion\nDiscuss using context information to indicate provenance\n```\n\nI was not entirely sure yet how we could actually indicate provenance with context information. However, I just realized that provenance in the sense that is meant here relates to the device itself (and not to the model or message), right? Would it make sense to include some kind of example for this kind of metadata?",
+              "createdAt": "2026-03-16T18:20:26Z",
+              "updatedAt": "2026-03-16T18:22:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87ryOC_",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:24:47Z",
+          "updatedAt": "2026-03-16T18:24:47Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "Sure, I will see what I can do here :)\n\n",
+              "createdAt": "2026-03-16T18:24:47Z",
+              "updatedAt": "2026-03-16T18:24:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87ryjhE",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:40:32Z",
+          "updatedAt": "2026-03-16T18:40:35Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "I hadn't heard of SD-CWT before, but that looks definitely very interesting relevant for this aspect.\n\nWould a formulation like this one work here?\n\n```suggestion\nThis information must not be exposed to unauthorized entities and should therefore be excluded from instance-related messages or only selectively disclosed using, for example, Selective Disclosure CBOR Web Tokens (SD-CWT).\n```",
+              "createdAt": "2026-03-16T18:40:33Z",
+              "updatedAt": "2026-03-16T18:40:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOOUh3t87ryl1s",
+          "commit": {
+            "abbreviatedOid": "a7fe915"
+          },
+          "author": "JKRhb",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-16T18:42:34Z",
+          "updatedAt": "2026-03-16T18:42:35Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Maybe this sentence could also be removed, as mentioned before, I think I might have misunderstood what provenance was actually referring to.",
+              "createdAt": "2026-03-16T18:42:34Z",
+              "updatedAt": "2026-03-16T18:42:35Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
