@@ -33,6 +33,15 @@
 {{code-snapshot-with-actions-and-events}}:
 : {{<<code-snapshot-with-actions-and-events}}
 
+{{code-wot-td-example}}:
+: {{<<code-wot-td-example}}
+
+{{code-sdf-model-for-wot-example}}:
+: {{<<code-sdf-model-for-wot-example}}
+
+{{code-sdf-message-for-wot-example}}:
+: {{<<code-sdf-message-for-wot-example}}
+
 {{code-off-device-model}}:
 : {{<<code-off-device-model}}
 
