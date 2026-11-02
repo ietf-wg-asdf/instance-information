@@ -259,10 +259,10 @@ Table of Contents
        (without a reference to a previous message or state) or relative
        (with such a reference).
 
-   The distinction of the intended effect into "update" or "state" is
+   The distinction of the intended effect between "update" or "state" is
    comparable to YANG's "config" statement (Section 7.21.1 of
-   [RFC7950]), a flag value indicating whether a definition
-   representation configuration or state data.
+   [RFC7950]), a flag value indicating whether a definition represents
+   configuration or state data.
 
    Based on these considerations (as illustrated by the systematization
    in Table 1), we can identify the following four message archetypes:
