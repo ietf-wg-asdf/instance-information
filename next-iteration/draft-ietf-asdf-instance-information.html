@@ -1421,7 +1421,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-4" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-instance-information-and-sd" class="section-name selfRef">Instance Information and SDF</a>
       </h2>
 <p id="section-2-1">The instantiation of an SDF model does not directly express an instance, which is, for example, a physical device or a digital twin.
-Instead, the instantiation produces an instance-related <em>message</em>, which adheres to a common message format and is always controlled by the corresponding SDF model.
+Instead, the instantiation produces an instance-related SDF <em>message</em>, which adheres to a common message format and is always controlled by the corresponding SDF model.
 Depending on the recipient and its purpose, a message can be interpreted as a report regarding the state of a Thing or the instruction to change it when consumed by the recipient.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Taking into account previous revisions of this document as well as <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>, we identified two main dimensions for covering the potential use cases for SDF messages:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-3">
@@ -1527,12 +1527,12 @@ statements such as "the temperature here" or "my current draw".<a href="#section
 <p id="section-2.2-2">Messages may have to be complemented by this context for
 interpretation, i.e., the context needed may need to be reified in the
 message (compare the use of SenML "n").
-Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.
-For this purpose, the <code>sdfProperty</code> quality is reused.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2-3">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.2-3" class="pilcrow">¶</a></p>
-<p id="section-2.2-4">Note that one interesting piece of context information is the model itself, including the information block and the default namespace.
+Information that enables interactions via application-layer protocols (such as an IP address) can also be considered context information.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">For this purpose, we are using the <code>sdfContext</code> keyword introduced by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-2.2-4">TODO: explain how <span>[<a href="#RFC9039" class="cite xref">RFC9039</a>]</span> could be used to obtain device names (using <code>urn:dev:org</code> in the example).<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">Note that one interesting piece of context information is the model itself, including the information block and the default namespace.
 This is of course not about the device or its twin (or even its asset management), because models and devices may want to associate freely.
-Also note that multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+Also note that multiple models may apply to the same device (including but not only revisions of the same models).<a href="#section-2.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1744,7 +1744,7 @@ Depending on the archetype, this information will either be used to report a Thi
             <p id="section-3.4-3.2.1">the device identity (via the <code>thingId</code> qualitity in the <code>sdfInstance</code> block).<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.4-4">The instance-related message has to follow the structure of the model the <code>entryPoint</code> is pointing to (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">The SDF message has to follow the structure of the model the <code>entryPoint</code> is pointing to (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.4-5">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
 Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 <span id="name-instance-block-2"></span><div id="ibsec">
@@ -1777,6 +1777,11 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
               <td class="text-left" rowspan="1" colspan="1">Values for the object entries in the referenced SDF definition</td>
             </tr>
             <tr>
+              <td class="text-left" rowspan="1" colspan="1">sdfContext</td>
+              <td class="text-left" rowspan="1" colspan="1">map</td>
+              <td class="text-left" rowspan="1" colspan="1">Values for the context entries in the referenced SDF definition</td>
+            </tr>
+            <tr>
               <td class="text-left" rowspan="1" colspan="1">sdfProperty</td>
               <td class="text-left" rowspan="1" colspan="1">map</td>
               <td class="text-left" rowspan="1" colspan="1">Values for the properties in the referenced SDF definition</td>
@@ -1804,7 +1809,6 @@ Note that we also have to replicate a nested structure via <code>sdfThing</code>
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-message-archetypes" class="section-name selfRef">Message Archetypes</a>
       </h2>
 <p id="section-4-1">Based on the common message format defined in <a href="#message-format" class="auto internal xref">Section 3</a> and the systematization from <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>, we can derive a set of four archetypes that serve different use cases and recipients.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">TODO: Decide whether we want to add specific CDDL schemas for the four archetypes via extension points in the "base schema"<a href="#section-4-2" class="pilcrow">¶</a></p>
 <div id="snapshot-messages">
 <section id="section-4.1">
         <h3 id="name-snapshot-messages">
@@ -2080,38 +2084,29 @@ As the <code>unit</code> property has a default value (<code>Cel</code> for degr
 However, for all of these properties, a reconfiguration during runtime is possible.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">In this example, the <code>deviceIdentity</code> would be retrievable like a "regular", but immutable property affordance.
 While the <code>ipAddress</code> might be used for interaction affordances (e.g., by other models that build upon this one), the <code>temperature</code> property is "importing" the value of the <code>unit</code> property via a new quality called <code>sdfParameters</code>, where pairs of quality names and JSON pointers are used to import values from <code>sdfProperty</code> definitions.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4"><a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for an SDF model where the <code>ipAddress</code> and <code>deviceIdentity</code> are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
+<p id="section-5.1-4"><a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for an SDF model where the <code>ipAddress</code> and <code>deviceIdentity</code> are supposed to be initialized at construction time, since they are modeled as mandatory (via <code>sdfRequired</code>) <code>sdfContext</code> definitions, making them non-writable via "regular" interactions during runtime.
 As the <code>unit</code> property has a default value (<code>Cel</code> for degrees Celcius), it does not have to be initialized during construction.
-However, for all of these properties, a reconfiguration during runtime is possible.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.1-5">In this example, the <code>deviceIdentity</code> would be retrievable like a "regular", but immutable property affordance.
-While the <code>ipAddress</code> might be used for interaction affordances (e.g., by other models that build upon this one), the <code>temperature</code> property is "importing" the value of the <code>unit</code> property via a new quality called <code>sdfParameters</code>, where pairs of quality names and JSON pointers are used to import values from <code>sdfProperty</code> definitions.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+However, for all of these context definitions, a reconfiguration during runtime is possible.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">While the <code>ipAddress</code> might be used for interaction affordances (e.g., by other models that build upon this one), the <code>temperature</code> property is "importing" the value of the <code>unit</code> property via a new quality called <code>sdfParameters</code>, where pairs of quality names and JSON pointers are used to import values from <code>sdfContext</code> definitions.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 <span id="name-example-for-sdf-model-with-"></span><div id="code-sdf-construction-sdf-context">
 <figure id="figure-7">
           <div class="lang-sdf sourcecode" id="section-5.1-6.1">
 <pre>{
   "namespace": {
-    "models": "https://example.com/models",
     "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "models",
+  "defaultNamespace": "sensors",
   "sdfObject": {
     "sensor": {
       "sdfRequired": [
         "ipAddress",
         "deviceIdentity"
       ],
-      "sdfProperty": {
+      "sdfContext": {
         "ipAddress": {
-          "writable": false,
           "type": "string"
         },
-        "unit": {
-          "writable": false,
-          "type": "string",
-          "default": "Cel"
-        },
         "deviceIdentity": {
-          "writable": false,
           "type": "object",
           "properties": {
             "manufacturer": {
@@ -2122,11 +2117,18 @@ While the <code>ipAddress</code> might be used for interaction affordances (e.g.
             }
           }
         },
+        "unit": {
+          "writable": false,
+          "type": "string",
+          "default": "Cel"
+        }
+      },
+      "sdfProperty": {
         "temperature": {
           "writable": false,
           "type": "number",
           "sdfParameters": {
-            "unit": "#/sdfObject/sensor/sdfProperty/unit"
+            "unit": "#/sdfObject/sensor/sdfContext/unit"
           }
         }
       }
@@ -2140,7 +2142,7 @@ While the <code>ipAddress</code> might be used for interaction affordances (e.g.
           </figcaption></figure>
 </div>
 <p id="section-5.1-7">Based on the SDF model above, a Construction Message such as the one shown in <a href="#code-sdf-construction-message" class="auto internal xref">Figure 3</a> can trigger the construction process.
-As indicated via <code>sdfRequired</code>, this process must include the initialization of an IP address as well as the device's identity definitions.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
+As indicated via <code>sdfRequired</code>, this process must involve the initialization of the device's identity definitions and IP address.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="protocol-binding-information">
@@ -2162,26 +2164,26 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
 
 {
   "namespace": {
-    "models": "https://example.com/models",
     "sensors": "https://example.com/sensor"
   },
-  "defaultNamespace": "models",
+  "defaultNamespace": "sensors",
   "sdfObject": {
     "sensor": {
       "sdfRequired": [
         "ipAddress"
       ],
-      "sdfProperty": {
+      "sdfContext": {
         "ipAddress": {
-          "writable": false,
           "type": "string"
-        },
+        }
+      },
+      "sdfProperty": {
         "temperature": {
           "type": "number",
           "sdfProtocolMap": {
             "coap": {
               "sdfParameters": {
-                "ipAddress": "#/sdfObject/sensor/sdfProperty/\
+                "ipAddress": "#/sdfObject/sensor/sdfContext/\
                                                            ipAddress"
               },
               "sdfOperations": {
@@ -2220,7 +2222,7 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
     "entryPoint": "#/sdfObject/sensor"
   },
   "sdfInstance": {
-    "sdfProperty": {
+    "sdfContext": {
       "ipAddress": "192.168.1.5"
     }
   }
@@ -2239,7 +2241,7 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-modelling-the-state-of-inte" class="section-name selfRef">Modelling the State of Interaction Affordances</a>
         </h3>
 <p id="section-5.3-1">Snapshot and (in a relative fashion) Delta Messages can report the current state associated with interaction affordances.
-For <code>sdfProperty</code> definitions, this is very straightforward, as previously seen in in <a href="#code-sdf-delta-message" class="auto internal xref">Figure 5</a>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+For <code>sdfProperty</code> (and <code>sdfContext</code>) definitions, this is very straightforward, as previously seen in in <a href="#code-sdf-delta-message" class="auto internal xref">Figure 5</a>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">Actions and events, however, need to be handled differently: In the case of actions, the state of one or more actions is reported, which might already be in a completed or error state, or may also still be running.
 For events, a history is reported that includes the returned values.
 The exact of number of action and event reports is implementation-dependent and may vary between deployments.
@@ -2374,10 +2376,12 @@ Note that this example contains a separate <code>ipAddress</code> property that 
     "lamp": {
       "title": "CoAP Lamp",
       "description": "A lamp example that uses CoAP.",
-      "sdfProperty": {
+      "sdfContext": {
         "ipAddress": {
           "type": "string"
-        },
+        }
+      },
+      "sdfProperty": {
         "status": {
           "type": "string",
           "writable": false,
@@ -2385,7 +2389,7 @@ Note that this example contains a separate <code>ipAddress</code> property that 
           "sdfProtocolMap": {
             "coap": {
               "sdfParameters": {
-                "ipAddress": "#/sdfObject/lamp/sdfProperty/ipAddress"
+                "ipAddress": "#/sdfObject/lamp/sdfContext/ipAddress"
               },
               "sdfOperations": {
                 "read": {
@@ -2408,7 +2412,7 @@ Note that this example contains a separate <code>ipAddress</code> property that 
         </figcaption></figure>
 </div>
 <p id="section-6-6"><a href="#code-sdf-message-for-wot-example" class="auto internal xref">Figure 13</a> in turn shows an SDF message that contains only the instance-related information from the WoT TD example.
-Besides the rather contextual <code>ipAddress</code>, this includes also the current value of the <code>status</code> property.
+Besides the contextual <code>ipAddress</code>, this includes also the current value of the <code>status</code> property.
 The <code>id</code> that was part of the WoT TD has been mapped to the <code>thingId</code> quality under <code>sdfInstance</code>.
 The instance-specific <code>title</code> has no real equivalent in SDF messages yet, but it could be added to <code>sdfInstance</code> in future revisions.<a href="#section-6-6" class="pilcrow">¶</a></p>
 <span id="name-sdf-message-containing-the-"></span><div id="code-sdf-message-for-wot-example">
@@ -2429,10 +2433,12 @@ The instance-specific <code>title</code> has no real equivalent in SDF messages 
   "sdfInstance": {
     "thingId": "urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4",
     "$comment": "Should we put the Thing's title here?",
-    "sdfProperty": {
+    "sdfContext": {
       "ipAddress": "2001:DB8::1"
     },
-    "status": "on"
+    "sdfProperty": {
+      "status": "on"
+    }
   }
 }
 </pre>
@@ -2441,7 +2447,7 @@ The instance-specific <code>title</code> has no real equivalent in SDF messages 
 <a href="#name-sdf-message-containing-the-" class="selfRef">SDF message containing the instance-related information from the previous WoT example.</a>
         </figcaption></figure>
 </div>
-<p id="section-6-8">While these examples highlight the potential of instance-related messages for a clean separation of model and instance information, they also raise a number of questions, for example about the role of namespaces for SDF conversion results and the location where the resulting SDF models may be stored to potentially make them accessible to consumers.
+<p id="section-6-8">While these examples highlight the potential of SDF messages for a clean separation of model and instance information, they also raise a number of questions, for example about the role of namespaces for SDF conversion results and the location where the resulting SDF models may be stored to potentially make them accessible to consumers.
 In practice, these questions may not be as relevant when converting from SDF to (in this case) WoT or when using SDF only as an internal translation medium for bridging between two ecosystems.
 However, these considerations emphasize the need for a set of standardized, reusable building blocks that can also be used for model and message conversion.<a href="#section-6-8" class="pilcrow">¶</a></p>
 </section>
@@ -2451,13 +2457,13 @@ However, these considerations emphasize the need for a set of standardized, reus
       <h2 id="name-discussion">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
       </h2>
-<p id="section-7-1">Instance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the exercise of affordances to the ecosystem-specific mechanisms.
+<p id="section-7-1">SDF messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the description of affordances to ecosystem-specific vocabulary.
 There are, however, a few aspects that need special consideration and have to be addressed by more fine-grained specifications in the future that will buid upon this one.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">Instance-related messages allow for noting down timestamps that currently relate to the message as a whole.
-Since the values contained within an instance-related message might reflect state updates such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.
-In this sense, instance-related messages really are imperfect "proofshots" when it comes to the state of affordances, also considering that there might be concurrency problems if a device is updated while generating a Snapshot or Delta message.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-2">SDF messages allow for noting down timestamps that currently relate to the message as a whole.
+Since the values contained within an SDF message might reflect state updates such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.
+In this sense, SDF messages really are imperfect "proofshots" when it comes to the state of affordances, also considering that there might be concurrency problems if a device is updated while generating a Snapshot or Delta message.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">With IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span> or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-10#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>).
-In cases like these, timestamps might have to be omitted from instance-related messages or need to be estimated by a more reliable intermediary.<a href="#section-7-3" class="pilcrow">¶</a></p>
+In cases like these, timestamps might have to be omitted from SDF messages or need to be estimated by a more reliable intermediary.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <p id="section-7-4">Discuss expressing a device's "purpose of life" via context information<a href="#section-7-4" class="pilcrow">¶</a></p>
 <p id="section-7-5">Discuss using context information to indicate provence<a href="#section-7-5" class="pilcrow">¶</a></p>
 </section>
@@ -2468,10 +2474,10 @@ In cases like these, timestamps might have to be omitted from instance-related m
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-8-1">The security considerations of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> apply to this document as well.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integrity.
+<p id="section-8-2">Entities processing SDF messages need to take measures to ensure the provenance of SDF messages, including authenticity and integrity.
 For this purpose, they may use the context and state information contained within a given message.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">Instance-related information may might only be available in certain scopes, e.g. when it comes to security-related configuration parameters.
-This information <span class="bcp14">MUST NOT</span> be exposed to unauthorized entities and therefore <span class="bcp14">MUST</span> be excluded from instance-related messages.
+This information <span class="bcp14">MUST NOT</span> be exposed to unauthorized entities and therefore <span class="bcp14">MUST</span> be excluded from SDF messages.
 Deployments <span class="bcp14">MAY</span> rely on an authorization framework such as ACE-OAuth <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span> to limit the included information or access to messages as a whole to a certain scope.<a href="#section-8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2597,20 +2603,19 @@ Deployments <span class="bcp14">MAY</span> rely on an authorization framework su
       </h2>
 <p id="appendix-A-1"><a href="#code-off-device-model" class="auto internal xref">Figure 14</a> shows the model all of the examples for SDF messages are pointing to in this document.
 Note how the namespace is managed here to export the <code>envSensor</code> component into
-<code>models:#/sdfObject/envSensor</code>, which is the "entry point" used in the instance
+<code>sensors:#/sdfObject/envSensor</code>, which is the "entry point" used in the instance
 messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-sdf-model-that-serves-as-a-"></span><div id="code-off-device-model">
 <figure id="figure-14">
         <div class="lang-sdf sourcecode" id="appendix-A-2.1">
 <pre>{
   "namespace": {
-    "models": "https://example.com/models",
     "sensors": "https://example.com/sensors"
   },
-  "defaultNamespace": "models",
+  "defaultNamespace": "sensors",
   "sdfObject": {
     "envSensor": {
-      "sdfProperty": {
+      "sdfContext": {
         "deviceIdentity": {
           "writable": false,
           "type": "object",
@@ -2637,7 +2642,9 @@ messages within the main document.<a href="#appendix-A-1" class="pilcrow">¶</a>
               ]
             }
           }
-        },
+        }
+      },
+      "sdfProperty": {
         "temperature": {
           "type": "number",
           "unit": "Cel"

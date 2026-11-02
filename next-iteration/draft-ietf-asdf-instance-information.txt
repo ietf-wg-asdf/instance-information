@@ -241,12 +241,12 @@ Table of Contents
 
    The instantiation of an SDF model does not directly express an
    instance, which is, for example, a physical device or a digital twin.
-   Instead, the instantiation produces an instance-related _message_,
-   which adheres to a common message format and is always controlled by
-   the corresponding SDF model.  Depending on the recipient and its
-   purpose, a message can be interpreted as a report regarding the state
-   of a Thing or the instruction to change it when consumed by the
-   recipient.
+   Instead, the instantiation produces an instance-related SDF
+   _message_, which adheres to a common message format and is always
+   controlled by the corresponding SDF model.  Depending on the
+   recipient and its purpose, a message can be interpreted as a report
+   regarding the state of a Thing or the instruction to change it when
+   consumed by the recipient.
 
    Taking into account previous revisions of this document as well as
    [I-D.ietf-asdf-sdf-nonaffordance], we identified two main dimensions
@@ -348,8 +348,10 @@ Table of Contents
    interpretation, i.e., the context needed may need to be reified in
    the message (compare the use of SenML "n").  Information that enables
    interactions via application-layer protocols (such as an IP address)
-   can also be considered context information.  For this purpose, the
-   sdfProperty quality is reused.
+   can also be considered context information.
+
+   For this purpose, we are using the sdfContext keyword introduced by
+   [I-D.ietf-asdf-sdf-nonaffordance].
 
    TODO: explain how [RFC9039] could be used to obtain device names
    (using urn:dev:org in the example).
@@ -506,8 +508,8 @@ Table of Contents
    *  the device identity (via the thingId qualitity in the sdfInstance
       block).
 
-   The instance-related message has to follow the structure of the model
-   the entryPoint is pointing to (although, depending on the archetype,
+   The SDF message has to follow the structure of the model the
+   entryPoint is pointing to (although, depending on the archetype,
    information that has not changed or will not be updated can be left
    out.)
 
@@ -530,6 +532,9 @@ Table of Contents
         | sdfObject   | map    | Values for the object entries in |
         |             |        | the referenced SDF definition    |
         +-------------+--------+----------------------------------+
+        | sdfContext  | map    | Values for the context entries   |
+        |             |        | in the referenced SDF definition |
+        +-------------+--------+----------------------------------+
         | sdfProperty | map    | Values for the properties in the |
         |             |        | referenced SDF definition        |
         +-------------+--------+----------------------------------+
@@ -547,9 +552,6 @@ Table of Contents
    Based on the common message format defined in Section 3 and the
    systematization from Table 1, we can derive a set of four archetypes
    that serve different use cases and recipients.
-
-   TODO: Decide whether we want to add specific CDDL schemas for the
-   four archetypes via extension points in the "base schema"
 
 4.1.  Snapshot Messages
 
@@ -853,44 +855,35 @@ Table of Contents
 
    Figure 7 shows an example for an SDF model where the ipAddress and
    deviceIdentity are supposed to be initialized at construction time,
-   since they are required and not writable via regular interactions
+   since they are modeled as mandatory (via sdfRequired) sdfContext
+   definitions, making them non-writable via "regular" interactions
    during runtime.  As the unit property has a default value (Cel for
    degrees Celcius), it does not have to be initialized during
-   construction.  However, for all of these properties, a
+   construction.  However, for all of these context definitions, a
    reconfiguration during runtime is possible.
 
-   In this example, the deviceIdentity would be retrievable like a
-   "regular", but immutable property affordance.  While the ipAddress
-   might be used for interaction affordances (e.g., by other models that
-   build upon this one), the temperature property is "importing" the
-   value of the unit property via a new quality called sdfParameters,
-   where pairs of quality names and JSON pointers are used to import
-   values from sdfProperty definitions.
+   While the ipAddress might be used for interaction affordances (e.g.,
+   by other models that build upon this one), the temperature property
+   is "importing" the value of the unit property via a new quality
+   called sdfParameters, where pairs of quality names and JSON pointers
+   are used to import values from sdfContext definitions.
 
    {
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfObject": {
        "sensor": {
          "sdfRequired": [
            "ipAddress",
            "deviceIdentity"
          ],
-         "sdfProperty": {
+         "sdfContext": {
            "ipAddress": {
-             "writable": false,
              "type": "string"
            },
-           "unit": {
-             "writable": false,
-             "type": "string",
-             "default": "Cel"
-           },
            "deviceIdentity": {
-             "writable": false,
              "type": "object",
              "properties": {
                "manufacturer": {
@@ -901,11 +894,18 @@ Table of Contents
                }
              }
            },
+           "unit": {
+             "writable": false,
+             "type": "string",
+             "default": "Cel"
+           }
+         },
+         "sdfProperty": {
            "temperature": {
              "writable": false,
              "type": "number",
              "sdfParameters": {
-               "unit": "#/sdfObject/sensor/sdfProperty/unit"
+               "unit": "#/sdfObject/sensor/sdfContext/unit"
              }
            }
          }
@@ -917,8 +917,8 @@ Table of Contents
 
    Based on the SDF model above, a Construction Message such as the one
    shown in Figure 3 can trigger the construction process.  As indicated
-   via sdfRequired, this process must include the initialization of an
-   IP address as well as the device's identity definitions.
+   via sdfRequired, this process must involve the initialization of the
+   device's identity definitions and IP address.
 
 5.2.  Protocol Binding Information
 
@@ -946,26 +946,26 @@ Table of Contents
 
    {
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfObject": {
        "sensor": {
          "sdfRequired": [
            "ipAddress"
          ],
-         "sdfProperty": {
+         "sdfContext": {
            "ipAddress": {
-             "writable": false,
              "type": "string"
-           },
+           }
+         },
+         "sdfProperty": {
            "temperature": {
              "type": "number",
              "sdfProtocolMap": {
                "coap": {
                  "sdfParameters": {
-                   "ipAddress": "#/sdfObject/sensor/sdfProperty/\
+                   "ipAddress": "#/sdfObject/sensor/sdfContext/\
                                                               ipAddress"
                  },
                  "sdfOperations": {
@@ -1003,7 +1003,7 @@ Table of Contents
        "entryPoint": "#/sdfObject/sensor"
      },
      "sdfInstance": {
-       "sdfProperty": {
+       "sdfContext": {
          "ipAddress": "192.168.1.5"
        }
      }
@@ -1017,8 +1017,8 @@ Table of Contents
 
    Snapshot and (in a relative fashion) Delta Messages can report the
    current state associated with interaction affordances.  For
-   sdfProperty definitions, this is very straightforward, as previously
-   seen in in Figure 5.
+   sdfProperty (and sdfContext) definitions, this is very
+   straightforward, as previously seen in in Figure 5.
 
    Actions and events, however, need to be handled differently: In the
    case of actions, the state of one or more actions is reported, which
@@ -1156,10 +1156,12 @@ Table of Contents
        "lamp": {
          "title": "CoAP Lamp",
          "description": "A lamp example that uses CoAP.",
-         "sdfProperty": {
+         "sdfContext": {
            "ipAddress": {
              "type": "string"
-           },
+           }
+         },
+         "sdfProperty": {
            "status": {
              "type": "string",
              "writable": false,
@@ -1167,7 +1169,7 @@ Table of Contents
              "sdfProtocolMap": {
                "coap": {
                  "sdfParameters": {
-                   "ipAddress": "#/sdfObject/lamp/sdfProperty/ipAddress"
+                   "ipAddress": "#/sdfObject/lamp/sdfContext/ipAddress"
                  },
                  "sdfOperations": {
                    "read": {
@@ -1189,11 +1191,11 @@ Table of Contents
 
    Figure 13 in turn shows an SDF message that contains only the
    instance-related information from the WoT TD example.  Besides the
-   rather contextual ipAddress, this includes also the current value of
-   the status property.  The id that was part of the WoT TD has been
-   mapped to the thingId quality under sdfInstance.  The instance-
-   specific title has no real equivalent in SDF messages yet, but it
-   could be added to sdfInstance in future revisions.
+   contextual ipAddress, this includes also the current value of the
+   status property.  The id that was part of the WoT TD has been mapped
+   to the thingId quality under sdfInstance.  The instance-specific
+   title has no real equivalent in SDF messages yet, but it could be
+   added to sdfInstance in future revisions.
 
    {
      "info": {
@@ -1210,54 +1212,56 @@ Table of Contents
      "sdfInstance": {
        "thingId": "urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4",
        "$comment": "Should we put the Thing's title here?",
-       "sdfProperty": {
+       "sdfContext": {
          "ipAddress": "2001:DB8::1"
        },
-       "status": "on"
+       "sdfProperty": {
+         "status": "on"
+       }
      }
    }
 
            Figure 13: SDF message containing the instance-related
                  information from the previous WoT example.
 
-   While these examples highlight the potential of instance-related
-   messages for a clean separation of model and instance information,
-   they also raise a number of questions, for example about the role of
-   namespaces for SDF conversion results and the location where the
-   resulting SDF models may be stored to potentially make them
-   accessible to consumers.  In practice, these questions may not be as
-   relevant when converting from SDF to (in this case) WoT or when using
-   SDF only as an internal translation medium for bridging between two
-   ecosystems.  However, these considerations emphasize the need for a
-   set of standardized, reusable building blocks that can also be used
-   for model and message conversion.
+   While these examples highlight the potential of SDF messages for a
+   clean separation of model and instance information, they also raise a
+   number of questions, for example about the role of namespaces for SDF
+   conversion results and the location where the resulting SDF models
+   may be stored to potentially make them accessible to consumers.  In
+   practice, these questions may not be as relevant when converting from
+   SDF to (in this case) WoT or when using SDF only as an internal
+   translation medium for bridging between two ecosystems.  However,
+   these considerations emphasize the need for a set of standardized,
+   reusable building blocks that can also be used for model and message
+   conversion.
 
 7.  Discussion
 
-   Instance-related messages close an important semantic gap of SDF,
-   which so far was only capable of describing device classes and their
-   capabilities, leaving the exercise of affordances to the ecosystem-
-   specific mechanisms.  There are, however, a few aspects that need
-   special consideration and have to be addressed by more fine-grained
+   SDF messages close an important semantic gap of SDF, which so far was
+   only capable of describing device classes and their capabilities,
+   leaving the description of affordances to ecosystem-specific
+   vocabulary.  There are, however, a few aspects that need special
+   consideration and have to be addressed by more fine-grained
    specifications in the future that will buid upon this one.
 
-   Instance-related messages allow for noting down timestamps that
-   currently relate to the message as a whole.  Since the values
-   contained within an instance-related message might reflect state
-   updates such as measurements that occurred before composing the
-   message, this timestamp cannot accurately reflect the device state at
-   that exact moment.  In this sense, instance-related messages really
-   are imperfect "proofshots" when it comes to the state of affordances,
-   also considering that there might be concurrency problems if a device
-   is updated while generating a Snapshot or Delta message.
+   SDF messages allow for noting down timestamps that currently relate
+   to the message as a whole.  Since the values contained within an SDF
+   message might reflect state updates such as measurements that
+   occurred before composing the message, this timestamp cannot
+   accurately reflect the device state at that exact moment.  In this
+   sense, SDF messages really are imperfect "proofshots" when it comes
+   to the state of affordances, also considering that there might be
+   concurrency problems if a device is updated while generating a
+   Snapshot or Delta message.
 
    With IoT devices, many additional potential time-related problems
    arise, as devices might have access to (credible) time information
    [I-D.amsuess-t2trg-raytime] or can only measure time unreliably due
    to resource constraints, accuracy problems, and/or their sleeping
    behavior (Section 4.4 of [I-D.ietf-iotops-7228bis]).  In cases like
-   these, timestamps might have to be omitted from instance-related
-   messages or need to be estimated by a more reliable intermediary.
+   these, timestamps might have to be omitted from SDF messages or need
+   to be estimated by a more reliable intermediary.
 
    Discuss expressing a device's "purpose of life" via context
    information
@@ -1269,18 +1273,18 @@ Table of Contents
    The security considerations of [RFC9880] apply to this document as
    well.
 
-   Entities processing instance-related messages need to take measures
-   to ensure the provenance of instance-related messages, including
-   authenticity and integrity.  For this purpose, they may use the
-   context and state information contained within a given message.
+   Entities processing SDF messages need to take measures to ensure the
+   provenance of SDF messages, including authenticity and integrity.
+   For this purpose, they may use the context and state information
+   contained within a given message.
 
    Instance-related information may might only be available in certain
    scopes, e.g. when it comes to security-related configuration
    parameters.  This information MUST NOT be exposed to unauthorized
-   entities and therefore MUST be excluded from instance-related
-   messages.  Deployments MAY rely on an authorization framework such as
-   ACE-OAuth [RFC9200] to limit the included information or access to
-   messages as a whole to a certain scope.
+   entities and therefore MUST be excluded from SDF messages.
+   Deployments MAY rely on an authorization framework such as ACE-OAuth
+   [RFC9200] to limit the included information or access to messages as
+   a whole to a certain scope.
 
 9.  IANA Considerations
 
@@ -1409,19 +1413,18 @@ Appendix A.  Example SDF Model
 
    Figure 14 shows the model all of the examples for SDF messages are
    pointing to in this document.  Note how the namespace is managed here
-   to export the envSensor component into models:#/sdfObject/envSensor,
+   to export the envSensor component into sensors:#/sdfObject/envSensor,
    which is the "entry point" used in the instance messages within the
    main document.
 
    {
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensors"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfObject": {
        "envSensor": {
-         "sdfProperty": {
+         "sdfContext": {
            "deviceIdentity": {
              "writable": false,
              "type": "object",
@@ -1448,7 +1451,9 @@ Appendix A.  Example SDF Model
                  ]
                }
              }
-           },
+           }
+         },
+         "sdfProperty": {
            "temperature": {
              "type": "number",
              "unit": "Cel"
