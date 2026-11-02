@@ -440,9 +440,9 @@ Table of Contents
 3.3.  Instance-of Block
 
    Distinct from SDF models are two instance-specific blocks, the first
-   of which is identified via the sdfInstanceOf keyword.  Via the
-   entryPoint keyword, this quality defines the sdfObject or sdfThing
-   the sdfInstance quality from the next section is referring to.  The
+   of which is identified via the sdfInstanceOf keyword.  Via the model
+   keyword, this quality defines the sdfObject or sdfThing the
+   sdfInstance quality from the next section is referring to.  The
    version, minVersion, maxVersion, exclusiveMinVersion, amd
    exclusiveMaxVersion qualities optionally allow for specifying a
    version or version range of the model.  Furthermore, via the
@@ -452,7 +452,7 @@ Table of Contents
       +=====================+========+==============================+
       | Quality             | Type   | Description                  |
       +=====================+========+==============================+
-      | entryPoint          | string | Defines the entry point for  |
+      | model               | string | Defines the entry point for  |
       |                     |        | sdfInstance by pointing to   |
       |                     |        | an sdfObject or an sdfThing. |
       |                     |        | Always refers to the target  |
@@ -508,10 +508,10 @@ Table of Contents
    *  the device identity (via the thingId qualitity in the sdfInstance
       block).
 
-   The SDF message has to follow the structure of the model the
-   entryPoint is pointing to (although, depending on the archetype,
-   information that has not changed or will not be updated can be left
-   out.)
+   The SDF message has to follow the structure of the definition that is
+   indicated by the model entry point (although, depending on the
+   archetype, information that has not changed or will not be updated
+   can be left out.)
 
    The alternating structure of the SDF model (e. g.,
    sdfObject/envSensor/sdfProperty/temperature) is repeated within the
@@ -586,7 +586,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor"
+       "model": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:abc123",
@@ -627,7 +627,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor"
+       "model": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:abc123",
@@ -686,7 +686,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor"
+       "model": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:unit42",
@@ -723,7 +723,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor"
+       "model": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:unit42",
@@ -769,7 +769,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor"
+       "model": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "sdfProperty": {
@@ -803,7 +803,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/envSensor",
+       "model": "#/sdfObject/envSensor",
        "patchMethod": "merge-patch"
      },
      "sdfInstance": {
@@ -1000,7 +1000,7 @@ Table of Contents
      },
      "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/sensor"
+       "model": "#/sdfObject/sensor"
      },
      "sdfInstance": {
        "sdfContext": {
@@ -1048,7 +1048,7 @@ Table of Contents
      },
      "defaultNamespace": "cap",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/lightSwitch"
+       "model": "#/sdfObject/lightSwitch"
      },
      "sdfInstance": {
        "sdfAction": {
@@ -1207,7 +1207,7 @@ Table of Contents
      },
      "defaultNamespace": "lamps",
      "sdfInstanceOf": {
-       "entryPoint": "#/sdfObject/lamp"
+       "model": "#/sdfObject/lamp"
      },
      "sdfInstance": {
        "thingId": "urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4",

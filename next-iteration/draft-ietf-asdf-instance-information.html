@@ -1666,7 +1666,7 @@ In constrast to models, including a <code>namespace</code> quality is mandatory 
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-instance-of-block" class="section-name selfRef">Instance-of Block</a>
         </h3>
 <p id="section-3.3-1">Distinct from SDF models are two instance-specific blocks, the first of which is identified via the <code>sdfInstanceOf</code> keyword.
-Via the <code>entryPoint</code> keyword, this quality defines the <code>sdfObject</code> or <code>sdfThing</code> the <code>sdfInstance</code> quality from the next section is referring to.
+Via the <code>model</code> keyword, this quality defines the <code>sdfObject</code> or <code>sdfThing</code> the <code>sdfInstance</code> quality from the next section is referring to.
 The <code>version</code>, <code>minVersion</code>, <code>maxVersion</code>, <code>exclusiveMinVersion</code>, amd <code>exclusiveMaxVersion</code> qualities optionally allow for specifying a version or version range of the model.
 Furthermore, via the <code>patchMethod</code> field, a patch algorithm different from JSON Merge Patch can be specified.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span id="name-instance-of-block-2"></span><div id="iobsec">
@@ -1684,7 +1684,7 @@ Furthermore, via the <code>patchMethod</code> field, a patch algorithm different
           </thead>
           <tbody>
             <tr>
-              <td class="text-left" rowspan="1" colspan="1">entryPoint</td>
+              <td class="text-left" rowspan="1" colspan="1">model</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
               <td class="text-left" rowspan="1" colspan="1">Defines the entry point for <code>sdfInstance</code> by pointing to an <code>sdfObject</code> or an <code>sdfThing</code>. Always refers to the target namespace indicated by the <code>defaultNamespace</code>and <code>namespaces</code> qualities.</td>
             </tr>
@@ -1744,7 +1744,7 @@ Depending on the archetype, this information will either be used to report a Thi
             <p id="section-3.4-3.2.1">the device identity (via the <code>thingId</code> qualitity in the <code>sdfInstance</code> block).<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.4-4">The SDF message has to follow the structure of the model the <code>entryPoint</code> is pointing to (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">The SDF message has to follow the structure of the definition that is indicated by the <code>model</code> entry point  (although, depending on the archetype, information that has not changed or will not be updated can be left out.)<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 <p id="section-3.4-5">The alternating structure of the SDF model (e. g., <code>sdfObject/envSensor/sdfProperty/temperature</code>) is repeated within the message, with the top-level <code>sdfObject</code> or <code>sdfThing</code> being replaced by <code>sdfInstance</code> at the entry point.
 Note that we also have to replicate a nested structure via <code>sdfThing</code> and/or <code>sdfObject</code> if present in the referenced SDF model.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
 <span id="name-instance-block-2"></span><div id="ibsec">
@@ -1836,7 +1836,7 @@ The corresponding message variants are (colloquially) referred to as "Context Sn
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor"
+    "model": "#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "thingId": "envSensor:abc123",
@@ -1875,7 +1875,7 @@ the associated schema.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor"
+    "model": "#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "thingId": "envSensor:abc123",
@@ -1922,7 +1922,7 @@ The construction message also assigns a <code>thingId</code>, the <code>unit</co
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor"
+    "model": "#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "thingId": "envSensor:unit42",
@@ -1958,7 +1958,7 @@ All definitions included in <code>sdfRequired</code> <span class="bcp14">MUST</s
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor"
+    "model": "#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "thingId": "envSensor:unit42",
@@ -2005,7 +2005,7 @@ In this example, only the temperature that has been measured by the sensor has c
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor"
+    "model": "#/sdfObject/envSensor"
   },
   "sdfInstance": {
     "sdfProperty": {
@@ -2043,7 +2043,7 @@ When transmitting state patches, the media type <code>application/sdf-patch+json
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/envSensor",
+    "model": "#/sdfObject/envSensor",
     "patchMethod": "merge-patch"
   },
   "sdfInstance": {
@@ -2219,7 +2219,7 @@ Via JSON pointers, the <code>sdfParameters</code> within the <code>sdfProtocolMa
   },
   "defaultNamespace": "sensors",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/sensor"
+    "model": "#/sdfObject/sensor"
   },
   "sdfInstance": {
     "sdfContext": {
@@ -2265,7 +2265,7 @@ As the lightswitch was turned on, the event was emitted with a value of <code>tr
   },
   "defaultNamespace": "cap",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/lightSwitch"
+    "model": "#/sdfObject/lightSwitch"
   },
   "sdfInstance": {
     "sdfAction": {
@@ -2428,7 +2428,7 @@ The instance-specific <code>title</code> has no real equivalent in SDF messages 
   },
   "defaultNamespace": "lamps",
   "sdfInstanceOf": {
-    "entryPoint": "#/sdfObject/lamp"
+    "model": "#/sdfObject/lamp"
   },
   "sdfInstance": {
     "thingId": "urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4",
