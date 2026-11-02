@@ -607,7 +607,7 @@ Practical uses for patch message include digital twins {{-digital-twin}}, where 
 
 # Application Scenarios
 
-The common message format and the four architectures are usable in a number of use cases, some of which we are going to specify in the following.
+The common message format and the four archetypes are usable in a number of use cases, some of which we are going to specify in the following.
 Other specifications may define additional use cases SDF messages can be used for.
 
 ## Construction
