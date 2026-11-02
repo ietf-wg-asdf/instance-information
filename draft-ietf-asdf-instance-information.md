@@ -365,13 +365,13 @@ In constrast to models, including a `namespace` quality is mandatory as at least
 ## Instance-of Block
 
 Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
-Via the `entryPoint` keyword, this quality defines the `sdfObject` or `sdfThing` the `sdfInstance` quality from the next section is referring to.
+Via the `model` keyword, this quality defines the `sdfObject` or `sdfThing` the `sdfInstance` quality from the next section is referring to.
 The `version`, `minVersion`, `maxVersion`, `exclusiveMinVersion`, amd `exclusiveMaxVersion` qualities optionally allow for specifying a version or version range of the model.
 Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
 
 | Quality             | Type   | Description                                                                                                                                                                                    |
 |---------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| entryPoint          | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Always refers to the target namespace indicated by the `defaultNamespace`and `namespaces` qualities. |
+| model               | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Always refers to the target namespace indicated by the `defaultNamespace`and `namespaces` qualities. |
 | version             | string | The exact version the model this message is referring to.                                                                                                                                      |
 | minVersion          | string | The (inclusive) minimal version of the model this message is referring to.                                                                                                                     |
 | maxVersion          | string | The (inclusive) maximal version of the model this message is referring to.                                                                                                                     |
@@ -391,7 +391,7 @@ In addition to the `messageId` and `previousMessageId` from the `info` block, we
 * the point in time when the information regarding the device state has been captured (via the `timestamp` quality) and
 * the device identity (via the `thingId` qualitity in the `sdfInstance` block).
 
-The SDF message has to follow the structure of the model the `entryPoint` is pointing to (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
+The SDF message has to follow the structure of the definition that is indicated by the `model` entry point  (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
 
 The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
 Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
@@ -436,7 +436,7 @@ namespace:
   sensors: https://example.com/sensors
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:abc123
   sdfProperty:
@@ -468,7 +468,7 @@ namespace:
   sensors: https://example.com/sensor
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:abc123
   sdfProperty:
@@ -507,7 +507,7 @@ namespace:
   sensors: https://example.com/sensor
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:unit42
   sdfProperty:
@@ -534,7 +534,7 @@ namespace:
   models: https://example.com/models
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:unit42
   sdfProperty:
@@ -568,7 +568,7 @@ namespace:
   sensors: https://example.com/sensor
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
 sdfInstance:
   sdfProperty:
     temperature: 24
@@ -592,7 +592,7 @@ namespace:
   sensors: https://example.com/sensor
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/envSensor"
+  model: "#/sdfObject/envSensor"
   patchMethod: merge-patch
 sdfInstance:
   sdfProperty:
@@ -711,7 +711,7 @@ namespace:
   sensors: https://example.com/sensor
 defaultNamespace: sensors
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/sensor"
+  model: "#/sdfObject/sensor"
 sdfInstance:
   sdfContext:
     ipAddress: 192.168.1.5
@@ -741,7 +741,7 @@ namespace:
   cap: https://example.com/capability/cap
 defaultNamespace: cap
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/lightSwitch"
+  model: "#/sdfObject/lightSwitch"
 sdfInstance:
   sdfAction:
     toggle:
@@ -844,7 +844,7 @@ namespace:
   lamps: https://example.com/lamps
 defaultNamespace: lamps
 sdfInstanceOf:
-  entryPoint: "#/sdfObject/lamp"
+  model: "#/sdfObject/lamp"
 sdfInstance:
   thingId: urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4
   "$comment": Should we put the Thing's title here?
