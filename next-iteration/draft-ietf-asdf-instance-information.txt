@@ -1609,6 +1609,12 @@ List of Figures
               from the previous figure.
    Figure 10:  Example of an SDF Snapshot Messages that reports an
               action and an event history.
+   Figure 11:  WoT TD example showcasing a mix of model and instance
+              information.
+   Figure 12:  SDF model containing the model-related information from
+              the previous WoT example.
+   Figure 13:  SDF message containing the instance-related information
+              from the previous WoT example.
    Figure 14:  SDF Model that serves as a reference point for the SDF
               messages in this draft
 
