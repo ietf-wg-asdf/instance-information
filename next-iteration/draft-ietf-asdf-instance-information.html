@@ -2078,7 +2078,7 @@ Other specifications may define additional use cases SDF messages can be used fo
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-construction" class="section-name selfRef">Construction</a>
         </h3>
 <p id="section-5.1-1">In SDF models, we can treat a Thing's <code>sdfProperty</code> definitions as construction parameters.
-Construction messages can serve as an ecosystem-independent way for initializing properties, epecially those that are specified as non-writable.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+Construction messages can serve as an ecosystem-independent way for initializing properties, especially those that are specified as non-writable.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2"><a href="#code-sdf-construction-sdf-context" class="auto internal xref">Figure 7</a> shows an example for an SDF model where the <code>ipAddress</code> and <code>deviceIdentity</code> are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
 As the <code>unit</code> property has a default value (<code>Cel</code> for degrees Celcius), it does not have to be initialized during construction.
 However, for all of these properties, a reconfiguration during runtime is possible.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
