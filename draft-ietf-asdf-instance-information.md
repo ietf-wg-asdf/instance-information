@@ -847,7 +847,7 @@ namespace:
   lamps: https://example.com/lamps
 defaultNamespace: lamps
 sdfInstanceOf:
-  model: models:/sdfObject/lamp
+  entryPoint: "#/sdfObject/lamp"
 sdfInstance:
   thingId: urn:uuid:b38acf9d-493c-408c-90bf-868c1f5326d4
   "$comment": Should we put the Thing's title here?
