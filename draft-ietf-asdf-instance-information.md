@@ -614,16 +614,12 @@ Other specifications may define additional use cases SDF messages can be used fo
 In SDF models, we can treat a Thing's `sdfProperty` definitions as construction parameters.
 Construction messages can serve as an ecosystem-independent way for initializing properties, especially those that are specified as non-writable.
 
-{{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
-As the `unit` property has a default value (`Cel` for degrees Celcius), it does not have to be initialized during construction.
-However, for all of these properties, a reconfiguration during runtime is possible.
+{{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are modeled as mandatory (via `sdfRequired`) `sdfContext` definitions, making them non-writable via "regular" interactions during runtime.
+As the `unit` property has a default value (`Cel` for degrees Celsius), it does not have to be initialized during construction.
+However, for all of these context definitions, a reconfiguration during runtime is possible.
 
 In this example, the `deviceIdentity` would be retrievable like a "regular", but immutable property affordance.
 While the `ipAddress` might be used for interaction affordances (e.g., by other models that build upon this one), the `temperature` property is "importing" the value of the `unit` property via a new quality called `sdfParameters`, where pairs of quality names and JSON pointers are used to import values from `sdfProperty` definitions.
-
-{{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are modeled as mandatory (via `sdfRequired`) `sdfContext` definitions, making them non-writable via "regular" interactions during runtime.
-As the `unit` property has a default value (`Cel` for degrees Celcius), it does not have to be initialized during construction.
-However, for all of these context definitions, a reconfiguration during runtime is possible.
 
 While the `ipAddress` might be used for interaction affordances (e.g., by other models that build upon this one), the `temperature` property is "importing" the value of the `unit` property via a new quality called `sdfParameters`, where pairs of quality names and JSON pointers are used to import values from `sdfContext` definitions.
 
