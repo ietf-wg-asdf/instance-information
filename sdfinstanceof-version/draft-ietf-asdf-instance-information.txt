@@ -5,8 +5,8 @@
 ASDF                                                           J. Romann
 Internet-Draft                                        Universität Bremen
 Intended status: Standards Track                              C. Bormann
-Expires: 29 August 2026                           Universität Bremen TZI
-                                                        25 February 2026
+Expires: 6 May 2027                               Universität Bremen TZI
+                                                         2 November 2026
 
 
                       Instance Information for SDF
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 6 May 2027.
 
 Copyright Notice
 
@@ -451,20 +451,21 @@ Table of Contents
 3.3.  Instance-of Block
 
    Distinct from SDF models are two instance-specific blocks, the first
-   of which is identified via the sdfInstanceOf keyword.  Via the model
-   keyword, this quality defines the entry point the sdfInstance quality
-   from the next section is referring to.  The version quality
-   optionally allows for specifying a version or version range of the
-   model.  Furthermore, via the patchMethod field, a patch algorithm
-   different from JSON Merge Patch can be specified.
+   of which is identified via the sdfInstanceOf keyword.  Via the
+   entryPoint keyword, this quality defines the sdfObject or sdfThing
+   the sdfInstance quality from the next section is referring to.  The
+   version quality optionally allows for specifying a version or version
+   range of the model.  Furthermore, via the patchMethod field, a patch
+   algorithm different from JSON Merge Patch can be specified.
 
    +=============+========+===========================================+
    | Quality     | Type   | Description                               |
    +=============+========+===========================================+
-   | model       | string | Defines the entry point for sdfInstance   |
+   | entryPoint  | string | Defines the entry point for sdfInstance   |
    |             |        | by pointing to an sdfObject or an         |
-   |             |        | sdfThing.  Has to be based on a namespace |
-   |             |        | identifier from the namespaces map.       |
+   |             |        | sdfThing.  Always refers to the target    |
+   |             |        | namespace indicated by the                |
+   |             |        | defaultNamespaceand namespaces qualities. |
    +-------------+--------+-------------------------------------------+
    | version     | string | The version or a compatible version range |
    |             |        | of the model this message is referring    |
@@ -496,11 +497,10 @@ Table of Contents
    *  the device identity (via the thingId qualitity in the sdfInstance
       block).
 
-   Since we are using the sdfInstance keyword as an entry point at the
-   location pointed to via the model specfied in sdfInstanceOf, the
-   instance-related message has to follow the structure of this part of
-   the model (although, depending on the archetype, information that has
-   not changed or will not be updated can be left out.)
+   The instance-related message has to follow the structure of the model
+   the entryPoint is pointing to (although, depending on the archetype,
+   information that has not changed or will not be updated can be left
+   out.)
 
    The alternating structure of the SDF model (e. g.,
    sdfObject/envSensor/sdfProperty/temperature) is repeated within the
@@ -575,12 +575,11 @@ Table of Contents
        "timestamp": "2025-07-01T12:00:00Z"
      },
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensors"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
+       "entryPoint": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:abc123",
@@ -617,12 +616,11 @@ Table of Contents
        "timestamp": "2025-07-01T12:00:00Z"
      },
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
+       "entryPoint": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:abc123",
@@ -679,12 +677,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
+       "entryPoint": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:unit42",
@@ -718,12 +715,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
-       "models": "https://example.com/models",
-       "sensors": "https://example.com/sensor"
+       "models": "https://example.com/models"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor"
+       "entryPoint": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "thingId": "envSensor:unit42",
@@ -765,12 +761,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
-       "cap": "https://example.com/capability/cap",
-       "models": "https://example.com/models"
+       "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "cap",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "models:/sdfObject/envSensor"
+       "entryPoint": "#/sdfObject/envSensor"
      },
      "sdfInstance": {
        "sdfProperty": {
@@ -801,12 +796,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a42"
      },
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/envSensor",
+       "entryPoint": "#/sdfObject/envSensor",
        "patchMethod": "merge-patch"
      },
      "sdfInstance": {
@@ -972,12 +966,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a47"
      },
      "namespace": {
-       "models": "https://example.com/models",
        "sensors": "https://example.com/sensor"
      },
-     "defaultNamespace": "models",
+     "defaultNamespace": "sensors",
      "sdfInstanceOf": {
-       "model": "sensors:#/sdfObject/sensor"
+       "entryPoint": "#/sdfObject/sensor"
      },
      "sdfInstance": {
        "sdfContext": {
@@ -1020,12 +1013,11 @@ Table of Contents
        "messageId": "75532020-8f64-4daf-a241-fcb0b6dc4a85"
      },
      "namespace": {
-       "cap": "https://example.com/capability/cap",
-       "models": "https://example.com/models"
+       "cap": "https://example.com/capability/cap"
      },
      "defaultNamespace": "cap",
      "sdfInstanceOf": {
-       "model": "models:/sdfObject/lightSwitch"
+       "entryPoint": "#/sdfObject/lightSwitch"
      },
      "sdfInstance": {
        "sdfAction": {
@@ -1112,9 +1104,9 @@ Table of Contents
               Hong, J. and H. Lee, "Semantic Definition Format (SDF)
               Extension for Non-Affordance Information", Work in
               Progress, Internet-Draft, draft-ietf-asdf-sdf-
-              nonaffordance-03, 20 January 2026,
+              nonaffordance-06, 27 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-nonaffordance-03>.
+              sdf-nonaffordance-06>.
 
    [RFC8288]  Nottingham, M., "Web Linking", RFC 8288,
               DOI 10.17487/RFC8288, October 2017,
@@ -1145,10 +1137,10 @@ Table of Contents
 
    [I-D.ietf-asdf-digital-twin]
               Lee, H. and J. Hong, "Semantic Definition Format (SDF)
-              modeling for Digital Twin", Work in Progress, Internet-
-              Draft, draft-ietf-asdf-digital-twin-03, 20 January 2026,
+              Modeling for Digital Twin", Work in Progress, Internet-
+              Draft, draft-ietf-asdf-digital-twin-06, 14 October 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              digital-twin-03>.
+              digital-twin-06>.
 
    [I-D.ietf-asdf-sdf-mapping]
               Bormann, C. and J. Romann, "Semantic Definition Format
@@ -1158,18 +1150,18 @@ Table of Contents
               sdf-mapping-01>.
 
    [I-D.ietf-asdf-sdf-protocol-mapping]
-              Mohan, R., Brinckman, B., and L. Corneo, "Protocol Mapping
-              for SDF", Work in Progress, Internet-Draft, draft-ietf-
-              asdf-sdf-protocol-mapping-05, 24 February 2026,
+              Mohan, R., Brinckman, B., and L. Corneo, "SDF Protocol
+              Mapping", Work in Progress, Internet-Draft, draft-ietf-
+              asdf-sdf-protocol-mapping-12, 15 September 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-asdf-
-              sdf-protocol-mapping-05>.
+              sdf-protocol-mapping-12>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
               "Terminology for Constrained-Node Networks", Work in
-              Progress, Internet-Draft, draft-ietf-iotops-7228bis-03, 4
-              November 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-iotops-7228bis-03>.
+              Progress, Internet-Draft, draft-ietf-iotops-7228bis-10, 6
+              July 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-iotops-7228bis-10>.
 
    [LAYERS]   "Terminology for Layers", WISHI Wiki,
               <https://github.com/t2trg/wishi/wiki/NOTE:-Terminology-
