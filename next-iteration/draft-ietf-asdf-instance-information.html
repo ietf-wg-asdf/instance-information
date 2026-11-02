@@ -1429,19 +1429,20 @@ Depending on the recipient and its purpose, a message can be interpreted as a re
           <p id="section-2-3.2.1">the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
-<p id="section-2-4">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-4" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-2-5">
-<li id="section-2-5.1">
-          <p id="section-2-5.1.1"><em>Snapshot</em> messages that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-5.1.1" class="pilcrow">¶</a></p>
+<p id="section-2-4">The distinction of the intended effect into "update" or "state" is comparable to YANG's "config" statement (<span><a href="https://rfc-editor.org/rfc/rfc7950#section-7.21.1" class="relref">Section 7.21.1</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>), a flag value indicating whether a definition representation configuration or state data.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-5">Based on these considerations (as illustrated by the systematization in <a href="#instance-message-dimensions" class="auto internal xref">Table 1</a>), we can identify the following four message archetypes:<a href="#section-2-5" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-6">
+<li id="section-2-6.1">
+          <p id="section-2-6.1.1"><em>Snapshot</em> messages that may contain contain both affordance-related and context information, including information about a Thing's identity,<a href="#section-2-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-2-5.2">
-          <p id="section-2-5.2.1"><em>Construction</em> messages that trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
+        <li id="section-2-6.2">
+          <p id="section-2-6.2.1"><em>Construction</em> messages that trigger a Thing's initial configuration process or its commissioning,<a href="#section-2-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-2-5.3">
-          <p id="section-2-5.3.1"><em>Delta</em> messages that indicate changes that have occurred since a reference state report, and<a href="#section-2-5.3.1" class="pilcrow">¶</a></p>
+        <li id="section-2-6.3">
+          <p id="section-2-6.3.1"><em>Delta</em> messages that indicate changes that have occurred since a reference state report, and<a href="#section-2-6.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li id="section-2-5.4">
-          <p id="section-2-5.4.1"><em>Patch</em> messages that update the Thing's state.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
+        <li id="section-2-6.4">
+          <p id="section-2-6.4.1"><em>Patch</em> messages that update the Thing's state.<a href="#section-2-6.4.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 <span id="name-systematization-of-messages"></span><div id="instance-message-dimensions">
@@ -1477,11 +1478,11 @@ Effect</th>
         </tbody>
       </table>
 </div>
-<p id="section-2-7">The common message format can be used for all four message archetypes.
+<p id="section-2-8">The common message format can be used for all four message archetypes.
 <a href="#syntax" class="auto internal xref">Appendix B</a> specifies the formal syntax of SDF messages that all normative statements as well as the examples in this document will adhere to.
-This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">In the following, we will first outline a number of general principles for SDF messages, before detailing the specific archetypes we define in this document.
-The specification text itself will be accompanied by examples that have been inspired by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.ietf-asdf-digital-twin" class="cite xref">I-D.ietf-asdf-digital-twin</a>]</span> that each correspond with one of the four archetypes.<a href="#section-2-8" class="pilcrow">¶</a></p>
+This syntax can serve to describe both the abstract structure and the concrete shape of the messages that can be used as a neutral form in interchange.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<p id="section-2-9">In the following, we will first outline a number of general principles for SDF messages, before detailing the specific archetypes we define in this document.
+The specification text itself will be accompanied by examples that have been inspired by <span>[<a href="#I-D.ietf-asdf-sdf-nonaffordance" class="cite xref">I-D.ietf-asdf-sdf-nonaffordance</a>]</span> and <span>[<a href="#I-D.ietf-asdf-digital-twin" class="cite xref">I-D.ietf-asdf-digital-twin</a>]</span> that each correspond with one of the four archetypes.<a href="#section-2-9" class="pilcrow">¶</a></p>
 <div id="axioms-for-sdf-messages">
 <section id="section-2.1">
         <h3 id="name-axioms-for-sdf-messages">
@@ -2309,13 +2310,15 @@ As the lightswitch was turned on, the event was emitted with a value of <code>tr
       <h2 id="name-discussion">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
       </h2>
-<p id="section-6-1">(TODO)<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">Discuss Proofshots of a Thing (device) and of other components.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">Discuss concurrency problems with getting and setting Proofshots.<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">Discuss Timestamps appropriate for Things (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-10#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>, <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span>).<a href="#section-6-4" class="pilcrow">¶</a></p>
-<p id="section-6-5">Discuss YANG config=true approach with regard to construction messages.<a href="#section-6-5" class="pilcrow">¶</a></p>
-<p id="section-6-6">Discuss expressing a device's "purpose of life" via context information<a href="#section-6-6" class="pilcrow">¶</a></p>
-<p id="section-6-7">Discuss using context information to indicate provence<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-1">Instance-related messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the exercise of affordances to the ecosystem-specific mechanisms.
+There are, however, a few aspects that need special consideration and have to be addressed by more fine-grained specifications in the future that will buid upon this one.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Instance-related messages allow for noting down timestamps that currently relate to the message as a whole.
+Since the values contained within an instance-related message might reflect state updates such as measurements that occurred before composing the message, this timestamp cannot accurately reflect the device state at that exact moment.
+In this sense, instance-related messages really are imperfect "proofshots" when it comes to the state of affordances, also considering that there might be concurrency problems if a device is updated while generating a Snapshot or Delta message.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">With IoT devices, many additional potential time-related problems arise, as devices might have access to (credible) time information <span>[<a href="#I-D.amsuess-t2trg-raytime" class="cite xref">I-D.amsuess-t2trg-raytime</a>]</span> or can only measure time unreliably due to resource constraints, accuracy problems, and/or their sleeping behavior (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-10#section-4.4" class="relref">Section 4.4</a> of [<a href="#I-D.ietf-iotops-7228bis" class="cite xref">I-D.ietf-iotops-7228bis</a>]</span>).
+In cases like these, timestamps might have to be omitted from instance-related messages or need to be estimated by a more reliable intermediary.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">Discuss expressing a device's "purpose of life" via context information<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">Discuss using context information to indicate provence<a href="#section-6-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -2323,12 +2326,12 @@ As the lightswitch was turned on, the event was emitted with a value of <code>tr
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<ul class="normal">
-<li class="normal" id="section-7-1.1">
-          <p id="section-7-1.1.1">Pieces of instance-related information might only be available in certain scopes, e.g. certain security-related configuration parameters<a href="#section-7-1.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-7-2">(TODO)<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-1">The security considerations of <span>[<a href="#RFC9880" class="cite xref">RFC9880</a>]</span> apply to this document as well.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">Entities processing instance-related messages need to take measures to ensure the provenance of instance-related messages, including authenticity and integrity.
+For this purpose, they may use the context and state information contained within a given message.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Instance-related information may might only be available in certain scopes, e.g. when it comes to security-related configuration parameters.
+This information <span class="bcp14">MUST NOT</span> be exposed to unauthorized entities and therefore <span class="bcp14">MUST</span> be excluded from instance-related messages.
+Deployments <span class="bcp14">MAY</span> rely on an authorization framework such as ACE-OAuth <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span> to limit the included information or access to messages as a whole to a certain scope.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2425,9 +2428,17 @@ As the lightswitch was turned on, the event was emitted with a value of <code>tr
         <dd>
 <span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Snell</span>, <span class="refTitle">"JSON Merge Patch"</span>, <span class="seriesInfo">RFC 7396</span>, <span class="seriesInfo">DOI 10.17487/RFC7396</span>, <time datetime="2014-10" class="refDate">October 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7396">https://www.rfc-editor.org/rfc/rfc7396</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9039">[RFC9039]</dt>
         <dd>
 <span class="refAuthor">Arkko, J.</span>, <span class="refAuthor">Jennings, C.</span>, and <span class="refAuthor">Z. Shelby</span>, <span class="refTitle">"Uniform Resource Names for Device Identifiers"</span>, <span class="seriesInfo">RFC 9039</span>, <span class="seriesInfo">DOI 10.17487/RFC9039</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9039">https://www.rfc-editor.org/rfc/rfc9039</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9200">[RFC9200]</dt>
+        <dd>
+<span class="refAuthor">Seitz, L.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Authentication and Authorization for Constrained Environments Using the OAuth 2.0 Framework (ACE-OAuth)"</span>, <span class="seriesInfo">RFC 9200</span>, <span class="seriesInfo">DOI 10.17487/RFC9200</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9200">https://www.rfc-editor.org/rfc/rfc9200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="STP">[STP]</dt>
       <dd>

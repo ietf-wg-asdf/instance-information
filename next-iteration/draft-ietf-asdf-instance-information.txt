@@ -258,6 +258,11 @@ Table of Contents
        (without a reference to a previous message or state) or relative
        (with such a reference).
 
+   The distinction of the intended effect into "update" or "state" is
+   comparable to YANG's "config" statement (Section 7.21.1 of
+   [RFC7950]), a flag value indicating whether a definition
+   representation configuration or state data.
+
    Based on these considerations (as illustrated by the systematization
    in Table 1), we can identify the following four message archetypes:
 
@@ -1079,17 +1084,30 @@ Table of Contents
 
 6.  Discussion
 
-   (TODO)
+   Instance-related messages close an important semantic gap of SDF,
+   which so far was only capable of describing device classes and their
+   capabilities, leaving the exercise of affordances to the ecosystem-
+   specific mechanisms.  There are, however, a few aspects that need
+   special consideration and have to be addressed by more fine-grained
+   specifications in the future that will buid upon this one.
 
-   Discuss Proofshots of a Thing (device) and of other components.
+   Instance-related messages allow for noting down timestamps that
+   currently relate to the message as a whole.  Since the values
+   contained within an instance-related message might reflect state
+   updates such as measurements that occurred before composing the
+   message, this timestamp cannot accurately reflect the device state at
+   that exact moment.  In this sense, instance-related messages really
+   are imperfect "proofshots" when it comes to the state of affordances,
+   also considering that there might be concurrency problems if a device
+   is updated while generating a Snapshot or Delta message.
 
-   Discuss concurrency problems with getting and setting Proofshots.
-
-   Discuss Timestamps appropriate for Things (Section 4.4 of
-   [I-D.ietf-iotops-7228bis], [I-D.amsuess-t2trg-raytime]).
-
-   Discuss YANG config=true approach with regard to construction
-   messages.
+   With IoT devices, many additional potential time-related problems
+   arise, as devices might have access to (credible) time information
+   [I-D.amsuess-t2trg-raytime] or can only measure time unreliably due
+   to resource constraints, accuracy problems, and/or their sleeping
+   behavior (Section 4.4 of [I-D.ietf-iotops-7228bis]).  In cases like
+   these, timestamps might have to be omitted from instance-related
+   messages or need to be estimated by a more reliable intermediary.
 
    Discuss expressing a device's "purpose of life" via context
    information
@@ -1098,11 +1116,21 @@ Table of Contents
 
 7.  Security Considerations
 
-   *  Pieces of instance-related information might only be available in
-      certain scopes, e.g. certain security-related configuration
-      parameters
+   The security considerations of [RFC9880] apply to this document as
+   well.
 
-   (TODO)
+   Entities processing instance-related messages need to take measures
+   to ensure the provenance of instance-related messages, including
+   authenticity and integrity.  For this purpose, they may use the
+   context and state information contained within a given message.
+
+   Instance-related information may might only be available in certain
+   scopes, e.g. when it comes to security-related configuration
+   parameters.  This information MUST NOT be exposed to unauthorized
+   entities and therefore MUST be excluded from instance-related
+   messages.  Deployments MAY rely on an authorization framework such as
+   ACE-OAuth [RFC9200] to limit the included information or access to
+   messages as a whole to a certain scope.
 
 8.  IANA Considerations
 
@@ -1206,10 +1234,20 @@ Table of Contents
               DOI 10.17487/RFC7396, October 2014,
               <https://www.rfc-editor.org/rfc/rfc7396>.
 
+   [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
+              RFC 7950, DOI 10.17487/RFC7950, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7950>.
+
    [RFC9039]  Arkko, J., Jennings, C., and Z. Shelby, "Uniform Resource
               Names for Device Identifiers", RFC 9039,
               DOI 10.17487/RFC9039, June 2021,
               <https://www.rfc-editor.org/rfc/rfc9039>.
+
+   [RFC9200]  Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
+              H. Tschofenig, "Authentication and Authorization for
+              Constrained Environments Using the OAuth 2.0 Framework
+              (ACE-OAuth)", RFC 9200, DOI 10.17487/RFC9200, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9200>.
 
    [STP]      Bormann, C. and K. Hartke, "The Series Transfer Pattern
               (STP)", Work in Progress, Internet-Draft, draft-bormann-
