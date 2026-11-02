@@ -82,7 +82,7 @@ Split into four "archetypes", SDF messages are always governed by SDF models, st
 
 [^status]
 
-[^status]: This revision updates the base SDF reference to the recently published RFC 9880, improves the terminology section, and applies a bug fix to an example.
+[^status]: This revision refines the structure and terminology used with SDF messages, and further improves the alignment with the non-affordance draft and its sdfContext keyword.
 
 --- middle
 
