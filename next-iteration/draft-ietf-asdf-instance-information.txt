@@ -22,9 +22,9 @@ Abstract
    role both for lifecycle management and actual device interaction.
 
 
-   // This revision updates the base SDF reference to the recently
-   // published RFC 9880, improves the terminology section, and applies
-   // a bug fix to an example.
+   // This revision refines the structure and terminology used with SDF
+   // messages, and further improves the alignment with the non-
+   // affordance draft and its sdfContext keyword.
 
 About This Document
 
