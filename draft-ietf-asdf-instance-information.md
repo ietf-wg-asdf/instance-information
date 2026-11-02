@@ -361,16 +361,16 @@ In constrast to models, including a `namespace` quality is mandatory as at least
 ## Instance-of Block
 
 Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
-Via the `model` keyword, this quality defines the entry point the `sdfInstance` quality from the next section is referring to.
+Via the `entryPoint` keyword, this quality defines the `sdfObject` or `sdfThing` the `sdfInstance` quality from the next section is referring to.
 The `version` quality optionally allows for specifying a version or version range of the model.
 Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
 
-| Quality          | Type   | Description                                                                                                                                                    |
-|------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| model            | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Has to be based on a namespace identifier from the `namespaces` map. |
-| version          | string | The version or a compatible version range of the model this message is referring to.                                                                           |
-| patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                             |
-| $comment         | string | Source code comments only, no semantics                                                                                                                        |
+| Quality          | Type   | Description                                                                                                                                                                                    |
+|------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| entryPoint       | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Always refers to the target namespace indicated by the `defaultNamespace`and `namespaces` qualities. |
+| version          | string | The version or a compatible version range of the model this message is referring to.                                                                                                           |
+| patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                                                             |
+| $comment         | string | Source code comments only, no semantics                                                                                                                                                        |
 {: #iobsec title="Instance-of Block"}
 
 ## Instance Block
@@ -383,7 +383,7 @@ In addition to the `messageId` and `previousMessageId` from the `info` block, we
 * the point in time when the information regarding the device state has been captured (via the `timestamp` quality) and
 * the device identity (via the `thingId` qualitity in the `sdfInstance` block).
 
-Since we are using the `sdfInstance` keyword as an entry point at the location pointed to via the `model` specfied in `sdfInstanceOf`, the SDF message has to follow the structure of this part of the model (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
+The instance-related message has to follow the structure of the model the `entryPoint` is pointing to (although, depending on the archetype, information that has not changed or will not be updated can be left out.)
 
 The alternating structure of the SDF model (e. g., `sdfObject/envSensor/sdfProperty/temperature`) is repeated within the message, with the top-level `sdfObject` or `sdfThing` being replaced by `sdfInstance` at the entry point.
 Note that we also have to replicate a nested structure via `sdfThing` and/or `sdfObject` if present in the referenced SDF model.
@@ -427,11 +427,10 @@ info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
   timestamp: '2025-07-01T12:00:00Z'
 namespace:
-  models: https://example.com/models
   sensors: https://example.com/sensors
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:abc123
   sdfContext:
@@ -460,11 +459,10 @@ info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
   timestamp: '2025-07-01T12:00:00Z'
 namespace:
-  models: https://example.com/models
   sensors: https://example.com/sensor
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:abc123
   sdfContext:
@@ -501,11 +499,10 @@ The construction message also assigns a `thingId`, the `unit` of reported temper
 info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
-  models: https://example.com/models
   sensors: https://example.com/sensor
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:unit42
   sdfContext:
@@ -530,10 +527,9 @@ info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
   models: https://example.com/models
-  sensors: https://example.com/sensor
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
 sdfInstance:
   thingId: envSensor:unit42
   sdfContext:
@@ -564,11 +560,10 @@ info:
   previousMessageId: 026c1f58-7bb9-4927-81cf-1ca0c25a857b
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
-  cap: https://example.com/capability/cap
-  models: https://example.com/models
-defaultNamespace: cap
+  sensors: https://example.com/sensor
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: models:/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
 sdfInstance:
   sdfProperty:
     temperature: 24
@@ -589,11 +584,10 @@ An example Patch Message is shown in {{code-sdf-context-patch}}, where a change 
 info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a42
 namespace:
-  models: https://example.com/models
   sensors: https://example.com/sensor
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/envSensor
+  entryPoint: "#/sdfObject/envSensor"
   patchMethod: merge-patch
 sdfInstance:
   sdfContext:
@@ -696,11 +690,10 @@ title="Example of an SDF model where a CoAP-based protocol map points to the def
 info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a47
 namespace:
-  models: https://example.com/models
   sensors: https://example.com/sensor
-defaultNamespace: models
+defaultNamespace: sensors
 sdfInstanceOf:
-  model: sensors:#/sdfObject/sensor
+  entryPoint: "#/sdfObject/sensor"
 sdfInstance:
   sdfContext:
     ipAddress: 192.168.1.5
@@ -727,10 +720,9 @@ info:
   messageId: 75532020-8f64-4daf-a241-fcb0b6dc4a85
 namespace:
   cap: https://example.com/capability/cap
-  models: https://example.com/models
 defaultNamespace: cap
 sdfInstanceOf:
-  model: models:/sdfObject/lightSwitch
+  entryPoint: "#/sdfObject/lightSwitch"
 sdfInstance:
   sdfAction:
     toggle:
