@@ -332,6 +332,8 @@ The data model of SDF messages makes use of the structural features of SDF model
 The information block contains the same qualities as an SDF model and, additionally, a mandatory `messageId` to uniquely identify the message.
 Furthermore, Delta messages can utilize the `previousMessageId` in order to link two messages and indicate the state change.
 
+<!-- TODO: Do we actually need a version quality for SDF messages? -->
+
 | Quality            | Type             | Description                                                                |
 |--------------------|------------------|----------------------------------------------------------------------------|
 | title              | string           | A short summary to be displayed in search results, etc.                    |
@@ -362,15 +364,19 @@ In constrast to models, including a `namespace` quality is mandatory as at least
 
 Distinct from SDF models are two instance-specific blocks, the first of which is identified via the `sdfInstanceOf` keyword.
 Via the `entryPoint` keyword, this quality defines the `sdfObject` or `sdfThing` the `sdfInstance` quality from the next section is referring to.
-The `version` quality optionally allows for specifying a version or version range of the model.
+The `version`, `minVersion`, `maxVersion`, `exclusiveMinVersion`, amd `exclusiveMaxVersion` qualities optionally allow for specifying a version or version range of the model.
 Furthermore, via the `patchMethod` field, a patch algorithm different from JSON Merge Patch can be specified.
 
-| Quality          | Type   | Description                                                                                                                                                                                    |
-|------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| entryPoint       | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Always refers to the target namespace indicated by the `defaultNamespace`and `namespaces` qualities. |
-| version          | string | The version or a compatible version range of the model this message is referring to.                                                                                                           |
-| patchMethod      | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                                                             |
-| $comment         | string | Source code comments only, no semantics                                                                                                                                                        |
+| Quality             | Type   | Description                                                                                                                                                                                    |
+|---------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| entryPoint          | string | Defines the entry point for `sdfInstance` by pointing to an `sdfObject` or an `sdfThing`. Always refers to the target namespace indicated by the `defaultNamespace`and `namespaces` qualities. |
+| version             | string | The exact version the model this message is referring to.                                                                                                                                      |
+| minVersion          | string | The (inclusive) minimal version of the model this message is referring to.                                                                                                                     |
+| maxVersion          | string | The (inclusive) maximal version of the model this message is referring to.                                                                                                                     |
+| exclusiveMinVersion | string | The exclusive minimal version of the model this message is referring to.                                                                                                                       |
+| exclusiveMaxVersion | string | The exclusive maximal version of the model this message is referring to.                                                                                                                       |
+| patchMethod         | string | Allows for overriding the default patch method (JSON Merge Patch) by providing a registered value.                                                                                             |
+| $comment            | string | Source code comments only, no semantics                                                                                                                                                        |
 {: #iobsec title="Instance-of Block"}
 
 ## Instance Block
