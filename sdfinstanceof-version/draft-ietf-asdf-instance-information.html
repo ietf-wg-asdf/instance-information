@@ -1674,7 +1674,7 @@ In constrast to models, including a <code>namespace</code> quality is mandatory 
         </h3>
 <p id="section-3.3-1">Distinct from SDF models are two instance-specific blocks, the first of which is identified via the <code>sdfInstanceOf</code> keyword.
 Via the <code>entryPoint</code> keyword, this quality defines the <code>sdfObject</code> or <code>sdfThing</code> the <code>sdfInstance</code> quality from the next section is referring to.
-The <code>version</code> quality optionally allows for specifying a version or version range of the model.
+The <code>version</code>, <code>minVersion</code>, <code>maxVersion</code>, <code>exclusiveMinVersion</code>, amd <code>exclusiveMaxVersion</code> qualities optionally allow for specifying a version or version range of the model.
 Furthermore, via the <code>patchMethod</code> field, a patch algorithm different from JSON Merge Patch can be specified.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span id="name-instance-of-block-2"></span><div id="iobsec">
 <table class="center" id="table-4">
@@ -1698,7 +1698,27 @@ Furthermore, via the <code>patchMethod</code> field, a patch algorithm different
             <tr>
               <td class="text-left" rowspan="1" colspan="1">version</td>
               <td class="text-left" rowspan="1" colspan="1">string</td>
-              <td class="text-left" rowspan="1" colspan="1">The version or a compatible version range of the model this message is referring to.</td>
+              <td class="text-left" rowspan="1" colspan="1">The exact version the model this message is referring to.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">minVersion</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">The (inclusive) minimal version of the model this message is referring to.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">maxVersion</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">The (inclusive) maximal version of the model this message is referring to.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">exclusiveMinVersion</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">The exclusive minimal version of the model this message is referring to.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">exclusiveMaxVersion</td>
+              <td class="text-left" rowspan="1" colspan="1">string</td>
+              <td class="text-left" rowspan="1" colspan="1">The exclusive maximal version of the model this message is referring to.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">patchMethod</td>
