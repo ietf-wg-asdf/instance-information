@@ -862,7 +862,7 @@ However, these considerations emphasize the need for a set of standardized, reus
 
 # Discussion
 
-SDF messages close an important semantic gap of SDF, which so far was only capable of describing device classes and their capabilities, leaving the description of affordances to ecosystem-specific vocabulary.
+SDF messages close an important semantic gap of SDF, which so far was only capable of describing device classes and not instances.
 There are, however, a few aspects that need special consideration and have to be addressed by more fine-grained specifications in the future that will buid upon this one.
 
 SDF messages allow for noting down timestamps that currently relate to the message as a whole.
