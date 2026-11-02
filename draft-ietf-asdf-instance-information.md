@@ -228,7 +228,7 @@ Taking into account previous revisions of this document as well as {{-non-afford
 1. the intended effect of a message, which can either be a report or an update of a Thing's state, and
 2. the actual content of the message, which may be freestanding (without a reference to a previous message or state) or relative (with such a reference).
 
-The distinction of the intended effect into "update" or "state" is comparable to YANG's "config" statement ({{Section 7.21.1 of -yang}}), a flag value indicating whether a definition representation configuration or state data.
+The distinction of the intended effect between "update" or "state" is comparable to YANG's "config" statement ({{Section 7.21.1 of -yang}}), a flag value indicating whether a definition represents configuration or state data.
 
 Based on these considerations (as illustrated by the systematization in {{instance-message-dimensions}}), we can identify the following four message archetypes:
 
