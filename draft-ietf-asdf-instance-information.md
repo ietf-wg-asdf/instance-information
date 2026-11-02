@@ -612,7 +612,7 @@ Other specifications may define additional use cases SDF messages can be used fo
 ## Construction
 
 In SDF models, we can treat a Thing's `sdfProperty` definitions as construction parameters.
-Construction messages can serve as an ecosystem-independent way for initializing properties, epecially those that are specified as non-writable.
+Construction messages can serve as an ecosystem-independent way for initializing properties, especially those that are specified as non-writable.
 
 {{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
 As the `unit` property has a default value (`Cel` for degrees Celcius), it does not have to be initialized during construction.
