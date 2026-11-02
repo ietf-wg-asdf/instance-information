@@ -727,7 +727,7 @@ For `sdfProperty` (and `sdfContext`) definitions, this is very straightforward, 
 Actions and events, however, need to be handled differently: In the case of actions, the state of one or more actions is reported, which might already be in a completed or error state, or may also still be running.
 For events, a history is reported that includes the returned values.
 The exact of number of action and event reports is implementation-dependent and may vary between deployments.
-Documents that add additional `sdfProtocolMap` definitions may also define protocol-specific ways to control the size of the histories returned.
+Models that add additional `sdfProtocolMap` definitions may also define protocol-specific ways to control the size of the histories returned.
 
 {{code-snapshot-with-actions-and-events}} shows an example of a Snapshot Message for a lightswitch which reports the results of two `toggle` actions, one of which failed.
 The successfully completed action caused the emission of a `toggleEvent` with the same `timestamp`.
