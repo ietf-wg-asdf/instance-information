@@ -624,6 +624,13 @@ In SDF models, we can speicify a Thing's configurable parameters via `sdfContext
 {{code-sdf-construction-sdf-context}} shows an example for such an SDF model.
 The parameters settable during construction (in this case: the `temperature` property's `unit`) are modeled as `sdfContext` definitions, to which the entries of the `sdfParameters` map may point to using JSON pointers.
 
+{{code-sdf-construction-sdf-context}} shows an example for an SDF model where the `ipAddress` and `deviceIdentity` are supposed to be initialized at construction time, since they are required and not writable via regular interactions during runtime.
+As the `unit` property has a default value (`Cel` for degrees Celcius), it does not have to be initialized during construction.
+However, for all of these properties, a reconfiguration during runtime is possible.
+
+In this example, the `deviceIdentity` would be retrievable like a "regular", but immutable property affordance.
+While the `ipAddress` might be used for interaction affordances (e.g., by other models that build upon this one), the `temperature` property is "importing" the value of the `unit` property via a new quality called `sdfParameters`, where pairs of quality names and JSON pointers are used to import values from `sdfProperty` definitions.
+
 ~~~ sdf
 namespace:
   models: https://example.com/models
@@ -648,6 +655,7 @@ sdfObject:
             type: string
     sdfProperty:
       temperature:
+        writable: false
         type: number
         sdfParameters:
           unit: "#/sdfObject/sensor/sdfContext/unit"
@@ -657,7 +665,7 @@ sdfObject:
 {:sdf #code-sdf-construction-sdf-context
 title="Example for SDF model with constructors"}
 
-Based on the SDF model above, a Construction Message such as the one shown in {{code-sdf-construction-message}} can trigger a construction process.
+Based on the SDF model above, a Construction Message such as the one shown in {{code-sdf-construction-message}} can trigger the construction process.
 As indicated via `sdfRequired`, this process must include the initialization of an IP address as well as the device's identity definitions.
 In the example model, initializing the `unit` context definition is only required if the `temperature` property is present, which is expressed by the JSON pointer within the property's `sdfRequired` definition.
 
@@ -689,11 +697,12 @@ sdfObject:
         sdfProtocolMap:
           coap:
             sdfParameters:
-              ipAddress: "#/sdfObject/sensor/sdfContext/ipAddress"
-            read:
-              method: GET
-              href: "/temperature"
-              contentType: 60
+              ipAddress: "#/sdfObject/sensor/sdfProperty/ipAddress"
+            sdfOperations:
+              read:
+                method: GET
+                href: "/temperature"
+                contentType: 60
 ~~~
 {:sdf #code-sdf-protocol-map-plus-context
 title="Example of an SDF model where a CoAP-based protocol map points to the definition of relevant context information: an IP address."}
@@ -724,6 +733,7 @@ For `sdfProperty` definitions, this is very similar to context information and v
 Actions and events, however, are handled differently: In the case of actions, the state of one or more actions is reported, which might already be in a completed or error state, or may also still be running.
 For events, a history is reported that includes the returned values.
 The exact of number of action and event reports is implementation-dependent and may vary between deployments.
+Documents that add additional `sdfProtocolMap` definitions may also define protocol-specific ways to control the size of the histories returned.
 
 {{code-snapshot-with-actions-and-events}} shows an example of a Snapshot Message for a lightswitch which reports the results of two `toggle` actions, one of which failed.
 The successfully completed action caused the emission of a `toggleEvent` with the same `timestamp`.
